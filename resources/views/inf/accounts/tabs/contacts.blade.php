@@ -11,22 +11,22 @@
           <div class="panel panel-primary ">
               <div class="col-md-12 button-tools" style="padding: 8px;">
                     @if ($crud->hasAccess('delete'))
-                        <button class="btn btn-xs btn-default pull-right btn-hidden del-confirmcontact"
+                        <button class="btn btn-xs btn-default pull-right  del-confirmcontact"
                             href="{{ url(config('backpack.base.route_prefix', 'admin') . '/contact').'/'.$contact->id }}"
                             type="button"
                             title="Delete Contact"
                             delete-id="{{ $contact->id }}">
-                            <i class="fa fa-trash"></i> {{ trans('backpack::crud.delete') }}</a>
+                            <i class="fa fa-trash"></i> </a>
                         </button>
                     @endif
-                    <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/contact').'/'.$contact->id }}/edit" class="btn btn-xs btn-default pull-right  btn-hidden" style="margin-right: 5px;">
+                    <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/contact').'/'.$contact->id }}/edit" class="btn btn-xs btn-default pull-right  " style="margin-right: 5px;">
                         <i class="fa fa-edit"></i> {{ trans('backpack::crud.edit') }}
                     </a>
               </div>
             <div class="box-body box-profile">
                 <h3 class="profile-username">
                     {{ $contact->title['description'] }}
-                    <br/>
+
                     {{ $contact->FullName }}
                 </h3>
                 <p class="text-muted text-center">
