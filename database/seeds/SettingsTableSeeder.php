@@ -38,11 +38,20 @@ class SettingsTableSeeder extends Seeder
 
         ],
         [
-            'key'           => 'motto',
-            'name'          => 'Motto',
-            'description'   => 'Website motto',
-            'value'         => 'this is the value',
-            'field'         => '{"name":"value","label":"Value", "title":"Motto value" ,"type":"textarea"}',
+            'key'           => 'button_label',
+            'name'          => 'CRUD Button Label',
+            'description'   => 'Hide label in CRUD Button (not in create button)',
+            'value'         => '0',
+            'field'         => '{"name":"value","label":"Hide", "title":"CRUD Button Label value" ,"type":"checkbox"}',
+            'active'        => 1,
+
+        ],
+        [
+            'key'           => 'create_button_label',
+            'name'          => 'Create Button Label',
+            'description'   => 'Hide label in Create Button',
+            'value'         => '0',
+            'field'         => '{"name":"value","label":"Hide", "title":"Create Button Label value" ,"type":"checkbox"}',
             'active'        => 1,
 
         ],

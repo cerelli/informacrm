@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InfOfficesTableSeeder::class);
         $this->call(InfTitlesTableSeeder::class);
         $this->call(InfWebSiteTypesTableSeeder::class);
+        $this->call(SettingsTableSeeder::class);
     }
 }

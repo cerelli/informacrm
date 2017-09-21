@@ -1,6 +1,14 @@
-<a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/contact/create?active_account_id='.$entry->id) }}" class="btn btn-xs btn-default" style="margin-right: 5px;">
+@php
+    $url_button = url(config('backpack.base.route_prefix', 'admin') . '/contact/create?active_account_id='.$entry->id);
+@endphp
+@includeif('vendor.backpack.crud.buttons.create', ['custom_button_url' => $url_button])
+@php
+    $url_button = "";
+@endphp
+{{-- <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/contact/create?active_account_id='.$entry->id) }}" class="btn btn-xs btn-primary" style="margin-right: 5px;">
     <i class="fa fa-plus-square-o"></i> {{ trans('backpack::crud.add') }}
-</a>
+</a> --}}
+
 <hr>
 @foreach ($contacts->chunk(3) as $chunk)
     <div class="row">
