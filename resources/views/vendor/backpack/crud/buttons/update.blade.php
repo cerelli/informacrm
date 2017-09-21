@@ -3,27 +3,36 @@
 		$url = '';
 		$attributes = '';
 		$class = '';
-		if ( !isset($custom_button_url) ) {
+		if ( isset($custom_button_url) ) {
 			$url = url($crud->route.'/'.$entry->getKey().'/edit');
 		} else {
-			$url = $custom_button_url;
+			if ( isset($custom_button_url) ) {
+				$url = $custom_button_url;
+			}
+
 		}
-		if ( !isset($attributes) ) {
+
+		if ( isset($attributes) ) {
 			$attributes = '';
 		} else {
-			$attributes = $custom_button_attributes;
+			if ( isset($custom_button_attributes) ) {
+				$attributes = $custom_button_attributes;
+			}
 		}
-		if ( !isset($class) ) {
+		if ( isset($class) ) {
 			$class = ' class="btn btn-xs btn-warning" ';
 		} else {
-			$class = ' class="btn btn-xs btn-warning '.$custom_button_class.'"';
+			if ( isset($custom_button_class) ) {
+				$class = ' class="btn btn-xs btn-warning '.$custom_button_class.'"';
+			}
+
 		}
 
 	@endphp
 	@if (!$crud->model->translationEnabled())
 
 		<!-- Single edit button -->
-		<a href="{!! $custom_button_url !!}" {!! $class !!} {!! $attributes !!}><i class="fa fa-edit"></i>
+		<a href="{!! $url !!}" {!! $class !!} {!! $attributes !!}><i class="fa fa-edit"></i>
 			@if ( Config::get('settings.button_label') == '0') {{ trans('backpack::crud.edit') }}@endif
 		</a>
 	@else
