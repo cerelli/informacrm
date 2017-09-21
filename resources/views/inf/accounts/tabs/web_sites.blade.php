@@ -1,7 +1,19 @@
 
-<a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/web_site/create?active_account_id='.$entry->id) }}" class="btn btn-xs btn-default" style="margin-right: 5px;">
+{{-- <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/web_site/create?active_account_id='.$entry->id) }}" class="btn btn-xs btn-default" style="margin-right: 5px;">
     <i class="fa fa-plus-square-o"></i> {{ trans('backpack::crud.add') }}
-</a>
+</a> --}}
+<!-- Create button -->
+@php
+    $url_button = url(config('backpack.base.route_prefix', 'admin') . '/web_site/create?active_account_id='.$entry->id);
+@endphp
+@includeif('vendor.backpack.crud.buttons.create', [
+    'custom_button_url' => $url_button,
+    'custom_button_attributes' => " title='Aggiungi' ",
+    'custom_button_class' => ""
+])
+@php
+    $url_button = "";
+@endphp
 <hr>
 @foreach ($web_sites->chunk(3) as $chunk)
     <div class="row">
@@ -9,9 +21,48 @@
     <div class="col-md-4" id="web-site-panel-{{ $web_site->id }}">
           <!-- Profile Image -->
           {{-- {{ $request }} --}}
-          <div class="panel panel-primary ">
-              <div class="col-md-12 button-tools" style="padding: 8px;">
-                    @if ($crud->hasAccess('delete'))
+          <div class="panel panel-primary  col-md-12">
+          <div class="box-body box-profile col-md-9">
+              <h3 class="profile-username">
+                  <a href="{{ $web_site->url }}" target="_blank">{{ $web_site->url }}</a>
+              </h3>
+              <p class="text-muted">
+                  {{ $web_site->web_site_type['description'] }}
+              </p>
+
+          </div>
+
+              <div class="col-md-3 button-tools" style="padding: 8px;">
+                  <!-- Delete button -->
+                  @php
+                      $url_button = url(config('backpack.base.route_prefix', 'admin') . '/web_site').'/'.$web_site->id;
+                  @endphp
+                  @includeif('vendor.backpack.crud.buttons.delete', [
+                      'custom_button_url' => $url_button,
+                      'custom_button_attributes' => " title='Delete contact_detail' delete-id='$web_site->id'",
+                      'custom_button_class' => " pull-right  del-confirmweb"
+                  ])
+                  @php
+                      $url_button = "";
+                  @endphp
+
+                  <!-- Edit button -->
+                  @php
+                      $url_button = url(config('backpack.base.route_prefix', 'admin') . '/web_site').'/'.$web_site->id.'/edit';
+                  @endphp
+                  @includeif('vendor.backpack.crud.buttons.update', [
+                      'custom_button_url' => $url_button,
+                      'custom_button_attributes' => " title='Edit Web Site' style='margin-right: 3px;' ",
+                      'custom_button_class' => " pull-right "
+                  ])
+                  @php
+                      $url_button = "";
+                  @endphp
+
+
+
+
+                    {{-- @if ($crud->hasAccess('delete'))
                         <button class="btn btn-xs btn-default pull-right btn-hidden del-confirmweb"
                             href="{{ url(config('backpack.base.route_prefix', 'admin') . '/web_site').'/'.$web_site->id }}"
                             type="button"
@@ -19,27 +70,21 @@
                             delete-id="{{ $web_site->id }}">
                             <i class="fa fa-trash"></i> {{ trans('backpack::crud.delete') }}</a>
                         </button>
-                    @endif
-                    <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/web_site').'/'.$web_site->id }}/edit" class="btn btn-xs btn-default pull-right  btn-hidden" style="margin-right: 5px;">
+                    @endif --}}
+                    {{-- <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/web_site').'/'.$web_site->id }}/edit" class="btn btn-xs btn-default pull-right  btn-hidden" style="margin-right: 5px;">
                         <i class="fa fa-edit"></i> {{ trans('backpack::crud.edit') }}
-                    </a>
+                    </a> --}}
               </div>
-            <div class="box-body box-profile">
-                <h3 class="profile-username">
-                    <a href="{{ $web_site->url }}" target="_blank">{{ $web_site->url }}</a>
-                </h3>
-                <p class="text-muted text-center">
-                    {{ $web_site->web_site_type['description'] }}
-                </p>
-                @if ( $web_site->notes == "" )
+              <div class="note col-md-12">
+                  @if ( $web_site->notes == "" )
 
-                @else
-                    <hr>
-                    <div class="well" style="padding: 1px 1px 1px 10px;;">
-                        <p>{!! $web_site->notes !!}</p>
-                    </div>
-                @endif
-            </div>
+                  @else
+                      <hr>
+                      <div class="well" style="padding: 1px 1px 1px 10px;;">
+                          <p>{!! $web_site->notes !!}</p>
+                      </div>
+                  @endif
+              </div>
             <!-- /.box-body -->
           </div>          <!-- /.box -->
           <!-- /.box -->

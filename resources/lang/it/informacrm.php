@@ -11,6 +11,7 @@ return [
     | You are free to change them to anything
     | you want to customize your views to better match your application.
     |
+
     */
 
     //base
@@ -39,5 +40,82 @@ return [
     'time_line'             => 'Linea del Tempo',
 
     'permissions'           => 'Permessi',
+
+    'addresses'           => 'Indirizzi',
+
+    'name2'          	  => 'Rag.Sociale 2 / Cognome',
+
+    'account_type'           => 'Tipologia',
+
+    'vat_number'           => 'Partita IVA',
+
+    'fiscal_code'           => 'Codice Fiscale',
+
+    'title'           => 'Titolo',
+
+    'first_name'           => 'Nome',
+
+    'last_name'           => 'Cognome',
+
+    'addresses'           => 'Indirizzi',
+
+    'address_find'           => 'Cera Indirizzo',
+
+    'address_line1'           => 'Indirizzo',
+
+    'street_number'           => 'Numero Civico',
+
+    'posta_code'           => 'Cap',
+
+    'city'           => 'Città',
+
+    'province'           => 'Provincia',
+
+    'address_notes'           => 'Note',
+
+    'inf_address'           => 'Indirizzo',
+
+    'inf_addresses'           => 'Indirizzi',
+
+    'contact_type'           => 'Tipo Contatto',
+
+    'office'           => 'Ufficio Contatto',
+
+    'inf_contact'           => 'Contatto',
+
+    'inf_contacts'           => 'Contatti',
+
+    'inf_contact_detail'           => 'Recapito',
+
+    'inf_contact_details'           => 'Recapiti',
+
+    'inf_contact_type'           => 'Tipo Recapito',
+
+    'comunication_type'           => 'Tipo Comunicazione',
+
+    'contact_detail_value'           => 'Valore',
+
+    'contact_detail_notes'           => 'Note Recapiti',
+
+    'web_site_type'           => 'Tipo sito web',
+
+    'web_site_url'           => 'Indirizzo Sito web',
+
+    'web_site_type'           => 'Tipo sito web',
+
+    'account_note'           => 'Nota',
+
+    'inf_web_site'           => 'Sito web',
+
+    'inf_web_sites'           => 'Siti web',
+
+    'inf_account'           => 'Nominativo',
+
+    'inf_accounts'           => 'Nominativi',
+
+
+
+
+
 
 ];
