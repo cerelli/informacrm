@@ -21,7 +21,7 @@ class Inf_contact_detailCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Inf_contact_detail');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/contact_detail');
-        $this->crud->setEntityNameStrings('inf_contact_detail', 'inf_contact_details');
+        $this->crud->setEntityNameStrings(trans('informacrm.inf_contact_detail'), trans('informacrm.inf_contact_details'));
         $this->crud->setEditView('inf/accounts/partials/edit_contact_detail_from_account');
         $this->crud->setCreateView('inf/accounts/partials/create_contact_detail_from_account');
 

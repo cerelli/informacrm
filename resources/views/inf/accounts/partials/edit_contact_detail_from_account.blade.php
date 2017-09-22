@@ -30,7 +30,6 @@
 		@endif
 
 		@include('crud::inc.grouped_errors')
-
 		  {!! Form::open(array('url' => $crud->route.'/'.$entry->getKey(), 'method' => 'put', 'files'=>$crud->hasUploadFields('update', $entry->getKey()))) !!}
 		  <div class="box">
 		    <div class="box-header with-border">
@@ -38,7 +37,8 @@
 			    	<!-- Single button -->
 					<div class="btn-group pull-right">
 					  <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    {{trans('backpack::crud.language')}}: {{ $crud->model->getAvailableLocales()[$crud->request->input('locale')?$crud->request->input('locale'):App::getLocale()] }} <span class="caret"></span>
+					    {{trans('backpack::crud.language')}}: {{ $crud->model->getAvailableLocales()[$crud->request->input('locale')?$crud->request->input('locale'):App::getLocale()] }}
+						<span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu">
 					  	@foreach ($crud->model->getAvailableLocales() as $key => $locale)
@@ -46,10 +46,11 @@
 					  	@endforeach
 					  </ul>
 					</div>
-					<h3 class="box-title" style="line-height: 30px;">{{ trans('backpack::crud.edit') }}</h3>
+					<h3 class="box-title" style="line-height: 30px;">{{ trans('backpack::crud.edit') }}: {{ $crud->entity_name }} {{ $entry->contact[0]['FullName'] }}</h3>
 				@else
-					<h3 class="box-title">{{ trans('backpack::crud.edit') }}</h3>
+					<h3 class="box-title">{{ trans('backpack::crud.edit') }} {{ $crud->entity_name }}: {{ $entry->contact[0]['FullName'] }}</h3>
 				@endif
+				{{-- {{ dd($entry->contact[0]['FullName']) }} --}}
 		    </div>
 		    <div class="box-body row">
 		      <!-- load the view from the application if it exists, otherwise load the one in the package -->

@@ -132,7 +132,7 @@ class Inf_contactCrudController extends CrudController
         // ------ CRUD COLUMNS
         $this->crud->addColumn([
             'name' => 'FullName',
-            'label' => trans('informacrm.first_name'),
+            'label' => trans('informacrm.contact_fullname'),
             'type' => 'text',
         ]);
         // $this->crud->addColumn(); // add a single column, at the end of the stack

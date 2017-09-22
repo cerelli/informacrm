@@ -36,14 +36,18 @@ class Inf_contact_detail extends Model
     */
     public function contact_detail_type()
     {
-        return $this->hasOne('App\Models\Inf_contact_detail_type','id');
+        return $this->hasOne('App\Models\Inf_contact_detail_type', 'id', 'inf_contact_detail_type_id');
     }
 
     public function communication_type()
     {
-        return $this->hasOne('App\Models\Inf_communication_type','id');
+        return $this->hasOne('App\Models\Inf_communication_type','id', 'inf_communication_type_id');
     }
 
+    public function contact()
+    {
+        return $this->hasMany('App\Models\Inf_contact','id','inf_contact_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

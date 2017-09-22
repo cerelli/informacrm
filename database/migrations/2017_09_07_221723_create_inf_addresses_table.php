@@ -21,12 +21,12 @@ class CreateInfAddressesTable extends Migration
             // $table->string('street', 255);
             $table->string('address')->nullable();
             $table->string('address_line_1');
-            $table->string('street_number');
-            $table->string('city');
-            $table->string('region');
+            $table->string('street_number')->nullable()->default('');
+            $table->string('city')->nullable()->default('');
+            $table->string('region')->nullable()->default('');
             $table->string('province');
             $table->string('postal_code');
-            $table->string('country');
+            $table->string('country')->nullable()->default('');
             $table->text('notes')->nullable();
 
             $table->unsignedInteger('inf_account_id')->nullable();

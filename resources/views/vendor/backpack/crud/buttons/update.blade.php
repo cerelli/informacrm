@@ -3,24 +3,26 @@
 		$url = '';
 		$attributes = '';
 		$class = '';
-		if ( isset($custom_button_url) ) {
+
+		if ( !isset($custom_button_url) ) {
 			$url = url($crud->route.'/'.$entry->getKey().'/edit');
 		} else {
 			if ( isset($custom_button_url) ) {
+				// dump($custom_button_url);
 				$url = $custom_button_url;
 			}
 
 		}
 
-		if ( isset($attributes) ) {
+		if ( !isset($custom_button_attributes) ) {
 			$attributes = '';
 		} else {
 			if ( isset($custom_button_attributes) ) {
 				$attributes = $custom_button_attributes;
 			}
 		}
-		if ( isset($class) ) {
-			$class = ' class="btn btn-xs btn-warning" ';
+		if ( !isset($custom_button_class) ) {
+			$class = ' class="btn btn-xs btn-warning " ';
 		} else {
 			if ( isset($custom_button_class) ) {
 				$class = ' class="btn btn-xs btn-warning '.$custom_button_class.'"';

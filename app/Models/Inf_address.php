@@ -57,6 +57,9 @@ class Inf_address extends Model
     public function getFormattedAddressAttribute()
     {
         $address_formatted = trim($this->address_line_1);
+        if ( !empty(trim($this->street_number)) ) {
+            $address_formatted .= ', '.trim($this->street_number);
+        }
         if ( !empty(trim($this->address_line_2)) ) {
             $address_formatted .= '<br>'.trim($this->address_line_2);
         }

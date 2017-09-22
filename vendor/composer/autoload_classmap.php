@@ -3419,6 +3419,7 @@ return array(
     'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => $vendorDir . '/sebastian/recursion-context/src/InvalidArgumentException.php',
     'SebastianBergmann\\ResourceOperations\\ResourceOperations' => $vendorDir . '/sebastian/resource-operations/src/ResourceOperations.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
+    'SettingsTableSeeder' => $baseDir . '/database/seeds/SettingsTableSeeder.php',
     'Spatie\\Permission\\Contracts\\Permission' => $vendorDir . '/spatie/laravel-permission/src/Contracts/Permission.php',
     'Spatie\\Permission\\Contracts\\Role' => $vendorDir . '/spatie/laravel-permission/src/Contracts/Role.php',
     'Spatie\\Permission\\Exceptions\\PermissionDoesNotExist' => $vendorDir . '/spatie/laravel-permission/src/Exceptions/PermissionDoesNotExist.php',

@@ -170,7 +170,6 @@ class Inf_addressCrudController extends CrudController
     {
         // your additional operations before save here
         $request['created_by'] = Auth::user()->name;
-        $redirect_location = parent::storeCrud($request);
         //***************************ORIGINAL*********
         $redirect_location = parent::storeCrud($request);
         //********************************************
