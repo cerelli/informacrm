@@ -2,7 +2,7 @@
     <!-- Create button -->
     @includeif('vendor.backpack.crud.buttons.create', [
         'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/contact_detail/create?active_account_id='.$entry->id.'&active_contact_id='.$contact->id),
-        'custom_button_attributes' => " ",
+        'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.contact_detail')."' ",
         'custom_button_class' => "  btn-xs  "
     ])
 </div>

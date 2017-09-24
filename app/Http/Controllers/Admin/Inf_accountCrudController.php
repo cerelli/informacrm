@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Auth;
+use Request;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\Inf_accountRequest as StoreRequest;
@@ -23,6 +24,8 @@ class Inf_accountCrudController extends CrudController
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/account');
         $this->crud->setEntityNameStrings('inf_account', 'inf_accounts');
         $this->crud->setShowView('inf.accounts.show');
+        $this->crud->setEditView('inf/accounts/edit_account');
+        // $this->crud->setCreateView('inf/accounts/tabs/create_contact_from_account');
 
         /*
         |--------------------------------------------------------------------------
@@ -38,6 +41,18 @@ class Inf_accountCrudController extends CrudController
             'type' => 'hidden',
             'attribute' => 'pippo',
         ],'show');
+
+
+        //
+        // $this->crud->addField([
+        //     'name' => 'from_url', // JSON variable name
+        //     'label' => "from_url", // human-readable label for the input
+        //     // 'type' => 'hidden',
+        //     'default' => 'valore di default',
+        //     'fake' => true, // show the field, but don’t store it in the database column above
+        //     'store_in' => '' // [optional] the database column name where you want the fake fields to be stored as a JSON array
+        // ]);
+
 
         $this->crud->addField([
             'label' => trans('informacrm.title'),
@@ -85,6 +100,7 @@ class Inf_accountCrudController extends CrudController
                 'model' => "App\Models\Inf_account_type", // foreign key model
                 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
             ]);
+
         $this->crud->addField([   // WYSIWYG Editor
             'name' => 'notes',
             'label' => trans('informacrm.account_notes'),
@@ -112,15 +128,19 @@ class Inf_accountCrudController extends CrudController
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS
+        // $this->crud->addColumn([
+        //     'name' => 'fullname',
+        //     'label' => '',
+        //     'type' => 'text',
+        // ]);
+
+
         $this->crud->addColumn([
-            'name' => 'name1',
-            'label' => trans('informacrm.name1'),
-            'type' => 'text',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'name2',
-            'label' => trans('informacrm.name2'),
-            'type' => 'text',
+            // run a function on the CRUD model and show its return value
+            'name' => "fullname",
+            'label' => trans('informacrm.fullname'), // Table column heading
+            'type' => "model_function",
+            'function_name' => 'getShowAccountLink', // the method in your Model
         ]);
         $this->crud->addColumn([
             // n-n relationship (with pivot table)
@@ -146,7 +166,7 @@ class Inf_accountCrudController extends CrudController
         // $this->crud->addButtonFromView($stack, $name, $view, $position); // add a button whose HTML is in a view placed at resources\views\vendor\backpack\crud\buttons
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
-        // $this->crud->removeAllButtons();
+        $this->crud->removeAllButtons();
         // $this->crud->removeAllButtonsFromStack('line');
         // $this->crud->addButtonFromModelFunction('line', 'open_google', 'openGoogle', 'beginning'); // add a button whose HTML is returned by a method in the CRUD model
 
@@ -213,27 +233,71 @@ class Inf_accountCrudController extends CrudController
         return $view;
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+
+        $this->crud->hasAccessOrFail('update');
+
+        $view = parent::edit($id);
+        return $view;
+    }
+
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
+        // dd($request);
         $request['created_by'] = Auth::user()->name;
+        // echo "<br>ABC Controller.";
+
         $redirect_location = parent::storeCrud($request);
+        // // your additional operations after save here
+        // // use $this->data['entry'] or $this->crud->entry
+        return $redirect_location;
+    }
+
+
+    public function update(UpdateRequest $request)
+    {
+        // your additional operations before save here
+        if ( $request['created_by'] == "") {
+            $request['created_by'] = Auth::user()->name;
+        }
+        $request['updated_by'] = Auth::user()->name;
+
+        // dd(url()->previous());
+        $parsed = parse_url(url()->previous());
+        parse_str($parsed['query'], $query_params);
+        $active_tab = $query_params['call_url'];
+        // dump(Request::server('HTTP_REFERER'));
+        // dd($_SERVER);
+        // $crud->request->get('call_url')
+
+        // dd(strtok($_SERVER["REQUEST_URI"],'?'));
+        $redirect_location = parent::updateCrud($request);
+
+        $saveAction = $this->getSaveAction()['active']['value'];
+
+        switch ($saveAction) {
+            case 'save_and_edit':
+                break;
+            case 'save_and_new':
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/create?call_url='.$active_tab);
+                break;
+            case 'save_and_back':
+            default:
+                $redirect_location = redirect('admin/account/'.$this->crud->entry['id'].'#'.$active_tab);
+                break;
+        }
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }
 
-    public function update(UpdateRequest $request)
-    {
-        // your additional operations before save here
-        // dd($request['updated_by']);
-        if ( $request['created_by'] == "") {
-            $request['created_by'] = Auth::user()->name;
-        }
-        $request['updated_by'] = Auth::user()->name;
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
-    }
 }

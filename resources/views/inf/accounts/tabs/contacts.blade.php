@@ -1,7 +1,7 @@
 <!-- Create button -->
 @includeif('vendor.backpack.crud.buttons.create', [
     'custom_button_url' => url(config('backpack.base.route_prefix', 'admin').'/contact/create?active_account_id='.$entry->id),
-    'custom_button_attributes' => "",
+    'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.contact')."' ",
     'custom_button_class' => ""
 ])
 <hr>
@@ -48,16 +48,12 @@
                                     <p>{!! $contact->notes !!}</p>
                                 </div>
                             @endif
-                            <hr style="margin-bottom: 2px;margin-top: 2px; border-color: #0016f5;">
+                            <hr style="margin-bottom: 2px;margin-top: 2px; ">
                         </div>
 
                     </div>
                     <div class="row col-md-12" style="padding-right: 0px;padding-bottom: 3px;padding-left: 0px;margin-left: 0px;margin-right: 0px;">
                         @include('inf.accounts.partials.contact_details', ['contact_details' => $entry->contact_details()->where('inf_contact_details.inf_contact_id', '=', $contact->id)->get()])
-                        <!-- contact_details -->
-                        {{-- <div class="box-body box-profile  col-md-12"> --}}
-
-                        {{-- </div> --}}
                     </div>
                 </div>          <!-- /.panel panel-primary contact-->
             </div> <!-- /#contact-panel.... -->

@@ -25,10 +25,13 @@ Route::group([
     'middleware' => ['admin'],
     'namespace' => 'Admin'
 ], function() {
+
     Route::get('dashboard', 'DashboardController@index');
 
     // your CRUD resources and other admin routes here
     CRUD::resource('account', 'Inf_accountCrudController');
+    // Route::get('terminate',['middleware' => 'account','uses' => 'Inf_accountCrudController@index',]);
+
     CRUD::resource('account_type', 'Inf_account_typeCrudController');
 
     CRUD::resource('contact', 'Inf_contactCrudController');

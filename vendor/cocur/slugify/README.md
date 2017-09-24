@@ -20,8 +20,10 @@ Features
 --------
 
 - Removes all special characters from a string.
-- Provides custom replacements for Arabic, Austrian, Azerbaijani, Bulgarian, Burmese, Croatian, Czech, Esperanto, Estonian, Finnish, French, Georgian, German, Greek, Hindi, Italien, Latvian, Lithuanian, Norwegian, Polish, Romanian, Russian, Serbian, Spanish, Swedish, Turkish, Ukrainian and Vietnamese special characters. Instead of
-removing these characters, Slugify approximates them (e.g., `ae` replaces `ä`).
+- Provides custom replacements for Arabic, Austrian, Azerbaijani, Brazilian Portuguese, Bulgarian, Burmese, Croatian, 
+Czech, Esperanto, Estonian, Finnish, French, Georgian, German, Greek, Hindi, Hungarian, Italian, Latvian, Lithuanian, 
+Macedonian, Norwegian, Polish, Romanian, Russian, Serbian, Spanish, Swedish, Turkish, Ukrainian and Vietnamese special 
+characters. Instead of removing these characters, Slugify approximates them (e.g., `ae` replaces `ä`).
 - No external dependencies.
 - PSR-4 compatible.
 - Compatible with PHP >= 5.5.9 and PHP 7.
@@ -39,6 +41,8 @@ You can install Slugify through [Composer](https://getcomposer.org):
 $ composer require cocur/slugify
 ```
 
+Slugify requires the Multibyte String extension from PHP. Typically you can use the configure option `--enable-mbstring` while compiling PHP. More information can be found in the [PHP documentation](http://php.net/manual/en/mbstring.installation.php).
+ 
 
 Usage
 -----
@@ -161,7 +165,15 @@ To add a new language you need to:
 4. Add tests for the language in `tests/SlugifyTest.php`. If the language is in the default ruleset add your
 test cases to `defaultRuleProvider()`, otherwise to `customRulesProvider()`.
 
-Submit PR. Thank you very much.
+Submit PR. Thank you very much. 💚
+
+### Code of Conduct
+
+In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+
+The full Code of Conduct can be found [here](https://github.com/cocur/slugify/blob/master/CODE_OF_CONDUCT.md).
+
+This project is no place for hate. If you have any problems please contact Florian: [florian@eckerstorfer.net](mailto:florian@eckerstorfer.net) ✌🏻🏳️‍🌈
 
 ### Further information
 
@@ -494,6 +506,12 @@ $slugify = $container->get(Slugify\SlugifyInterface::class);
 
 Change Log
 ----------
+
+### Version 3.0.1 (24 September 2017)
+
+- [#183](https://github.com/cocur/slugify/pull/183) Fix invalid JSON ([RusiPapazov](https://github.com/RusiPapazov))
+- [#185](https://github.com/cocur/slugify/pull/185) Fix support for Symfony > 3.3 (by [FabienPapet](https://github.com/FabienPapet))
+- [#186](https://github.com/cocur/slugify/pull/186) Require Multibyte extension in `composer.json` (by [wandersonwhcr](https://github.com/wandersonwhcr))
 
 ### Version 3.0 (11 August 2017)
 

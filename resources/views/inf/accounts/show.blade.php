@@ -2,14 +2,16 @@
 
 @section('content-header')
 	<section class="content-header">
-	  <h1>
-	    {{ trans('backpack::crud.preview') }} <span>{{ $crud->entity_name }}</span>
-	  </h1>
-	  <ol class="breadcrumb">
-	    <li><a href="{{ url(config('backpack.base.route_prefix'), 'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
-	    <li><a href="{{ url($crud->route) }}" class="text-capitalize">{{ $crud->entity_name_plural }}</a></li>
-	    <li class="active">{{ trans('backpack::crud.preview') }}</li>
-	  </ol>
+		<div class="row col-md-12">
+			<h1>
+	  	    {{ trans('backpack::crud.preview') }} <span>{{ $crud->entity_name }}</span>
+	  	  </h1>
+	  	  <ol class="breadcrumb">
+	  	    <li><a href="{{ url(config('backpack.base.route_prefix'), 'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
+	  	    <li><a href="{{ url($crud->route) }}" class="text-capitalize">{{ $crud->entity_name_plural }}</a></li>
+	  	    <li class="active">{{ trans('backpack::crud.preview') }}</li>
+	  	  </ol>
+		</div>
 	</section>
 @endsection
 
@@ -17,18 +19,37 @@
 	@if ($crud->hasAccess('list'))
 		<a href="{{ url($crud->route) }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
 	@endif
-	<div class="row">
+	<div class="row content col-md-12">
 		<!-- THE ACTUAL CONTENT -->
-	  <div class="col-md-12">
-		<div class="box">
-			<div class="box-header with-border">
-			<h1 class="name text-light-blue">
-				{{  ($entry->inf_title_id > 0)  ? $entry->title->description : ''  }}  {{ $entry->name1 }} {{ $entry->name2 }}
-			</h1>
-			<br>
-			<!-- account types -->
-			@include('vendor.backpack.crud.fields.label_multiple',['field' => $crud->create_fields['account_types']])
-		</div>
+		<div class="box col-md-12">
+			<div class="box-header with-border col-md-12">
+				<div class="row fullname-buttontools col-md-12">
+					<div class="row fullname col-md-9">
+						<h1 class="name text-light-blue">
+							{{  ($entry->inf_title_id > 0)  ? $entry->title->description : ''  }}  {{ $entry->name1 }} {{ $entry->name2 }}
+						</h1>
+					</div>
+					<div class="row button-tools  col-md-3">
+						<!-- Delete button -->
+						@includeif('vendor.backpack.crud.buttons.delete', [
+							'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->id,
+							'custom_button_attributes' => "  title='Delete account' delete-id='$entry->id' ",
+							'custom_button_class' => " pull-right  del-confirmaccount"
+						])
+
+						<!-- Edit button -->
+						@includeif('vendor.backpack.crud.buttons.update', [
+							'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->id.'/edit',
+							'custom_button_attributes' => " id='btn_edit_account' title='".trans('backpack::crud.edit')." ".trans('informacrm.account')."'  style='margin-right: 3px;' ",
+							'custom_button_class' => " pull-right "
+						])
+					</div>
+				</div>
+				<div class="row account-types col-md-12">
+					<!-- account types -->
+					@include('vendor.backpack.crud.fields.label_multiple',['field' => $crud->create_fields['account_types']])
+				</div>
+			</div>
 		  <div class="box-body">
 			  <div class="tab-container col-md-12">
 			  	<div class="nav-tabs-custom" id="form_tabs">
@@ -46,7 +67,7 @@
 								<a href="#tab_addresses" aria-controls="tab_addresses" role="tab" data-toggle="tab">{{ trans('informacrm.addresses') }}</a>
 						</li>
 						<li role="presentation" class="">
-								<a href="#tab_relations" aria-controls="tab_relations" role="tab" data-toggle="tab">{{ trans('informacrm.relations') }}</a>
+								<a href="#tab_events" aria-controls="tab_events" role="tab" data-toggle="tab">{{ trans('informacrm.events') }}</a>
 						</li>
 						<li role="presentation" class="">
 								<a href="#tab_opportunities" aria-controls="tab_opportunities" role="tab" data-toggle="tab">{{ trans('informacrm.opportunities') }}</a>
@@ -62,6 +83,9 @@
 		  						{{ trans('informacrm.other') }} <span class="caret"></span>
 	  						</a>
 	  						<ul class="dropdown-menu">
+								<li role="presentation" class="">
+										<a href="#tab_relations" aria-controls="tab_relations" role="tab" data-toggle="tab">{{ trans('informacrm.relations') }}</a>
+								</li>
 		  						<li role="presentation"><a href="#tab_time_line" aria-controls="tab_time_line" role="menuitem" tabindex="-1">{{ trans('informacrm.time_line') }}</a></li>
 								<li role="presentation"><a href="#tab_permissions" aria-controls="tab_permissions" role="menuitem" tabindex="-1">{{ trans('informacrm.permissions') }}</a></li>
 	  						</ul>
@@ -86,6 +110,9 @@
 				<div role="tabpanel" class="tab-pane" id="tab_relations">
 					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
 				</div>
+				<div role="tabpanel" class="tab-pane" id="tab_events">
+					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
+				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_opportunities">
 					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
 				</div>
@@ -108,8 +135,6 @@
 		  @include('crud::inc.button_stack', ['stack' => 'bottom'])
 
 		</div><!-- /.box -->
-	  </div>
-
 	</div>
 @endsection
 

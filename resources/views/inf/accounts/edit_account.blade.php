@@ -12,16 +12,24 @@
 	  </ol>
 	</section>
 @endsection
-
+{{-- @section('after_scripts')
+	<script src="{{ asset('vendor/backpack/crud/js/crud.js') }}"></script>
+	<script src="{{ asset('vendor/backpack/crud/js/show.js') }}"></script>
+	@include('inf.accounts.js')
+    <script type="text/javascript">
+        window.onload = returnURL;
+    </script>
+@endsection --}}
 @section('content')
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<!-- Default box -->
-		@if ($crud->hasAccess('list'))
-			<a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->inf_account_id.'#addresses' }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
-		@endif
+		{{-- @if ($crud->hasAccess('list'))
+			<a href="{{ url($crud->route) }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
+		@endif --}}
 
 		@include('crud::inc.grouped_errors')
+
 		  {!! Form::open(array('url' => $crud->route.'/'.$entry->getKey(), 'method' => 'put', 'files'=>$crud->hasUploadFields('update', $entry->getKey()))) !!}
 		  <div class="box">
 		    <div class="box-header with-border">
@@ -33,7 +41,7 @@
 					  </button>
 					  <ul class="dropdown-menu">
 					  	@foreach ($crud->model->getAvailableLocales() as $key => $locale)
-						  	<li><a href="{{ url($crud->route.'/'.$entry->getKey().'/edit') }}?locale={{ $key }}">{{ $locale }}pp</a></li>
+						  	<li><a href="{{ url($crud->route.'/'.$entry->getKey().'/edit') }}?locale={{ $key }}">{{ $locale }}</a></li>
 					  	@endforeach
 					  </ul>
 					</div>
@@ -52,11 +60,13 @@
 		    </div><!-- /.box-body -->
 
             <div class="box-footer">
-				{{-- @php
-					$var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->inf_account_id.'#addresses';
-					$crud->route = $var_annulle;
-				@endphp --}}
+                @php
+                $active_tab=Request::get('call_url');
+                    $var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->getKey().'#'.$active_tab;
+                    $crud->route = $var_annulle;
+                @endphp
                 @include('crud::inc.form_save_buttons')
+
 		    </div><!-- /.box-footer-->
 		  </div><!-- /.box -->
 		  {!! Form::close() !!}

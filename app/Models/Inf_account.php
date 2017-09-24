@@ -19,9 +19,10 @@ class Inf_account extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = ['inf_title_id', 'is_person', 'name1', 'name2', 'notes', ];s
+    // protected $fillable = ['inf_title_id', 'is_person', 'name1', 'name2', 'notes','from_url' ];
     // protected $hidden = [];
     // protected $dates = [];
+    // protected $fakeColumns = ['extras'];
 
     /*
     |--------------------------------------------------------------------------
@@ -33,6 +34,15 @@ class Inf_account extends Model
         return '<a class="btn btn-xs btn-default" target="_blank" href="http://google.com?q='.urlencode($this->text).'" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i> Google it</a>';
     }
 
+
+    public function getShowAccountLink() {
+        // Replace proofAttach with the name of your field
+        if (isset($this->fullname)) {
+            // dd($this);
+            return '<a href="'.url(config('backpack.base.route_prefix', 'admin') . '/account/'.$this->id).'" >'.$this->fullname.'</a>';
+            // return '<a href="'.url($this->id).'" target="_blank">Download</a>';
+        }
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -95,4 +105,5 @@ class Inf_account extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
 }

@@ -1,7 +1,7 @@
 <!-- Create button -->
 @includeif('vendor.backpack.crud.buttons.create', [
     'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/web_site/create?active_account_id='.$entry->id),
-    'custom_button_attributes' => " title='Aggiungi' ",
+    'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.web_site')."' ",
     'custom_button_class' => ""
 ])
 <hr>
@@ -44,9 +44,7 @@
                                     <p>{!! $web_site->notes !!}</p>
                                 </div>
                             @endif
-                            {{-- <hr style="margin-bottom: 2px;margin-top: 2px; border-color: #0016f5;"> --}}
                         </div>
-
                     </div>
                 </div>          <!-- /.panel panel-primary contact-->
             </div> <!-- /#contact-panel.... -->
