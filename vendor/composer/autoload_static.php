@@ -428,6 +428,10 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
+            'MaddHatter\\LaravelFullcalendar' => 
+            array (
+                0 => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src',
+            ),
         ),
         'L' => 
         array (
@@ -465,9 +469,12 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
     );
 
     public static $classMap = array (
+        'AddDummyEvent' => __DIR__ . '/../..' . '/database/seeds/AddDummyEvent.php',
+        'AddFirstRolePermission' => __DIR__ . '/../..' . '/database/seeds/AddFirstRolePermission.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Admin\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DashboardController.php',
+        'App\\Http\\Controllers\\Admin\\EventCrudController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/EventCrudController.php',
         'App\\Http\\Controllers\\Admin\\Inf_accountCrudController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Inf_accountCrudController.php',
         'App\\Http\\Controllers\\Admin\\Inf_account_typeCrudController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Inf_account_typeCrudController.php',
         'App\\Http\\Controllers\\Admin\\Inf_addressCrudController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Inf_addressCrudController.php',
@@ -496,6 +503,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\EventRequest' => __DIR__ . '/../..' . '/app/Http/Requests/EventRequest.php',
         'App\\Http\\Requests\\Inf_accountRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Inf_accountRequest.php',
         'App\\Http\\Requests\\Inf_account_typeRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Inf_account_typeRequest.php',
         'App\\Http\\Requests\\Inf_addressRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Inf_addressRequest.php',
@@ -509,6 +517,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'App\\Http\\Requests\\Inf_titleRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Inf_titleRequest.php',
         'App\\Http\\Requests\\Inf_web_siteRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Inf_web_siteRequest.php',
         'App\\Http\\Requests\\Inf_web_site_typeRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Inf_web_site_typeRequest.php',
+        'App\\Models\\Event' => __DIR__ . '/../..' . '/app/Models/Event.php',
         'App\\Models\\Inf_account' => __DIR__ . '/../..' . '/app/Models/Inf_account.php',
         'App\\Models\\Inf_account_type' => __DIR__ . '/../..' . '/app/Models/Inf_account_type.php',
         'App\\Models\\Inf_address' => __DIR__ . '/../..' . '/app/Models/Inf_address.php',
@@ -2706,6 +2715,13 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'LiveControl\\EloquentDataTable\\VersionTransformers\\Version109Transformer' => __DIR__ . '/..' . '/livecontrol/eloquent-datatable/src/LiveControl/EloquentDataTable/VersionTransformers/Version109Transformer.php',
         'LiveControl\\EloquentDataTable\\VersionTransformers\\Version110Transformer' => __DIR__ . '/..' . '/livecontrol/eloquent-datatable/src/LiveControl/EloquentDataTable/VersionTransformers/Version110Transformer.php',
         'LiveControl\\EloquentDataTable\\VersionTransformers\\VersionTransformerContract' => __DIR__ . '/..' . '/livecontrol/eloquent-datatable/src/LiveControl/EloquentDataTable/VersionTransformers/VersionTransformerContract.php',
+        'MaddHatter\\LaravelFullcalendar\\Calendar' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/Calendar.php',
+        'MaddHatter\\LaravelFullcalendar\\Event' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/Event.php',
+        'MaddHatter\\LaravelFullcalendar\\EventCollection' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/EventCollection.php',
+        'MaddHatter\\LaravelFullcalendar\\Facades\\Calendar' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/Facades/Calendar.php',
+        'MaddHatter\\LaravelFullcalendar\\IdentifiableEvent' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/IdentifiableEvent.php',
+        'MaddHatter\\LaravelFullcalendar\\ServiceProvider' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/ServiceProvider.php',
+        'MaddHatter\\LaravelFullcalendar\\SimpleEvent' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/SimpleEvent.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',

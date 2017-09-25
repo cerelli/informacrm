@@ -166,12 +166,16 @@ class Inf_accountCrudController extends CrudController
         // $this->crud->addButtonFromView($stack, $name, $view, $position); // add a button whose HTML is in a view placed at resources\views\vendor\backpack\crud\buttons
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
-        $this->crud->removeAllButtons();
+        //$this->crud->removeAllButtons();
+        $this->crud->removeButton( 'preview' );
+        $this->crud->removeButton( 'update' );
+        $this->crud->removeButton( 'revisions' );
+        $this->crud->removeButton( 'delete' );
         // $this->crud->removeAllButtonsFromStack('line');
         // $this->crud->addButtonFromModelFunction('line', 'open_google', 'openGoogle', 'beginning'); // add a button whose HTML is returned by a method in the CRUD model
 
         // ------ CRUD ACCESS
-        $this->crud->allowAccess('show');
+        $this->crud->allowAccess('show','create');
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
         // $this->crud->denyAccess(['list', 'create', 'update', 'reorder', 'delete']);
 

@@ -1,3 +1,4 @@
+{{-- {{ dd($crud->hasAccess('create')) }} --}}
 @if ($crud->hasAccess('create'))
 	@php
 		$url = '';

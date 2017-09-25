@@ -16,7 +16,7 @@ class SettingsTableSeeder extends Seeder
             'description'   => 'The email address that all emails from the contact form will go to.',
             'value'         => 'admin@updivision.com',
             'field'         => '{"name":"value","label":"Value","type":"email"}',
-            'active'        => 1,
+            'active'        => 0,
         ],
         [
             'key'           => 'contact_cc',
@@ -24,7 +24,7 @@ class SettingsTableSeeder extends Seeder
             'description'   => 'Email adresses separated by comma, to be included as CC in the email sent by the contact form.',
             'value'         => '',
             'field'         => '{"name":"value","label":"Value","type":"text"}',
-            'active'        => 1,
+            'active'        => 0,
 
         ],
         [
@@ -33,14 +33,14 @@ class SettingsTableSeeder extends Seeder
             'description'   => 'Email adresses separated by comma, to be included as BCC in the email sent by the contact form.',
             'value'         => '',
             'field'         => '{"name":"value","label":"Value","type":"email"}',
-            'active'        => 1,
+            'active'        => 0,
 
         ],
         [
             'key'           => 'button_label',
             'name'          => 'CRUD Button Label',
             'description'   => 'Hide label in CRUD Button (not in create button)',
-            'value'         => '0',
+            'value'         => '1',
             'field'         => '{"name":"value","label":"Hide", "title":"CRUD Button Label value" ,"type":"checkbox"}',
             'active'        => 1,
 
@@ -49,7 +49,7 @@ class SettingsTableSeeder extends Seeder
             'key'           => 'create_button_label',
             'name'          => 'Create Button Label',
             'description'   => 'Hide label in Create Button',
-            'value'         => '0',
+            'value'         => '1',
             'field'         => '{"name":"value","label":"Hide", "title":"Create Button Label value" ,"type":"checkbox"}',
             'active'        => 1,
 

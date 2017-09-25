@@ -26,7 +26,7 @@ class CreateInfWebSitesTable extends Migration
             $table->timestamps();
 
             $table->foreign('inf_web_site_type_id')->references('id')->on('inf_web_site_types')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('inf_account_id')->references('id')->on('inf_accounts')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('inf_account_id')->references('id')->on('inf_accounts')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

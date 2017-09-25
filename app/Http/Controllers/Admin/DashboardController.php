@@ -9,7 +9,7 @@ use Gate;
 class DashboardController extends CrudController
 {
     public function __construct(){
-        $this->middleware('permission:super-permission');
+    // $this->middleware('permission: dashboard');
     parent::__construct();
 }
 

@@ -15,11 +15,12 @@
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-          <li class="header">{{ trans('backpack::base.administration') }}</li>
           <!-- ================================================ -->
           <!-- ==== Recommended place for admin menu items ==== -->
           <!-- ================================================ -->
-          @hasrole('super-admin')
+          {{-- @hasrole('super-admin') --}}
+          @can ('show admin menu')
+              <li class="header">{{ trans('backpack::base.administration') }}</li>
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('backpack::base.dashboard') }}</span></a></li>
 
           <li class="treeview">
@@ -42,17 +43,29 @@
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/setting') }}"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
               </ul>
           </li>
-@endhasrole
+          @endcan
+{{-- @endhasrole --}}
+
+        <!-- ================================================ -->
+        <!-- ====              CONFIG MENU               ==== -->
+        <!-- ================================================ -->
+        @can ('show config menu')
+            <li class="header">{{ trans('informacrm.config') }}</li>
+        @endcan
 
           <!-- ================================================ -->
           <!-- ====               USER MENU                ==== -->
           <!-- ================================================ -->
-          <li class="header">{{ trans('backpack::base.user') }}</li>
-          <li><a href="#"><i class="fa fa-calendar"></i> <span>{{ trans('informacrm.calendar') }}</span></a></li>
-          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account') }}"><i class="fa fa-address-book-o"></i> <span>{{ trans('informacrm.accounts') }}</span></a></li>
-          <li><a href="#"><i class="fa fa-money"></i> <span>{{ trans('informacrm.opportunities') }}</span></a></li>
-          <li><a href="#"><i class="fa fa-files-o"></i> <span>{{ trans('informacrm.documents') }}</span></a></li>
-          <li><a href="#"><i class="fa fa-ticket"></i> <span>{{ trans('informacrm.service_tickets') }}</span></a></li>
+          @can ('show user menu')
+              <li class="header">{{ trans('backpack::base.user') }}</li>
+                <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('backpack::base.dashboard') }}</span></a></li>
+              <li><a href="#"><i class="fa fa-calendar"></i> <span>{{ trans('informacrm.calendar') }}</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account') }}"><i class="fa fa-address-book-o"></i> <span>{{ trans('informacrm.accounts') }}</span></a></li>
+              <li><a href="#"><i class="fa fa-money"></i> <span>{{ trans('informacrm.opportunities') }}</span></a></li>
+              <li><a href="#"><i class="fa fa-files-o"></i> <span>{{ trans('informacrm.documents') }}</span></a></li>
+              <li><a href="#"><i class="fa fa-ticket"></i> <span>{{ trans('informacrm.service_tickets') }}</span></a></li>
+          @endcan
+
           <!-- ================================================ -->
           <!-- ====               LOGOUT                   ==== -->
           <!-- ================================================ -->

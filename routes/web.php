@@ -28,6 +28,8 @@ Route::group([
 
     Route::get('dashboard', 'DashboardController@index');
 
+    Route::get('events', 'EventCrudController@index');
+
     // your CRUD resources and other admin routes here
     CRUD::resource('account', 'Inf_accountCrudController');
     // Route::get('terminate',['middleware' => 'account','uses' => 'Inf_accountCrudController@index',]);

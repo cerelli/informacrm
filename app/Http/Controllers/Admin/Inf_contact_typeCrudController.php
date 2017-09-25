@@ -10,6 +10,11 @@ use App\Http\Requests\Inf_contact_typeRequest as UpdateRequest;
 
 class Inf_contact_typeCrudController extends CrudController
 {
+    // public function __construct(){
+    //     $this->middleware('permission:anuncio-manage');
+    //     parent::__construct();
+    // }
+
     public function setup()
     {
 

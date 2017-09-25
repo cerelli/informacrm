@@ -22,7 +22,7 @@ class Permission
         }
 
         //check permission
-        // dd($permission);
+        dump($permission);
         if (!$request->user()->can($permission)) {
            abort(403);
         }

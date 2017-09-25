@@ -18,7 +18,7 @@ class CreateInfAddressTypesTable extends Migration
             $table->string('description',30);
             $table->string('color',7)->default('');
             $table->string('background_color',7)->default('');
-            $table->string('icon',15)->default('');
+            $table->string('icon',25)->default('');
             $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('lft')->unsigned()->nullable();
             $table->integer('rgt')->unsigned()->nullable();
