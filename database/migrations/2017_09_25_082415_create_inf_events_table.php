@@ -22,9 +22,9 @@ class CreateInfEventsTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
 
-            $table->unsignedInteger('inf_account_id');
-            $table->unsignedInteger('inf_event_status_id');
-            $table->unsignedInteger('inf_event_result_id');
+            $table->unsignedInteger('inf_account_id')->nullable();
+            $table->unsignedInteger('inf_event_status_id')->nullable();
+            $table->unsignedInteger('inf_event_result_id')->nullable();
 
             $table->string('result_description',255)->default('');
 
