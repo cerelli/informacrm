@@ -76,7 +76,7 @@ class AddDummyEvent extends Seeder
         ];
         \DB::table('inf_event_results')->insert($data);
 
-        // ----- inf_event_classifications -------
+        // ----- inf_event_types -------
         $data = [
             [
                 'description'       => 'Nota',
@@ -156,7 +156,7 @@ class AddDummyEvent extends Seeder
                 'created_at'        => date('Y-m-d H:i:s')
             ],
         ];
-        \DB::table('inf_event_classifications')->insert($data);
+        \DB::table('inf_event_types')->insert($data);
 
         // ----- inf_events -------
         $data = [

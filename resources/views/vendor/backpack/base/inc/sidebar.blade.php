@@ -40,7 +40,7 @@
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/role') }}"><i class="fa fa-group"></i> <span>Roles</span></a></li>
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
                   <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/page') }}"><i class="fa fa-file-o"></i> <span>Pages</span></a></li>
-                  <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/setting') }}"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+                  {{-- <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/setting') }}"><i class="fa fa-cog"></i> <span>Settings</span></a></li> --}}
               </ul>
           </li>
           @endcan
@@ -51,6 +51,19 @@
         <!-- ================================================ -->
         @can ('show config menu')
             <li class="header">{{ trans('informacrm.config') }}</li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.account_type') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/address_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.address_type') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/communication_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.communication_type') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/contact_detail_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.contact_detail_type') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/contact_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.contact_type') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/office') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.office') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/title') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.title') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/web_site_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.web_site_type') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_status') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_result') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_result') }}</span></a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_type') }}</span></a></li>
+
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/setting') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.settings') }}</span></a></li>
         @endcan
 
           <!-- ================================================ -->

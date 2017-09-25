@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInfEventClassificationsTable extends Migration
+class CreateInfEventTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateInfEventClassificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('inf_event_classifications', function (Blueprint $table) {
+        Schema::create('inf_event_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description',30);
             $table->string('color',7)->default('');
@@ -39,6 +39,6 @@ class CreateInfEventClassificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inf_event_classifications');
+        Schema::dropIfExists('inf_event_types');
     }
 }
