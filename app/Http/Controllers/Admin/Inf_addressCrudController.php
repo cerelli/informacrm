@@ -42,6 +42,18 @@ class Inf_addressCrudController extends CrudController
         ]);
 
         $this->crud->addField([
+            'label' => trans('informacrm.address_type'),
+            'type' => 'select2',
+            'name' => 'inf_address_type_id', // the db column for the foreign key
+            'entity' => 'address_types', // the method that defines the relationship in your Model
+            'attribute' => 'description', // foreign key attribute that is shown to user
+            'model' => "App\Models\Inf_address_type", // foreign key model
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ]
+        ]);
+
+        $this->crud->addField([
             'name'              => 'address',
             'label'             => trans('informacrm.address_find'),
             'type'              => 'address_form_google',

@@ -25,7 +25,7 @@ class Inf_addressRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'address_line_1' => 'required|min:5|max:191'
         ];
     }
 

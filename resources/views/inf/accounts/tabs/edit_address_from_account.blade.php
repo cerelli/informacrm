@@ -52,10 +52,10 @@
 		    </div><!-- /.box-body -->
 
             <div class="box-footer">
-				{{-- @php
+				@php
 					$var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->inf_account_id.'#addresses';
 					$crud->route = $var_annulle;
-				@endphp --}}
+				@endphp
                 @include('crud::inc.form_save_buttons')
 		    </div><!-- /.box-footer-->
 		  </div><!-- /.box -->
