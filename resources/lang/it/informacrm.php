@@ -30,7 +30,7 @@ return [
 
     'relations'             => 'Parentele',
 
-    'opportunities'         => 'OpportunitÃ ',
+    'opportunities'         => 'Opportunità',
 
     'documents'             => 'Documenti',
 
@@ -98,7 +98,7 @@ return [
 
     'inf_contact_type'           => 'Tipo Recapito',
 
-    'comunication_type'           => 'Tipo Comunicazione',
+    'communication_type'           => 'Tipo Comunicazione',
 
     'contact_detail_value'           => 'Valore',
 
@@ -122,13 +122,14 @@ return [
 
     'inf_accounts'           => 'Nominativi',
 
-    'comunication_type'           => 'Tipo comunicazione',
+    'communication_type'           => 'Tipo comunicazione',
     'address_type'           => 'Tipo indirizzo',
     'contact_detail_type'           => 'Tipo recapito',
     'event_status'           => 'Stato evento',
     'event_result'           => 'Esito evento',
    'event_type'           => 'Tipo evento',
    'settings'           => 'Impostazioni',
+   'config'           => 'configurazione',
 
 
 

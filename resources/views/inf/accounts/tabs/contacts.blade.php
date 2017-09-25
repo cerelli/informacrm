@@ -29,7 +29,7 @@
                                 @includeif('vendor.backpack.crud.buttons.delete', [
                                     'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/contact').'/'.$contact->id,
                                     'custom_button_attributes' => " title= 'Delete Contact' delete-id='$contact->id'",
-                                    'custom_button_class' => " pull-right del-confirmcontactdetails"
+                                    'custom_button_class' => " pull-right del-confirmcontact"
                                 ])
 
                                 <!-- Edit button -->

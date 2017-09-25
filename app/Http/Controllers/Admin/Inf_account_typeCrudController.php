@@ -21,7 +21,7 @@ class Inf_account_typeCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Inf_account_type');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/account_type');
-        $this->crud->setEntityNameStrings('inf_account_type', 'inf_account_types');
+        $this->crud->setEntityNameStrings(trans('informacrm.inf_account_type'), trans('informacrm.inf_account_types'));
         $this->crud->enableReorder('description', 1);
         $this->crud->allowAccess('reorder');
 

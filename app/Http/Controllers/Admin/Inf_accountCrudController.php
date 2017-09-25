@@ -22,7 +22,7 @@ class Inf_accountCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Inf_account');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/account');
-        $this->crud->setEntityNameStrings('inf_account', 'inf_accounts');
+        $this->crud->setEntityNameStrings(trans('informacrm.inf_account'), trans('informacrm.inf_accounts'));
         $this->crud->setShowView('inf.accounts.show');
         $this->crud->setEditView('inf/accounts/edit_account');
         // $this->crud->setCreateView('inf/accounts/tabs/create_contact_from_account');

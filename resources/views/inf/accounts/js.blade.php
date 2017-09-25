@@ -96,6 +96,7 @@
 					  type: "success"
 				  });
 				  // delete panel of contact deleted
+				  console.log('qui');
 				  $("#contact-panel-"+delete_id).remove();
 			  },
 			  error: function(result) {
