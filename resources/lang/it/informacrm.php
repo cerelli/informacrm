@@ -11,7 +11,6 @@ return [
     | You are free to change them to anything
     | you want to customize your views to better match your application.
     |
-
     */
 
     //base
@@ -31,7 +30,7 @@ return [
 
     'relations'             => 'Parentele',
 
-    'opportunities'         => 'Opportunità',
+    'opportunities'         => 'OpportunitÃ ',
 
     'documents'             => 'Documenti',
 
@@ -46,6 +45,10 @@ return [
     'name2'          	  => 'Rag.Sociale 2 / Cognome',
 
     'account_type'           => 'Tipologia',
+
+	'account_types'           => 'Tipologie',
+
+	'fullname'           => 'Nominativo',
 
     'vat_number'           => 'Partita IVA',
 
@@ -77,6 +80,10 @@ return [
 
     'inf_addresses'           => 'Indirizzi',
 
+	'inf_accounts'           => 'Nominativi',
+
+	'events'           => 'Eventi',
+
     'contact_type'           => 'Tipo Contatto',
 
     'office'           => 'Ufficio Contatto',
@@ -105,6 +112,8 @@ return [
 
     'account_note'           => 'Nota',
 
+    'account_notes'           => 'Note',
+
     'inf_web_site'           => 'Sito web',
 
     'inf_web_sites'           => 'Siti web',
@@ -112,8 +121,6 @@ return [
     'inf_account'           => 'Nominativo',
 
     'inf_accounts'           => 'Nominativi',
-
-
 
 
 
