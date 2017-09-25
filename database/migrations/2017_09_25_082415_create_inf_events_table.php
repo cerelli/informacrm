@@ -18,7 +18,7 @@ class CreateInfEventsTable extends Migration
             $table->string('title');
             $table->text('notes')->nullable();
 
-            $table->boolean('all_day');
+            $table->boolean('all_day')->default(0);
             $table->date('start_date');
             $table->date('end_date');
 
