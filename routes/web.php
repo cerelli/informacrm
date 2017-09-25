@@ -28,7 +28,7 @@ Route::group([
 
     Route::get('dashboard', 'DashboardController@index');
 
-    Route::get('events', 'EventCrudController@index');
+    Route::get('calendar', 'EventCrudController@index');
 
     // your CRUD resources and other admin routes here
     CRUD::resource('account', 'Inf_accountCrudController');

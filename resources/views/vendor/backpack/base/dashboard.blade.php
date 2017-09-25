@@ -21,9 +21,9 @@
                     <div class="box-title">{{ trans('backpack::base.login_status') }}</div>
                     {{ $someVar }}
                     @hasrole('super-admin')
-                        I am a standard!
+                        I am a super-admin!
                     @else
-                        I am not a standard...
+                        I am not a super-admin...
                     @endhasrole
                 </div>
 

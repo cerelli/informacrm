@@ -49,22 +49,7 @@
         <!-- ================================================ -->
         <!-- ====              CONFIG MENU               ==== -->
         <!-- ================================================ -->
-        @can ('show config menu')
-            <li class="header">{{ trans('informacrm.config') }}</li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.account_type') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/address_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.address_type') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/communication_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.communication_type') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/contact_detail_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.contact_detail_type') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/contact_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.contact_type') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/office') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.office') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/title') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.title') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/web_site_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.web_site_type') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_status') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_result') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_result') }}</span></a></li>
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_type') }}</span></a></li>
 
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/setting') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.settings') }}</span></a></li>
-        @endcan
 
           <!-- ================================================ -->
           <!-- ====               USER MENU                ==== -->
@@ -72,7 +57,7 @@
           @can ('show user menu')
               <li class="header">{{ trans('backpack::base.user') }}</li>
                 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('backpack::base.dashboard') }}</span></a></li>
-              <li><a href="#"><i class="fa fa-calendar"></i> <span>{{ trans('informacrm.calendar') }}</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/calendar') }}"><i class="fa fa-calendar"></i> <span>{{ trans('informacrm.calendar') }}</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account') }}"><i class="fa fa-address-book-o"></i> <span>{{ trans('informacrm.accounts') }}</span></a></li>
               <li><a href="#"><i class="fa fa-money"></i> <span>{{ trans('informacrm.opportunities') }}</span></a></li>
               <li><a href="#"><i class="fa fa-files-o"></i> <span>{{ trans('informacrm.documents') }}</span></a></li>

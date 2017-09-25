@@ -63,4 +63,5 @@ class MenuItemCrudController extends CrudController
     {
         return parent::updateCrud($request);
     }
+
 }

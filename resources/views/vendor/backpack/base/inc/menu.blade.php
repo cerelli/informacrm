@@ -1,3 +1,6 @@
+<nav class="navbar navbar-static-top">
+
+
 <div class="navbar-custom-menu pull-left">
     <ul class="nav navbar-nav">
         <!-- =================================================== -->
@@ -5,7 +8,15 @@
         <!-- =================================================== -->
 
         {{-- <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Home</span></a></li> --}}
-
+        <?php
+            // $menuItems = App\Models\MenuItem::getTree();
+        ?>
+        {{-- @foreach ($menuItems as $menuItem) --}}
+            {{-- <li>{{ dump($menuItem) }}</li> --}}
+            {{-- <li><a href="{{ url('/'.$menuItem->link) }}">{{ $menuItem->name }}</a></li> --}}
+        {{-- @endforeach --}}
+        {{-- {{ dump($menuItems) }} --}}
+        <div class="navbar-custom-menu">
         <!-- ========== End of top menu left items ========== -->
     </ul>
 </div>
@@ -18,17 +29,25 @@
       <!-- ========================================================= -->
 
       <!-- <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Home</span></a></li> -->
-
         @if (Auth::guest())
             <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/login') }}">{{ trans('backpack::base.login') }}</a></li>
             @if (config('backpack.base.registration_open'))
             <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/register') }}">{{ trans('backpack::base.register') }}</a></li>
             @endif
         @else
+            {{-- <li><a href="{{ url('admin/menu-item') }}"><i class="fa fa-list"></i> <span>Menu</span></a></li> --}}
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>
+                </ul>
+            </div>
             <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/logout') }}"><i class="fa fa-btn fa-sign-out"></i> {{ trans('backpack::base.logout') }}</a></li>
-            <li><a href="{{ url('admin/menu-item') }}"><i class="fa fa-list"></i> <span>Menu</span></a></li>
+
         @endif
 
        <!-- ========== End of top menu right items ========== -->
     </ul>
 </div>
+</nav>
