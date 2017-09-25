@@ -122,6 +122,13 @@ return [
 
     'inf_accounts'           => 'Nominativi',
 
+    'comunication_type'           => 'Tipo comunicazione',
+    'address_type'           => 'Tipo indirizzo',
+    'contact_detail_type'           => 'Tipo recapito',
+    'event_status'           => 'Stato evento',
+    'event_result'           => 'Esito evento',
+   'event_type'           => 'Tipo evento',
+   'settings'           => 'Impostazioni',
 
 
 

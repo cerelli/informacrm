@@ -18,8 +18,8 @@ class CreateInfContactsTable extends Migration
 
             $table->unsignedInteger('inf_title_id')->nullable();
 
-            $table->string('first_name', 30);
-            $table->string('last_name', 30);
+            $table->string('first_name', 30)->default('');
+            $table->string('last_name', 30)->default('');
             $table->text('notes')->nullable();
 
             $table->unsignedInteger('inf_account_id')->nullable();
