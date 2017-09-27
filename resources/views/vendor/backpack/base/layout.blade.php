@@ -69,12 +69,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-
+          
           @include('backpack::inc.menu')
         </nav>
       </header>
 
       <!-- =============================================== -->
+
 
       @include('backpack::inc.sidebar')
       @include('backpack::inc.config_menu')

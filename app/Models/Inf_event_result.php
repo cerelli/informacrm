@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-class Event extends Model
+class Inf_event_result extends Model
 {
     use CrudTrait;
 
@@ -15,11 +15,11 @@ class Event extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'events';
-    protected $primaryKey = 'id';
+    //protected $table = 'inf_event_results';
+    //protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['title','start_date','end_date'];
+    // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
 

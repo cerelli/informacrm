@@ -84,6 +84,11 @@ class Inf_account extends Model
     {
         return $this->hasMany('App\Models\Inf_web_site','inf_account_id', 'id');
     }
+
+    public function events()
+    {
+        return $this->hasMany('App\Models\Inf_event','inf_account_id', 'id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-use App\Models\Event;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\EventRequest as StoreRequest;
-use App\Http\Requests\EventRequest as UpdateRequest;
+use App\Http\Requests\Inf_event_typesRequest as StoreRequest;
+use App\Http\Requests\Inf_event_typesRequest as UpdateRequest;
 
-class EventCrudController extends CrudController
+class Inf_event_typesCrudController extends CrudController
 {
     public function setup()
     {
@@ -20,9 +18,9 @@ class EventCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Event');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/event');
-        $this->crud->setEntityNameStrings('event', 'events');
+        $this->crud->setModel('App\Models\Inf_event_types');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/inf_event_types');
+        $this->crud->setEntityNameStrings('inf_event_types', 'inf_event_types');
 
         /*
         |--------------------------------------------------------------------------
@@ -100,30 +98,6 @@ class EventCrudController extends CrudController
         // $this->crud->groupBy();
         // $this->crud->limit();
     }
-
-    public function index()
-                {
-                    $events = [];
-                    $data = Event::all();
-                    if($data->count()) {
-                        foreach ($data as $key => $value) {
-                            $events[] = Calendar::event(
-                                $value->title,
-                                true,
-                                new \DateTime($value->start_date),
-                                new \DateTime($value->end_date.' +1 day'),
-                                null,
-                                // Add color and link on event
-                             [
-                                 'color' => '#ff0000',
-                                 'url' => 'pass here url and any route',
-                             ]
-                            );
-                        }
-                    }
-                    $calendar = Calendar::addEvents($events);
-                    return view('inf.calendar.fullcalendar', compact('calendar'));
-                }
 
     public function store(StoreRequest $request)
     {

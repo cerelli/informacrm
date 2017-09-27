@@ -11,10 +11,10 @@
   display: none;
 }
 
-.box {
+/*.box {
   border-radius: 0;
   border-top: 1px solid #d2d6de;
-}
+}*/
 
 body[class^='skin-'] .sidebar-menu>li>a {
   border-left: 1px solid transparent;

@@ -1,33 +1,46 @@
 @extends('backpack::layout')
-
 @section('before_styles')
 {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script> --}}
+<link rel='stylesheet' href='{{ asset('vendor/adminlte/plugins/') }}/fullcalendar/fullcalendar.css' />
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/> --}}
+{{-- <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" />
+<link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.print.css" /> --}}
 @endsection
 
-@section('header')
-	{{-- <section class="content-header">
+@section('after_style')
+    {{-- href="{{ asset('vendor/adminlte/') }}/bootstrap/css/bootstrap.min.css" --}}
+    {{-- <link rel='stylesheet' href='{{ asset('vendor/adminlte/plugins/') }}fullcalendar/fullcalendar.css' />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+    <script src='{{ asset('vendor/adminlte/plugins/') }}fullcalendar/fullcalendar.js'></script> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/> --}}
+@endsection
+
+{{-- @section('content-header')
+	<section class="content-header">
 	  <h1>
-	    {{ trans('backpack::crud.edit') }} <span>{{ $crud->entity_name }}</span>
+	    {{ trans('backpack::crud.preview') }} <span>{{ $crud->entity_name }}</span>
 	  </h1>
 	  <ol class="breadcrumb">
-	    <li><a href="{{ url(config('backpack.base.route_prefix'),'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
+	    <li><a href="{{ url(config('backpack.base.route_prefix'), 'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
 	    <li><a href="{{ url($crud->route) }}" class="text-capitalize">{{ $crud->entity_name_plural }}</a></li>
-	    <li class="active">{{ trans('backpack::crud.edit') }}</li>
+	    <li class="active">{{ trans('backpack::crud.preview') }}</li>
 	  </ol>
-	</section> --}}
-    {{-- <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-    <script src='lib/jquery.min.js'></script>
-    <script src='lib/moment.min.js'></script>
-    <script src='fullcalendar/fullcalendar.js'></script> --}}
-@endsection
+	</section>
+@endsection --}}
 
 @section('content')
-    <div id='calendar'></div>
     <div class="row">
         <div class="col-md-3">
-            @include('inf.calendar.box_draggable')
             <div class="box box-solid">
+                @include('inf.calendar.event_box_draggable')
+            </div>
+            <div class="box box-solid">
+                @include('inf.calendar.event_box_statuses')
+            </div>
+
+            {{-- <div class="box box-solid">
                         <div class="box-header with-border">
                           <h3 class="box-title">Create Event</h3>
                         </div>
@@ -61,8 +74,9 @@
                           </div>
                           <!-- /input-group -->
                         </div>
-                      </div>
+                      </div> --}}
         </div>
+
       <div class="col-md-9">
           <div class="box box-primary">
               <div class="box-body no-padding">
@@ -73,8 +87,15 @@
       </div>
     </div>
 @endsection
+
+
+@section('after_styles')
+	<link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/crud.css') }}">
+	<link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/show.css') }}">
+@endsection
+
 @section('after_scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
-{!! $calendar->script() !!}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js"></script>
+    {!! $calendar->script() !!}
 @endsection

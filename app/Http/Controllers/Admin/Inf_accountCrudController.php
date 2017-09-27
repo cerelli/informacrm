@@ -274,20 +274,12 @@ class Inf_accountCrudController extends CrudController
             $request['created_by'] = Auth::user()->name;
         }
         $request['updated_by'] = Auth::user()->name;
-
-        // dd(url()->previous());
         $parsed = parse_url(url()->previous());
         parse_str($parsed['query'], $query_params);
         $active_tab = $query_params['call_url'];
-        // dump(Request::server('HTTP_REFERER'));
-        // dd($_SERVER);
-        // $crud->request->get('call_url')
-
-        // dd(strtok($_SERVER["REQUEST_URI"],'?'));
         $redirect_location = parent::updateCrud($request);
 
         $saveAction = $this->getSaveAction()['active']['value'];
-
         switch ($saveAction) {
             case 'save_and_edit':
                 break;

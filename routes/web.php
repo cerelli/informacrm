@@ -26,12 +26,18 @@ Route::group([
     'namespace' => 'Admin'
 ], function() {
 
+    Route::get('search',array('as'=>'search','uses'=>'SearchController@search'));
+    Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
+
+
+
     Route::get('dashboard', 'DashboardController@index');
 
-    Route::get('calendar', 'EventCrudController@index');
+    Route::get('events_calendar', 'Inf_eventCrudController@calendar');
 
     // your CRUD resources and other admin routes here
     CRUD::resource('account', 'Inf_accountCrudController');
+    CRUD::resource('event', 'Inf_eventCrudController');
     // Route::get('terminate',['middleware' => 'account','uses' => 'Inf_accountCrudController@index',]);
 
     CRUD::resource('account_type', 'Inf_account_typeCrudController');

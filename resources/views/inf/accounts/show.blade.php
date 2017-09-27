@@ -101,7 +101,6 @@
 			  		@include('inf.accounts.tabs.contacts', ['contacts' => $entry->contacts])
 			  	</div>
 				<div role="tabpanel" class="tab-pane" id="tab_web_sites">
-					{{-- {{ dd($entry->web_sites) }} --}}
 					@include('inf.accounts.tabs.web_sites', ['web_sites' => $entry->web_sites])
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_addresses">
@@ -111,7 +110,7 @@
 					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_events">
-					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
+					@include('inf.accounts.tabs.events', ['events' => $entry->events])
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_opportunities">
 					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
