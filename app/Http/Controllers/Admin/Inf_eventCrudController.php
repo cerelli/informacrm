@@ -7,8 +7,11 @@ use App\Models\Inf_event;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\EventRequest as StoreRequest;
-use App\Http\Requests\EventRequest as UpdateRequest;
+use App\Http\Requests\Inf_eventRequest as StoreRequest;
+use App\Http\Requests\Inf_eventRequest as UpdateRequest;
+
+use Auth;
+use Illuminate\Http\Request;
 
 class Inf_eventCrudController extends CrudController
 {
@@ -23,27 +26,147 @@ class Inf_eventCrudController extends CrudController
         $this->crud->setModel('App\Models\Inf_event');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/event');
         $this->crud->setEntityNameStrings(trans('informacrm.inf_event'), trans('informacrm.inf_events'));
-        // $this->crud->setShowView('inf.accounts.show');
+        // $this->crud->setShowView('inf/accounts/tabs/create_event_from_account');
         // $this->crud->setListView('inf/calendar/events')
-        $this->crud->setEditView('inf/calendar/edit_event');
-        // $this->crud->setCreateView('inf/accounts/tabs/create_contact_from_account');
+        $this->crud->setEditView('inf/accounts/tabs/create_event_from_account');
+        $this->crud->setCreateView('inf/accounts/tabs/create_event_from_account');
+
+        // $this->crud->setRequiredFields(['title', 'event_types'], 'update/create/both');
+        // $this->crud->setRequiredField('field_1', 'update/create/both');
+        // $this->crud->getRequiredFields()
+
+        // enabled/disables grouped errors at the top
+        $this->crud->enableGroupedErrors();
+        // $this->crud->disableGroupedErrors();
+
+        // enables/disables inline errors
+        // $this->crud->enableInlineErrors();
+        $this->crud->disableInlineErrors();
+
+        // check if grouped messages are enabled
+        // $this->crud->isGroupedErrorsEnabled();
+
+        // check if inline messages are enabled
+        // $this->crud->isInlineErrorsEnabled();
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setFromDb();
+        // $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
+        $this->crud->addField([
+            'name' => 'inf_account_id',
+            'label' => trans('informacrm.inf_account_id'),
+            'type' => 'hidden'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'title',
+            'label' => trans('informacrm.event_title').' *',
+            'type' => 'text'
+        ]);
+
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
-            'label' => trans('informacrm.event_types'),
+            'label' => trans('informacrm.event_types').' *',
                 'type' => 'select2_multiple_color',
                 'name' => 'event_types', // the method that defines the relationship in your Model
                 'entity' => 'event_types', // the method that defines the relationship in your Model
                 'attribute' => 'description', // foreign key attribute that is shown to user
                 'model' => "App\Models\Inf_event_type", // foreign key model
                 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-9'
+                ]
+            ]);
+
+            $this->crud->addField([
+                'label' => trans('informacrm.event_status').' *',
+                'type' => 'select',
+                'name' => 'inf_event_status_id', // the db column for the foreign key
+                'entity' => 'event_statuses', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Inf_event_status", // foreign key model
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-3'
+                ]
+            ]);
+
+            $this->crud->addField([   // CustomHTML
+                'name' => 'separator',
+                'type' => 'custom_html',
+                'value' => '',
+                'wrapperAttributes' => [
+                    'class' => 'row',
+                    'style' => 'margin-top: 20px'
+                ]
+            ]);
+
+            $this->crud->addField([   // Checkbox
+                'name' => 'all_day',
+                'label' => trans('informacrm.event_all_day'),
+                'type' => 'checkbox',
+                'default' => 0,
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-3'
+                ]
+            ]);
+            $this->crud->addField([   // CustomHTML
+                'name' => 'separator1',
+                'type' => 'custom_html',
+                'value' => '',
+                'wrapperAttributes' => [
+                    'class' => 'row',
+                    'style' => 'margin-top: 20px'
+                ]
+            ]);
+            $this->crud->addField([   // DateTime
+                'name' => 'start_date',
+                'label' => trans('informacrm.event_start'),
+                'type' => 'datetime_picker',
+                // optional:
+                'datetime_picker_options' => [
+                    'format' => 'DD/MM/YYYY HH:mm',
+                    'language' => 'it'
+                ],
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-6'
+                ]
+            ]);
+
+            $this->crud->addField([   // DateTime
+                'name' => 'end_date',
+                'label' => trans('informacrm.event_end'),
+                'type' => 'datetime_picker',
+                // optional:
+                'datetime_picker_options' => [
+                    'format' => 'DD/MM/YYYY HH:mm',
+                    'language' => 'it'
+                ],
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-6'
+                ]
+            ]);
+
+            $this->crud->addField([
+                'label' => trans('informacrm.event_result_id'),
+                'type' => 'select',
+                'name' => 'inf_event_result_id', // the db column for the foreign key
+                'entity' => 'event_results', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Inf_event_result", // foreign key model
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-3'
+                ]
+            ]);
+
+
+            $this->crud->addField([   // WYSIWYG Editor
+                'name' => 'notes',
+                'label' => trans('informacrm.event_notes'),
+                'type' => 'ckeditor'
             ]);
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
@@ -143,15 +266,31 @@ class Inf_eventCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
+        // dd('qui');
+        $request['created_by'] = \Auth::user()->name;
+
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
+        $saveAction = $this->getSaveAction()['active']['value'];
+        switch ($saveAction) {
+            case 'save_and_edit':
+                break;
+            case 'save_and_new':
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/event/create?active_account_id='.$this->crud->entry['inf_account_id']);
+                break;
+            case 'save_and_back':
+            default:
+                $redirect_location = redirect('admin/account/'.$this->crud->entry['inf_account_id'].'#events');
+                break;
+        }
         return $redirect_location;
     }
 
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
+        // dd('qui');
         if ( $request['created_by'] == "") {
             $request['created_by'] = \Auth::user()->name;
         }

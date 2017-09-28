@@ -18,8 +18,8 @@ class Inf_event extends Model
     protected $table = 'inf_events';
     protected $primaryKey = 'id';
     // public $timestamps = false;
-    // protected $guarded = ['id'];
-    protected $fillable = ['title','start_date','end_date'];
+    protected $guarded = ['id'];
+    // protected $fillable = ['title','start_date','end_date', 'type'];
     // protected $hidden = [];
     // protected $dates = [];
 
