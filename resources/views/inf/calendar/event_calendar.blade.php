@@ -32,13 +32,13 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-3">
-            <div class="box box-solid">
-                @include('inf.calendar.event_box_draggable')
-            </div>
-            <div class="box box-solid">
-                @include('inf.calendar.event_box_statuses')
-            </div>
+        {{-- <div class="col-md-3"> --}}
+            {{-- <div class="box box-solid"> --}}
+                {{-- @include('inf.calendar.event_box_draggable') --}}
+            {{-- </div> --}}
+            {{-- <div class="box box-solid"> --}}
+                {{-- @include('inf.calendar.event_box_statuses') --}}
+            {{-- </div> --}}
 
             {{-- <div class="box box-solid">
                         <div class="box-header with-border">
@@ -75,9 +75,9 @@
                           <!-- /input-group -->
                         </div>
                       </div> --}}
-        </div>
+        {{-- </div> --}}
 
-      <div class="col-md-9">
+      <div class="col-md-12">
           <div class="box box-primary">
               <div class="box-body no-padding">
                   <!-- THE CALENDAR -->

@@ -1,7 +1,7 @@
 <!-- Create button -->
 @includeif('vendor.backpack.crud.buttons.create', [
-    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/address/create?active_account_id='.$entry->id),
-    'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.address')."' ",
+    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/events/create?active_account_id='.$entry->id),
+    'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.events')."' ",
     'custom_button_class' => ""
 ])
 <hr>

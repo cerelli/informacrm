@@ -36,6 +36,15 @@ class Inf_eventCrudController extends CrudController
         $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
+        $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
+            'label' => trans('informacrm.event_types'),
+                'type' => 'select2_multiple_color',
+                'name' => 'event_types', // the method that defines the relationship in your Model
+                'entity' => 'event_types', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Inf_event_type", // foreign key model
+                'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+            ]);
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
