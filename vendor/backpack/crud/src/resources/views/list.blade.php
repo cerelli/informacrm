@@ -44,11 +44,13 @@
 
                 {{-- Table columns --}}
                 @foreach ($crud->columns as $column)
-                  <th>{{ $column['label'] }}</th>
+                  <th {{ isset($column['orderable']) ? 'data-orderable=' .var_export($column['orderable'], true) : '' }}>
+                    {{ $column['label'] }}
+                  </th>
                 @endforeach
 
                 @if ( $crud->buttons->where('stack', 'line')->count() )
-                  <th>{{ trans('backpack::crud.actions') }}</th>
+                  <th data-orderable="false">{{ trans('backpack::crud.actions') }}</th>
                 @endif
               </tr>
             </thead>
@@ -155,6 +157,7 @@
 
 	<script type="text/javascript">
 	  jQuery(document).ready(function($) {
+
       @if ($crud->exportButtons())
       var dtButtons = function(buttons){
           var extended = [];
@@ -175,6 +178,7 @@
           return extended;
       }
       @endif
+
 	  	var table = $("#crudTable").DataTable({
         "pageLength": {{ $crud->getDefaultPageLength() }},
         /* Disable initial sort */
@@ -210,6 +214,7 @@
                   "colvis": "{{ trans('backpack::crud.export.column_visibility') }}"
               },
           },
+
           @if ($crud->ajaxTable())
           "processing": true,
           "serverSide": true,
@@ -218,6 +223,7 @@
               "type": "POST"
           },
           @endif
+
           @if ($crud->exportButtons())
           // show the export datatable buttons
           dom: '<"p-l-0 col-md-6"l>B<"p-r-0 col-md-6"f>rt<"col-md-6 p-l-0"i><"col-md-6 p-r-0"p>',
@@ -231,6 +237,7 @@
           ]),
           @endif
       });
+
       @if ($crud->exportButtons())
       // move the datatable buttons in the top-right corner and make them smaller
       table.buttons().each(function(button) {
@@ -241,21 +248,27 @@
       })
       $(".dt-buttons").appendTo($('#datatable_button_stack' ));
       @endif
+
       $.ajaxPrefilter(function(options, originalOptions, xhr) {
           var token = $('meta[name="csrf_token"]').attr('content');
+
           if (token) {
                 return xhr.setRequestHeader('X-XSRF-TOKEN', token);
           }
       });
+
       // make the delete button work in the first result page
       register_delete_button_action();
+
       // make the delete button work on subsequent result pages
       $('#crudTable').on( 'draw.dt',   function () {
          register_delete_button_action();
+
          @if ($crud->details_row)
           register_details_row_button_action();
          @endif
       } ).dataTable();
+
       function register_delete_button_action() {
         $("[data-button-type=delete]").unbind('click');
         // CRUD Delete
@@ -264,6 +277,7 @@
           e.preventDefault();
           var delete_button = $(this);
           var delete_url = $(this).attr('href');
+
           if (confirm("{{ trans('backpack::crud.delete_confirm') }}") == true) {
               $.ajax({
                   url: delete_url,
@@ -296,21 +310,26 @@
           }
         });
       }
+
+
       @if ($crud->details_row)
       function register_details_row_button_action() {
         // var crudTable = $('#crudTable tbody');
         // Remove any previously registered event handlers from draw.dt event callback
         $('#crudTable tbody').off('click', 'td .details-row-button');
+
         // Make sure the ajaxDatatables rows also have the correct classes
         $('#crudTable tbody td .details-row-button').parent('td')
           .removeClass('details-control').addClass('details-control')
           .removeClass('text-center').addClass('text-center')
           .removeClass('cursor-pointer').addClass('cursor-pointer');
+
         // Add event listener for opening and closing details
         $('#crudTable tbody td.details-control').on('click', function () {
             var tr = $(this).closest('tr');
             var btn = $(this).find('.details-row-button');
             var row = table.row( tr );
+
             if ( row.child.isShown() ) {
                 // This row is already open - close it
                 btn.removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
@@ -348,8 +367,11 @@
             }
         } );
       }
+
       register_details_row_button_action();
       @endif
+
+
 	  });
 	</script>
 

@@ -112,16 +112,16 @@
         },
         {
             "name": "backpack/crud",
-            "version": "3.2.19",
+            "version": "3.2.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/CRUD.git",
-                "reference": "4b120ae627e7d381f366d8e6a227770ea726c93e"
+                "reference": "0250f8dd23a4572c2cffa19e209e009b8c903943"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/4b120ae627e7d381f366d8e6a227770ea726c93e",
-                "reference": "4b120ae627e7d381f366d8e6a227770ea726c93e",
+                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/0250f8dd23a4572c2cffa19e209e009b8c903943",
+                "reference": "0250f8dd23a4572c2cffa19e209e009b8c903943",
                 "shasum": ""
             },
             "require": {
@@ -134,6 +134,8 @@
                 "venturecraft/revisionable": "1.*"
             },
             "require-dev": {
+                "orchestra/database": "~3.4",
+                "orchestra/testbench": "~3.0",
                 "phpunit/phpunit": "4.*",
                 "scrutinizer/ocular": "~1.1"
             },
@@ -177,7 +179,7 @@
                 "read",
                 "update"
             ],
-            "time": "2017-09-05T09:39:36+00:00"
+            "time": "2017-09-28T11:36:39+00:00"
         },
         {
             "name": "backpack/langfilemanager",
@@ -2489,16 +2491,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.10",
+            "version": "v2.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
+                "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
-                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/5da4d3c796c275c55f057af5a643ae297d96b4d8",
+                "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8",
                 "shasum": ""
             },
             "require": {
@@ -2533,7 +2535,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-03-13T16:27:32+00:00"
+            "time": "2017-09-27T21:40:39+00:00"
         },
         {
             "name": "prologue/alerts",

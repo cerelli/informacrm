@@ -383,56 +383,6 @@
         ]
     },
     {
-        "name": "paragonie/random_compat",
-        "version": "v2.0.10",
-        "version_normalized": "2.0.10.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/paragonie/random_compat.git",
-            "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
-            "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*|5.*"
-        },
-        "suggest": {
-            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
-        },
-        "time": "2017-03-13T16:27:32+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/random.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Paragon Initiative Enterprises",
-                "email": "security@paragonie.com",
-                "homepage": "https://paragonie.com"
-            }
-        ],
-        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
-        "keywords": [
-            "csprng",
-            "pseudorandom",
-            "random"
-        ]
-    },
-    {
         "name": "psr/simple-cache",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -4138,77 +4088,6 @@
         "homepage": "http://laravelcollective.com"
     },
     {
-        "name": "backpack/crud",
-        "version": "3.2.19",
-        "version_normalized": "3.2.19.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/CRUD.git",
-            "reference": "4b120ae627e7d381f366d8e6a227770ea726c93e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/4b120ae627e7d381f366d8e6a227770ea726c93e",
-            "reference": "4b120ae627e7d381f366d8e6a227770ea726c93e",
-            "shasum": ""
-        },
-        "require": {
-            "backpack/base": "^0.7.15",
-            "barryvdh/laravel-elfinder": "^0.3.10",
-            "doctrine/dbal": "^2.5",
-            "intervention/image": "^2.3",
-            "laravelcollective/html": "~5.0",
-            "livecontrol/eloquent-datatable": "^0.1.5",
-            "venturecraft/revisionable": "1.*"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*",
-            "scrutinizer/ocular": "~1.1"
-        },
-        "time": "2017-09-05T09:39:36+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Backpack\\CRUD\\CrudServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\CRUD\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Cristian tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://www.tabacitu.ro",
-                "role": "Chief Architect & Lead Developer"
-            }
-        ],
-        "description": "Quickly build an admin interface for your Eloquent models, using Laravel 5. Build a CMS in a matter of minutes.",
-        "homepage": "https://github.com/laravel-backpack/CRUD",
-        "keywords": [
-            "Admin Interface",
-            "admin panel",
-            "cms",
-            "create",
-            "crud",
-            "delete",
-            "read",
-            "update"
-        ]
-    },
-    {
         "name": "spatie/laravel-permission",
         "version": "1.13.0",
         "version_normalized": "1.13.0.0",
@@ -6015,5 +5894,128 @@
             }
         ],
         "description": "Laravel helper for FullCalendar.io"
+    },
+    {
+        "name": "paragonie/random_compat",
+        "version": "v2.0.11",
+        "version_normalized": "2.0.11.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/paragonie/random_compat.git",
+            "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/5da4d3c796c275c55f057af5a643ae297d96b4d8",
+            "reference": "5da4d3c796c275c55f057af5a643ae297d96b4d8",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*|5.*"
+        },
+        "suggest": {
+            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+        },
+        "time": "2017-09-27T21:40:39+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/random.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Paragon Initiative Enterprises",
+                "email": "security@paragonie.com",
+                "homepage": "https://paragonie.com"
+            }
+        ],
+        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+        "keywords": [
+            "csprng",
+            "pseudorandom",
+            "random"
+        ]
+    },
+    {
+        "name": "backpack/crud",
+        "version": "3.2.21",
+        "version_normalized": "3.2.21.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/CRUD.git",
+            "reference": "0250f8dd23a4572c2cffa19e209e009b8c903943"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/0250f8dd23a4572c2cffa19e209e009b8c903943",
+            "reference": "0250f8dd23a4572c2cffa19e209e009b8c903943",
+            "shasum": ""
+        },
+        "require": {
+            "backpack/base": "^0.7.15",
+            "barryvdh/laravel-elfinder": "^0.3.10",
+            "doctrine/dbal": "^2.5",
+            "intervention/image": "^2.3",
+            "laravelcollective/html": "~5.0",
+            "livecontrol/eloquent-datatable": "^0.1.5",
+            "venturecraft/revisionable": "1.*"
+        },
+        "require-dev": {
+            "orchestra/database": "~3.4",
+            "orchestra/testbench": "~3.0",
+            "phpunit/phpunit": "4.*",
+            "scrutinizer/ocular": "~1.1"
+        },
+        "time": "2017-09-28T11:36:39+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\CRUD\\CrudServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\CRUD\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Cristian tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://www.tabacitu.ro",
+                "role": "Chief Architect & Lead Developer"
+            }
+        ],
+        "description": "Quickly build an admin interface for your Eloquent models, using Laravel 5. Build a CMS in a matter of minutes.",
+        "homepage": "https://github.com/laravel-backpack/CRUD",
+        "keywords": [
+            "Admin Interface",
+            "admin panel",
+            "cms",
+            "create",
+            "crud",
+            "delete",
+            "read",
+            "update"
+        ]
     }
 ]
