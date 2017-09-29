@@ -96,7 +96,7 @@
 
     var contacts = new Bloodhound({
         remote: {
-            url: '/{{ config('backpack.base.route_search', 'admin') }}/findContacts?q=%QUERY%',
+            url: '/{{ config('backpack.base.route_prefix', 'admin') }}/findContacts?q=%QUERY%',
             wildcard: '%QUERY%'
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace('q'),
@@ -125,7 +125,7 @@
                         // $user = App\User::find(1); // works!
                         // echo $user->full_name;
                         var fullname = $.trim($.trim(data.name1)+' '+$.trim(data.name2));
-                        return '<a href="{{ url(config('backpack.base.route_search', 'admin').'/account/') }}/'+data.id+'" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a>'
+                        return '<a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account/') }}/'+data.id+'" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a>'
                     }
                 }
             }
@@ -145,7 +145,7 @@
                         // $user = App\User::find(1); // works!
                         // echo $user->full_name;
                         var fullname = $.trim($.trim(data.first_name)+' '+$.trim(data.last_name));
-                        return '<a href="{{ url(config('backpack.base.route_search', 'admin').'/account/') }}/'+data.inf_account_id+'#contacts" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a>'
+                        return '<a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account/') }}/'+data.inf_account_id+'#contacts" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a>'
                     }
                 }
             }
