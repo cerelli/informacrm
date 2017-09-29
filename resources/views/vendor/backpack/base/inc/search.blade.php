@@ -96,7 +96,7 @@
 
     var contacts = new Bloodhound({
         remote: {
-            url: '/{{ config('backpack.base.route_prefix', 'admin') }}/findContacts?q=%QUERY%',
+            url: '/{{ config('backpack.base.route_search', 'admin') }}/findContacts?q=%QUERY%',
             wildcard: '%QUERY%'
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace('q'),
