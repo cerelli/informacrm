@@ -4,10 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Inf_account extends Model
 {
     use CrudTrait;
+    use SearchableTrait;
+
+    protected $searchable = [
+        'columns' => [
+            'inf_accounts.name1' => 10,
+            'inf_accounts.name2' => 10,
+            'inf_accounts.vat_number' => 5,
+            'inf_accounts.fiscal_code' => 5,
+            'inf_accounts.notes' => 1,
+            'inf_contacts.first_name' => 5,
+            'inf_contacts.last_name' => 5,
+            'inf_contacts.notes' => 10,
+            // 'profiles.bio' => 3,
+            // 'profiles.country' => 2,
+            // 'profiles.city' => 1,
+        ],
+        'joins' =>  [
+            'inf_contacts' => ['inf_accounts.id','inf_contacts.inf_account_id'],
+        ],
+    ];
 
      /*
     |--------------------------------------------------------------------------

@@ -28,7 +28,8 @@ Route::group([
 
     Route::get('search',array('as'=>'search','uses'=>'SearchController@search'));
     Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
-
+    Route::get('findAccounts','SearchController@findAccounts');
+    Route::get('findContacts','SearchController@findContacts');
 
 
     Route::get('dashboard', 'DashboardController@index');

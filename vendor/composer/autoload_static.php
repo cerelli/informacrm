@@ -71,6 +71,10 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
             'Prologue\\Alerts\\' => 16,
             'PhpParser\\' => 10,
         ),
+        'N' => 
+        array (
+            'Nicolaslopezj\\Searchable\\' => 25,
+        ),
         'M' => 
         array (
             'Monolog\\' => 8,
@@ -256,6 +260,10 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
+        'Nicolaslopezj\\Searchable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nicolaslopezj/searchable/src',
         ),
         'Monolog\\' => 
         array (
@@ -2887,6 +2895,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
+        'Nicolaslopezj\\Searchable\\SearchableTrait' => __DIR__ . '/..' . '/nicolaslopezj/searchable/src/SearchableTrait.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',

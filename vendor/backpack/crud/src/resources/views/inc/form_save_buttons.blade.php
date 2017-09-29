@@ -7,11 +7,12 @@
         <button type="submit" class="btn btn-success">
             <span class="fa fa-save" role="presentation" aria-hidden="true"></span> &nbsp;
             <span data-value="{{ $saveAction['active']['value'] }}">{{ $saveAction['active']['label'] }}</span>
+
         </button>
 
         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aira-expanded="false">
             <span class="caret"></span>
-            <span class="sr-only">&#x25BC;</span>
+            <span class="sr-only">Toggle Save Dropdown</span>
         </button>
 
         <ul class="dropdown-menu">
@@ -23,4 +24,5 @@
     </div>
 
     <a href="{{ url($crud->route) }}" class="btn btn-default"><span class="fa fa-ban"></span> &nbsp;{{ trans('backpack::crud.cancel') }}</a>
+    {{-- {{ dd(url($crud->route)) }} --}}
 </div>
