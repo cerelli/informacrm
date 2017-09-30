@@ -28,7 +28,7 @@ class SearchController extends CrudController
         //
         // $results['contacts'][] = inf_contact::search($request->get('q'))->distinct()->get();
 
-        // dd($results);
+        // dd($results->toJson());
         return inf_account::search($request->get('q'))->distinct()->get();
     }
 
