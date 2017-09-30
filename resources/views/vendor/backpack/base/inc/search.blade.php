@@ -125,7 +125,7 @@
                         // $user = App\User::find(1); // works!
                         // echo $user->full_name;
                         var fullname = $.trim($.trim(data.name1)+' '+$.trim(data.name2));
-                        return '<a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account/') }}/'+data.id+'" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a>'
+                        return '<p><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account/') }}/'+data.id+'" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a></p>'
                     }
                 }
             }
@@ -145,7 +145,7 @@
                         // $user = App\User::find(1); // works!
                         // echo $user->full_name;
                         var fullname = $.trim($.trim(data.first_name)+' '+$.trim(data.last_name));
-                        return '<a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account/') }}/'+data.inf_account_id+'#contacts" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a>'
+                        return '<p><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account/') }}/'+data.inf_account_id+'#contacts" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a></p>'
                     }
                 }
             }
