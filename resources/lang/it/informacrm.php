@@ -44,6 +44,8 @@ return [
 
     'name2'          	  => 'Rag.Sociale 2 / Cognome',
 
+    'inf_account_types'           => 'Tipologie',
+
     'account_type'           => 'Tipologia',
 
 	'account_types'           => 'Tipologie',

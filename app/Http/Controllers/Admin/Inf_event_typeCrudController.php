@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\Inf_event_typesRequest as StoreRequest;
-use App\Http\Requests\Inf_event_typesRequest as UpdateRequest;
+use App\Http\Requests\Inf_event_typeRequest as StoreRequest;
+use App\Http\Requests\Inf_event_typeRequest as UpdateRequest;
 
-class Inf_event_typesCrudController extends CrudController
+class Inf_event_typeCrudController extends CrudController
 {
     public function setup()
     {
@@ -18,8 +18,8 @@ class Inf_event_typesCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Inf_event_types');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/inf_event_types');
+        $this->crud->setModel('App\Models\Inf_event_type');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/event_type');
         $this->crud->setEntityNameStrings('inf_event_types', 'inf_event_types');
 
         /*

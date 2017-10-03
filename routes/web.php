@@ -35,10 +35,13 @@ Route::group([
     Route::get('dashboard', 'DashboardController@index');
 
     Route::get('events_calendar', 'Inf_eventCrudController@calendar');
-
+    CRUD::resource('title', 'Inf_titleCrudController');
     // your CRUD resources and other admin routes here
     CRUD::resource('account', 'Inf_accountCrudController');
     CRUD::resource('event', 'Inf_eventCrudController');
+    CRUD::resource('event_status', 'Inf_event_statusCrudController');
+    CRUD::resource('event_result', 'Inf_event_resultCrudController');
+    CRUD::resource('event_type', 'Inf_event_typeCrudController');
     // Route::get('terminate',['middleware' => 'account','uses' => 'Inf_accountCrudController@index',]);
 
     CRUD::resource('account_type', 'Inf_account_typeCrudController');
@@ -53,4 +56,8 @@ Route::group([
     CRUD::resource('web_site_type', 'Inf_web_site_typeCrudController');
 
     CRUD::resource('address', 'Inf_addressCrudController');
+    CRUD::resource('address_type', 'Inf_address_typeCrudController');
+
+    CRUD::resource('office', 'Inf_officeCrudController');
+
 });
