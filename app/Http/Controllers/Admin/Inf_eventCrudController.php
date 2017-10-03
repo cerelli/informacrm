@@ -28,7 +28,7 @@ class Inf_eventCrudController extends CrudController
         $this->crud->setEntityNameStrings(trans('informacrm.inf_event'), trans('informacrm.inf_events'));
         // $this->crud->setShowView('inf/accounts/tabs/create_event_from_account');
         // $this->crud->setListView('inf/calendar/events')
-        $this->crud->setEditView('inf/accounts/tabs/create_event_from_account');
+        $this->crud->setEditView('inf/accounts/tabs/edit_event_from_account');
         $this->crud->setCreateView('inf/accounts/tabs/create_event_from_account');
 
         // $this->crud->setRequiredFields(['title', 'event_types'], 'update/create/both');
@@ -164,8 +164,8 @@ class Inf_eventCrudController extends CrudController
 
 
             $this->crud->addField([   // WYSIWYG Editor
-                'name' => 'notes',
-                'label' => trans('informacrm.event_notes'),
+                'name' => 'result_description',
+                'label' => trans('informacrm.event_result_description'),
                 'type' => 'ckeditor'
             ]);
         // $this->crud->addField($options, 'update/create/both');
@@ -253,7 +253,7 @@ class Inf_eventCrudController extends CrudController
                  [
                      'color' => $value->event_statuses->background_color,
                      'textColor' => $value->event_statuses->color,
-                     'url' => 'event/'.$value->id.'/edit?call_url=events_calendar',
+                     'url' => 'event/'.$value->id.'/edit?call_url=events_calendar&call=events_calendar',
                  ]
                 );
             }
@@ -296,9 +296,10 @@ class Inf_eventCrudController extends CrudController
         }
         $request['updated_by'] = \Auth::user()->name;
         $parsed = parse_url(url()->previous());
+        // dd($parsed);
         parse_str($parsed['query'], $query_params);
         $call_url = $query_params['call_url'];
-
+        $call = $query_params['call'];
         $redirect_location = parent::updateCrud($request);
 
         $saveAction = $this->getSaveAction()['active']['value'];
@@ -310,7 +311,17 @@ class Inf_eventCrudController extends CrudController
                 break;
             case 'save_and_back':
             default:
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/events_calendar');
+                switch ($call) {
+                    case 'events_calendar':
+                        $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/'.$call_url);
+                        break;
+                    case 'account':
+                        $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/'.$call_url.'#events');
+                        break;
+                    default:
+                        $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/'.$call_url);
+                        break;
+                }
                 break;
         }
         // your additional operations after save here

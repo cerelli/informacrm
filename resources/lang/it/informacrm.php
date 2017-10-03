@@ -131,6 +131,17 @@ return [
    'settings'           => 'Impostazioni',
    'config'           => 'configurazione',
 
+   'is_persona'           => 'Persona Fisica',
+   'inf_event'           => 'Evento',
+   'inf_events'           => 'Eventi',
+   'event_title'           => 'Titolo Evento',
+   'event_types'           => 'Tipo Evento',
+   'event_start'           => 'Inizio Evento',
+   'event_end'           => 'Fine Evento',
+   'event_result_id'           => 'Esito Evento',
+   'event_notes'           => 'Descrizione Evento',
+   'event_all_day'           => 'Evento in giornata',
+   'search'           => 'Ricerca',
 
 
 ];

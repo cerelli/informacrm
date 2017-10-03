@@ -110,6 +110,18 @@ class Inf_account extends Model
     {
         return $this->hasMany('App\Models\Inf_event','inf_account_id', 'id');
     }
+
+    public function event_types()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Inf_event_type',
+            'App\Models\Inf_event',
+            'inf_account_id', // Foreign key on contacts table...
+            'inf_event_id', // Foreign key on contact_details table...
+            'id', // Local key on accounts table...
+            'id' // Local key on contacts table...
+        );
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
