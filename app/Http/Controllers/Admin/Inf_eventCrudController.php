@@ -251,8 +251,8 @@ class Inf_eventCrudController extends CrudController
                     $value->id,
                     // Add color and link on event
                  [
-                     'color' => $value->event_statuses->background_color,
-                     'textColor' => $value->event_statuses->color,
+                     'color' => $value->event_status->background_color,
+                     'textColor' => $value->event_status->color,
                      'url' => 'event/'.$value->id.'/edit?call_url=events_calendar&call=events_calendar',
                  ]
                 );
