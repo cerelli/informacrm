@@ -19,8 +19,8 @@ class CreateInfEventsTable extends Migration
             $table->text('notes')->nullable();
 
             $table->boolean('all_day')->default(0);
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
 
             $table->unsignedInteger('inf_account_id')->nullable();
             $table->unsignedInteger('inf_event_status_id')->nullable();
