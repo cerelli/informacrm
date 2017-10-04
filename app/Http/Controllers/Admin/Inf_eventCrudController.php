@@ -243,6 +243,8 @@ class Inf_eventCrudController extends CrudController
         // dd($data);
         if($data->count()) {
             foreach ($data as $key => $value) {
+                $backColor = (isset($value->event_status->background_color)) ? $value->event_status->background_color : '#ffffff' ;
+                $textColor = (isset($value->event_status->color)) ? $value->event_status->color : '#000000' ;
                 $events[] = Calendar::event(
                     $value->title,
                     true,
@@ -251,8 +253,8 @@ class Inf_eventCrudController extends CrudController
                     $value->id,
                     // Add color and link on event
                  [
-                     'color' => $value->event_status->background_color,
-                     'textColor' => $value->event_status->color,
+                     'color' => $backColor,
+                     'textColor' => $textColor,
                      'url' => 'event/'.$value->id.'/edit?call_url=events_calendar&call=events_calendar',
                  ]
                 );
