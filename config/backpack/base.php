@@ -15,9 +15,9 @@ return [
     'project_name' => 'informaCRM',
 
     // Menu logos
-    'logo_lg'   => ' <img src="'.env('APP_IMAGE_URL',url('')).'/images/logo-lg.png" alt="logo-lg Image" width="147" height="43">',
+    'logo_lg'   => ' <img src="'.env('APP_IMAGE_URL','#').'/images/logo-lg.png" alt="logo-lg Image" width="147" height="43">',
     // 'logo_lg'   => '<b>informa</b>CRM',
-    'logo_mini' => ' <img src="'.env('APP_IMAGE_URL',url('')).'/images/logo-mini.png" alt="logo-mini Image" width="21" height="49">',
+    'logo_mini' => ' <img src="'.env('APP_IMAGE_URL','#').'/images/logo-mini.png" alt="logo-mini Image" width="21" height="49">',
     // 'logo_mini' => '<b>i</b>C',
 
     // Developer or company name. Shown in footer.

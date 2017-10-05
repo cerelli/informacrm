@@ -28,6 +28,8 @@ class Inf_eventRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
             'title' => 'required|min:3|max:255',
             'event_types' => 'required',
             'inf_event_status_id' => 'required',
+            // 'start_date' => 'required',
+            // 'end_date' => 'required',
         ];
     }
 

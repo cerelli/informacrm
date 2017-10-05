@@ -246,21 +246,47 @@ class Inf_eventCrudController extends CrudController
                 $backColor = (isset($value->event_status->background_color)) ? $value->event_status->background_color : '#ffffff' ;
                 $textColor = (isset($value->event_status->color)) ? $value->event_status->color : '#000000' ;
                 $events[] = Calendar::event(
-                    $value->title,
-                    true,
+                    $value->title.' - '.\Auth::user()->name,
+                    $value->all_day,
                     new \DateTime($value->start_date),
-                    new \DateTime($value->end_date.' +1 day'),
+                    // new \DateTime($value->end_date.' +1 day'),
+                    new \DateTime($value->end_date),
                     $value->id,
                     // Add color and link on event
                  [
                      'color' => $backColor,
                      'textColor' => $textColor,
                      'url' => 'event/'.$value->id.'/edit?call_url=events_calendar&call=events_calendar',
+
                  ]
                 );
             }
         }
-        $calendar = Calendar::addEvents($events);
+        $calendar = Calendar::addEvents($events)
+        ->setOptions([
+            'defaultView' => 'listYear',
+            'header' => [
+                'left' => 'prev,next today',
+                'center' => 'title',
+                'right' => 'month,agendaWeek,agendaDay,listYear',
+            ]
+        ])
+        ;
+
+        // ->setOptions([
+        //         'defaultView' => 'listDay',
+        //         'header' =>
+        //             [
+        //                 'left' => 'prev,next today',
+        //                 'center' => 'title',
+        //                 'right' => 'month,agendaWeek,agendaDay,listDay',
+        //             ]
+        //     ])
+        //     ->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
+        //         'eventRender' => 'function(event, element) {
+        // element.children().last().append(event.description);
+        //     }'])
+            // ;
         // dd($calendar);
         return view('inf.calendar.event_calendar', compact('calendar'));
     }

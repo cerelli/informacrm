@@ -2,13 +2,17 @@
 @section('before_styles')
 {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script> --}}
-<link rel='stylesheet' href='{{ asset('vendor/adminlte/plugins/') }}/fullcalendar/fullcalendar.css' />
+
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.css"></script> --}}
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.css' />
+{{-- <link rel='stylesheet' href='{{ asset('vendor/adminlte/plugins/') }}/fullcalendar/fullcalendar.css' /> --}}
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/> --}}
 {{-- <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" />
 <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.print.css" /> --}}
 @endsection
 
 @section('after_style')
+    {{-- <script src='{{ asset('vendor/adminlte/plugins/') }}fullcalendar/fullcalendar.js'></script> --}}
     {{-- href="{{ asset('vendor/adminlte/') }}/bootstrap/css/bootstrap.min.css" --}}
     {{-- <link rel='stylesheet' href='{{ asset('vendor/adminlte/plugins/') }}fullcalendar/fullcalendar.css' />
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -95,7 +99,10 @@
 @endsection
 
 @section('after_scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js"></script>
-    {!! $calendar->script() !!}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/locale-all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/locale/it.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js"></script> --}}
+{!! $calendar->script() !!}
 @endsection
