@@ -11,7 +11,7 @@
     <title>
       {{ isset($title) ? $title.' :: '.config('backpack.base.project_name').' Admin' : config('backpack.base.project_name').' Admin' }}
     </title>
-
+    <link rel="shortcut icon" type="image/png" href="{{ asset('') }}/favicon.ico" />
     @yield('before_styles')
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
