@@ -85,9 +85,10 @@
 <script type="text/javascript">
     // jQuery(document).ready(function($) {
     //Set the Options for "Bloodhound" suggestion engine
+
     var accounts = new Bloodhound({
         remote: {
-            url: '/{{ config('backpack.base.route_search', 'admin') }}/findAccounts?q=%QUERY%',
+            url: '/{{ Config::get('settings.route_search') }}/findAccounts?q=%QUERY%',
             wildcard: '%QUERY%'
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace('q'),
@@ -96,7 +97,7 @@
 
     var contacts = new Bloodhound({
         remote: {
-            url: '/{{ config('backpack.base.route_search', 'admin') }}/findContacts?q=%QUERY%',
+            url: '/{{ Config::get('settings.route_search') }}/findContacts?q=%QUERY%',
             wildcard: '%QUERY%'
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace('q'),

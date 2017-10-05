@@ -54,6 +54,15 @@ class SettingsTableSeeder extends Seeder
             'active'        => 1,
 
         ],
+        [
+            'key'           => 'route_search',
+            'name'          => 'Route Search',
+            'description'   => 'Route for searching function',
+            'value'         => 'admin',
+            'field'         => '{"name":"value","label":"Value","type":"text"}',
+            'active'        => 1,
+
+        ],
     ];
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Auth;
 use Request;
+use App\Models\Inf_account_type;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\Inf_accountRequest as StoreRequest;
@@ -32,6 +33,22 @@ class Inf_accountCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
+
+        // // ------- FILTERS
+        // $this->crud->addFilter([ // add a "simple" filter called Draft
+        //     'type' => 'simple',
+        //     'name' => 'is_blocked',
+        //     'label'=> 'is_blocked'
+        // ],
+        // false, // the simple filter has no values, just the "Draft" label specified above
+        // function() { // if the filter is active (the GET parameter "draft" exits)
+        //     $this->crud->addClause('where', 'is_blocked', '0');
+        //     // we've added a clause to the CRUD so that only elements with draft=1 are shown in the table
+        //     // an alternative syntax to this would have been
+        //     // $this->crud->query = $this->crud->query->where('draft', '1');
+        //     // another alternative syntax, in case you had a scopeDraft() on your model:
+        //     // $this->crud->addClause('draft');
+        // });
 
         // $this->crud->setFromDb();
 
@@ -151,6 +168,20 @@ class Inf_accountCrudController extends CrudController
             'attribute' => "description", // foreign key attribute that is shown to user
             'model' => "App\Models\Inf_account_type", // foreign key model
         ]);
+        $this->crud->addFilter([ // select2_multiple filter
+            'name' => 'account_types',
+            'type' => 'select2_multiple',
+            'label'=> trans('informacrm.account_types')
+        ], function() { // the options that show up in the select2
+            return Inf_account_type::all()->pluck('description', 'id')->toArray();
+        }, function($values) { // if the filter is active
+            foreach (json_decode($values) as $key => $value) {
+                $this->crud->query = $this->crud->query->whereHas('account_types', function ($query) use ($value) {
+                    $query->where('account_type_id', $value);
+                });
+            }
+        });
+
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
