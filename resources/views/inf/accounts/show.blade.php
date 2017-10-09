@@ -114,13 +114,13 @@
 					@include('inf.accounts.tabs.events', ['events' => $entry->events])
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_opportunities">
-					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
+					@include('inf.accounts.tabs.opportunities', ['opportunities' => $entry->events])
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_documents">
-					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
+					@include('inf.accounts.tabs.documents', ['opportunities' => $entry->events])
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_service_tickets">
-					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
+					@include('inf.accounts.tabs.service_tickets', ['opportunities' => $entry->events])
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_time_line">
 					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
