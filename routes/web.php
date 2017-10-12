@@ -42,6 +42,18 @@ Route::group([
     CRUD::resource('event_status', 'Inf_event_statusCrudController');
     CRUD::resource('event_result', 'Inf_event_resultCrudController');
     CRUD::resource('event_type', 'Inf_event_typeCrudController');
+
+    CRUD::resource('opportunity', 'Inf_opportunityCrudController');
+    CRUD::resource('opportunity_status', 'Inf_opportunity_statusCrudController');
+    CRUD::resource('opportunity_result', 'Inf_opportunity_resultCrudController');
+    CRUD::resource('opportunity_type', 'Inf_opportunity_typeCrudController');
+
+    //service_ticket
+    CRUD::resource('service_ticket', 'Inf_service_ticketCrudController');
+    CRUD::resource('service_ticket_status', 'Inf_service_ticket_statusCrudController');
+    CRUD::resource('service_ticket_result', 'Inf_service_ticket_resultCrudController');
+    CRUD::resource('service_ticket_type', 'Inf_service_ticket_typeCrudController');
+
     // Route::get('terminate',['middleware' => 'account','uses' => 'Inf_accountCrudController@index',]);
 
     CRUD::resource('account_type', 'Inf_account_typeCrudController');

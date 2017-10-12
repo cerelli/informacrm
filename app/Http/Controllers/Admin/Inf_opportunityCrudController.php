@@ -19,16 +19,116 @@ class Inf_opportunityCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Inf_opportunity');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/inf_opportunity');
-        $this->crud->setEntityNameStrings('inf_opportunity', 'inf_opportunities');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/opportunity');
+        $this->crud->setEntityNameStrings(trans('informacrm.inf_opportunity'), trans('informacrm.inf_opportunities'));
 
+        $this->crud->setEditView('inf/accounts/tabs/edit_opportunity_from_account');
+        $this->crud->setCreateView('inf/accounts/tabs/create_opportunity_from_account');
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setFromDb();
+        // $this->crud->setFromDb();
+
+        $this->crud->addField([
+            'name' => 'inf_account_id',
+            'label' => trans('informacrm.inf_account_id'),
+            'type' => 'hidden'
+        ]);
+
+        $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
+            'label' => trans('informacrm.opportunity_types').' *',
+                'type' => 'select2_multiple_color',
+                'name' => 'opportunity_types', // the method that defines the relationship in your Model
+                'entity' => 'opportunity_types', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Inf_opportunity_type", // foreign key model
+                'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-9'
+                ]
+            ]);
+
+            $this->crud->addField([
+                'label' => trans('informacrm.opportunity_status').' *',
+                'type' => 'select',
+                'name' => 'inf_opportunity_status_id', // the db column for the foreign key
+                'entity' => 'opportunity_statuses', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Inf_opportunity_status", // foreign key model
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-3'
+                ]
+            ]);
+        $this->crud->addField([   // WYSIWYG Editor
+            'name' => 'description',
+            'label' => trans('informacrm.opportunity_description'),
+            'type' => 'ckeditor'
+        ]);
+
+        // $this->crud->addField(
+        //     [   // Date
+        //         'name' => 'expiration_date',
+        //         'label' => trans('informacrm.opportunity_expiration_date'),
+        //         'type' => 'date'
+        //     ]
+        // );
+
+        $this->crud->addField(
+            [   // Number
+                'name' => 'value',
+                'label' => trans('informacrm.opportunity_value'),
+                'type' => 'number',
+                // optionals
+                'attributes' => ["step" => "any"], // allow decimals
+                'prefix' => "€",
+                'suffix' => ",00",
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-6'
+                ]
+            ]
+        );
+
+        $this->crud->addField(
+            [   // date_picker
+                'name' => 'expiration_date',
+                'type' => 'date_picker',
+                'label' => trans('informacrm.opportunity_expiration_date'),
+                // optional:
+                'date_picker_options' => [
+                    'todayBtn' => 'linked',
+                    'format' => "dd/mm/yyyy",
+                    'language' => 'it',
+                    'autoclose' => 'true'
+                ],
+           'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+           ]
+            ]
+        );
+
+
+
+        $this->crud->addField([
+            'label' => trans('informacrm.opportunity_result_id'),
+            'type' => 'select',
+            'name' => 'inf_opportunity_result_id', // the db column for the foreign key
+            'entity' => 'opportunity_results', // the method that defines the relationship in your Model
+            'attribute' => 'description', // foreign key attribute that is shown to user
+            'model' => "App\Models\Inf_opportunity_result", // foreign key model
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ]
+        ]);
+
+
+        $this->crud->addField([   // WYSIWYG Editor
+            'name' => 'result_description',
+            'label' => trans('informacrm.opportunity_result_description'),
+            'type' => 'ckeditor'
+        ], 'update/create/both');
 
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
@@ -55,6 +155,8 @@ class Inf_opportunityCrudController extends CrudController
         // $this->crud->removeAllButtonsFromStack('line');
 
         // ------ CRUD ACCESS
+        $this->crud->allowAccess('show','create');
+        // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
         // $this->crud->denyAccess(['list', 'create', 'update', 'reorder', 'delete']);
 
@@ -102,17 +204,53 @@ class Inf_opportunityCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
+        $request['created_by'] = \Auth::user()->name;
+
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
+        $saveAction = $this->getSaveAction()['active']['value'];
+        switch ($saveAction) {
+            case 'save_and_edit':
+                break;
+            case 'save_and_new':
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/opportunity/create?active_account_id='.$this->crud->entry['inf_account_id']);
+                break;
+            case 'save_and_back':
+            default:
+                $redirect_location = redirect('admin/account/'.$this->crud->entry['inf_account_id'].'#opportunities');
+                break;
+        }
         return $redirect_location;
     }
 
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
+        if ( $request['created_by'] == "") {
+            $request['created_by'] = \Auth::user()->name;
+        }
+        $request['updated_by'] = \Auth::user()->name;
+        $parsed = parse_url(url()->previous());
+        // dd($parsed);
+        parse_str($parsed['query'], $query_params);
+        $call_url = $query_params['call_url'];
+        $call = $query_params['call'];
+
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
+        $saveAction = $this->getSaveAction()['active']['value'];
+        switch ($saveAction) {
+            case 'save_and_edit':
+                break;
+            case 'save_and_new':
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/opportunity/create?call_url='.$call_url);
+                break;
+            case 'save_and_back':
+            default:
+            $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/'.$call_url.'#opportunities');
+            break;
+        }
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }

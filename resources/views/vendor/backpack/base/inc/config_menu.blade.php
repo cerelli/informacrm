@@ -113,9 +113,11 @@
       </div>
       <!-- /.tab-pane -->
       <!-- Stats tab content -->
+
       <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
       <!-- /.tab-pane -->
       <!-- Settings tab content -->
+      <section class="sidebar">
       <div class="tab-pane active" id="control-sidebar-settings-tab">
           <!-- ================== Config menu =================== -->
 
@@ -138,16 +140,52 @@
                                               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/office') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.office') }}</span></a></li>
                                               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/title') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.title') }}</span></a></li>
                                               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/web_site_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.web_site_type') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_status') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_result') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_result') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_type') }}</span></a></li>
+                                              <!-- ====================== OPPORTUNITIES ================= -->
+                                              <ul class="sidebar-menu">
+                                                  <li class="treeview">
+                                                      <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.event') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
+                                                      <ul class="treeview-menu">
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_status') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_result') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_result') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_type') }}</span></a></li>
+                                                      </ul>
+                                                  </li>
+                                              </ul>
 
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/setting') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.settings') }}</span></a></li>
+
+                                              <!-- ====================== OPPORTUNITIES ================= -->
+                                              <ul class="sidebar-menu">
+                                                  <li class="treeview">
+                                                      <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.opportunity') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
+                                                      <ul class="treeview-menu">
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/opportunity_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_status') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/opportunity_result') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_result') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/opportunity_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_type') }}</span></a></li>
+                                                      </ul>
+                                                  </li>
+                                              </ul>
+
+                                              <!-- ====================== SERVICE TICKETS ================= -->
+                                              <ul class="sidebar-menu">
+                                                  <li class="treeview">
+                                                      <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.service_ticket') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
+                                                      <ul class="treeview-menu">
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_status') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_result') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_result') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_type') }}</span></a></li>
+                                                      </ul>
+                                                  </li>
+                                              </ul>
+
+                                            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/setting') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.settings') }}</span></a></li>
+
                                           @endcan
                                           <!-- Control Sidebar Toggle Button -->
 
                                       </ul>
                                     </li>
+
+
                                     {{-- <li class="footer"> --}}
                                       {{-- <a href="#">View all tasks</a> --}}
                                     {{-- </li> --}}
@@ -226,9 +264,19 @@
           <!-- /.form-group -->
         </form> --}}
       </div>
+      </section>
       <!-- /.tab-pane -->
     </div>
+
+
+
+
+
+
+
+
   </aside>
+
   <!-- Add the sidebar's background. This div must be placed
       immediately after the control sidebar -->
  <div class="control-sidebar-bg"></div>

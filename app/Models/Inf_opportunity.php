@@ -15,10 +15,10 @@ class Inf_opportunity extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'inf_opportunitys';
-    //protected $primaryKey = 'id';
+    protected $table = 'inf_opportunities';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
-    // protected $guarded = ['id'];
+    protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
@@ -34,7 +34,25 @@ class Inf_opportunity extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function opportunity_status()
+    {
+        return $this->hasOne('App\Models\Inf_opportunity_status','id','inf_opportunity_status_id');
+    }
 
+    public function opportunity_result()
+    {
+        return $this->hasOne('App\Models\Inf_opportunity_result','id','inf_opportunity_result_id');
+    }
+
+    public function account()
+    {
+        return $this->hasOne('App\Models\Inf_account','id','inf_account_id');
+    }
+
+    public function opportunity_types()
+    {
+        return $this->belongsToMany('App\Models\Inf_opportunity_type','inf_opportunity_inf_opportunity_type','opportunity_id','opportunity_type_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -46,7 +64,18 @@ class Inf_opportunity extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
+    public function getFullResultAttribute()
+    {
+        if ( isset($this->inf_opportunity_result_id) && $this->inf_opportunity_result_id > 0 ) {
+            $label_opportunity_result = '<span style="font-size: 80%; margin-right: 3px; color: '.$this->opportunity_result->color.'; background-color: '.$this->opportunity_result->background_color.'" class="label label-default pull-right">
+                    <i class= "fa  '.$this->opportunity_result->icon.'"></i> '.$this->opportunity_result->description.'
+                </span>';
 
+            return $label_opportunity_result;
+        } else {
+            return "";
+        }
+    }
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

@@ -19,17 +19,74 @@ class Inf_service_ticketCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Inf_service_ticket');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/inf_service_ticket');
-        $this->crud->setEntityNameStrings('inf_service_ticket', 'inf_service_tickets');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/service_ticket');
+        $this->crud->setEntityNameStrings(trans('informacrm.inf_service_ticket'), trans('informacrm.inf_service_tickets'));
 
+        $this->crud->setEditView('inf/accounts/tabs/edit_service_ticket_from_account');
+        $this->crud->setCreateView('inf/accounts/tabs/create_service_ticket_from_account');
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setFromDb();
+        // $this->crud->setFromDb();
 
+        $this->crud->addField([
+            'name' => 'inf_account_id',
+            'label' => trans('informacrm.inf_account_id'),
+            'type' => 'hidden'
+        ]);
+
+        $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
+            'label' => trans('informacrm.service_ticket_types').' *',
+                'type' => 'select2_multiple_color',
+                'name' => 'service_ticket_types', // the method that defines the relationship in your Model
+                'entity' => 'service_ticket_types', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Inf_service_ticket_type", // foreign key model
+                'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-9'
+                ]
+            ]);
+
+            $this->crud->addField([
+                'label' => trans('informacrm.service_ticket_status').' *',
+                'type' => 'select',
+                'name' => 'inf_service_ticket_status_id', // the db column for the foreign key
+                'entity' => 'service_ticket_statuses', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Inf_service_ticket_status", // foreign key model
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-3'
+                ]
+            ]);
+        $this->crud->addField([   // WYSIWYG Editor
+            'name' => 'description',
+            'label' => trans('informacrm.service_ticket_description'),
+            'type' => 'ckeditor'
+        ]);
+
+
+        $this->crud->addField([
+            'label' => trans('informacrm.service_ticket_result_id'),
+            'type' => 'select',
+            'name' => 'inf_service_ticket_result_id', // the db column for the foreign key
+            'entity' => 'service_ticket_results', // the method that defines the relationship in your Model
+            'attribute' => 'description', // foreign key attribute that is shown to user
+            'model' => "App\Models\Inf_service_ticket_result", // foreign key model
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ]
+        ]);
+
+
+        $this->crud->addField([   // WYSIWYG Editor
+            'name' => 'result_description',
+            'label' => trans('informacrm.service_ticket_result_description'),
+            'type' => 'ckeditor'
+        ], 'update/create/both');
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');

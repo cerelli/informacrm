@@ -122,6 +122,20 @@ class Inf_account extends Model
             'id' // Local key on contacts table...
         );
     }
+
+    public function opportunities()
+    {
+        return $this->hasMany('App\Models\Inf_opportunity','inf_account_id', 'id');
+    }
+
+
+    public function service_tickets()
+    {
+        return $this->hasMany('App\Models\Inf_service_ticket','inf_account_id', 'id');
+    }
+
+
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

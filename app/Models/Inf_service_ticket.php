@@ -34,7 +34,25 @@ class Inf_service_ticket extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function service_ticket_status()
+    {
+        return $this->hasOne('App\Models\Inf_service_ticket_status','id','inf_service_ticket_status_id');
+    }
 
+    public function service_ticket_result()
+    {
+        return $this->hasOne('App\Models\Inf_service_ticket_result','id','inf_service_ticket_result_id');
+    }
+
+    public function account()
+    {
+        return $this->hasOne('App\Models\Inf_account','id','inf_account_id');
+    }
+
+    public function service_ticket_types()
+    {
+        return $this->belongsToMany('App\Models\Inf_service_ticket_type','inf_service_ticket_inf_service_ticket_type','service_ticket_id','service_ticket_type_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
