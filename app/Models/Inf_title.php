@@ -15,10 +15,11 @@ class Inf_title extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'inf_titles';
-    //protected $primaryKey = 'id';
+    protected $table = 'inf_titles';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
+    protected $fillable = ['description', 'color', 'background_color', 'icon', 'created_by', 'updated_by'];
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];

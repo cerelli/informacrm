@@ -15,11 +15,11 @@ class Inf_web_site_type extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'inf_web_site_types';
-    //protected $primaryKey = 'id';
+    protected $table = 'inf_web_site_types';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    // protected $fillable = [];
+    protected $fillable = ['description', 'color', 'background_color', 'icon', 'created_by', 'updated_by'];
     // protected $hidden = [];
     // protected $dates = [];
 

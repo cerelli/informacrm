@@ -31,11 +31,17 @@ class Inf_account_typeCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setFromDb();
+        // $this->crud->setFromDb();
 
         // ------ CRUD FIELDS
         $this->crud->addField([   // color_picker
-            'label' => trans('informacrm.color'),
+            'label' => trans('informacrm.description').' *',
+            'name' => 'description',
+            'type' => 'text',
+        ]);
+
+        $this->crud->addField([   // color_picker
+            'label' => trans('informacrm.color').' *',
             'name' => 'color',
             'type' => 'color_picker',
             //'color_picker_options' => ['customClass' => 'col-md-3']
@@ -44,7 +50,7 @@ class Inf_account_typeCrudController extends CrudController
             ]
         ]);
         $this->crud->addField([   // color_picker
-            'label' => trans('informacrm.background_color'),
+            'label' => trans('informacrm.background_color').' *',
             'name' => 'background_color',
             'type' => 'color_picker',
             //'color_picker_options' => ['customClass' => 'col-md-3']
@@ -82,7 +88,7 @@ class Inf_account_typeCrudController extends CrudController
 
         // ------ CRUD COLUMNS
         // $this->crud->addColumn(); // add a single column, at the end of the stack
-        // $this->crud->addColumns(); // add multiple columns, at the end of the stack
+        $this->crud->addColumns(['description','color', 'background_color']); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
         // $this->crud->removeColumns(['column_name_1', 'column_name_2']); // remove an array of columns from the stack
         // $this->crud->setColumnDetails('column_name', ['attribute' => 'value']); // adjusts the properties of the passed in column (by name)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Auth;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\Inf_titleRequest as StoreRequest;
@@ -19,17 +20,63 @@ class Inf_titleCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Inf_title');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/inf_title');
-        $this->crud->setEntityNameStrings('inf_title', 'inf_titles');
-
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/title');
+        $this->crud->setEntityNameStrings(trans('informacrm.inf_title'), trans('informacrm.inf_titles'));
+        $this->crud->enableReorder('description', 1);
+        $this->crud->allowAccess('reorder');
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setFromDb();
+        // $this->crud->setFromDb();
+        $this->crud->addField([   // color_picker
+            'label' => trans('informacrm.description').' *',
+            'name' => 'description',
+            'type' => 'text',
+        ]);
 
+        $this->crud->addField([   // color_picker
+            'label' => trans('informacrm.color').' *',
+            'name' => 'color',
+            'type' => 'color_picker',
+            //'color_picker_options' => ['customClass' => 'col-md-3']
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ]
+        ]);
+        $this->crud->addField([   // color_picker
+            'label' => trans('informacrm.background_color').' *',
+            'name' => 'background_color',
+            'type' => 'color_picker',
+            //'color_picker_options' => ['customClass' => 'col-md-3']
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ]
+        ]);
+        $this->crud->addField([
+            'label' => trans('informacrm.icon').' *',
+            'name' => 'icon',
+            'type' => 'icon_picker',
+            'iconset' => 'fontawesome',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-3'
+            ]
+        ]);
+        $this->crud->addField([
+            'label' => trans('informacrm.created_by'),
+            'name' => 'created_by',
+            'type' => 'text',
+            'attributes' => ['disabled' => 'disabled'],
+        ]);
+
+        $this->crud->addField([
+            'label' => trans('informacrm.updated_by'),
+            'name' => 'updated_by',
+            'type' => 'text',
+            'attributes' => ['disabled' => 'disabled'],
+        ]);
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
@@ -38,7 +85,7 @@ class Inf_titleCrudController extends CrudController
 
         // ------ CRUD COLUMNS
         // $this->crud->addColumn(); // add a single column, at the end of the stack
-        // $this->crud->addColumns(); // add multiple columns, at the end of the stack
+        $this->crud->addColumns(['description','color', 'background_color']); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
         // $this->crud->removeColumns(['column_name_1', 'column_name_2']); // remove an array of columns from the stack
         // $this->crud->setColumnDetails('column_name', ['attribute' => 'value']); // adjusts the properties of the passed in column (by name)
@@ -102,6 +149,7 @@ class Inf_titleCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
+        $request['created_by'] = Auth::user()->name;
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
@@ -111,6 +159,7 @@ class Inf_titleCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
+        $request['updated_by'] = Auth::user()->name;
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry

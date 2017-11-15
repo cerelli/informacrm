@@ -25,7 +25,10 @@ class Inf_account_typeRequest extends \Backpack\CRUD\app\Http\Requests\CrudReque
     public function rules()
     {
         return [
-            'icon' => 'required'
+            'description' => 'required|min:3|max:30',
+            'icon' => 'required',
+            'color' => 'required',
+            'background_color' => 'required',
             // 'icon' => 'required|min:5|max:255'
         ];
     }

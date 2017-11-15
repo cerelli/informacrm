@@ -25,7 +25,11 @@ class Inf_officeRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'description' => 'required|min:3|max:30',
+            'icon' => 'required',
+            'color' => 'required',
+            'background_color' => 'required',
+            // 'icon' => 'required|min:5|max:255'
         ];
     }
 

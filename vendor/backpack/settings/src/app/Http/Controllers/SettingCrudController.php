@@ -14,31 +14,16 @@ class SettingCrudController extends CrudController
         parent::__construct();
 
         $this->crud->setModel("Backpack\Settings\app\Models\Setting");
-        $this->crud->setEntityNameStrings(trans('backpack::settings.setting_singular'), trans('backpack::settings.setting_plural'));
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/setting');
+        $this->crud->setEntityNameStrings('setting', 'settings');
+        $this->crud->setRoute('admin/setting');
         $this->crud->denyAccess(['create', 'delete']);
-        $this->crud->setColumns([
-            [
-                'name'  => 'name',
-                'label' => trans('backpack::settings.name'),
-            ],
-            [
-                'name'  => 'value',
-                'label' => trans('backpack::settings.value'),
-            ],
-            [
-                'name'  => 'description',
-                'label' => trans('backpack::settings.description'),
-            ],
-        ]);
+        $this->crud->setColumns(['name', 'value', 'description']);
         $this->crud->addField([
-            'name'       => 'name',
-            'label'      => trans('backpack::settings.name'),
-            'type'       => 'text',
-            'attributes' => [
-                'disabled' => 'disabled',
-            ],
-        ]);
+                                'name'     => 'name',
+                                'label'    => 'Name',
+                                'type'     => 'text',
+                                'disabled' => 'disabled',
+                            ]);
     }
 
     /**
@@ -50,9 +35,16 @@ class SettingCrudController extends CrudController
      */
     public function index()
     {
-        $this->crud->addClause('where', 'active', 1);
+        // if view_table_permission is false, abort
+        $this->crud->hasAccessOrFail('list');
+        $this->crud->addClause('where', 'active', 1); // <---- this is where it's different from CrudController::index()
 
-        return parent::index();
+        $this->data['entries'] = $this->crud->getEntries();
+        $this->data['crud'] = $this->crud;
+        $this->data['title'] = ucfirst($this->crud->entity_name_plural);
+
+        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
+        return view('crud::list', $this->data);
     }
 
     public function store(StoreRequest $request)
@@ -74,14 +66,13 @@ class SettingCrudController extends CrudController
         $this->data['entry'] = $this->crud->getEntry($id);
         $this->crud->addField((array) json_decode($this->data['entry']->field)); // <---- this is where it's different
         $this->data['crud'] = $this->crud;
-        $this->data['saveAction'] = $this->getSaveAction();
         $this->data['fields'] = $this->crud->getUpdateFields($id);
         $this->data['title'] = trans('backpack::crud.edit').' '.$this->crud->entity_name;
 
         $this->data['id'] = $id;
 
         // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
-        return view($this->crud->getEditView(), $this->data);
+        return view('crud::edit', $this->data);
     }
 
     public function update(UpdateRequest $request)

@@ -19,6 +19,80 @@ All Notable changes to `Backpack CRUD` will be documented in this file
 ### Security
 - Nothing
 
+-----------
+
+## [3.3.1] - 2017-11-06
+
+## Fixed
+- unit tests for column key functionality;
+
+
+## [3.3.0] - 2017-11-06
+
+## Added
+- you can now define a "key" for a column, if you need multiple columns with the same name;
+
+## Fixed
+- in create/update, fields without a tab are displayed before all tabs;
+- unit tests now use PHPUnit 6;
+- completely rewritten AjaxTables functionality;
+- fixed all AjaxTables issues - merged #710;
+
+### Deprecated
+- ```$this->crud->enableAjaxTable();``` still exists for backwards-compatibility, but has been deprecated and does nothing;
+
+### Removed
+- DataTables PHP dependency;
+- all tables now use AjaxTables; there is no classic tables anymore; 
+- removed all classic table filter fallbacks;
+
+-----------
+
+## [3.2.27] - 2017-11-06
+
+## Fixed
+- inline validation on nested attributes - merged #987, fixes #986;
+- morphed entities caused records in the pivot table to duplicate - merged #772, fixes #369;
+- browse field used slash instead of backslash on windows - fixes #496;
+- endless loop when using date_range filter - merged #1092;
+
+
+## [3.2.26] - 2017-10-25
+
+## Added
+- prefix option to upload field type;
+
+## Fixed
+- when creating an entry, pivot fields were overwriting the $field variable - merged #1046;
+- Italian translation file;
+- select fields old data values;
+- date_range field triggered error on Create;
+- bug where non-translatable columns in translatable models got their $guarded updated - merged #754;
+
+
+## [3.2.25] - 2017-10-24
+
+## Added
+- number of records per page menu now features "All", so people can use it before exporting results when using AjaxDataTables;
+- prefix option for the image column (merged #1056; fixes #1054);
+
+
+## [3.2.24] - 2017-10-23
+
+## Fixed
+- daterange field did not use the correct value if the start_date and end_date were not casted in the model - merged #1036;
+- PR #1015 - fixes #798 - fixed field order methods;
+- PR #1011 - fixes #982 and #971 - fixed column order methods;
+- radio column not showing value - PR #1023;
+
+## [3.2.23] - 2017-10-16
+
+## Added
+- Added config option to choose if the save actions changed bubble will be shown;
+
+## Fixed
+- lv language file spelling error;
+
 
 ## [3.2.22] - 2017-09-30
 

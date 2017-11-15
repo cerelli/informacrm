@@ -132,15 +132,25 @@
                                       <ul class="sidebar-menu">
                                           @can ('show config menu')
                                               <li class="header">{{ trans('informacrm.config') }}</li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.account_type') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/address_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.address_type') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/communication_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.communication_type') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/contact_detail_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.contact_detail_type') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/contact_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.contact_type') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/office') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.office') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/title') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.title') }}</span></a></li>
-                                              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/web_site_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.web_site_type') }}</span></a></li>
-                                              <!-- ====================== OPPORTUNITIES ================= -->
+                                              <!-- ====================== ACCOUNTS ================= -->
+                                              <ul class="sidebar-menu">
+                                                  <li class="treeview">
+                                                      <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.account') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
+                                                      <ul class="treeview-menu">
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/title') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.title') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.account_type') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/contact_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.contact_type') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/office') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.office') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/contact_detail_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.contact_detail_type') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/communication_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.communication_type') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/web_site_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.web_site_type') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/address_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.address_type') }}</span></a></li>
+                                                      </ul>
+                                                  </li>
+                                              </ul>
+
+
+                                              <!-- ====================== EVENTS ================= -->
                                               <ul class="sidebar-menu">
                                                   <li class="treeview">
                                                       <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.event') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>

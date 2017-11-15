@@ -2,9 +2,9 @@
 
 namespace Backpack\Settings\app\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class SettingRequest extends FormRequest
+class SettingRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

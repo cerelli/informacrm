@@ -19,13 +19,6 @@ class SettingsServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
-     * Where the route file lives, both inside the package and in the app (if overwritten).
-     *
-     * @var string
-     */
-    public $routeFilePath = '/routes/backpack/settings.php';
-
-    /**
      * Perform post-registration booting of services.
      *
      * @return void
@@ -33,7 +26,7 @@ class SettingsServiceProvider extends ServiceProvider
     public function boot()
     {
         // only use the Settings package if the Settings table is present in the database
-        if (!\App::runningInConsole() && count(Schema::getColumnListing('settings'))) {
+        if (count(Schema::getColumnListing('settings'))) {
             // get all settings from the database
             $settings = Setting::all();
 
@@ -43,12 +36,10 @@ class SettingsServiceProvider extends ServiceProvider
                 Config::set('settings.'.$setting->key, $setting->value);
             }
         }
+
         // publish the migrations and seeds
         $this->publishes([__DIR__.'/database/migrations/' => database_path('migrations')], 'migrations');
         $this->publishes([__DIR__.'/database/seeds/' => database_path('seeds')], 'seeds');
-
-        // publish translation files
-        $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
     }
 
     /**
@@ -60,15 +51,13 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function setupRoutes(Router $router)
     {
-        // by default, use the routes file provided in vendor
-        $routeFilePathInUse = __DIR__.$this->routeFilePath;
-
-        // but if there's a file with the same name in routes/backpack, use that one
-        if (file_exists(base_path().$this->routeFilePath)) {
-            $routeFilePathInUse = base_path().$this->routeFilePath;
-        }
-
-        $this->loadRoutesFrom($routeFilePathInUse);
+        $router->group(['namespace' => 'Backpack\Settings\app\Http\Controllers'], function ($router) {
+            // Admin Interface Routes
+            Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
+                // Settings
+                Route::resource('setting', 'SettingCrudController');
+            });
+        });
     }
 
     /**
@@ -79,8 +68,12 @@ class SettingsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerSettings();
-
         $this->setupRoutes($this->app->router);
+
+        // use this if your package has a config file
+        // config([
+        //         'config/Settings.php',
+        // ]);
     }
 
     private function registerSettings()

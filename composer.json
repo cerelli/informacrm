@@ -6,8 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "backpack/base": "^0.7.25",
-        "backpack/crud": "^3.2",
+        "backpack/base": "^0.8.0",
+        "backpack/crud": "^3.3.0",
         "backpack/langfilemanager": "^1.0",
         "backpack/pagemanager": "^1.1",
         "backpack/permissionmanager": "^2.1",
