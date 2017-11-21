@@ -180,9 +180,9 @@
                                                   <li class="treeview">
                                                       <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.service_ticket') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
                                                       <ul class="treeview-menu">
-                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_status') }}</span></a></li>
-                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_result') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_result') }}</span></a></li>
-                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_type') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.service_ticket_status') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_result') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.service_ticket_result') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.service_ticket_type') }}</span></a></li>
                                                       </ul>
                                                   </li>
                                               </ul>

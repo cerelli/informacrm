@@ -88,16 +88,19 @@
 
     var accounts = new Bloodhound({
         remote: {
-            url: '/{{ Config::get('settings.route_search') }}/findAccounts?q=%QUERY%',
+            url: '{{ url(config('backpack.base.route_prefix', 'admin')) }}/findAccounts?q=%QUERY%',
+            // url: '/{{ Config::get('settings.route_search') }}/findAccounts?q=%QUERY%',
             wildcard: '%QUERY%'
         },
+
         datumTokenizer: Bloodhound.tokenizers.whitespace('q'),
         queryTokenizer: Bloodhound.tokenizers.whitespace
     });
 
     var contacts = new Bloodhound({
         remote: {
-            url: '/{{ Config::get('settings.route_search') }}/findContacts?q=%QUERY%',
+            // url: '/{{ Config::get('settings.route_search') }}/findContacts?q=%QUERY%',
+            url: '{{ url(config('backpack.base.route_prefix', 'admin')) }}/findContacts?q=%QUERY%',
             wildcard: '%QUERY%'
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace('q'),

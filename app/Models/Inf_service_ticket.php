@@ -15,8 +15,8 @@ class Inf_service_ticket extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'inf_service_tickets';
-    //protected $primaryKey = 'id';
+    protected $table = 'inf_service_tickets';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
     // protected $fillable = [];

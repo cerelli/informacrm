@@ -15,11 +15,11 @@ class Inf_event_status extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'inf_event_statuss';
-    //protected $primaryKey = 'id';
+    protected $table = 'inf_event_statuses';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    // protected $fillable = [];
+    protected $fillable = ['description', 'color', 'background_color', 'icon', 'created_by', 'updated_by'];
     // protected $hidden = [];
     // protected $dates = [];
 
