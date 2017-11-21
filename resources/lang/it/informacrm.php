@@ -187,5 +187,5 @@ return [
 'inf_opportunity_results' => 'Esiti opportunità',
 'inf_opportunity_types' => 'Tipi opportunità',
 'inf_event_types' => 'Tipi eventi',
-
+'inf_opportunity' => 'Opportunità',
 ];

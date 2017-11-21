@@ -25,6 +25,10 @@ class Inf_opportunityRequest extends \Backpack\CRUD\app\Http\Requests\CrudReques
     public function rules()
     {
         return [
+            'opportunity_types' => 'required',
+            'inf_opportunity_status_id' => 'required',
+            'value' => 'required',
+
             // 'name' => 'required|min:5|max:255'
         ];
     }

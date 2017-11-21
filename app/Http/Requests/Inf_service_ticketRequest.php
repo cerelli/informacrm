@@ -25,6 +25,10 @@ class Inf_service_ticketRequest extends \Backpack\CRUD\app\Http\Requests\CrudReq
     public function rules()
     {
         return [
+            'service_ticket_types' => 'required',
+            'inf_service_ticket_status_id' => 'required',
+            'value' => 'required',
+
             // 'name' => 'required|min:5|max:255'
         ];
     }
