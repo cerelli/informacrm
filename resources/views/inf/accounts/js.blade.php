@@ -229,4 +229,114 @@
   }
   });
 
+  $('.del-confirmevent').click(function(e){
+	e.preventDefault();
+	var delete_button = $(this);
+	var delete_url = $(this).attr('href');
+	var delete_id = $(this).attr('delete-id');
+	if (confirm("{{ trans('backpack::crud.delete_confirm') }}") == true) {
+		$.ajax({
+			url: delete_url,
+			type: 'DELETE',
+			success: function(result) {
+				// Show an alert with the result
+				new PNotify({
+					title: "{{ trans('backpack::crud.delete_confirmation_title') }}",
+					text: "{{ trans('backpack::crud.delete_confirmation_message') }}",
+					type: "success"
+				});
+				// delete panel of contact deleted
+				$("#event-panel-"+delete_id).remove();
+			},
+			error: function(result) {
+				// Show an alert with the result
+				new PNotify({
+					title: "{{ trans('backpack::crud.delete_confirmation_not_title') }}",
+					text: "{{ trans('backpack::crud.delete_confirmation_not_message') }}",
+					type: "warning"
+				});
+			}
+		});
+	} else {
+		new PNotify({
+			title: "{{ trans('backpack::crud.delete_confirmation_not_deleted_title') }}",
+			text: "{{ trans('backpack::crud.delete_confirmation_not_deleted_message') }}",
+			type: "info"
+		});
+	}
+  });
+
+  $('.del-confirmopportunity').click(function(e){
+  e.preventDefault();
+  var delete_button = $(this);
+  var delete_url = $(this).attr('href');
+  var delete_id = $(this).attr('delete-id');
+  if (confirm("{{ trans('backpack::crud.delete_confirm') }}") == true) {
+	  $.ajax({
+		  url: delete_url,
+		  type: 'DELETE',
+		  success: function(result) {
+			  // Show an alert with the result
+			  new PNotify({
+				  title: "{{ trans('backpack::crud.delete_confirmation_title') }}",
+				  text: "{{ trans('backpack::crud.delete_confirmation_message') }}",
+				  type: "success"
+			  });
+			  // delete panel of contact deleted
+			  $("#opportunity-panel-"+delete_id).remove();
+		  },
+		  error: function(result) {
+			  // Show an alert with the result
+			  new PNotify({
+				  title: "{{ trans('backpack::crud.delete_confirmation_not_title') }}",
+				  text: "{{ trans('backpack::crud.delete_confirmation_not_message') }}",
+				  type: "warning"
+			  });
+		  }
+	  });
+  } else {
+	  new PNotify({
+		  title: "{{ trans('backpack::crud.delete_confirmation_not_deleted_title') }}",
+		  text: "{{ trans('backpack::crud.delete_confirmation_not_deleted_message') }}",
+		  type: "info"
+	  });
+  }
+  });
+
+  $('.del-confirmservice_ticket').click(function(e){
+  e.preventDefault();
+  var delete_button = $(this);
+  var delete_url = $(this).attr('href');
+  var delete_id = $(this).attr('delete-id');
+  if (confirm("{{ trans('backpack::crud.delete_confirm') }}") == true) {
+	  $.ajax({
+		  url: delete_url,
+		  type: 'DELETE',
+		  success: function(result) {
+			  // Show an alert with the result
+			  new PNotify({
+				  title: "{{ trans('backpack::crud.delete_confirmation_title') }}",
+				  text: "{{ trans('backpack::crud.delete_confirmation_message') }}",
+				  type: "success"
+			  });
+			  // delete panel of contact deleted
+			  $("#service_ticket-panel-"+delete_id).remove();
+		  },
+		  error: function(result) {
+			  // Show an alert with the result
+			  new PNotify({
+				  title: "{{ trans('backpack::crud.delete_confirmation_not_title') }}",
+				  text: "{{ trans('backpack::crud.delete_confirmation_not_message') }}",
+				  type: "warning"
+			  });
+		  }
+	  });
+  } else {
+	  new PNotify({
+		  title: "{{ trans('backpack::crud.delete_confirmation_not_deleted_title') }}",
+		  text: "{{ trans('backpack::crud.delete_confirmation_not_deleted_message') }}",
+		  type: "info"
+	  });
+  }
+  });
   </script>

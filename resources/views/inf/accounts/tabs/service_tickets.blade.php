@@ -8,7 +8,7 @@
 @foreach ($service_tickets->chunk(2) as $chunk)
     <div class="row">
         @foreach ($chunk as $service_ticket)
-            <div class="col-md-6" id="service_tickets-panel-{{ $service_ticket->id }}">
+            <div class="col-md-6" id="service_ticket-panel-{{ $service_ticket->id }}">
                 <div class="panel panel-primary panel-heading col-md-12" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px;">
                     <div class="row col-md-12" style="margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;">
                         <div class="row col-md-12" style="margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
@@ -16,7 +16,7 @@
                                 @php
                                     $title = trans('informacrm.service_ticket_creation')." ". \Carbon\Carbon::parse($service_ticket->created_at)->format('d/m/Y');
                                     // if ( isset($service_ticket->expiration_date) ) {
-                                    //     // $title .= " - ".trans('informacrm.service_ticket_expiration_date')." ".\Carbon\Carbon::parse($service_ticket->expiration_date)->format('d/m/Y');
+                                    //     $title .= " - ".trans('informacrm.$service_ticket_expiration_date')." ".\Carbon\Carbon::parse($service_ticket->expiration_date)->format('d/m/Y');
                                     // } else {
                                     //
                                     // }
@@ -33,7 +33,7 @@
                                     @includeif('vendor.backpack.crud.buttons.delete', [
                                         'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/service_ticket').'/'.$service_ticket->id,
                                         'custom_button_attributes' => "  title='Delete service_ticket' delete-id='$service_ticket->id' ",
-                                        'custom_button_class' => " pull-right  del-confirmservice_tickets"
+                                        'custom_button_class' => " pull-right  del-confirmservice_ticket"
                                     ])
 
                                     <!-- Edit button -->
@@ -63,11 +63,14 @@
                             </div>
                         </div>
                         <div class="note col-md-12" style="margin-top: 5px; padding-bottom: 15px;">
+                            <div class="well" style="padding: 1px 1px 1px 10px; margin-bottom: 0px;">
+                                <p>{!! $service_ticket->description !!}</p>
+                            </div>
                             @if ( $service_ticket->result_description == "" )
 
                             @else
                                 <div class="well" style="padding: 1px 1px 1px 10px; margin-bottom: 0px;">
-                                    <p>{!! $service_ticket->description !!}</p>
+                                    <p>{!! $service_ticket->result_description !!}</p>
                                 </div>
                             @endif
                             {{-- <hr style="margin-bottom: 2px;margin-top: 2px; border-color: #0016f5;"> --}}

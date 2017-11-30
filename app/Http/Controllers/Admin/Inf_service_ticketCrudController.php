@@ -20,7 +20,7 @@ class Inf_service_ticketCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Inf_service_ticket');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/service_ticket');
-        $this->crud->setEntityNameStrings(trans('informacrm.inf_service_ticket'), trans('informacrm.inf_service_tickets'));
+        $this->crud->setEntityNameStrings(trans('informacrm.service_ticket'), trans('informacrm.service_tickets'));
 
         $this->crud->setEditView('inf/accounts/tabs/edit_service_ticket_from_account');
         $this->crud->setCreateView('inf/accounts/tabs/create_service_ticket_from_account');
@@ -70,7 +70,7 @@ class Inf_service_ticketCrudController extends CrudController
 
 
         $this->crud->addField([
-            'label' => trans('informacrm.service_ticket_result_id'),
+            'label' => trans('informacrm.service_ticket_result'),
             'type' => 'select',
             'name' => 'inf_service_ticket_result_id', // the db column for the foreign key
             'entity' => 'service_ticket_results', // the method that defines the relationship in your Model
@@ -85,7 +85,7 @@ class Inf_service_ticketCrudController extends CrudController
         $this->crud->addField([   // WYSIWYG Editor
             'name' => 'result_description',
             'label' => trans('informacrm.service_ticket_result_description'),
-            'type' => 'ckeditor'
+            'type' => 'text'
         ], 'update/create/both');
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
@@ -159,17 +159,53 @@ class Inf_service_ticketCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
+        $request['created_by'] = \Auth::user()->name;
+
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
+        $saveAction = $this->getSaveAction()['active']['value'];
+        switch ($saveAction) {
+            case 'save_and_edit':
+                break;
+            case 'save_and_new':
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/service_ticket/create?active_account_id='.$this->crud->entry['inf_account_id']);
+                break;
+            case 'save_and_back':
+            default:
+                $redirect_location = redirect('admin/account/'.$this->crud->entry['inf_account_id'].'#service_tickets');
+                break;
+        }
         return $redirect_location;
     }
 
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
+        if ( $request['created_by'] == "") {
+            $request['created_by'] = \Auth::user()->name;
+        }
+        $request['updated_by'] = \Auth::user()->name;
+        $parsed = parse_url(url()->previous());
+        // dd($parsed);
+        parse_str($parsed['query'], $query_params);
+        $call_url = $query_params['call_url'];
+        $call = $query_params['call'];
+
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
+        $saveAction = $this->getSaveAction()['active']['value'];
+        switch ($saveAction) {
+            case 'save_and_edit':
+                break;
+            case 'save_and_new':
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/service_ticket/create?call_url='.$call_url);
+                break;
+            case 'save_and_back':
+            default:
+            $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/'.$call_url.'#service_tickets');
+            break;
+        }
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }

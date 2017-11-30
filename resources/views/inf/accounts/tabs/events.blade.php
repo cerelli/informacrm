@@ -8,7 +8,7 @@
 @foreach ($events->chunk(2) as $chunk)
     <div class="row">
         @foreach ($chunk as $event)
-            <div class="col-md-6" id="events-panel-{{ $event->id }}">
+            <div class="col-md-6" id="event-panel-{{ $event->id }}">
                 <div class="panel panel-primary panel-heading col-md-12" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px;">
                     <div class="row col-md-12" style="margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;">
                         <div class="row col-md-12" style="margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
@@ -21,7 +21,7 @@
                                     @includeif('vendor.backpack.crud.buttons.delete', [
                                         'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/events').'/'.$event->id,
                                         'custom_button_attributes' => "  title='Delete events' delete-id='$event->id' ",
-                                        'custom_button_class' => " pull-right  del-confirmevents"
+                                        'custom_button_class' => " pull-right  del-confirmevent"
                                     ])
 
                                     <!-- Edit button -->

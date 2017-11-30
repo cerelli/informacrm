@@ -8,6 +8,10 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\Inf_opportunityRequest as StoreRequest;
 use App\Http\Requests\Inf_opportunityRequest as UpdateRequest;
 
+use App\Models\Inf_opportunity_status;
+use App\Models\Inf_opportunity_type;
+use Illuminate\Http\Request;
+
 class Inf_opportunityCrudController extends CrudController
 {
     public function setup()
@@ -21,7 +25,6 @@ class Inf_opportunityCrudController extends CrudController
         $this->crud->setModel('App\Models\Inf_opportunity');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/opportunity');
         $this->crud->setEntityNameStrings(trans('informacrm.inf_opportunity'), trans('informacrm.inf_opportunities'));
-
         $this->crud->setEditView('inf/accounts/tabs/edit_opportunity_from_account');
         $this->crud->setCreateView('inf/accounts/tabs/create_opportunity_from_account');
         /*
@@ -31,11 +34,13 @@ class Inf_opportunityCrudController extends CrudController
         */
 
         // $this->crud->setFromDb();
-
         $this->crud->addField([
             'name' => 'inf_account_id',
             'label' => trans('informacrm.inf_account_id'),
-            'type' => 'hidden'
+            'type' => 'hidden',
+            'wrapperAttributes' => [
+                'id' => 'inf_account_id'
+            ]
         ]);
 
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
@@ -94,12 +99,12 @@ class Inf_opportunityCrudController extends CrudController
         $this->crud->addField(
             [   // date_picker
                 'name' => 'expiration_date',
-                'type' => 'date_picker',
+                'type' => 'datetime_picker',
                 'label' => trans('informacrm.opportunity_expiration_date'),
                 // optional:
                 'date_picker_options' => [
                     'todayBtn' => 'linked',
-                    'format' => "dd/mm/yyyy",
+                    'format' => 'dd/mm/yyyy  HH:mm',
                     'language' => 'it',
                     'autoclose' => 'true'
                 ],
@@ -109,11 +114,9 @@ class Inf_opportunityCrudController extends CrudController
             ]
         );
 
-
-
         $this->crud->addField([
             'label' => trans('informacrm.opportunity_result_id'),
-            'type' => 'select',
+            'type' => 'select_opportunity_result',
             'name' => 'inf_opportunity_result_id', // the db column for the foreign key
             'entity' => 'opportunity_results', // the method that defines the relationship in your Model
             'attribute' => 'description', // foreign key attribute that is shown to user
@@ -123,11 +126,13 @@ class Inf_opportunityCrudController extends CrudController
             ]
         ]);
 
-
         $this->crud->addField([   // WYSIWYG Editor
             'name' => 'result_description',
             'label' => trans('informacrm.opportunity_result_description'),
-            'type' => 'ckeditor'
+            'type' => 'text',
+            'wrapperAttributes' => [
+                'id' => 'id_result_description'
+            ]
         ], 'update/create/both');
 
         // ------ CRUD FIELDS
@@ -137,6 +142,121 @@ class Inf_opportunityCrudController extends CrudController
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
         // ------ CRUD COLUMNS
+        // $this->crud->addFilter([ // simple filter
+        //     'type' => 'simple',
+        //     'name' => 'active',
+        //     'label'=> 'Active'
+        // ],
+        // false,
+        // function() { // if the filter is active
+        //     $this->crud->addClause('where', 'inf_opportunity_status_id', 1); // apply the "active" eloquent scope
+        // } );
+        $this->crud->addFilter([ // select2_multiple filter
+          'name' => 'status',
+          'type' => 'select2_multiple',
+          'label'=> trans('informacrm.opportunity_status')
+        ], function() {
+                $statuses = Inf_opportunity_status::all();
+                $statusList = [];
+                $statuses->each(function ($s) use (&$statusList) {
+                    $statusList[$s->id] = $s->description;
+                });
+
+                return $statusList;
+        }, function($values) { // if the filter is active
+            if (isset($values)) {
+                foreach (json_decode($values) as $key => $value) {
+                    if ( $value->count()>0 ) {
+                        if ($key == 0) {
+                            $this->crud->addClause('where', 'inf_opportunity_status_id', $value);
+                        } else {
+                            $this->crud->addClause('orWhere', 'inf_opportunity_status_id', $value);
+                        }
+                    } else {
+                        $this->crud->removeFilter('status');
+                    }
+                }
+            }
+        });
+
+        $this->crud->addFilter([ // select2_multiple filter
+          'name' => 'opportunity_types',
+          'type' => 'select2_multiple',
+          'label'=> trans('informacrm.opportunity_types')
+        ], function() {
+                $opportunity_types = Inf_opportunity_type::all();
+                $opportunity_typesList = [];
+                $opportunity_types->each(function ($s) use (&$opportunity_typesList) {
+                    $opportunity_typesList[$s->id] = $s->description;
+                });
+                // return Inf_opportunity_type::all()->pluck('description', 'id')->toArray();
+                return $opportunity_typesList;
+        }, function($values) { // if the filter is active
+            foreach (json_decode($values) as $key => $value) {
+                $this->crud->query = $this->crud->query->whereHas('opportunity_types', function ($query) use ($value) {
+                    $query->where('opportunity_type_id', $value);
+                });
+            }
+        });
+
+
+
+        $this->crud->addColumn([
+            'name' => 'id', // The db column name
+            'label' => trans('informacrm.id'), // Table column heading
+            'type' => "model_function",
+            'function_name' => 'getShowIdLink', // the method in your Model
+        ]);
+
+        $this->crud->addColumn([
+            'name' => "account",
+            'label' => trans('informacrm.inf_account'), // Table column heading
+            'type' => "model_function",
+            'function_name' => 'getShowAccountLink',
+        ]);
+
+        $this->crud->addColumn([
+            // n-n relationship (with pivot table)
+            'label' => trans('informacrm.opportunity_status'), // Table column heading
+            'type' => 'label',
+            'name' => 'opportunity_status', // the method that defines the relationship in your Model
+            'entity' => 'opportunity_status', // the method that defines the relationship in your Model
+            'attribute' => "description" // foreign key attribute that is shown to user
+            // 'model' => "App\Models\Inf_opportunity_status", // foreign key model
+        ]);
+
+        $this->crud->addColumn([
+            // n-n relationship (with pivot table)
+            'label' => trans('informacrm.opportunity_types'), // Table column heading
+            'type' => 'label_multiple',
+            'name' => 'opportunity_types', // the method that defines the relationship in your Model
+            'entity' => 'opportunity_types', // the method that defines the relationship in your Model
+            'attribute' => "description", // foreign key attribute that is shown to user
+            'model' => "App\Models\Inf_opportunity_type", // foreign key model
+        ]);
+
+        $this->crud->addColumn([
+            'name' => "value",
+            'label' => trans('informacrm.opportunity_value'), // Table column heading
+            'type' => "model_function",
+            'function_name' => 'getValue'
+        ]);
+        // $this->crud->addColumn([
+        //     // run a function on the CRUD model and show its return value
+        //     'name' => "account",
+        //     'label' => trans('informacrm.fullname'), // Table column heading
+        //     'type' => "model_function",
+        //     'function_name' => 'getShowAccountLink', // the method in your Model
+        // ]);
+        // $this->crud->addColumn([
+        //     // n-n relationship (with pivot table)
+        //     'label' => trans('informacrm.opportunity_types'), // Table column heading
+        //     'type' => 'label_multiple',
+        //     'name' => 'opportunity_types', // the method that defines the relationship in your Model
+        //     'entity' => 'account_types', // the method that defines the relationship in your Model
+        //     'attribute' => "description", // foreign key attribute that is shown to user
+        //     'model' => "App\Models\Inf_account_type", // foreign key model
+        // ]);
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
@@ -153,10 +273,15 @@ class Inf_opportunityCrudController extends CrudController
         // $this->crud->removeButtonFromStack($name, $stack);
         // $this->crud->removeAllButtons();
         // $this->crud->removeAllButtonsFromStack('line');
+        $this->crud->removeButton( 'create' );
+        $this->crud->removeButton( 'preview' );
+        $this->crud->removeButton( 'update' );
+        $this->crud->removeButton( 'revisions' );
+        $this->crud->removeButton( 'delete' );
 
         // ------ CRUD ACCESS
         $this->crud->allowAccess('show','create');
-        // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
+        // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete','show']);
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
         // $this->crud->denyAccess(['list', 'create', 'update', 'reorder', 'delete']);
 
@@ -168,6 +293,9 @@ class Inf_opportunityCrudController extends CrudController
         // $this->crud->enableDetailsRow();
         // NOTE: you also need to do allow access to the right users: $this->crud->allowAccess('details_row');
         // NOTE: you also need to do overwrite the showDetailsRow($id) method in your EntityCrudController to show whatever you'd like in the details row OR overwrite the views/backpack/crud/details_row.blade.php
+        $this->crud->enableDetailsRow();
+        $this->crud->allowAccess('details_row');
+        $this->crud->setDetailsRowView('inf.details_row.opportunity');
 
         // ------ REVISIONS
         // You also need to use \Venturecraft\Revisionable\RevisionableTrait;
@@ -199,7 +327,9 @@ class Inf_opportunityCrudController extends CrudController
         // $this->crud->orderBy();
         // $this->crud->groupBy();
         // $this->crud->limit();
+        // $this->addCustomCrudFilters();
     }
+
 
     public function store(StoreRequest $request)
     {
@@ -254,4 +384,7 @@ class Inf_opportunityCrudController extends CrudController
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }
+
+
+
 }

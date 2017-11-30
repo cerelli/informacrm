@@ -14,7 +14,8 @@ return [
     */
 
     //base
-    'other'                 => 'Altro',
+    'other'         => 'Altro',
+    'id'            => 'Codice',
 
     // Forms
     'calendar'              => 'Agenda',
@@ -183,9 +184,13 @@ return [
 'inf_document_statuses' => 'Stati documenti',
 'inf_service_ticket_statuses' => 'Stati Service ticket',
 'inf_service_ticket_results' => 'Esiti Service ticket',
+'inf_service_ticket_result' => 'Esito Service ticket',
+'service_ticket_result_description' => 'Descrizione esito Service ticket',
+'service_ticket_creation' => 'Creato il',
 'inf_service_ticket_types' => 'Tipi Service ticket',
 'inf_opportunity_results' => 'Esiti opportunità',
 'inf_opportunity_types' => 'Tipi opportunità',
 'inf_event_types' => 'Tipi eventi',
 'inf_opportunity' => 'Opportunità',
+'inf_opportunities' => 'Opportunità',
 ];

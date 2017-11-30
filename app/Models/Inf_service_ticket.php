@@ -18,7 +18,7 @@ class Inf_service_ticket extends Model
     protected $table = 'inf_service_tickets';
     protected $primaryKey = 'id';
     // public $timestamps = false;
-    // protected $guarded = ['id'];
+    protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
@@ -64,7 +64,18 @@ class Inf_service_ticket extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
+    public function getFullResultAttribute()
+    {
+        if ( isset($this->inf_service_ticket_result_id) && $this->inf_service_ticket_result_id > 0 ) {
+            $label_service_ticket_result = '<span style="font-size: 80%; margin-right: 3px; color: '.$this->service_ticket_result->color.'; background-color: '.$this->service_ticket_result->background_color.'" class="label label-default pull-right">
+                    <i class= "fa  '.$this->service_ticket_result->icon.'"></i> '.$this->service_ticket_result->description.'
+                </span>';
 
+            return $label_service_ticket_result;
+        } else {
+            return "";
+        }
+    }
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

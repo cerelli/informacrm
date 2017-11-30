@@ -8,7 +8,7 @@
 @foreach ($opportunities->chunk(2) as $chunk)
     <div class="row">
         @foreach ($chunk as $opportunity)
-            <div class="col-md-6" id="opportunities-panel-{{ $opportunity->id }}">
+            <div class="col-md-6" id="opportunity-panel-{{ $opportunity->id }}">
                 <div class="panel panel-primary panel-heading col-md-12" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px;">
                     <div class="row col-md-12" style="margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;">
                         <div class="row col-md-12" style="margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
@@ -33,7 +33,7 @@
                                     @includeif('vendor.backpack.crud.buttons.delete', [
                                         'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/opportunity').'/'.$opportunity->id,
                                         'custom_button_attributes' => "  title='Delete opportunity' delete-id='$opportunity->id' ",
-                                        'custom_button_class' => " pull-right  del-confirmopportunities"
+                                        'custom_button_class' => " pull-right  del-confirmopportunity"
                                     ])
 
                                     <!-- Edit button -->
@@ -63,13 +63,17 @@
                             </div>
                         </div>
                         <div class="note col-md-12" style="margin-top: 5px; padding-bottom: 15px;">
+                            <div class="well" style="padding: 1px 1px 1px 10px; margin-bottom: 0px;">
+                                <p>{!! $opportunity->description !!}</p>
+                            </div>
                             @if ( $opportunity->result_description == "" )
 
                             @else
                                 <div class="well" style="padding: 1px 1px 1px 10px; margin-bottom: 0px;">
-                                    <p>{!! $opportunity->description !!}</p>
+                                    <p>{!! $opportunity->result_description !!}</p>
                                 </div>
                             @endif
+
                             {{-- <hr style="margin-bottom: 2px;margin-top: 2px; border-color: #0016f5;"> --}}
                         </div>
                     </div>

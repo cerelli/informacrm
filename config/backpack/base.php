@@ -15,11 +15,11 @@ return [
     'project_name' => 'informaCRM',
 
     // Menu logos
-    // 'logo_lg'   => ' <img src="'.env('APP_IMAGE_URL','#').'/images/logo-lg.png" alt="logo-lg Image" width="147" height="43">',
-    'logo_lg'   => '<font face=”Verdana”><b>informa</b></font>',
+    'logo_lg'   => ' <img src="'.env('APP_IMAGE_URL','#').'/images/logo-lg.png" alt="logo-lg Image" width="199" height="49">',
+    //'logo_lg'   => '<font face=”Verdana”><b>informa</b></font>',
 
-    // 'logo_mini' => ' <img src="'.env('APP_IMAGE_URL','#').'/images/logo-mini.png" alt="logo-mini Image" width="21" height="49">',
-    'logo_mini' => '<font face=”Verdana”><b>i</b></font>',
+    'logo_mini' => ' <img src="'.env('APP_IMAGE_URL','#').'/images/logo-mini.png" alt="logo-mini Image" width="49" height="49">',
+    //'logo_mini' => '<font face=”Verdana”><b>i</b></font>',
 
     // Developer or company name. Shown in footer.
     'developer_name' => 'Marco Mapelli',

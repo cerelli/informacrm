@@ -4080,6 +4080,8 @@ return array(
     'elFinder' => $vendorDir . '/studio-42/elfinder/php/elFinder.class.php',
     'elFinderAbortException' => $vendorDir . '/studio-42/elfinder/php/elFinder.class.php',
     'elFinderConnector' => $vendorDir . '/studio-42/elfinder/php/elFinderConnector.class.php',
+    'elFinderEditor' => $vendorDir . '/studio-42/elfinder/php/editors/editor.php',
+    'elFinderEditorZohoOffice' => $vendorDir . '/studio-42/elfinder/php/editors/ZohoOffice/editor.php',
     'elFinderLibGdBmp' => $vendorDir . '/studio-42/elfinder/php/libs/GdBmp.php',
     'elFinderPlugin' => $vendorDir . '/studio-42/elfinder/php/elFinderPlugin.php',
     'elFinderPluginAutoResize' => $vendorDir . '/studio-42/elfinder/php/plugins/AutoResize/plugin.php',

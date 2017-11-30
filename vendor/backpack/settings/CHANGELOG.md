@@ -20,6 +20,113 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [2.0.25] - 2017-11-22
+
+## Fixed
+- composer.json CRUD requirement - makes Settings package work on Backpack\CRUD 3.3;
+
+
+## [2.0.24] - 2017-11-14
+
+## Fixed
+- proper CRUD routes - makes Settings package work on Backpack\CRUD 3.3;
+
+
+## [2.0.23] - 2017-11-02
+
+## Fixed
+- route uses CRUD facade instead of route, for it to have the search route in CRUD 3.3;
+
+
+## [2.0.22] - 2017-08-30
+
+## Added
+- package autodiscovery;
+
+## Fixed
+= text type columns for values in example migrations;
+
+## [2.0.21] - 2017-08-11
+
+## Added
+- Russian (ru) language files, thanks to [Андрей](https://github.com/parabellumKoval);
+
+
+## [2.0.20] - 2017-08-11
+
+## Added
+- Danish (da_DK) language files, thanks to [Frederik Rabøl](https://github.com/Xayer);
+
+
+## 2.0.19 - 2017-07-06
+
+### Added
+- overwritable routes file;
+
+## 2.0.18 - 2017-07-05
+
+### Fixed
+- Removed HHVM from TravisCI, since Laravel 5.4 no longer supports it;
+
+## 2.0.17 - 2017-07-05
+
+### Added
+- Portugese translation (thanks to [Toni Almeida](https://github.com/promatik));
+- Portugese (Brasilian) translation (thanks to [Guilherme Augusto Henschel](https://github.com/cenoura));
+- command line feedback when seeding the settings table;
+
+
+## 2.0.16 - 2017-04-21
+
+### Removed
+- Backpack\CRUD no longer loads translations, as Backpack\Base does it for him.
+
+
+## 2.0.15 - 2017-02-14
+
+### Removed
+- Support for PHP 5.5 and HHVM, as Laravel 5.4 no longer supports them;
+
+
+## 2.0.14 - 2017-02-14
+
+### Added
+- Support for Backpack\CRUD 3.2
+
+
+## 2.0.13 - 2017-01-08
+
+### Added
+- Lang files for the Settings package, thanks to [Phouvanh Korngchansavath](https://www.phouvanh.com/);
+
+
+
+## 2.0.12 - 2016-12-13
+
+### Fixed
+- Can now publish assets again.
+
+
+
+## 2.0.11 - 2016-12-07
+
+### Fixed
+- No longer conflicting with artisan when no database is present.
+
+
+## 2.0.10 - 2016-09-21
+
+### Fixed
+- Settings now respects the admin prefix set in Backpack\Base's config file - thanks to [Twaambo Haamucenje](https://github.com/twoSeats);
+
+
+## 2.0.9 - 2016-08-31
+
+### Fixed
+- Setting name is again disabled in the Edit screen;
+- Support for Laravel 5.3 (Backpack\CRUD 3.1.x);
+
+
 ## 2.0.8 - 2016-08-05
 
 ### Fixed
