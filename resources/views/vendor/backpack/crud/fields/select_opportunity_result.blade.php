@@ -65,22 +65,22 @@
             //     return url;
             // }
 
-            jQuery(document).ready(function($) {
-                $("#select_result").change(function(e) {
-                    var select_template_confirmation = confirm("@lang('backpack::pagemanager.change_template_confirmation')");
-                    var valore = $("select#select_result").val();
-                    if (select_template_confirmation == true) {
-                        // redirect_to_new_page_with_template_parameter();
-                        $("#id_result_description").hide();
-                        console.log(valore);
-                    } else {
-                        // txt = "You pressed Cancel!";
-                        $("#id_result_description").show();
-                        console.log(valore);
-                    }
-                });
-
-            });
+            // jQuery(document).ready(function($) {
+            //     $("#select_result").change(function(e) {
+            //         var select_template_confirmation = confirm("@lang('backpack::pagemanager.change_template_confirmation')");
+            //         var valore = $("select#select_result").val();
+            //         if (select_template_confirmation == true) {
+            //             // redirect_to_new_page_with_template_parameter();
+            //             $("#id_result_description").hide();
+            //             console.log(valore);
+            //         } else {
+            //             // txt = "You pressed Cancel!";
+            //             $("#id_result_description").show();
+            //             console.log(valore);
+            //         }
+            //     });
+            //
+            // });
         </script>
     @endpush
 

@@ -42,32 +42,7 @@
 					<h3 class="box-title">{{ trans('backpack::crud.edit') }}</h3>
 				@endif
 		    </div>
-			<div class="box-footer">
-				@php
-				$call_url = Request::get('call_url');
-				$call = Request::get('call');
-				switch ($call) {
-					case 'events_calendar':
-						$var_annulle = config('backpack.base.route_prefix', 'admin') . '/'.$call_url;
-						// $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/'.$call_url);
-						break;
-					case 'account':
-						$var_annulle = config('backpack.base.route_prefix', 'admin').'/'.$call_url.'#service_tickets';
-						break;
-					default:
-						$var_annulle = config('backpack.base.route_prefix', 'admin').'/'.$call_url.'#service_tickets';
-						break;
-				}
-				// $call_url = Request::get('call_url');
-					// $var_annulle = config('backpack.base.route_prefix', 'admin') . '/'.$call_url;
-					$crud->route = $var_annulle;
-				@endphp
-				{{-- @php
-					$var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->inf_account_id.'#addresses';
-					$crud->route = $var_annulle;
-				@endphp --}}
-				@include('crud::inc.form_save_buttons')
-			</div>
+			@include('inf.accounts.save_annulle_buttons.service_ticket')
 		    <div class="box-body row">
 		      <!-- load the view from the application if it exists, otherwise load the one in the package -->
 		      @if(view()->exists('vendor.backpack.crud.form_content'))
@@ -76,33 +51,8 @@
 		      	@include('crud::form_content', ['fields' => $fields, 'action' => 'edit'])
 		      @endif
 		    </div><!-- /.box-body -->
+			@include('inf.accounts.save_annulle_buttons.service_ticket')
 
-            <div class="box-footer">
-				@php
-				$call_url = Request::get('call_url');
-				$call = Request::get('call');
-				switch ($call) {
-					case 'events_calendar':
-						$var_annulle = config('backpack.base.route_prefix', 'admin') . '/'.$call_url;
-						// $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/'.$call_url);
-						break;
-					case 'account':
-						$var_annulle = config('backpack.base.route_prefix', 'admin').'/'.$call_url.'#service_tickets';
-						break;
-					default:
-						$var_annulle = config('backpack.base.route_prefix', 'admin').'/'.$call_url.'#service_tickets';
-						break;
-				}
-				// $call_url = Request::get('call_url');
-					// $var_annulle = config('backpack.base.route_prefix', 'admin') . '/'.$call_url;
-					$crud->route = $var_annulle;
-				@endphp
-				{{-- @php
-					$var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->inf_account_id.'#addresses';
-					$crud->route = $var_annulle;
-				@endphp --}}
-                @include('crud::inc.form_save_buttons')
-		    </div><!-- /.box-footer-->
 		  </div><!-- /.box -->
 		  {!! Form::close() !!}
 	</div>
