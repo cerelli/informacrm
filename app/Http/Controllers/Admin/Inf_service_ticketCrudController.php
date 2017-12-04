@@ -8,6 +8,10 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\Inf_service_ticketRequest as StoreRequest;
 use App\Http\Requests\Inf_service_ticketRequest as UpdateRequest;
 
+use App\Models\Inf_service_ticket_status;
+use App\Models\Inf_service_ticket_type;
+use Illuminate\Http\Request;
+
 class Inf_service_ticketCrudController extends CrudController
 {
     public function setup()
@@ -93,7 +97,88 @@ class Inf_service_ticketCrudController extends CrudController
         // $this->crud->removeField('name', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
 
+        $this->crud->addFilter([ // select2_multiple filter
+          'name' => 'status',
+          'type' => 'select2_multiple',
+          'label'=> trans('informacrm.service_ticket_status')
+        ], function() {
+                $statuses = Inf_service_ticket_status::all();
+                $statusList = [];
+                $statuses->each(function ($s) use (&$statusList) {
+                    $statusList[$s->id] = $s->description;
+                });
+
+                return $statusList;
+        }, function($values) { // if the filter is active
+            if (isset($values)) {
+                foreach (json_decode($values) as $key => $value) {
+                    if ( $value->count()>0 ) {
+                        if ($key == 0) {
+                            $this->crud->addClause('where', 'inf_service_ticket_status_id', $value);
+                        } else {
+                            $this->crud->addClause('orWhere', 'inf_service_ticket_status_id', $value);
+                        }
+                    } else {
+                        $this->crud->removeFilter('status');
+                    }
+                }
+            }
+        });
+
+        $this->crud->addFilter([ // select2_multiple filter
+          'name' => 'service_ticket_types',
+          'type' => 'select2_multiple',
+          'label'=> trans('informacrm.service_ticket_types')
+        ], function() {
+                $service_ticket_types = Inf_service_ticket_type::all();
+                $service_ticket_typesList = [];
+                $service_ticket_types->each(function ($s) use (&$service_ticket_typesList) {
+                    $service_ticket_typesList[$s->id] = $s->description;
+                });
+                // return Inf_opportunity_type::all()->pluck('description', 'id')->toArray();
+                return $service_ticket_typesList;
+        }, function($values) { // if the filter is active
+            foreach (json_decode($values) as $key => $value) {
+                $this->crud->query = $this->crud->query->whereHas('service_ticket_types', function ($query) use ($value) {
+                    $query->where('service_ticket_types.service_ticket_type_id', $value);
+                });
+            }
+        });
         // ------ CRUD COLUMNS
+                $this->crud->addColumn([
+                    'name' => 'id', // The db column name
+                    'label' => trans('informacrm.id'), // Table column heading
+                    'type' => "model_function",
+                    'function_name' => 'getShowIdLink', // the method in your Model
+                ]);
+
+                $this->crud->addColumn([
+                    'name' => "account",
+                    'label' => trans('informacrm.inf_account'), // Table column heading
+                    'type' => "model_function",
+                    'function_name' => 'getShowAccountLink',
+                ]);
+
+                $this->crud->addColumn([
+                    // n-n relationship (with pivot table)
+                    'label' => trans('informacrm.service_ticket_status'), // Table column heading
+                    'type' => 'label',
+                    'name' => 'service_ticket_status', // the method that defines the relationship in your Model
+                    'entity' => 'service_ticket_status', // the method that defines the relationship in your Model
+                    'attribute' => "description" // foreign key attribute that is shown to user
+                    // 'model' => "App\Models\Inf_opportunity_status", // foreign key model
+                ]);
+
+                $this->crud->addColumn([
+                    // n-n relationship (with pivot table)
+                    'label' => trans('informacrm.service_ticket_types'), // Table column heading
+                    'type' => 'label_multiple',
+                    'name' => 'service_ticket_types', // the method that defines the relationship in your Model
+                    'entity' => 'service_ticket_types', // the method that defines the relationship in your Model
+                    'attribute' => "description", // foreign key attribute that is shown to user
+                    'model' => "App\Models\Inf_service_ticket_type", // foreign key model
+                ]);
+
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack
         // $this->crud->removeColumn('column_name'); // remove a column from the stack
@@ -110,8 +195,14 @@ class Inf_service_ticketCrudController extends CrudController
         // $this->crud->removeButtonFromStack($name, $stack);
         // $this->crud->removeAllButtons();
         // $this->crud->removeAllButtonsFromStack('line');
+        $this->crud->removeButton( 'create' );
+        $this->crud->removeButton( 'preview' );
+        $this->crud->removeButton( 'update' );
+        $this->crud->removeButton( 'revisions' );
+        $this->crud->removeButton( 'delete' );
 
         // ------ CRUD ACCESS
+        $this->crud->allowAccess('show','create');
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
         // $this->crud->denyAccess(['list', 'create', 'update', 'reorder', 'delete']);
 
@@ -120,6 +211,9 @@ class Inf_service_ticketCrudController extends CrudController
         // NOTE: you also need to do allow access to the right users: $this->crud->allowAccess('reorder');
 
         // ------ CRUD DETAILS ROW
+        $this->crud->enableDetailsRow();
+        $this->crud->allowAccess('details_row');
+        $this->crud->setDetailsRowView('inf.details_row.service_ticket');
         // $this->crud->enableDetailsRow();
         // NOTE: you also need to do allow access to the right users: $this->crud->allowAccess('details_row');
         // NOTE: you also need to do overwrite the showDetailsRow($id) method in your EntityCrudController to show whatever you'd like in the details row OR overwrite the views/backpack/crud/details_row.blade.php

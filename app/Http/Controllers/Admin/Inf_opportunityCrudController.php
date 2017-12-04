@@ -194,7 +194,7 @@ class Inf_opportunityCrudController extends CrudController
         }, function($values) { // if the filter is active
             foreach (json_decode($values) as $key => $value) {
                 $this->crud->query = $this->crud->query->whereHas('opportunity_types', function ($query) use ($value) {
-                    $query->where('opportunity_type_id', $value);
+                    $query->where('opportunity_types.opportunity_type_id', $value);
                 });
             }
         });

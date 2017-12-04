@@ -2887,80 +2887,6 @@
         "homepage": "http://laravelcollective.com"
     },
     {
-        "name": "backpack/permissionmanager",
-        "version": "2.1.19",
-        "version_normalized": "2.1.19.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/PermissionManager.git",
-            "reference": "c9604481896169d33855978c15bdb332f2a5fe6b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/PermissionManager/zipball/c9604481896169d33855978c15bdb332f2a5fe6b",
-            "reference": "c9604481896169d33855978c15bdb332f2a5fe6b",
-            "shasum": ""
-        },
-        "require": {
-            "backpack/crud": "^3.2.0",
-            "illuminate/support": "~5.1",
-            "php": ">=5.3.0",
-            "spatie/laravel-permission": "^1.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*",
-            "scrutinizer/ocular": "~1.1"
-        },
-        "time": "2017-08-11T05:27:33+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\PermissionManager\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Marius Constantin",
-                "email": "marius@updivision.com",
-                "homepage": "http://www.updivision.com",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Cristian Tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://www.tabacitu.ro",
-                "role": "Chief Architect"
-            }
-        ],
-        "description": "Users and permissions management interface for Laravel 5 using Backpack CRUD.",
-        "homepage": "https://github.com/laravel-backpack/permissionmanager",
-        "keywords": [
-            "backpack",
-            "backpack permission",
-            "backpack roles",
-            "backpack user management",
-            "dick",
-            "dick permission",
-            "laravel backpack",
-            "manage permission",
-            "manage roles",
-            "manage users",
-            "tabacitu",
-            "updivision",
-            "users roles admin"
-        ]
-    },
-    {
         "name": "cviebrock/eloquent-sluggable",
         "version": "4.3.0",
         "version_normalized": "4.3.0.0",
@@ -4173,72 +4099,6 @@
         ]
     },
     {
-        "name": "backpack/base",
-        "version": "0.8.2",
-        "version_normalized": "0.8.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/Base.git",
-            "reference": "a47899310e7ad3490b50d9cd7d64d1bdc88dbf08"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/Base/zipball/a47899310e7ad3490b50d9cd7d64d1bdc88dbf08",
-            "reference": "a47899310e7ad3490b50d9cd7d64d1bdc88dbf08",
-            "shasum": ""
-        },
-        "require": {
-            "almasaeed2010/adminlte": "2.3.*",
-            "creativeorange/gravatar": "~1.0",
-            "jenssegers/date": "^3.2",
-            "laravel/framework": "5.5.*",
-            "prologue/alerts": "^0.4.1"
-        },
-        "require-dev": {
-            "backpack/generators": "^1.1",
-            "laracasts/generators": "^1.1",
-            "phpunit/phpunit": "~6.0",
-            "scrutinizer/ocular": "~1.1",
-            "squizlabs/php_codesniffer": "~2.3"
-        },
-        "time": "2017-11-07T12:17:50+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Backpack\\Base\\BaseServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\Base\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Cristian Tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://www.tabacitu.ro",
-                "role": "Chief Architect & Developer"
-            }
-        ],
-        "description": "Laravel Backpack's base package, which offers admin authentication and a blank admin panel using AdminLTE",
-        "homepage": "https://github.com/laravel-backpack/base",
-        "keywords": [
-            "backpack",
-            "base"
-        ]
-    },
-    {
         "name": "backpack/crud",
         "version": "3.3.1",
         "version_normalized": "3.3.1.0",
@@ -4566,72 +4426,6 @@
             "dbal",
             "persistence",
             "queryobject"
-        ]
-    },
-    {
-        "name": "backpack/settings",
-        "version": "2.0.25",
-        "version_normalized": "2.0.25.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/Settings.git",
-            "reference": "e155cb0e9a70eefea48141954ec753cac9df4162"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/Settings/zipball/e155cb0e9a70eefea48141954ec753cac9df4162",
-            "reference": "e155cb0e9a70eefea48141954ec753cac9df4162",
-            "shasum": ""
-        },
-        "require": {
-            "backpack/crud": "^3.2"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*",
-            "scrutinizer/ocular": "~1.1"
-        },
-        "time": "2017-11-22T08:48:14+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Backpack\\Settings\\SettingsServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\Settings\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "proprietary"
-        ],
-        "authors": [
-            {
-                "name": "Cristian Tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://www.tabacitu.ro",
-                "role": "Chief Architect & Lead Developer"
-            }
-        ],
-        "description": "Application settings interface for Laravel 5 using Backpack CRUD.",
-        "homepage": "https://github.com/laravel-backpack/settings",
-        "keywords": [
-            "backpack",
-            "backpack settings",
-            "dick",
-            "dick settings",
-            "laravel backpack",
-            "manage settings",
-            "settings admin",
-            "tabacitu",
-            "updivision"
         ]
     },
     {
@@ -5175,153 +4969,6 @@
         ],
         "description": "File manager for web",
         "homepage": "http://elfinder.org"
-    },
-    {
-        "name": "phpunit/phpunit-mock-objects",
-        "version": "5.0.2",
-        "version_normalized": "5.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-            "reference": "b09519fb0786d369c0ae6b00c9caf25f7292b393"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/b09519fb0786d369c0ae6b00c9caf25f7292b393",
-            "reference": "b09519fb0786d369c0ae6b00c9caf25f7292b393",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/instantiator": "^1.0.5",
-            "php": "^7.0",
-            "phpunit/php-text-template": "^1.2.1",
-            "sebastian/exporter": "^3.0"
-        },
-        "conflict": {
-            "phpunit/phpunit": "<6.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^6.5"
-        },
-        "suggest": {
-            "ext-soap": "*"
-        },
-        "time": "2017-12-01T09:50:16+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
-            }
-        ],
-        "description": "Mock Object library for PHPUnit",
-        "homepage": "https://github.com/sebastianbergmann/phpunit-mock-objects/",
-        "keywords": [
-            "mock",
-            "xunit"
-        ]
-    },
-    {
-        "name": "phpunit/phpunit",
-        "version": "6.5.1",
-        "version_normalized": "6.5.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sebastianbergmann/phpunit.git",
-            "reference": "8eea3cfbfe3c8363f8111e24569bdb6ead71ea6e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8eea3cfbfe3c8363f8111e24569bdb6ead71ea6e",
-            "reference": "8eea3cfbfe3c8363f8111e24569bdb6ead71ea6e",
-            "shasum": ""
-        },
-        "require": {
-            "ext-dom": "*",
-            "ext-json": "*",
-            "ext-libxml": "*",
-            "ext-mbstring": "*",
-            "ext-xml": "*",
-            "myclabs/deep-copy": "^1.6.1",
-            "phar-io/manifest": "^1.0.1",
-            "phar-io/version": "^1.0",
-            "php": "^7.0",
-            "phpspec/prophecy": "^1.7",
-            "phpunit/php-code-coverage": "^5.2.3",
-            "phpunit/php-file-iterator": "^1.4.3",
-            "phpunit/php-text-template": "^1.2.1",
-            "phpunit/php-timer": "^1.0.9",
-            "phpunit/phpunit-mock-objects": "^5.0",
-            "sebastian/comparator": "^2.1",
-            "sebastian/diff": "^2.0",
-            "sebastian/environment": "^3.1",
-            "sebastian/exporter": "^3.1",
-            "sebastian/global-state": "^2.0",
-            "sebastian/object-enumerator": "^3.0.3",
-            "sebastian/resource-operations": "^1.0",
-            "sebastian/version": "^2.0.1"
-        },
-        "conflict": {
-            "phpdocumentor/reflection-docblock": "3.0.2",
-            "phpunit/dbunit": "<3.0"
-        },
-        "require-dev": {
-            "ext-pdo": "*"
-        },
-        "suggest": {
-            "ext-xdebug": "*",
-            "phpunit/php-invoker": "^1.1"
-        },
-        "time": "2017-12-01T09:57:23+00:00",
-        "bin": [
-            "phpunit"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "6.5.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
-            }
-        ],
-        "description": "The PHP Unit Testing framework.",
-        "homepage": "https://phpunit.de/",
-        "keywords": [
-            "phpunit",
-            "testing",
-            "xunit"
-        ]
     },
     {
         "name": "symfony/debug",
@@ -6101,5 +5748,361 @@
         ],
         "description": "Symfony Translation Component",
         "homepage": "https://symfony.com"
+    },
+    {
+        "name": "backpack/base",
+        "version": "0.8.3",
+        "version_normalized": "0.8.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/Base.git",
+            "reference": "9cae2b6b19e6b016a21d16d767469215188aaa40"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/Base/zipball/9cae2b6b19e6b016a21d16d767469215188aaa40",
+            "reference": "9cae2b6b19e6b016a21d16d767469215188aaa40",
+            "shasum": ""
+        },
+        "require": {
+            "almasaeed2010/adminlte": "2.3.*",
+            "creativeorange/gravatar": "~1.0",
+            "jenssegers/date": "^3.2",
+            "laravel/framework": "5.5.*",
+            "prologue/alerts": "^0.4.1"
+        },
+        "require-dev": {
+            "backpack/generators": "^1.1",
+            "laracasts/generators": "^1.1",
+            "phpunit/phpunit": "~6.0",
+            "scrutinizer/ocular": "~1.1",
+            "squizlabs/php_codesniffer": "~2.3"
+        },
+        "time": "2017-12-02T08:13:32+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\Base\\BaseServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\Base\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "Cristian Tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://www.tabacitu.ro",
+                "role": "Chief Architect & Developer"
+            }
+        ],
+        "description": "Laravel Backpack's base package, which offers admin authentication and a blank admin panel using AdminLTE",
+        "homepage": "https://github.com/laravel-backpack/base",
+        "keywords": [
+            "backpack",
+            "base"
+        ]
+    },
+    {
+        "name": "backpack/permissionmanager",
+        "version": "2.1.22",
+        "version_normalized": "2.1.22.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/PermissionManager.git",
+            "reference": "a3b652329deb2e0a5f527ee1a58379f81e27c640"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/PermissionManager/zipball/a3b652329deb2e0a5f527ee1a58379f81e27c640",
+            "reference": "a3b652329deb2e0a5f527ee1a58379f81e27c640",
+            "shasum": ""
+        },
+        "require": {
+            "backpack/crud": "^3.3.0",
+            "spatie/laravel-permission": "^1.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "scrutinizer/ocular": "~1.1"
+        },
+        "time": "2017-12-02T11:55:22+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\PermissionManager\\PermissionManagerServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\PermissionManager\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "Marius Constantin",
+                "email": "marius@updivision.com",
+                "homepage": "http://www.updivision.com",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Cristian Tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://www.tabacitu.ro",
+                "role": "Chief Architect"
+            }
+        ],
+        "description": "Users and permissions management interface for Laravel 5 using Backpack CRUD.",
+        "homepage": "https://github.com/laravel-backpack/permissionmanager",
+        "keywords": [
+            "backpack",
+            "backpack permission",
+            "backpack roles",
+            "backpack user management",
+            "dick",
+            "dick permission",
+            "laravel backpack",
+            "manage permission",
+            "manage roles",
+            "manage users",
+            "tabacitu",
+            "updivision",
+            "users roles admin"
+        ]
+    },
+    {
+        "name": "backpack/settings",
+        "version": "2.0.26",
+        "version_normalized": "2.0.26.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/Settings.git",
+            "reference": "f995d13061226f0ce6ee43c39e93d1c303e0e173"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/Settings/zipball/f995d13061226f0ce6ee43c39e93d1c303e0e173",
+            "reference": "f995d13061226f0ce6ee43c39e93d1c303e0e173",
+            "shasum": ""
+        },
+        "require": {
+            "backpack/crud": "^3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "scrutinizer/ocular": "~1.1"
+        },
+        "time": "2017-12-02T10:20:56+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\Settings\\SettingsServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\Settings\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "Cristian Tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://www.tabacitu.ro",
+                "role": "Chief Architect & Lead Developer"
+            }
+        ],
+        "description": "Application settings interface for Laravel 5 using Backpack CRUD.",
+        "homepage": "https://github.com/laravel-backpack/settings",
+        "keywords": [
+            "backpack",
+            "backpack settings",
+            "dick",
+            "dick settings",
+            "laravel backpack",
+            "manage settings",
+            "settings admin",
+            "tabacitu",
+            "updivision"
+        ]
+    },
+    {
+        "name": "phpunit/phpunit-mock-objects",
+        "version": "5.0.4",
+        "version_normalized": "5.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
+            "reference": "16b50f4167e5e85e81ca8a3dd105d0a5fd32009a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/16b50f4167e5e85e81ca8a3dd105d0a5fd32009a",
+            "reference": "16b50f4167e5e85e81ca8a3dd105d0a5fd32009a",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/instantiator": "^1.0.5",
+            "php": "^7.0",
+            "phpunit/php-text-template": "^1.2.1",
+            "sebastian/exporter": "^3.0"
+        },
+        "conflict": {
+            "phpunit/phpunit": "<6.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^6.5"
+        },
+        "suggest": {
+            "ext-soap": "*"
+        },
+        "time": "2017-12-02T05:31:19+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Sebastian Bergmann",
+                "email": "sebastian@phpunit.de",
+                "role": "lead"
+            }
+        ],
+        "description": "Mock Object library for PHPUnit",
+        "homepage": "https://github.com/sebastianbergmann/phpunit-mock-objects/",
+        "keywords": [
+            "mock",
+            "xunit"
+        ]
+    },
+    {
+        "name": "phpunit/phpunit",
+        "version": "6.5.2",
+        "version_normalized": "6.5.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sebastianbergmann/phpunit.git",
+            "reference": "24b708f2fd725bcef1c8153b366043381aa324f2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/24b708f2fd725bcef1c8153b366043381aa324f2",
+            "reference": "24b708f2fd725bcef1c8153b366043381aa324f2",
+            "shasum": ""
+        },
+        "require": {
+            "ext-dom": "*",
+            "ext-json": "*",
+            "ext-libxml": "*",
+            "ext-mbstring": "*",
+            "ext-xml": "*",
+            "myclabs/deep-copy": "^1.6.1",
+            "phar-io/manifest": "^1.0.1",
+            "phar-io/version": "^1.0",
+            "php": "^7.0",
+            "phpspec/prophecy": "^1.7",
+            "phpunit/php-code-coverage": "^5.2.3",
+            "phpunit/php-file-iterator": "^1.4.3",
+            "phpunit/php-text-template": "^1.2.1",
+            "phpunit/php-timer": "^1.0.9",
+            "phpunit/phpunit-mock-objects": "^5.0.4",
+            "sebastian/comparator": "^2.1",
+            "sebastian/diff": "^2.0",
+            "sebastian/environment": "^3.1",
+            "sebastian/exporter": "^3.1",
+            "sebastian/global-state": "^2.0",
+            "sebastian/object-enumerator": "^3.0.3",
+            "sebastian/resource-operations": "^1.0",
+            "sebastian/version": "^2.0.1"
+        },
+        "conflict": {
+            "phpdocumentor/reflection-docblock": "3.0.2",
+            "phpunit/dbunit": "<3.0"
+        },
+        "require-dev": {
+            "ext-pdo": "*"
+        },
+        "suggest": {
+            "ext-xdebug": "*",
+            "phpunit/php-invoker": "^1.1"
+        },
+        "time": "2017-12-02T05:36:24+00:00",
+        "bin": [
+            "phpunit"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "6.5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Sebastian Bergmann",
+                "email": "sebastian@phpunit.de",
+                "role": "lead"
+            }
+        ],
+        "description": "The PHP Unit Testing framework.",
+        "homepage": "https://phpunit.de/",
+        "keywords": [
+            "phpunit",
+            "testing",
+            "xunit"
+        ]
     }
 ]

@@ -64,7 +64,8 @@
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account') }}"><i class="fa fa-address-book-o"></i> <span>{{ trans('informacrm.accounts') }}</span></a></li>
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/opportunity') }}"><i class="fa fa-money"></i> <span>{{ trans('informacrm.opportunities') }}</span></a></li>
               <li><a href="#"><i class="fa fa-files-o"></i> <span>{{ trans('informacrm.documents') }}</span></a></li>
-              <li><a href="#"><i class="fa fa-ticket"></i> <span>{{ trans('informacrm.service_tickets') }}</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/service_ticket') }}"><i class="fa fa-money"></i> <span>{{ trans('informacrm.service_tickets') }}</span></a></li>
+              
           @endcan
 
           <!-- ================================================ -->

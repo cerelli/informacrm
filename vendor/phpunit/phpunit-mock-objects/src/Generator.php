@@ -939,7 +939,7 @@ class Generator
             $callOriginalMethods,
             $method->isStatic(),
             $deprecation,
-            $method->hasReturnType() && $method->getReturnType()->allowsNull()
+            $method->hasReturnType() && PHP_VERSION_ID >= 70100 && $method->getReturnType()->allowsNull()
         );
     }
 
@@ -1029,35 +1029,7 @@ class Generator
      */
     private function canMockMethod(ReflectionMethod $method)
     {
-        return !($method->isConstructor() || $method->isFinal() || $this->canReturnTypeBeStubbed($method) || $method->isPrivate() || $this->isMethodNameBlacklisted($method->getName()));
-    }
-
-    /**
-     * @param ReflectionMethod $method
-     *
-     * @return bool
-     *
-     * @throws \ReflectionException
-     */
-    private function canReturnTypeBeStubbed(ReflectionMethod $method)
-    {
-        if (!$method->hasReturnType()) {
-            return false;
-        }
-
-        $returnType = (string) $method->getReturnType();
-
-        if ($returnType === \Generator::class || $returnType === \Closure::class) {
-            return false;
-        }
-
-        if (\class_exists($returnType)) {
-            $class = new ReflectionClass($returnType);
-
-            return $class->isFinal();
-        }
-
-        return false;
+        return !($method->isConstructor() || $method->isFinal() || $method->isPrivate() || $this->isMethodNameBlacklisted($method->getName()));
     }
 
     /**

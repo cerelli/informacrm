@@ -20,6 +20,13 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [2.0.26] - 2017-12-02
+
+## Added
+- Italian translation;
+- removed publishing of seeds;
+
+
 ## [2.0.25] - 2017-11-22
 
 ## Fixed

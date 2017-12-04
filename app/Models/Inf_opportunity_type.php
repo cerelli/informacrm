@@ -34,7 +34,10 @@ class Inf_opportunity_type extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+    public function opportunity_types()
+    {
+        return $this->belongsToMany('App\Models\Inf_opportunity_type','inf_opportunity_inf_opportunity_type','opportunity_id','opportunity_type_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
