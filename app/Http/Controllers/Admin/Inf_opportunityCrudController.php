@@ -166,15 +166,12 @@ class Inf_opportunityCrudController extends CrudController
         }, function($values) { // if the filter is active
             if (isset($values)) {
                 foreach (json_decode($values) as $key => $value) {
-                    if ( $value->count()>0 ) {
-                        if ($key == 0) {
-                            $this->crud->addClause('where', 'inf_opportunity_status_id', $value);
-                        } else {
-                            $this->crud->addClause('orWhere', 'inf_opportunity_status_id', $value);
-                        }
+                    if ($key == 0) {
+                        $this->crud->addClause('where', 'inf_opportunity_status_id', $value);
                     } else {
-                        $this->crud->removeFilter('status');
+                        $this->crud->addClause('orWhere', 'inf_opportunity_status_id', $value);
                     }
+
                 }
             }
         });
@@ -183,18 +180,17 @@ class Inf_opportunityCrudController extends CrudController
           'name' => 'opportunity_types',
           'type' => 'select2_multiple',
           'label'=> trans('informacrm.opportunity_types')
-        ], function() {
-                $opportunity_types = Inf_opportunity_type::all();
-                $opportunity_typesList = [];
-                $opportunity_types->each(function ($s) use (&$opportunity_typesList) {
-                    $opportunity_typesList[$s->id] = $s->description;
-                });
-                // return Inf_opportunity_type::all()->pluck('description', 'id')->toArray();
-                return $opportunity_typesList;
+        ], function() { // the options that show up in the select2
+            return Inf_opportunity_type::all()->pluck('description', 'id')->toArray();
         }, function($values) { // if the filter is active
             foreach (json_decode($values) as $key => $value) {
+                // $this->crud->addClause('where', 'opportunity_types', $value);
                 $this->crud->query = $this->crud->query->whereHas('opportunity_types', function ($query) use ($value) {
-                    $query->where('opportunity_types.opportunity_type_id', $value);
+                    if ( $value == "" ) {
+
+                    } else {
+                        $query->where('opportunity_type_id', '=', $value);
+                    }
                 });
             }
         });

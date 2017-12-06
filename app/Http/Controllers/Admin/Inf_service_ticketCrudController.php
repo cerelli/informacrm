@@ -96,7 +96,6 @@ class Inf_service_ticketCrudController extends CrudController
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
         // $this->crud->removeFields($array_of_names, 'update/create/both');
-
         $this->crud->addFilter([ // select2_multiple filter
           'name' => 'status',
           'type' => 'select2_multiple',
@@ -112,38 +111,34 @@ class Inf_service_ticketCrudController extends CrudController
         }, function($values) { // if the filter is active
             if (isset($values)) {
                 foreach (json_decode($values) as $key => $value) {
-                    if ( $value->count()>0 ) {
                         if ($key == 0) {
                             $this->crud->addClause('where', 'inf_service_ticket_status_id', $value);
                         } else {
                             $this->crud->addClause('orWhere', 'inf_service_ticket_status_id', $value);
                         }
-                    } else {
-                        $this->crud->removeFilter('status');
-                    }
                 }
             }
         });
+
 
         $this->crud->addFilter([ // select2_multiple filter
           'name' => 'service_ticket_types',
           'type' => 'select2_multiple',
           'label'=> trans('informacrm.service_ticket_types')
-        ], function() {
-                $service_ticket_types = Inf_service_ticket_type::all();
-                $service_ticket_typesList = [];
-                $service_ticket_types->each(function ($s) use (&$service_ticket_typesList) {
-                    $service_ticket_typesList[$s->id] = $s->description;
-                });
-                // return Inf_opportunity_type::all()->pluck('description', 'id')->toArray();
-                return $service_ticket_typesList;
+        ], function() { // the options that show up in the select2
+            return Inf_service_ticket_type::all()->pluck('description', 'id')->toArray();
         }, function($values) { // if the filter is active
             foreach (json_decode($values) as $key => $value) {
                 $this->crud->query = $this->crud->query->whereHas('service_ticket_types', function ($query) use ($value) {
-                    $query->where('service_ticket_types.service_ticket_type_id', $value);
+                    if ( $value == "" ) {
+
+                    } else {
+                        $query->where('service_ticket_type_id', '=', $value);
+                    }
                 });
             }
         });
+
         // ------ CRUD COLUMNS
                 $this->crud->addColumn([
                     'name' => 'id', // The db column name
