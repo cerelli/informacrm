@@ -15,9 +15,14 @@
 
 @section('content')
 	@php
-		  $active_account_id=Request::get('active_account_id');
-		//   $active_contact_id=Request::get('active_contact_id');
-		  $crud->create_fields['inf_account_id']['value'] = $active_account_id;
+		$active_account_id = Request::get('active_account_id');
+		$active_opportunity_id = Request::get('active_opportunity_id');
+		if ( isset($active_opportunity_id) ) {
+			$crud->create_fields['inf_opportunity_id']['value'] = $active_opportunity_id;
+		}
+		$annulle = Request::get('annulle').'#'.Request::get('tab');
+		// dump($annulle);
+		$crud->create_fields['inf_account_id']['value'] = $active_account_id;
 	@endphp
     {{-- {{ $crud->create_fields['inf_account_id']['default'] = Request::get('active_account_id') }} --}}
 <div class="row">
@@ -44,8 +49,8 @@
 		    </div><!-- /.box-body -->
 		    <div class="box-footer">
                 @php
-					$var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$active_account_id.'#events';
-					// $crud->route = $var_annulle;
+					$var_annulle = config('backpack.base.route_prefix', 'admin') . '/'.$annulle;
+					$crud->route = $var_annulle;
 				@endphp
 				{{-- {{ dd($crud->route) }} --}}
                 @include('crud::inc.form_save_buttons')

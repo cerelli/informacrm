@@ -70,6 +70,11 @@ class Inf_opportunity extends Model
         return $this->hasOne('App\Models\Inf_account','id','inf_account_id');
     }
 
+    public function events()
+    {
+        return $this->hasMany('App\Models\Inf_event','inf_opportunity_id','id');
+    }
+
     public function opportunity_types()
     {
         return $this->belongsToMany('App\Models\Inf_opportunity_type','inf_opportunity_inf_opportunity_type','opportunity_id','opportunity_type_id');

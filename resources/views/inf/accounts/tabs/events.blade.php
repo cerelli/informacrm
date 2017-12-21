@@ -1,6 +1,6 @@
 <!-- Create button -->
 @includeif('vendor.backpack.crud.buttons.create', [
-    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/event/create?active_account_id='.$entry->id),
+    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/event/create?active_account_id='.$entry->id).'&annulle=account/'.$entry->id.'&tab=events',
     'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.events')."' ",
     'custom_button_class' => ""
 ])
@@ -19,8 +19,8 @@
                                 <div class="col-md-3 button-tools" style="padding: 8px;">
                                     <!-- Delete button -->
                                     @includeif('vendor.backpack.crud.buttons.delete', [
-                                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/events').'/'.$event->id,
-                                        'custom_button_attributes' => "  title='Delete events' delete-id='$event->id' ",
+                                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/event').'/'.$event->id,
+                                        'custom_button_attributes' => "  title='Delete event' delete-id='$event->id' ",
                                         'custom_button_class' => " pull-right  del-confirmevent"
                                     ])
 

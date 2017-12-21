@@ -7,6 +7,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Inf_account;
 use App\Models\Inf_contact;
+use App\Models\Inf_event;
 
 class SearchController extends CrudController
 {
@@ -37,6 +38,20 @@ class SearchController extends CrudController
         return inf_contact::search($request->get('q'))->distinct()->get();
     }
 
+    public function findSelEventOpportunity(Request $request)
+    {
+        $result = inf_event::whereNull('inf_opportunity_id')
+                    ->search($request->get('q'))
+                    ->distinct()
+                    ->get();
+        // dd($result);
+        return $result;
+        // $data = Inf_event::select("id","title as title")
+        //                     ->where("title","LIKE","%{$request->input('query')}%")->get();
+        //
+        // return response()->json($data);
+        // return 'pippo'; //inf_event::search($request->get('q'))->distinct()->get();
+    }
     /**
      * Display a listing of the resource.
      *

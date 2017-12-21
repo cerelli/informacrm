@@ -9,6 +9,7 @@ use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\Inf_eventRequest as StoreRequest;
 use App\Http\Requests\Inf_eventRequest as UpdateRequest;
+use App\Http\Requests\Inf_eventRequest as SelectRequest;
 
 use Auth;
 use Illuminate\Http\Request;
@@ -104,24 +105,73 @@ class Inf_eventCrudController extends CrudController
                 ]
             ]);
 
-            $this->crud->addField([   // Checkbox
-                'name' => 'all_day',
-                'label' => trans('informacrm.event_all_day'),
-                'type' => 'checkbox',
-                'default' => 0,
-                'wrapperAttributes' => [
-                    'class' => 'form-group col-md-3'
-                ]
+            // $this->crud->addField([   // Checkbox
+            //     'name' => 'in_calendar',
+            //     'label' => trans('informacrm.event_in_calendar'),
+            //     'type' => 'checkbox',
+            //     'default' => 0,
+            //     'wrapperAttributes' => [
+            //         'class' => 'form-group col-md-6'
+            //     ]
+            // ]);
+            $this->crud->addField(
+                [
+                    'label' => trans('informacrm.event_in_calendar'),
+                    'name' => 'in_calendar',
+                    'type' => 'toggle',
+                    'inline' => true,
+                    'options' => [
+                        0 => 'No',
+                        1 => 'Si'
+                    ],
+                    'hide_when' => [
+                        0 => ['all_day', 'start_date', 'end_date'],
+                    ],
+                    'default' => 0,
+                    'wrapperAttributes' => [
+                        'class' => 'form-group col-md-12'
+                    ]
             ]);
-            $this->crud->addField([   // CustomHTML
-                'name' => 'separator1',
-                'type' => 'custom_html',
-                'value' => '',
-                'wrapperAttributes' => [
-                    'class' => 'row',
-                    'style' => 'margin-top: 20px'
-                ]
+
+            $this->crud->addField(
+                [
+                    'label' => trans('informacrm.event_all_day'),
+                    'name' => 'all_day',
+                    'type' => 'toggle',
+                    'inline' => true,
+                    'options' => [
+                        0 => 'No',
+                        1 => 'Si'
+                    ],
+                    'hide_when' => [
+                        1 => ['start_date', 'end_date'],
+                    ],
+                    'default' => 0,
+                    'wrapperAttributes' => [
+                        'class' => 'form-group col-md-12'
+                    ]
             ]);
+
+            // $this->crud->addField([   // Checkbox
+            //     'name' => 'all_day',
+            //     'label' => trans('informacrm.event_all_day'),
+            //     'type' => 'checkbox',
+            //     'default' => 0,
+            //     'wrapperAttributes' => [
+            //         'class' => 'form-group col-md-12'
+            //     ]
+            // ]);
+
+
+            // $this->crud->addField([   // CustomHTML
+            //     'name' => 'separator1',
+            //     'type' => 'custom_html',
+            //     'value' => '',
+            //     'wrapperAttributes' => [
+            //         'class' => 'row',
+            //         'style' => 'margin-top: 20px'
+            //     ]
+            // ]);
             $this->crud->addField([   // DateTime
                 'name' => 'start_date',
                 'label' => trans('informacrm.event_start'),
@@ -158,7 +208,7 @@ class Inf_eventCrudController extends CrudController
                 'attribute' => 'description', // foreign key attribute that is shown to user
                 'model' => "App\Models\Inf_event_result", // foreign key model
                 'wrapperAttributes' => [
-                    'class' => 'form-group col-md-3'
+                    'class' => 'form-group col-md-12'
                 ]
             ]);
 
@@ -167,6 +217,18 @@ class Inf_eventCrudController extends CrudController
                 'name' => 'result_description',
                 'label' => trans('informacrm.event_result_description'),
                 'type' => 'ckeditor'
+            ]);
+
+            $this->crud->addField([
+                'label' => trans('informacrm.opportunity'),
+                'type' => 'select2_nohtml',
+                'name' => 'inf_opportunity_id', // the db column for the foreign key
+                'entity' => 'opportunity', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Inf_opportunity", // foreign key model
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-12'
+                ]
             ]);
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
@@ -239,7 +301,9 @@ class Inf_eventCrudController extends CrudController
     public function calendar()
     {
         $events = [];
-        $data = Inf_event::all();
+        // $data = Inf_event::all();
+        $data = Inf_event::InCalendar()->get();
+
         // dd($data);
         if($data->count()) {
             foreach ($data as $key => $value) {
@@ -291,6 +355,7 @@ class Inf_eventCrudController extends CrudController
         return view('inf.calendar.event_calendar', compact('calendar'));
     }
 
+
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
@@ -300,16 +365,21 @@ class Inf_eventCrudController extends CrudController
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
+        $parsed = parse_url(url()->previous());
+        parse_str($parsed['query'], $query_params);
+        $tab = $query_params['tab'];
+        $save_and_new = url()->previous();
+        // dd($save_and_new);
         $saveAction = $this->getSaveAction()['active']['value'];
         switch ($saveAction) {
             case 'save_and_edit':
                 break;
             case 'save_and_new':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/event/create?active_account_id='.$this->crud->entry['inf_account_id']);
+                $redirect_location = redirect($save_and_new);
                 break;
             case 'save_and_back':
             default:
-                $redirect_location = redirect('admin/account/'.$this->crud->entry['inf_account_id'].'#events');
+                $redirect_location = redirect('admin/account/'.$this->crud->entry['inf_account_id'].'#'.$tab);
                 break;
         }
         return $redirect_location;
@@ -324,7 +394,6 @@ class Inf_eventCrudController extends CrudController
         }
         $request['updated_by'] = \Auth::user()->name;
         $parsed = parse_url(url()->previous());
-        // dd($parsed);
         parse_str($parsed['query'], $query_params);
         $call_url = $query_params['call_url'];
         $call = $query_params['call'];
@@ -355,5 +424,13 @@ class Inf_eventCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
+    }
+
+    public function selectupdate($event_id, $opportunity_id, $account_id, $tab)
+    {
+        $event_result = Inf_event::findOrFail($event_id);
+        $event_result->update(['inf_opportunity_id'=>$opportunity_id]);
+        return redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'#'.$tab);
+        // return $id;
     }
 }

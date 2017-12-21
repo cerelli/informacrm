@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'], 'namespace' => 'Admin'], function () {
     // Backpack\MenuCRUD
     CRUD::resource('menu-item', 'MenuItemCrudController');
@@ -30,6 +31,7 @@ Route::group([
     Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
     Route::get('findAccounts','SearchController@findAccounts');
     Route::get('findContacts','SearchController@findContacts');
+    Route::get('findSelEventOpportunity','SearchController@findSelEventOpportunity');
 
 
     Route::get('dashboard', 'DashboardController@index');
@@ -39,9 +41,13 @@ Route::group([
     // your CRUD resources and other admin routes here
     CRUD::resource('account', 'Inf_accountCrudController');
     CRUD::resource('event', 'Inf_eventCrudController');
+    Route::get('selevent', 'Inf_eventCrudController@select');
+    Route::get('selevent/update/{event_id}/{opportunity_id}/{account_id}/{tab}', 'Inf_eventCrudController@selectupdate');
+
     CRUD::resource('event_status', 'Inf_event_statusCrudController');
     CRUD::resource('event_result', 'Inf_event_resultCrudController');
     CRUD::resource('event_type', 'Inf_event_typeCrudController');
+
 
     CRUD::resource('opportunity', 'Inf_opportunityCrudController');
     CRUD::resource('opportunity_status', 'Inf_opportunity_statusCrudController');

@@ -76,6 +76,34 @@
 
                             {{-- <hr style="margin-bottom: 2px;margin-top: 2px; border-color: #0016f5;"> --}}
                         </div>
+                        <div class="row col-md-12" style="margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
+                            @include('inf.accounts.dropdown.opportunity')
+                        </div>
+                        @if(count($opportunity->events) > 0)
+                                <div class="row" style="margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
+                                    <div class="col-md-2">
+                                        <div class="col-md-2" style="margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
+                                            <h4>{{ trans('informacrm.events') }}: </h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="row">
+                                            @foreach ($opportunity->events as $key => $event)
+                                            <div class="col-xs-10" style="margin-left: 5px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
+                                                    <span style="font-size: 80%; margin-right: 3px; color: {{ $event->event_status->color }}; background-color: {{ $event->event_status->background_color }}" class="label label-default pull-left">
+                                                        <i class= "fa  {{ $event->event_status->icon }}"></i> {{ $event->event_status->description }}
+                                                    </span>
+                                                    <span> {{ $event->title }}</span>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                        @endif
+
+
+
+
                     </div>
                 </div>          <!-- /.panel panel-primary contact-->
             </div> <!-- /#contact-panel.... -->

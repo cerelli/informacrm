@@ -381,6 +381,15 @@ class Inf_opportunityCrudController extends CrudController
         return $redirect_location;
     }
 
+    public function showDetailsRow($id) {
+        $data    = $this->crud->model->find($id);
+        $address = $data->address()->first();
 
+        if (isset($address)) {
+            print view('customer/customeraddressdetails', ['data' => $address]);
+        } else {
+            print view('customer/customeraddaddress', ['id' => $id]);
+        }
+    }
 
 }

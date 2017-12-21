@@ -4,11 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Inf_event extends Model
 {
     use CrudTrait;
+    use SearchableTrait;
 
+    protected $searchable = [
+        'columns' => [
+            'inf_events.title' => 10,
+            'inf_events.notes' => 10,
+            // 'profiles.bio' => 3,
+            // 'profiles.country' => 2,
+            // 'profiles.city' => 1,
+        ],
+    ];
      /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
@@ -34,6 +45,11 @@ class Inf_event extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function opportunity()
+    {
+        return $this->hasOne('App\Models\Inf_opportunity','id','inf_opportunity_id');
+    }
+
     public function event_status()
     {
         return $this->hasOne('App\Models\Inf_event_status','id','inf_event_status_id');
@@ -59,7 +75,10 @@ class Inf_event extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
+    public function scopeInCalendar($query)
+    {
+        return $query->where('in_calendar', '=', 1);
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

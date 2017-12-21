@@ -14,9 +14,11 @@ return [
     */
 
     //base
+    'select' => 'Seleziona',
+    'new' => 'Nuovo',
     'other'         => 'Altro',
     'id'            => 'Codice',
-
+    'search_to_select' => 'Ricerca per selezionare',
     // Forms
     'calendar'              => 'Agenda',
 
@@ -34,6 +36,7 @@ return [
     'opportunities'         => 'Opportunità',
 
     'documents'             => 'Documenti',
+    'document'             => 'Documento',
 
     'service_tickets'       => 'Service Tickets',
 
@@ -193,4 +196,6 @@ return [
 'inf_event_types' => 'Tipi eventi',
 'inf_opportunity' => 'Opportunità',
 'inf_opportunities' => 'Opportunità',
+'event_in_calendar' => 'In calendario',
+'event_result_description' => 'Descrizione esito',
 ];
