@@ -19,7 +19,7 @@
         $crud->route = $var_annulle;
     @endphp
     {{-- @php
-        $var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->inf_account_id.'#addresses';
+        $var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->account_id.'#addresses';
         $crud->route = $var_annulle;
     @endphp --}}
     @include('crud::inc.form_save_buttons')

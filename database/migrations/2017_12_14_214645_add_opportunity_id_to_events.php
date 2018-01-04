@@ -13,10 +13,10 @@ class AddOpportunityIdToEvents extends Migration
      */
     public function up()
     {
-        Schema::table('inf_events', function($table) {
-            $table->unsignedInteger('inf_opportunity_id')->nullable()->after('result_description');
+        Schema::table('events', function($table) {
+            $table->unsignedInteger('opportunity_id')->nullable()->after('result_description');
 
-            $table->foreign('inf_opportunity_id')->references('id')->on('inf_opportunities')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('opportunity_id')->references('id')->on('opportunities')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -27,8 +27,8 @@ class AddOpportunityIdToEvents extends Migration
      */
     public function down()
     {
-        Schema::table('inf_events', function($table) {
-            $table->dropColumn('inf_opportunity_id');
+        Schema::table('events', function($table) {
+            $table->dropColumn('opportunity_id');
         });
     }
 }

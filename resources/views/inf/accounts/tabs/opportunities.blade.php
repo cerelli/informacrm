@@ -38,7 +38,7 @@
 
                                     <!-- Edit button -->
                                     @includeif('vendor.backpack.crud.buttons.update', [
-                                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/opportunity').'/'.$opportunity->id.'/edit?call_url=account/'.$opportunity->inf_account_id.'&call=account',
+                                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/opportunity').'/'.$opportunity->id.'/edit?call_url=account/'.$opportunity->account_id.'&call=account',
                                         'custom_button_attributes' => " title='Edit opportunity' style='margin-right: 3px;' ",
                                         'custom_button_class' => " pull-right "
                                     ])
@@ -90,10 +90,20 @@
                                         <div class="row">
                                             @foreach ($opportunity->events as $key => $event)
                                             <div class="col-xs-10" style="margin-left: 5px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
+                                                <!-- Edit button -->
+                                                @includeif('vendor.backpack.crud.buttons.update', [
+                                                    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/event').'/'.$event->id.'/edit?call_url=account/'.$event->account_id.'&call=account',
+                                                    'custom_button_attributes' => " title='Edit event' style='margin-right: 3px;' ",
+                                                    'custom_button_class' => " pull-right "
+                                                ])
+
+
                                                     <span style="font-size: 80%; margin-right: 3px; color: {{ $event->event_status->color }}; background-color: {{ $event->event_status->background_color }}" class="label label-default pull-left">
                                                         <i class= "fa  {{ $event->event_status->icon }}"></i> {{ $event->event_status->description }}
                                                     </span>
-                                                    <span> {{ $event->title }}</span>
+                                                    <span>
+                                                        <a href="{{ url(config('backpack.base.route_prefix'),'event') }}/{{ $event->id }}/edit?call_url=account/{{ $event->account_id }}">{{ $event->title }}</a>
+                                                    </span>
                                             </div>
                                             @endforeach
                                         </div>

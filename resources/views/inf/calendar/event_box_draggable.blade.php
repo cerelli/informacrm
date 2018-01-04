@@ -5,7 +5,7 @@
             <div class="box-body">
               <!-- the events type-->
               @php
-                  $event_types = App\Models\Inf_event_type::all();
+                  $event_types = App\Models\Event_type::all();
                 //   dd($event_types);
               @endphp
                <div id="external-events">
@@ -29,4 +29,3 @@
               </div>
             </div>
             <!-- /.box-body -->
-          

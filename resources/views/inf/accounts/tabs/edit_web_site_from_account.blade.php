@@ -18,7 +18,7 @@
 	<div class="col-md-8 col-md-offset-2">
 		<!-- Default box -->
 		@if ($crud->hasAccess('list'))
-			<a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->inf_account_id.'#web_sites' }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
+			<a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->account_id.'#web_sites' }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
 		@endif
 
 		@include('crud::inc.grouped_errors')
@@ -53,7 +53,7 @@
 
             <div class="box-footer">
 				@php
-					$var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->inf_account_id.'#web_sites';
+					$var_annulle = config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->account_id.'#web_sites';
 					$crud->route = $var_annulle;
 				@endphp
                 @include('crud::inc.form_save_buttons')

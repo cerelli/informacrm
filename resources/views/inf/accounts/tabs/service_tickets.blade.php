@@ -38,7 +38,7 @@
 
                                     <!-- Edit button -->
                                     @includeif('vendor.backpack.crud.buttons.update', [
-                                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/service_ticket').'/'.$service_ticket->id.'/edit?call_url=account/'.$service_ticket->inf_account_id.'&call=account',
+                                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/service_ticket').'/'.$service_ticket->id.'/edit?call_url=account/'.$service_ticket->account_id.'&call=account',
                                         'custom_button_attributes' => " title='Edit service_ticket' style='margin-right: 3px;' ",
                                         'custom_button_class' => " pull-right "
                                     ])

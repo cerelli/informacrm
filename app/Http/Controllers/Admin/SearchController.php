@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Auth;
 use Illuminate\Http\Request;
-use App\Models\Inf_account;
-use App\Models\Inf_contact;
-use App\Models\Inf_event;
+use App\Models\Account;
+use App\Models\Contact;
+use App\Models\Event;
 
 class SearchController extends CrudController
 {
@@ -15,7 +15,7 @@ class SearchController extends CrudController
     public function findAccounts(Request $request)
     {
         // User::search($request->get('q'))->with('profile')->get();
-        // $test = inf_account::search($request->get('q'))->get();
+        // $test = account::search($request->get('q'))->get();
         // dd($test->toArray());
         // Simple search
         // $users = User::search($query)->get();
@@ -25,32 +25,32 @@ class SearchController extends CrudController
         // $users = User::search($query)
         //     ->with('posts')
         //     ->get();
-        // $results['accounts'][] = inf_account::search($request->get('q'))->distinct()->get();
+        // $results['accounts'][] = account::search($request->get('q'))->distinct()->get();
         //
-        // $results['contacts'][] = inf_contact::search($request->get('q'))->distinct()->get();
+        // $results['contacts'][] = contact::search($request->get('q'))->distinct()->get();
 
         // dd($results->toJson());
-        return inf_account::search($request->get('q'))->distinct()->get();
+        return account::search($request->get('q'))->distinct()->get();
     }
 
     public function findContacts(Request $request)
     {
-        return inf_contact::search($request->get('q'))->distinct()->get();
+        return contact::search($request->get('q'))->distinct()->get();
     }
 
     public function findSelEventOpportunity(Request $request)
     {
-        $result = inf_event::whereNull('inf_opportunity_id')
+        $result = event::whereNull('opportunity_id')
                     ->search($request->get('q'))
                     ->distinct()
                     ->get();
         // dd($result);
         return $result;
-        // $data = Inf_event::select("id","title as title")
+        // $data = Event::select("id","title as title")
         //                     ->where("title","LIKE","%{$request->input('query')}%")->get();
         //
         // return response()->json($data);
-        // return 'pippo'; //inf_event::search($request->get('q'))->distinct()->get();
+        // return 'pippo'; //event::search($request->get('q'))->distinct()->get();
     }
     /**
      * Display a listing of the resource.
@@ -69,7 +69,7 @@ class SearchController extends CrudController
      */
     public function autocomplete(Request $request)
     {
-        // $account = Inf_account;
+        // $account = Account;
         //
         // $data = [
         //     'clients' => [],
@@ -82,7 +82,7 @@ class SearchController extends CrudController
         //     # code...
         // }
 
-        $data = Inf_account::select("name1 as name")->where("name1","LIKE","%{$request->input('query')}%")->get();
+        $data = Account::select("name1 as name")->where("name1","LIKE","%{$request->input('query')}%")->get();
 
         return response()->json($data);
     }

@@ -18,9 +18,9 @@
 		  $active_account_id=Request::get('active_account_id');
 		//   dd($active_account_id);
 		//   $active_contact_id=Request::get('active_contact_id');
-		  $crud->create_fields['inf_account_id']['value'] = $active_account_id;
+		  $crud->create_fields['account_id']['value'] = $active_account_id;
 	@endphp
-    {{-- {{ $crud->create_fields['inf_account_id']['default'] = Request::get('active_account_id') }} --}}
+    {{-- {{ $crud->create_fields['account_id']['default'] = Request::get('active_account_id') }} --}}
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<!-- Default box -->
@@ -57,6 +57,6 @@
 		  {!! Form::close() !!}
 	</div>
 </div>
-{{-- {{ dd($crud->create_fields['inf_account_id']) }} --}}
-{{-- {{ dd($crud->request->inf_account_id) }} --}}
+{{-- {{ dd($crud->create_fields['account_id']) }} --}}
+{{-- {{ dd($crud->request->account_id) }} --}}
 @endsection

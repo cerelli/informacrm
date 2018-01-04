@@ -23,7 +23,7 @@ return [
     'calendar'              => 'Agenda',
 
     'accounts'              => 'Nominativi',
-    'inf_account'           => 'Nominativi',
+    'account'           => 'Nominativi',
     'information'           => 'Info',
     'name1'                 => 'Rag.Sociale 1 / Nome',
 
@@ -48,7 +48,7 @@ return [
 
     'name2'          	  => 'Rag.Sociale 2 / Cognome',
 
-    'inf_account_types'           => 'Tipologie',
+    'account_types'           => 'Tipologie',
 
     'account_type'           => 'Tipologia',
 
@@ -82,11 +82,11 @@ return [
 
     'address_notes'           => 'Note',
 
-    'inf_address'           => 'Indirizzo',
+    'address'           => 'Indirizzo',
 
-    'inf_addresses'           => 'Indirizzi',
+    'addresses'           => 'Indirizzi',
 
-	'inf_accounts'           => 'Nominativi',
+	'accounts'           => 'Nominativi',
 
 	'events'           => 'Eventi',
 
@@ -94,15 +94,15 @@ return [
 
     'office'           => 'Ufficio Contatto',
 
-    'inf_contact'           => 'Contatto',
+    'contact'           => 'Contatto',
 
-    'inf_contacts'           => 'Contatti',
+    'contacts'           => 'Contatti',
 
-    'inf_contact_detail'           => 'Recapito',
+    'contact_detail'           => 'Recapito',
 
-    'inf_contact_details'           => 'Recapiti',
+    'contact_details'           => 'Recapiti',
 
-    'inf_contact_type'           => 'Tipo Recapito',
+    'contact_type'           => 'Tipo Recapito',
 
     'communication_type'           => 'Tipo Comunicazione',
 
@@ -120,13 +120,13 @@ return [
 
     'account_notes'           => 'Note',
 
-    'inf_web_site'           => 'Sito web',
+    'web_site'           => 'Sito web',
 
-    'inf_web_sites'           => 'Siti web',
+    'web_sites'           => 'Siti web',
 
-    'inf_account'           => 'Nominativo',
+    'account'           => 'Nominativo',
 
-    'inf_accounts'           => 'Nominativi',
+    'accounts'           => 'Nominativi',
 
     'communication_type'           => 'Tipo comunicazione',
     'address_type'           => 'Tipo indirizzo',
@@ -138,8 +138,8 @@ return [
    'config'           => 'configurazione',
 
    'is_persona'           => 'Persona Fisica',
-   'inf_event'           => 'Evento',
-   'inf_events'           => 'Eventi',
+   'event'           => 'Evento',
+   'events'           => 'Eventi',
    'event_title'           => 'Titolo Evento',
    'event_types'           => 'Tipo Evento',
    'event_start'           => 'Inizio Evento',
@@ -163,8 +163,8 @@ return [
  'opportunity_expiration_date'           => 'Data Scadenza',
  'opportunity_result_id'           => 'Esito',
  'opportunity_result_description'           => 'Descrizione Esito',
- 'informacrm.inf_opportunities'           => 'Opportunità',
- 'informacrm.inf_opportunity'           => 'Opportunità',
+ 'informacrm.opportunities'           => 'Opportunità',
+ 'informacrm.opportunity'           => 'Opportunità',
  'service_ticket_types'           => 'Tipo Service Ticket',
  'service_ticket_status'           => 'Stato',
  'service_ticket_types'           => 'Tipo Service Ticket',
@@ -180,22 +180,22 @@ return [
  'service_ticket'  => 'Service ticket',
 'service_ticket_result'  => 'Esito',
 'service_ticket_type'  => 'Tipo',
-'inf_web_site_types' => 'Web site tipologie',
-'inf_address_types' => 'Indirizzi tipologie',
-'inf_event_statuses' => 'Stati eventi',
-'inf_opportunity_statuses' => 'Stati opportunità',
-'inf_document_statuses' => 'Stati documenti',
-'inf_service_ticket_statuses' => 'Stati Service ticket',
-'inf_service_ticket_results' => 'Esiti Service ticket',
-'inf_service_ticket_result' => 'Esito Service ticket',
+'web_site_types' => 'Web site tipologie',
+'address_types' => 'Indirizzi tipologie',
+'event_statuses' => 'Stati eventi',
+'opportunity_statuses' => 'Stati opportunità',
+'document_statuses' => 'Stati documenti',
+'service_ticket_statuses' => 'Stati Service ticket',
+'service_ticket_results' => 'Esiti Service ticket',
+'service_ticket_result' => 'Esito Service ticket',
 'service_ticket_result_description' => 'Descrizione esito Service ticket',
 'service_ticket_creation' => 'Creato il',
-'inf_service_ticket_types' => 'Tipi Service ticket',
-'inf_opportunity_results' => 'Esiti opportunità',
-'inf_opportunity_types' => 'Tipi opportunità',
-'inf_event_types' => 'Tipi eventi',
-'inf_opportunity' => 'Opportunità',
-'inf_opportunities' => 'Opportunità',
+'service_ticket_types' => 'Tipi Service ticket',
+'opportunity_results' => 'Esiti opportunità',
+'opportunity_types' => 'Tipi opportunità',
+'event_types' => 'Tipi eventi',
+'opportunity' => 'Opportunità',
+'opportunities' => 'Opportunità',
 'event_in_calendar' => 'In calendario',
 'event_result_description' => 'Descrizione esito',
 ];

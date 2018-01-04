@@ -27,7 +27,7 @@
 
                                     <!-- Edit button -->
                                     @includeif('vendor.backpack.crud.buttons.update', [
-                                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/event').'/'.$opportunity->id.'/edit?call_url=account/'.$opportunity->inf_account_id.'&call=account',
+                                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/event').'/'.$opportunity->id.'/edit?call_url=account/'.$opportunity->account_id.'&call=account',
                                         'custom_button_attributes' => " title='Edit event' style='margin-right: 3px;' ",
                                         'custom_button_class' => " pull-right "
                                     ])

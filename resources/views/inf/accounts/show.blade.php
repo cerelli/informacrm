@@ -26,7 +26,7 @@
 				<div class="row fullname-buttontools col-md-12">
 					<div class="row fullname col-md-9">
 						<h1 class="name text-light-blue">
-							{{  ($entry->inf_title_id > 0)  ? $entry->title->description : ''  }}  {{ $entry->name1 }} {{ $entry->name2 }}
+							{{  ($entry->title_id > 0)  ? $entry->title->description : ''  }}  {{ $entry->name1 }} {{ $entry->name2 }}
 						</h1>
 					</div>
 					<div class="row button-tools  col-md-3">

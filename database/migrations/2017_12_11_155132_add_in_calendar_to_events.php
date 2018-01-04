@@ -13,7 +13,7 @@ class AddInCalendarToEvents extends Migration
      */
     public function up()
     {
-        Schema::table('inf_events', function($table) {
+        Schema::table('events', function($table) {
             $table->tinyInteger('in_calendar')->after('notes');
         });
     }
@@ -25,7 +25,7 @@ class AddInCalendarToEvents extends Migration
      */
     public function down()
     {
-        Schema::table('inf_events', function($table) {
+        Schema::table('events', function($table) {
             $table->dropColumn('in_calendar');
         });
     }

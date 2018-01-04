@@ -19,7 +19,7 @@
 	<div class="col-md-12">
 		<!-- Default box -->
 		@if ($crud->hasAccess('list'))
-			<a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->inf_account_id.'#opportunities' }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
+			<a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->account_id.'#opportunities' }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
 		@endif
 
 		@include('crud::inc.grouped_errors')
@@ -66,7 +66,7 @@
 		  <div class="box" style="border-top: 3px solid #ff0000;">
 			  <div class="box-header with-border">
   		    	<h3 class="box-title">{{ trans('Legami') }}</h3>
-				
+
   		    </div>
 		  </div>
 	  </div>

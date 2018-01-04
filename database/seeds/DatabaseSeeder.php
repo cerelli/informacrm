@@ -12,15 +12,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
-        $this->call(InfAccountTypesTableSeeder::class);
-        $this->call(InfAddressTypesTableSeeder::class);
-        $this->call(InfCommunicationTypesTableSeeder::class);
-        $this->call(InfContactDetailTypesTableSeeder::class);
-        $this->call(InfContactTypesTableSeeder::class);
-        $this->call(InfLocalitiesTableSeeder::class);
-        $this->call(InfOfficesTableSeeder::class);
-        $this->call(InfTitlesTableSeeder::class);
-        $this->call(InfWebSiteTypesTableSeeder::class);
+        $this->call(AccountTypesTableSeeder::class);
+        $this->call(AddressTypesTableSeeder::class);
+        $this->call(CommunicationTypesTableSeeder::class);
+        $this->call(ContactDetailTypesTableSeeder::class);
+        $this->call(ContactTypesTableSeeder::class);
+        $this->call(LocalitiesTableSeeder::class);
+        $this->call(OfficesTableSeeder::class);
+        $this->call(TitlesTableSeeder::class);
+        $this->call(WebSiteTypesTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
         $this->call(AddDummyEvent::class);
         $this->call(AddFirstRolePermission::class);

@@ -17,13 +17,13 @@
 	@php
 		  $active_account_id=Request::get('active_account_id');
 		  $active_contact_id=Request::get('active_contact_id');
-		  $crud->create_fields['inf_contact_id']['value'] = $active_contact_id;
+		  $crud->create_fields['contact_id']['value'] = $active_contact_id;
 		  $this->crud->entry['active_account_id'] = $active_account_id;
 	@endphp
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<!-- Default box -->
-		{{-- $crud->route = {{ "config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->inf_account_id.'#contacts'" }} --}}
+		{{-- $crud->route = {{ "config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->account_id.'#contacts'" }} --}}
 		{{-- {{ dd($crud) }} --}}
 		@if ($crud->hasAccess('list'))
 			<a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/account').'/'.$active_account_id.'#contacts' }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>

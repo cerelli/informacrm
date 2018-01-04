@@ -14,7 +14,7 @@
                         <span style="font-weight: 600;">{{ trans_choice('informacrm.event', 1) }}</span>
                     </li>
                     @php
-                        $complete_url = url(config('backpack.base.route_prefix', 'admin')).'/event/create?active_account_id='.$opportunity->inf_account_id.'&active_opportunity_id='.$opportunity->id.'&annulle=account/'.$opportunity->inf_account_id.'&tab=opportunities';
+                        $complete_url = url(config('backpack.base.route_prefix', 'admin')).'/event/create?active_account_id='.$opportunity->account_id.'&active_opportunity_id='.$opportunity->id.'&annulle=account/'.$opportunity->account_id.'&tab=opportunities';
                     @endphp
                     <li><a href={{ $complete_url }}>{{ trans('informacrm.new') }}</a></li>
                 </ul>

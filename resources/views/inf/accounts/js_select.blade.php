@@ -28,7 +28,7 @@ $("#select-event-multiple-datasets .typeahead").typeahead(
 			templates:
 			{
 				header: [
-					'<div class="list-group search-results-dropdown"><h3 class="eventList">{{ trans('informacrm.inf_events') }}</h3>'
+					'<div class="list-group search-results-dropdown"><h3 class="eventList">{{ trans('informacrm.events') }}</h3>'
 				],
 				suggestion: function (data)
 				{

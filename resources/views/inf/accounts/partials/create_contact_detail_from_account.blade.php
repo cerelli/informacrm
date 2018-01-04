@@ -17,7 +17,7 @@
 	@php
 		  $active_account_id=Request::get('active_account_id');
 		  $active_contact_id=Request::get('active_contact_id');
-		  $crud->create_fields['inf_contact_id']['value'] = $active_contact_id;
+		  $crud->create_fields['contact_id']['value'] = $active_contact_id;
 		  $this->crud->entry['active_account_id'] = $active_account_id;
 	@endphp
 <div class="row">
@@ -55,6 +55,6 @@
 		  {!! Form::close() !!}
 	</div>
 </div>
-{{-- {{ dd($crud->create_fields['inf_account_id']) }} --}}
-{{-- {{ dd($crud->request->inf_account_id) }} --}}
+{{-- {{ dd($crud->create_fields['account_id']) }} --}}
+{{-- {{ dd($crud->request->account_id) }} --}}
 @endsection

@@ -4,7 +4,7 @@
 <div class="box-body">
   <!-- the event statuses-->
   @php
-      $event_statuses = App\Models\Inf_event_status::all();
+      $event_statuses = App\Models\Event_status::all();
   @endphp
    <div id="external-events">
   @foreach ($event_statuses as $event_status)

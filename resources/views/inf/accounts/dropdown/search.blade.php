@@ -106,7 +106,7 @@ $("#select-event-multiple-datasets-{{ $opportunity->id }} .typeahead").typeahead
 			templates:
 			{
 				header: [
-					'<div class="list-group search-results-dropdown"><h3 class="eventList">{{ trans('informacrm.inf_events') }}</h3>'
+					'<div class="list-group search-results-dropdown"><h3 class="eventList">{{ trans('informacrm.events') }}</h3>'
 				],
 				suggestion: function (data)
 				{
@@ -114,7 +114,7 @@ $("#select-event-multiple-datasets-{{ $opportunity->id }} .typeahead").typeahead
 					// $user = App\User::find(1); // works!
 					// echo $user->full_name;
                     var fullname = $.trim(data.title);
-					return '<p><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/selevent/update/') }}/'+data.id+'/'+{{ $opportunity->id }}+'/'+{{ $opportunity->inf_account_id }}+'/opportunities" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a></p>'
+					return '<p><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/selevent/update/') }}/'+data.id+'/'+{{ $opportunity->id }}+'/'+{{ $opportunity->account_id }}+'/opportunities" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a></p>'
 				}
 			}
 		}

@@ -121,7 +121,7 @@
                 templates:
                 {
                     header: [
-                        '<div class="list-group search-results-dropdown"><h3 class="accountList">{{ trans('informacrm.inf_accounts') }}</h3>'
+                        '<div class="list-group search-results-dropdown"><h3 class="accountList">{{ trans('informacrm.accounts') }}</h3>'
                     ],
                     suggestion: function (data)
                     {
@@ -141,7 +141,7 @@
                 templates:
                 {
                     header: [
-                        '<div class="list-group search-results-dropdown"><h3 class="contactList">{{ trans('informacrm.inf_contacts') }}</h3>'
+                        '<div class="list-group search-results-dropdown"><h3 class="contactList">{{ trans('informacrm.contacts') }}</h3>'
                     ],
                     suggestion: function (data)
                     {
@@ -149,16 +149,16 @@
                         // $user = App\User::find(1); // works!
                         // echo $user->full_name;
                         var fullname = $.trim($.trim(data.first_name)+' '+$.trim(data.last_name));
-                        return '<p><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account/') }}/'+data.inf_account_id+'#contacts" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a></p>'
+                        return '<p><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/account/') }}/'+data.account_id+'#contacts" class="tt-suggestion tt-selectable tt-is-under-cursor">'+fullname+'</a></p>'
                     }
                 }
             }
         );
 </script>
 {{-- empty: [
-    '<div class="list-group search-results-dropdown"><h3 class="accountList">{{ trans('informacrm.inf_accounts') }}</h3><div class="list-group search-results-dropdown"><div class="list-group-item">{{ trans('informacrm.inf_nothing_found') }}</div></div>'
+    '<div class="list-group search-results-dropdown"><h3 class="accountList">{{ trans('informacrm.accounts') }}</h3><div class="list-group search-results-dropdown"><div class="list-group-item">{{ trans('informacrm.nothing_found') }}</div></div>'
 ], --}}
 {{-- empty: [
-    '<div class="list-group search-results-dropdown"><h3 class="contactList">{{ trans('informacrm.inf_contacts') }}</h3><div class="list-group search-results-dropdown"><div class="list-group-item">{{ trans('informacrm.inf_nothing_found') }}</div></div>'
+    '<div class="list-group search-results-dropdown"><h3 class="contactList">{{ trans('informacrm.contacts') }}</h3><div class="list-group search-results-dropdown"><div class="list-group-item">{{ trans('informacrm.nothing_found') }}</div></div>'
 ], --}}
 {{-- @foreach (['clients', 'contacts', 'invoices', 'quotes', 'navigation'] as $type)@endforeach --}}

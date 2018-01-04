@@ -53,7 +53,7 @@
 
                     </div>
                     <div class="row col-md-12" style="padding-right: 0px;padding-bottom: 3px;padding-left: 0px;margin-left: 0px;margin-right: 0px;">
-                        @include('inf.accounts.partials.contact_details', ['contact_details' => $entry->contact_details()->where('inf_contact_details.inf_contact_id', '=', $contact->id)->get()])
+                        @include('inf.accounts.partials.contact_details', ['contact_details' => $entry->contact_details()->where('contact_details.contact_id', '=', $contact->id)->get()])
                     </div>
                 </div>          <!-- /.panel panel-primary contact-->
             </div> <!-- /#contact-panel.... -->

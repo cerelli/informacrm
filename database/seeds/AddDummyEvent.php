@@ -11,7 +11,7 @@ class AddDummyEvent extends Seeder
      */
     public function run()
     {
-        // ----- inf_event_statuses -------
+        // ----- event_statuses -------
         $data = [
             [
                 'description'       => 'Aperto',
@@ -47,9 +47,9 @@ class AddDummyEvent extends Seeder
                 'created_at'        => date('Y-m-d H:i:s')
             ],
         ];
-        \DB::table('inf_event_statuses')->insert($data);
+        \DB::table('event_statuses')->insert($data);
 
-        // ----- inf_event_results -------
+        // ----- event_results -------
         $data = [
             [
                 'description'       => 'Positivo',
@@ -74,9 +74,9 @@ class AddDummyEvent extends Seeder
                 'created_at'        => date('Y-m-d H:i:s')
             ],
         ];
-        \DB::table('inf_event_results')->insert($data);
+        \DB::table('event_results')->insert($data);
 
-        // ----- inf_event_types -------
+        // ----- event_types -------
         $data = [
             [
                 'description'       => 'Nota',
@@ -156,16 +156,16 @@ class AddDummyEvent extends Seeder
                 'created_at'        => date('Y-m-d H:i:s')
             ],
         ];
-        \DB::table('inf_event_types')->insert($data);
+        \DB::table('event_types')->insert($data);
 
-        // ----- inf_events -------
+        // ----- events -------
         $data = [
          ['title'=>'Finacial forum', 'start_date'=>'2017-10-12', 'end_date'=>'2017-09-15'],
          ['title'=>'Devtalk', 'start_date'=>'2017-10-13', 'end_date'=>'2017-09-25'],
          ['title'=>'Super Event', 'start_date'=>'2017-09-23', 'end_date'=>'2017-09-24'],
          ['title'=>'wtf event', 'start_date'=>'2017-09-19', 'end_date'=>'2017-09-27'],
         ];
-        \DB::table('inf_events')->insert($data);
+        \DB::table('events')->insert($data);
 
 
     }
