@@ -123,6 +123,11 @@ class Account extends Model
         );
     }
 
+    public function actions()
+    {
+        return $this->hasMany('App\Models\Action','account_id', 'id');
+    }
+
     public function opportunities()
     {
         return $this->hasMany('App\Models\Opportunity','account_id', 'id');
@@ -141,7 +146,14 @@ class Account extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
+    public function scopeActionsDetail($account_id)
+    {
+        dump($this->crud->entry);
+        return $this;
+        // return static::with('actions')
+        //             ->where('account_id',$account_id)
+        //             ->get();
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

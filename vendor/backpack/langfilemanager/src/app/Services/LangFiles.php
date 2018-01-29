@@ -70,12 +70,13 @@ class LangFiles
     {
         $fileList = [];
 
-        foreach (scandir($this->getLangPath(), SCANDIR_SORT_DESCENDING) as $file) {
+        foreach (is_dir($this->getLangPath()) ? scandir($this->getLangPath(), SCANDIR_SORT_DESCENDING) : [] as $file) {
             $fileName = str_replace('.php', '', $file);
 
             if (! in_array($fileName, array_merge(['.', '..'], config('backpack.langfilemanager.language_ignore')))) {
                 $fileList[] = [
                     'name' => ucfirst(str_replace('_', ' ', $fileName)),
+                    'original_name' => $fileName,
                     'url' => url(config('backpack.base.route_prefix', 'admin')."/language/texts/{$this->lang}/{$fileName}"),
                     'active' => $fileName == $this->file,
                 ];

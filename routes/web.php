@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 
+
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'], 'namespace' => 'Admin'], function () {
     // Backpack\MenuCRUD
     CRUD::resource('menu-item', 'MenuItemCrudController');
@@ -26,6 +27,11 @@ Route::group([
     'middleware' => ['admin'],
     'namespace' => 'Admin'
 ], function() {
+    Route::get('test', function () {
+        return view('test');
+    });
+    Route::get('actions', 'ActionCrudController@test');
+    CRUD::resource('action','ActionCrudController');
 
     Route::get('search',array('as'=>'search','uses'=>'SearchController@search'));
     Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
@@ -39,7 +45,14 @@ Route::group([
     Route::get('events_calendar', 'EventCrudController@calendar');
     CRUD::resource('title', 'TitleCrudController');
     // your CRUD resources and other admin routes here
+    //***************account*******************
     CRUD::resource('account', 'AccountCrudController');
+    Route::get('account_tab_actions/{account_id}/{action_status_id?}', 'ActionCrudController@account_tab_actions');
+    Route::group(['prefix' => 'account/{account_id}'], function()
+    {
+        CRUD::resource('action', 'AccountActionCrudController');
+    });
+
     CRUD::resource('event', 'EventCrudController');
     Route::get('selevent', 'EventCrudController@select');
     Route::get('selevent/update/{event_id}/{opportunity_id}/{account_id}/{tab}', 'EventCrudController@selectupdate');
@@ -47,6 +60,7 @@ Route::group([
     CRUD::resource('event_status', 'Event_statusCrudController');
     CRUD::resource('event_result', 'Event_resultCrudController');
     CRUD::resource('event_type', 'Event_typeCrudController');
+
 
 
     CRUD::resource('opportunity', 'OpportunityCrudController');

@@ -22,6 +22,23 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 
 
+## [0.8.7] - 2018-01-18
+
+## Added
+- progress bar to installer;
+- debug option to installer;
+- configurable timeout option to installer;
+
+## Fixed
+- hide secondary pace loader to avoid CRUD list page three-separate-loaders syndrome;
+
+
+## [0.8.6] - 2018-01-10
+
+## Fixed
+- ajax datatable loading screen;
+
+
 ## [0.8.5] - 2018-01-03
 
 ## Added

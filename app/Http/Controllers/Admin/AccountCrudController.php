@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Auth;
 use Request;
+use App\Models\Account;
 use App\Models\Account_type;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -249,7 +250,9 @@ class AccountCrudController extends CrudController
 
         // $this->crud->addClause('withoutGlobalScopes');
         // $this->crud->addClause('withoutGlobalScope', VisibleScope::class);
-        // $this->crud->with(); // eager load relationships
+        // $this->crud->with('actions'); // eager load relationships
+        // $this->crud->with('events');
+        // $this->crud->with('event_types');
         // $this->crud->orderBy();
         // $this->crud->groupBy();
         // $this->crud->limit();

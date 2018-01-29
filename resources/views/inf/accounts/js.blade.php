@@ -27,13 +27,39 @@
 	// });
 	//
 	//
+	$('[data-tab="tab_actions"]').click(function(e) {
+		var account_id = $(this).attr('data-account_id');
+		// console.log(account_id);
+		$.ajax({
+			type: "GET",
+			url: $(this).attr('data-dati'),
+			dataType: 'html',
+			data: {
+				// account_id: account_id, // < note use of 'this' here
+				access_token: $("#access_token").val()
+			},
+			success: function(result) {
+				$('#tab_actions').html(result);
+			},
+			error: function(result) {
+				alert('error');
+			}
+		});
+	});
+
+	$('a.btn.btn-app.btn_action_1').click(function(e) {
+		e.preventDefault();
+		console.log('pippo');
+
+	});
+
 	$('#btn_edit_account').click(function(e) {
 		e.preventDefault()
 		var currentURL = $(location).attr('href');
 		var tabhash = currentURL.split('#')[1];
 		var pp = "{{ url(config('backpack.base.route_prefix', 'admin') . '/account').'/'.$entry->id.'/edit?call_url=' }}"+tabhash;
 		var test = currentURL+"{{ '?call_url='.Request::path()}}";
-		console.log(pp);
+		// console.log(pp);
 		window.open(pp,"_self");
 	});
 
@@ -342,5 +368,5 @@
   });
 
   //***************************************************************************************
- 
+
   </script>

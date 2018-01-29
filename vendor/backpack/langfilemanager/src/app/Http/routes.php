@@ -5,5 +5,5 @@ Route::group(['prefix' => config('backpack.base.route_prefix', 'admin'), 'middle
     // Language
     Route::get('language/texts/{lang?}/{file?}', 'LanguageCrudController@showTexts');
     Route::post('language/texts/{lang}/{file}', 'LanguageCrudController@updateTexts');
-    Route::resource('language', 'LanguageCrudController');
+    CRUD::resource('language', 'LanguageCrudController');
 });

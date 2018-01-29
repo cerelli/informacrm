@@ -198,4 +198,6 @@ return [
 'opportunities' => 'Opportunità',
 'event_in_calendar' => 'In calendario',
 'event_result_description' => 'Descrizione esito',
+'action' => 'Azione',
+'actions' => 'Azioni',
 ];

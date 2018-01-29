@@ -68,8 +68,11 @@
 								<a href="#tab_addresses" aria-controls="tab_addresses" role="tab" data-toggle="tab">{{ trans('informacrm.addresses') }}</a>
 						</li>
 						<li role="presentation" class="">
-								<a href="#tab_events" aria-controls="tab_events" role="tab" data-toggle="tab">{{ trans('informacrm.events') }}</a>
+								<a href="#tab_actions" data-dati="{{ url(config('backpack.base.route_prefix', 'admin') . '/account_tab_actions/'.$entry->id) }}" data-account_id="{{ $entry->id }}" data-tab="tab_actions" aria-controls="tab_actions" role="tab" data-toggle="tab">{{ trans('informacrm.actions') }}</a>
 						</li>
+						{{-- <li role="presentation" class="">
+								<a href="#tab_events" aria-controls="tab_events" role="tab" data-toggle="tab">{{ trans('informacrm.events') }}</a>
+						</li> --}}
 						<li role="presentation" class="">
 								<a href="#tab_opportunities" aria-controls="tab_opportunities" role="tab" data-toggle="tab">{{ trans('informacrm.opportunities') }}</a>
 						</li>
@@ -109,6 +112,9 @@
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_relations">
 					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
+				</div>
+				<div role="tabpanel" class="tab-pane" id="tab_actions">
+					{{-- @include('inf.accounts.tabs.actions', ['actions' => $entry->actions]) --}}
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_events">
 					@include('inf.accounts.tabs.events', ['events' => $entry->events])
