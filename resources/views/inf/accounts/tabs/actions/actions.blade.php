@@ -43,7 +43,7 @@
             var action_status_id = $(this).attr('data-action_status_id');
             var account_id = $(this).attr('data-account_id');
             // sendAjaxRequest($(this),'/pages/test/');
-            console.log(action_status_id);
+            // console.log(action_status_id);
             $.ajax({
                 type: "GET",
                 url: $(this).attr('data-dati'),

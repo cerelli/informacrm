@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Controllers\Admin\ActionCrudController;
 use Auth;
+// use App\Models\Action;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ActionRequest as StoreRequest;
@@ -17,6 +18,7 @@ class AccountActionCrudController extends ActionCrudController {
 
         // get the user_id parameter
         $account_id = \Route::current()->parameter('account_id');
+
         $id = \Route::current()->parameter('action');
         // set a different route for the admin panel buttons
         // $this->crud->setRoute("admin/account/".$account_id."#actions");
@@ -42,12 +44,15 @@ class AccountActionCrudController extends ActionCrudController {
     {
         // your additional operations before save here
         $request['created_by'] = Auth::user()->name;
+        $account_id = \Route::current()->parameter('account_id');
+        $request['account_id'] = $account_id;
         //***************************ORIGINAL*********
         $redirect_location = parent::storeCrud($request);
         //********************************************
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
-        $account_id = \Route::current()->parameter('account_id');
+
+        // dump($request['account_id']);
         $action_id = \Route::current()->parameter('action');
         $saveAction = $this->getSaveAction()['active']['value'];
         switch ($saveAction) {

@@ -67,7 +67,7 @@
 						<li role="presentation" class="">
 								<a href="#tab_addresses" aria-controls="tab_addresses" role="tab" data-toggle="tab">{{ trans('informacrm.addresses') }}</a>
 						</li>
-						<li role="presentation" class="">
+						<li role="presentation" class="tab_actions_click">
 								<a href="#tab_actions" data-dati="{{ url(config('backpack.base.route_prefix', 'admin') . '/account_tab_actions/'.$entry->id) }}" data-account_id="{{ $entry->id }}" data-tab="tab_actions" aria-controls="tab_actions" role="tab" data-toggle="tab">{{ trans('informacrm.actions') }}</a>
 						</li>
 						{{-- <li role="presentation" class="">

@@ -34,23 +34,187 @@ class ActionCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setFromDb();
+        // $this->crud->setFromDb();
 
-        $this->crud->addFilter([ // select2_multiple filter
-            'name' => 'action',
-            'type' => 'select2_multiple',
-            'label'=> trans('informacrm.account_types')
-        ], function() { // the options that show up in the select2
-            return [
-            1 => 'In stock',
-            2 => 'In provider stock',
-            3 => 'Available upon ordering',
-            4 => 'Not available',
-            ];
-        }, function($value) { // if the filter is active
-            $this->crud->addClause('where', 'status', $value);
-        });
+        // $this->crud->addFilter([ // select2_multiple filter
+        //     'name' => 'action',
+        //     'type' => 'select2_multiple',
+        //     'label'=> trans('informacrm.account_types')
+        // ], function() { // the options that show up in the select2
+        //     return [
+        //     1 => 'In stock',
+        //     2 => 'In provider stock',
+        //     3 => 'Available upon ordering',
+        //     4 => 'Not available',
+        //     ];
+        // }, function($value) { // if the filter is active
+        //     $this->crud->addClause('where', 'status', $value);
+        // });
         // ------ CRUD FIELDS
+        $this->crud->addField([
+            'name' => 'account_id',
+            'label' => trans('informacrm.account_id'),
+            'type' => 'hidden'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'title',
+            'label' => trans('informacrm.action_title').' *',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
+            'label' => trans('informacrm.action_types').' *',
+                'type' => 'select2_multiple_color',
+                'name' => 'action_types', // the method that defines the relationship in your Model
+                'entity' => 'action_types', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Action_type", // foreign key model
+                'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-9'
+                ]
+            ]);
+
+            $this->crud->addField([
+                'label' => trans('informacrm.action_status').' *',
+                'type' => 'select',
+                'name' => 'action_status_id', // the db column for the foreign key
+                'entity' => 'action_statuses', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Action_status", // foreign key model
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-3'
+                ]
+            ]);
+
+            $this->crud->addField([   // CustomHTML
+                'name' => 'separator',
+                'type' => 'custom_html',
+                'value' => '',
+                'wrapperAttributes' => [
+                    'class' => 'row',
+                    'style' => 'margin-top: 20px'
+                ]
+            ]);
+
+
+            // $this->crud->addField(
+            //     [
+            //         'label' => trans('informacrm.action_in_calendar'),
+            //         'name' => 'in_calendar',
+            //         'type' => 'toggle',
+            //         'inline' => true,
+            //         'options' => [
+            //             0 => 'No',
+            //             1 => 'Si'
+            //         ],
+            //         'hide_when' => [
+            //             0 => ['all_day', 'start_date', 'end_date'],
+            //         ],
+            //         'default' => 0,
+            //         'wrapperAttributes' => [
+            //             'class' => 'form-group col-md-12'
+            //         ]
+            // ]);
+
+            $this->crud->addField(
+                [
+                    'label' => trans('informacrm.action_all_day'),
+                    'name' => 'all_day',
+                    'type' => 'toggle',
+                    'inline' => true,
+                    'options' => [
+                        0 => 'No',
+                        1 => 'Si'
+                    ],
+                    'hide_when' => [
+                        1 => ['start_date', 'end_date'],
+                    ],
+                    'default' => 0,
+                    'wrapperAttributes' => [
+                        'class' => 'form-group col-md-12'
+                    ]
+            ]);
+
+            // $this->crud->addField([   // Checkbox
+            //     'name' => 'all_day',
+            //     'label' => trans('informacrm.action_all_day'),
+            //     'type' => 'checkbox',
+            //     'default' => 0,
+            //     'wrapperAttributes' => [
+            //         'class' => 'form-group col-md-12'
+            //     ]
+            // ]);
+
+
+            // $this->crud->addField([   // CustomHTML
+            //     'name' => 'separator1',
+            //     'type' => 'custom_html',
+            //     'value' => '',
+            //     'wrapperAttributes' => [
+            //         'class' => 'row',
+            //         'style' => 'margin-top: 20px'
+            //     ]
+            // ]);
+            $this->crud->addField([   // DateTime
+                'name' => 'start_date',
+                'label' => trans('informacrm.action_start'),
+                'type' => 'datetime_picker',
+                // optional:
+                'datetime_picker_options' => [
+                    'format' => 'DD/MM/YYYY HH:mm',
+                    'language' => 'it'
+                ],
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-6'
+                ]
+            ]);
+
+            $this->crud->addField([   // DateTime
+                'name' => 'end_date',
+                'label' => trans('informacrm.action_end'),
+                'type' => 'datetime_picker',
+                // optional:
+                'datetime_picker_options' => [
+                    'format' => 'DD/MM/YYYY HH:mm',
+                    'language' => 'it'
+                ],
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-6'
+                ]
+            ]);
+
+            $this->crud->addField([
+                'label' => trans('informacrm.action_result_id'),
+                'type' => 'select',
+                'name' => 'action_result_id', // the db column for the foreign key
+                'entity' => 'action_results', // the method that defines the relationship in your Model
+                'attribute' => 'description', // foreign key attribute that is shown to user
+                'model' => "App\Models\Action_result", // foreign key model
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-12'
+                ]
+            ]);
+
+
+            $this->crud->addField([   // WYSIWYG Editor
+                'name' => 'result_description',
+                'label' => trans('informacrm.action_result_description'),
+                'type' => 'ckeditor'
+            ]);
+
+            // $this->crud->addField([
+            //     'label' => trans('informacrm.opportunity'),
+            //     'type' => 'select2_nohtml',
+            //     'name' => 'opportunity_id', // the db column for the foreign key
+            //     'entity' => 'opportunity', // the method that defines the relationship in your Model
+            //     'attribute' => 'description', // foreign key attribute that is shown to user
+            //     'model' => "App\Models\Opportunity", // foreign key model
+            //     'wrapperAttributes' => [
+            //         'class' => 'form-group col-md-12'
+            //     ]
+            // ]);
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
