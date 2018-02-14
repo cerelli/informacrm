@@ -1,6 +1,19 @@
 
 
 	<script>
+	$(document).ready(function($) {
+		var accountReturnURL = document.baseURI;
+		var tabhash = accountReturnURL.split('#')[1];
+		if (tabhash == 'actions'){
+			// console.log(tabhash);
+			$('[data-tab="tab_actions"]').trigger("click");
+		}else{
+			// console.log('pippo');
+		}
+	});
+	// parser.href = window.location.href;
+
+
 	// function returnURL() {
 	// 	var accountReturnURL = document.baseURI;
 	// 	var tabhash = accountReturnURL.split('#')[1];

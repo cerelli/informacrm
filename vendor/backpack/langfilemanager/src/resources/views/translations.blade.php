@@ -47,8 +47,15 @@
 		<br>
 		<section class="lang-inputs">
 		@if (!empty($fileArray))
-			{!! Form::open(array('url' => url(config('backpack.base.route_prefix', 'admin')."/language/texts/{$currentLang}/{$currentFile}"), 'method' => 'post', 'id' => 'lang-form', 'class' => 'form-horizontal', 'data-required' => trans('admin.language.fields_required'))) !!}
-				{!! Form::button(trans('backpack::crud.save'), array('type' => 'submit', 'class' => 'btn btn-success submit pull-right hidden-xs hidden-sm', 'style' => "margin-top: -60px;")) !!}
+			<form
+				method="post"
+				id="lang-form"
+				class="form-horizontal"
+				data-required="{{ trans('admin.language.fields_required') }}"
+		  		action="{{ url(config('backpack.base.route_prefix', 'admin')."/language/texts/{$currentLang}/{$currentFile}") }}"
+		  		>
+				{!! csrf_field() !!}
+				<button type="submit" class="btn btn-success submit pull-right hidden-xs hidden-sm" style="margin-top: -60px;">{{ trans('backpack::crud.save') }}</button>
 				<div class="form-group hidden-sm hidden-xs">
 					<div class="col-sm-2 text-right">
 						<h4>{{ trans('backpack::langfilemanager.key') }}</h4>
@@ -63,9 +70,9 @@
 				{!! $langfile->displayInputs($fileArray) !!}
 				<hr>
 				<div class="text-center">
-					{!! Form::button(trans('backpack::crud.save'), array('type' => 'submit', 'class' => 'btn btn-success submit')) !!}
+					<button type="submit" class="btn btn-success submit">{{ trans('backpack::crud.save') }}</button>
 				</div>
-			{!! Form::close() !!}
+				</form>
 		@else
 			<em>{{ trans('backpack::langfilemanager.empty_file') }}</em>
 		@endif

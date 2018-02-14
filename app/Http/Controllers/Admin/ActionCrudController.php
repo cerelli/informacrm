@@ -88,6 +88,12 @@ class ActionCrudController extends CrudController
                 ]
             ]);
 
+            $this->crud->addField([   // WYSIWYG Editor
+                'name' => 'notes',
+                'label' => trans('informacrm.action_notes'),
+                'type' => 'ckeditor'
+            ]);
+
             $this->crud->addField([   // CustomHTML
                 'name' => 'separator',
                 'type' => 'custom_html',

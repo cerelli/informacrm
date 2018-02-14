@@ -46,12 +46,21 @@
 
                     </div>
                 </div>
-                <span class="time"><i class="fa fa-clock-o"></i> {{ $action->created_at }}</span>
 
-                <h3 class="timeline-header"><a href="#">{{ $action->title }}</a> ...</h3>
+
+                <span class="time">
+                    @php
+                        $title = trans('informacrm.action_creation') .'<br>'.Carbon\Carbon::parse($action->created_at)->format('d-m-Y i');
+                        // . \Carbon\Carbon::parse($action->created_at)->format('d/m/Y h:i'). 'da' .$action->created_by."<br>";
+                        // $title .= trans('informacrm.action_modification')." ". \Carbon\Carbon::parse($action->update_at)->format('d/m/Y h:i')." da ".$action->updated_by."<br>";
+                        // // dd($title);
+                    @endphp
+                    <i class="fa fa-clock-o" data-toggle="popover" data-trigger= "hover" title="PIPPO" data-content={{ $action->created_at->diffForHumans() }}></i> {{ Carbon\Carbon::parse($action->created_at)->format('d-m-Y h:i') }}</span>
+
+                <h3 class="timeline-header"><a href="#">{{ $action->title }}</a> </h3>
 
                 <div class="timeline-body">
-                    {{ $action->notes }}
+                    {!! $action->notes !!}
                 </div>
 
                 <div class="timeline-footer row">
@@ -66,6 +75,11 @@
 
 <script>
     $(document).ready(function () {
+        $('[data-toggle="popover"]').popover({
+            html: true,
+            placement: 'auto left'
+        });
+
         $('.del-confirmaction').click(function(e){
             e.preventDefault();
             var delete_button = $(this);

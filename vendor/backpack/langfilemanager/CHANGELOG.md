@@ -20,6 +20,12 @@ All Notable changes to `Backpack LangFileManager` will be documented in this fil
 - Nothing
 
 
+## [1.0.23] - 2018-02-08
+
+### Removed
+- laravelcollective/html dependency;
+
+
 ## [1.0.22] - 2018-01-09
 
 ### Added
