@@ -90,7 +90,7 @@
               <div id="expired-actions">
                 @foreach ($data as $key => $action)
                     {{-- <div href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" type="button" class="btn-xs btn-block" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> {{ $action->title }}</div> --}}
-                    <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" class="btn-xs btn-block" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> {{ $action->title }}</a>
+                    <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" class="btn-xs btn-block" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> [{{ $action->id }}] {{ $action->title }}</a>
                     {{-- <a type="button" class="btn-xs btn-block" href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> --}}
                         {{-- <span class="badge bg-teal" style="background-color: {{ $countActionStatus->background_color }} !important; color: {{ $countActionStatus->color }} !important;">{{ $countActionStatus->actions_count }}</span>
                         <i class="fa {{ $countActionStatus->icon }}"></i> {{ $countActionStatus->description }} --}}

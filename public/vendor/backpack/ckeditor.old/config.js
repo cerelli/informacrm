@@ -15,10 +15,9 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'links' },
 		{ name: 'insert' },
 		{ name: 'forms' },
-		{ name: 'tools' },
+		// { name: 'tools' },
 		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
 		{ name: 'others' },
-		'/',
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
 		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
 		{ name: 'styles' },
@@ -28,7 +27,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Remove some buttons, provided by the standard plugins, which we don't
 	// need to have in the Standard(s) toolbar.
-	config.removeButtons = 'Underline,Subscript,Superscript';
+	config.removeButtons = 'Subscript,Superscript';
 
 	// Se the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
@@ -36,6 +35,24 @@ CKEDITOR.editorConfig = function( config ) {
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
+	config.extraPlugins = 'colorbutton';
 	// elFinder
 	// config.filebrowserBrowseUrl = 'admin/elfinder/ckeditor';
 };
+
+// config.toolbarGroups = [
+// 	{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+// 	{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+// 	{ name: 'links' },
+// 	{ name: 'insert' },
+// 	{ name: 'forms' },
+// 	{ name: 'tools' },
+// 	{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
+// 	{ name: 'others' },
+// 	'/',
+// 	{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+// 	{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+// 	{ name: 'styles' },
+// 	{ name: 'colors' },
+// 	{ name: 'about' }
+// ];

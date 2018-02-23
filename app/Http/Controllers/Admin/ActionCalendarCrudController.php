@@ -88,51 +88,35 @@ class ActionCalendarCrudController extends ActionCrudController {
         ->where('end_date', '<', $end)
         ->get();
 
-        // dd($data);
         if($data->count()) {
             foreach ($data as $key => $value) {
                 $backColor = (isset($value->action_status->background_color)) ? $value->action_status->background_color : '#ffffff' ;
                 $textColor = (isset($value->action_status->color)) ? $value->action_status->color : '#000000' ;
+                if ( $value->all_day == 0 ) {
+                    $allDay = false;
+                    $startDate = $value->start_date;
+                    $endDate = $value->end_date;
+                } else {
+                    $allDay = true;
+                    $startDate = $value->start_date;
+                    $endDate = $value->start_date;
+                }
+
+
                 $eventsJson[] = array(
                     'id' => $value->id,
-                    'title' => $value->title.' - '.\Auth::user()->name,
+                    'title' => '['.$value->id.'] '.$value->title.' - '.\Auth::user()->name,
                     'url' => 'calendar/action/'.$value->id.'/edit',
-                    'start' => $value->start_date,
-                    'end' => $value->end_date,
-                    'allDay' => $value->all_day,
+                    'allDay' => $allDay,
+                    'start' => $startDate,
+                    'end' => $endDate,
                     'backgroundColor' => $backColor,
                     'textColor' => $textColor,
                     'resourceEditable' => true ,
                 );
-
-                // $actions[] = Calendar::event(
-                //
-                //     $value->all_day,
-                //     new \DateTime($value->start_date),
-                //     // new \DateTime($value->end_date.' +1 day'),
-                //     new \DateTime($value->end_date),
-                //     $value->id,
-                //     // Add color and link on event
-                //  [
-                //      'color' => $backColor,
-                //      'textColor' => $textColor,
-                //      'url' => 'action/'.$value->id.'/edit?call_url=actions_calendar&call=actions_calendar',
-                //
-                //  ]
-                // );
             }
         }
-        // $events = CalendarEvent::wherePublic(1)->get();
-        //
-        // $eventsJson = array();
-        // foreach ($events as $event) {
-        //     $eventsJson[] = array(
-        //         'id' => $event->id,
-        //         'title' => $event->title,
-        //         'url' => URL::to('events/event/' . date("Y/m/d/", strtotime($event->start_date)) . $event->slug),
-        //         'start' => $event->start_date
-        //     );
-        // }
+        // dd($eventsJson);
         return Response::json($eventsJson);
     }
 
