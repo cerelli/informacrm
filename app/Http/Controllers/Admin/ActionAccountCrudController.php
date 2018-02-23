@@ -44,8 +44,8 @@ class ActionAccountCrudController extends ActionCrudController {
     {
         // // your additional operations before save here
         // $request['created_by'] = Auth::user()->name;
-        // $account_id = \Route::current()->parameter('account_id');
-        // $request['account_id'] = $account_id;
+        $account_id = \Route::current()->parameter('account_id');
+        $request['account_id'] = $account_id;
         // //***************************ORIGINAL*********
         // $redirect_location = parent::storeCrud($request);
         parent::store($request);
