@@ -25,8 +25,9 @@ class ActionCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Action');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/action');
-        $this->crud->setEntityNameStrings('action', 'actions');
-        $this->crud->setListView('inf.action');
+        $this->crud->setEntityNameStrings(trans('informacrm.action'), trans('informacrm.actions'));
+        // $this->crud->setListView('inf.action');
+        // $this->crud->setEditView('inf.edit');
         // dump($this->crud);
         /*
         |--------------------------------------------------------------------------
@@ -135,7 +136,7 @@ class ActionCrudController extends CrudController
                         1 => 'Si'
                     ],
                     'hide_when' => [
-                        1 => ['start_date', 'end_date'],
+                        1 => ['end_date'],
                     ],
                     'default' => 0,
                     'wrapperAttributes' => [
@@ -294,8 +295,7 @@ class ActionCrudController extends CrudController
         $data['actions'] = Action::where('account_id', '=', $account_id);
         $data['countActionStatuses'] = Action_status::countActions($account_id)->get();
         $data['active_account_id']['id'] = $account_id;
-        if (!$action_status_id)
-        {
+        if (!$action_status_id){
             //active first action_status
             $data['actions']->where('action_status_id', '=', $data['countActionStatuses'][0]->id);
             $viewReturn = 'inf.accounts.tabs.actions.actions';
@@ -318,8 +318,17 @@ class ActionCrudController extends CrudController
     {
         // your additional operations before save here
         // dd($request);
+
+        list($dateStart, $timeStart) = explode(' ', $request['start_date']);
+
+        if ( $request['all_day'] == 0 ) {
+
+        } else {
+            $request['start_date'] = $dateStart;
+            $request['end_date'] = $dateStart." 23:59:59";
+        }
+
         $request['created_by'] = Auth::user()->name;
-        // echo "<br>ABC Controller.";
 
         $redirect_location = parent::storeCrud($request);
         // // your additional operations after save here
@@ -338,14 +347,60 @@ class ActionCrudController extends CrudController
     //     return parent::edit($id);
     // }
 
+    // public function update(UpdateRequest $request)
+    // {
+    //     // your additional operations before save here
+    //     if ( $request['created_by'] == "") {
+    //         $request['created_by'] = Auth::user()->name;
+    //     }
+    //     $request['updated_by'] = Auth::user()->name;
+    //     $request['end_date'] = $request['start_date'];
+    //     if ( $request['all_day'] == 0 ) {
+    //
+    //     } else {
+    //         $request['end_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $request['start_date']);
+    //     }
+    //     $redirect_location = parent::updateCrud($request);
+    //
+    // }
+
     public function update(UpdateRequest $request)
     {
+        
         // your additional operations before save here
         if ( $request['created_by'] == "") {
             $request['created_by'] = Auth::user()->name;
         }
         $request['updated_by'] = Auth::user()->name;
-        $redirect_location = parent::updateCrud($request);
+        list($dateStart, $timeStart) = explode(' ', $request['start_date']);
 
+        if ( $request['all_day'] == 0 ) {
+
+        } else {
+            $request['start_date'] = $dateStart;
+            $request['end_date'] = $dateStart." 23:59:59";
+        }
+
+        // $redirect_location = parent::updateCrud($request);
+        return parent::updateCrud($request);
+        // $account_id = \Route::current()->parameter('account_id');
+        // $action_id = \Route::current()->parameter('action');
+        // // set a different route for the admin panel buttons
+        // $this->crud->setRoute("admin/account/".$account_id."/action");
+        // $saveAction = $this->getSaveAction()['active']['value'];
+        // switch ($saveAction) {
+        //     case 'save_and_edit':
+        //         break;
+        //     case 'save_and_new':
+        //         $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'/'.$action_id.'/create');
+        //         break;
+        //     case 'save_and_back':
+        //     default:
+        //         $redirect_location = redirect('admin/account/'.$account_id.'#actions');
+        //         break;
+        // }
+        // // your additional operations after save here
+        // // use $this->data['entry'] or $this->crud->entry
+        // return $redirect_location;
     }
 }

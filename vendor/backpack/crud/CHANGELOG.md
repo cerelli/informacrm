@@ -18,8 +18,20 @@ All Notable changes to `Backpack CRUD` will be documented in this file
 
 ### Security
 - Nothing
-
 -----------
+
+
+## [3.3.10] - 2018-02-21
+
+
+## Added
+- ```number``` column type, with prefix, suffix and decimals options;
+- prefix, suffix and limit to ```text``` column type;
+- setLabeller($callable) method to change how labels are made; merges #688;
+- support Github probot that automatically closes issues tagged ```Ask-It-On-Stack-Overflow```, writes a nice redirect message and gives them the proper link;
+
+## Fixed
+- #638 and #1207 - using flexbox for equal height rows for prettier inline errors;
 
 
 ## [3.3.9] - 2018-02-14
@@ -32,7 +44,6 @@ All Notable changes to `Backpack CRUD` will be documented in this file
 
 ### Deprecated
 - CrudRequest; Since it does nothing, CrudController now extends Illuminate\Http\Request instead; merged #1129; fixes #1119;
-
 
 ## [3.3.8] - 2018-02-08
 

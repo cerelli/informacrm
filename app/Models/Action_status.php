@@ -17,9 +17,9 @@ class Action_status extends Model
     */
 
     protected $table = 'action_statuses';
-    //protected $primaryKey = 'id';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
-    // protected $guarded = ['id'];
+    protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];

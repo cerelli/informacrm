@@ -11,7 +11,7 @@ use Auth;
 use App\Http\Requests\ActionRequest as StoreRequest;
 use App\Http\Requests\ActionRequest as UpdateRequest;
 
-class AccountActionCrudController extends ActionCrudController {
+class ActionAccountCrudController extends ActionCrudController {
 
     public function setup() {
         parent::setup();
@@ -42,12 +42,13 @@ class AccountActionCrudController extends ActionCrudController {
 
     public function store(StoreRequest $request)
     {
-        // your additional operations before save here
-        $request['created_by'] = Auth::user()->name;
-        $account_id = \Route::current()->parameter('account_id');
-        $request['account_id'] = $account_id;
-        //***************************ORIGINAL*********
-        $redirect_location = parent::storeCrud($request);
+        // // your additional operations before save here
+        // $request['created_by'] = Auth::user()->name;
+        // $account_id = \Route::current()->parameter('account_id');
+        // $request['account_id'] = $account_id;
+        // //***************************ORIGINAL*********
+        // $redirect_location = parent::storeCrud($request);
+        parent::store($request);
         //********************************************
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
@@ -72,14 +73,7 @@ class AccountActionCrudController extends ActionCrudController {
 
     public function update(UpdateRequest $request)
     {
-        // your additional operations before save here
-        if ( $request['created_by'] == "") {
-            $request['created_by'] = Auth::user()->name;
-        }
-        $request['updated_by'] = Auth::user()->name;
-
-        $redirect_location = parent::updateCrud($request);
-
+        parent::update($request);
         $account_id = \Route::current()->parameter('account_id');
         $action_id = \Route::current()->parameter('action');
         // set a different route for the admin panel buttons
@@ -100,4 +94,42 @@ class AccountActionCrudController extends ActionCrudController {
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }
+    // public function update(UpdateRequest $request)
+    // {
+    //     // your additional operations before save here
+    //     if ( $request['created_by'] == "") {
+    //         $request['created_by'] = Auth::user()->name;
+    //     }
+    //     $request['updated_by'] = Auth::user()->name;
+    //     list($dateStart, $timeStart) = explode(' ', $request['start_date']);
+    //
+    //     if ( $request['all_day'] == 0 ) {
+    //
+    //     } else {
+    //         $request['start_date'] = $dateStart;
+    //         $request['end_date'] = $dateStart." 23:59:59";
+    //     }
+    //
+    //     $redirect_location = parent::updateCrud($request);
+    //
+    //     $account_id = \Route::current()->parameter('account_id');
+    //     $action_id = \Route::current()->parameter('action');
+    //     // set a different route for the admin panel buttons
+    //     $this->crud->setRoute("admin/account/".$account_id."/action");
+    //     $saveAction = $this->getSaveAction()['active']['value'];
+    //     switch ($saveAction) {
+    //         case 'save_and_edit':
+    //             break;
+    //         case 'save_and_new':
+    //             $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'/'.$action_id.'/create');
+    //             break;
+    //         case 'save_and_back':
+    //         default:
+    //             $redirect_location = redirect('admin/account/'.$account_id.'#actions');
+    //             break;
+    //     }
+    //     // your additional operations after save here
+    //     // use $this->data['entry'] or $this->crud->entry
+    //     return $redirect_location;
+    // }
 }

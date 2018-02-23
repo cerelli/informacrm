@@ -5574,82 +5574,6 @@
         ]
     },
     {
-        "name": "backpack/crud",
-        "version": "3.3.9",
-        "version_normalized": "3.3.9.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/CRUD.git",
-            "reference": "39a82ed22f5ae9380b714a19b17456f69984cffa"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/39a82ed22f5ae9380b714a19b17456f69984cffa",
-            "reference": "39a82ed22f5ae9380b714a19b17456f69984cffa",
-            "shasum": ""
-        },
-        "require": {
-            "backpack/base": "^0.8.0",
-            "barryvdh/laravel-elfinder": "^0.3.10",
-            "doctrine/dbal": "^2.5",
-            "intervention/image": "^2.3",
-            "venturecraft/revisionable": "1.*"
-        },
-        "require-dev": {
-            "orchestra/database": "~3.4",
-            "orchestra/testbench": "~3.0",
-            "phpunit/phpunit": "~6.0",
-            "scrutinizer/ocular": "~1.1"
-        },
-        "time": "2018-02-13T16:22:17+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Backpack\\CRUD\\CrudServiceProvider"
-                ],
-                "aliases": {
-                    "CRUD": "Backpack\\CRUD\\CrudServiceProvider"
-                }
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\CRUD\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Cristian Tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://www.tabacitu.ro",
-                "role": "Chief Architect & Lead Developer"
-            }
-        ],
-        "description": "Quickly build an admin interface for your Eloquent models, using Laravel 5. Build a CMS in a matter of minutes.",
-        "homepage": "https://github.com/laravel-backpack/CRUD",
-        "keywords": [
-            "Admin Interface",
-            "Content management system",
-            "admin panel",
-            "cms",
-            "content management framework",
-            "create",
-            "crud",
-            "delete",
-            "read",
-            "update"
-        ]
-    },
-    {
         "name": "backpack/langfilemanager",
         "version": "1.0.23",
         "version_normalized": "1.0.23.0",
@@ -5919,71 +5843,6 @@
         ]
     },
     {
-        "name": "phpspec/prophecy",
-        "version": "1.7.4",
-        "version_normalized": "1.7.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/phpspec/prophecy.git",
-            "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
-            "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/instantiator": "^1.0.2",
-            "php": "^5.3|^7.0",
-            "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0",
-            "sebastian/comparator": "^1.1|^2.0",
-            "sebastian/recursion-context": "^1.0|^2.0|^3.0"
-        },
-        "require-dev": {
-            "phpspec/phpspec": "^2.5|^3.2",
-            "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"
-        },
-        "time": "2018-02-11T18:49:29+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.7.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Prophecy\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Konstantin Kudryashov",
-                "email": "ever.zet@gmail.com",
-                "homepage": "http://everzet.com"
-            },
-            {
-                "name": "Marcello Duarte",
-                "email": "marcello.duarte@gmail.com"
-            }
-        ],
-        "description": "Highly opinionated mocking framework for PHP 5.3+",
-        "homepage": "https://github.com/phpspec/prophecy",
-        "keywords": [
-            "Double",
-            "Dummy",
-            "fake",
-            "mock",
-            "spy",
-            "stub"
-        ]
-    },
-    {
         "name": "barryvdh/laravel-debugbar",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -6051,6 +5910,147 @@
             "laravel",
             "profiler",
             "webprofiler"
+        ]
+    },
+    {
+        "name": "backpack/crud",
+        "version": "3.3.10",
+        "version_normalized": "3.3.10.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/CRUD.git",
+            "reference": "f4cf166c1d0b2293380ff95cb85595d5732f1fa7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/f4cf166c1d0b2293380ff95cb85595d5732f1fa7",
+            "reference": "f4cf166c1d0b2293380ff95cb85595d5732f1fa7",
+            "shasum": ""
+        },
+        "require": {
+            "backpack/base": "^0.8.0",
+            "barryvdh/laravel-elfinder": "^0.3.10",
+            "doctrine/dbal": "^2.5",
+            "intervention/image": "^2.3",
+            "venturecraft/revisionable": "1.*"
+        },
+        "require-dev": {
+            "orchestra/database": "~3.4",
+            "orchestra/testbench": "~3.0",
+            "phpunit/phpunit": "~6.0",
+            "scrutinizer/ocular": "~1.1"
+        },
+        "time": "2018-02-15T00:05:39+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\CRUD\\CrudServiceProvider"
+                ],
+                "aliases": {
+                    "CRUD": "Backpack\\CRUD\\CrudServiceProvider"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\CRUD\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Cristian Tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://www.tabacitu.ro",
+                "role": "Chief Architect & Lead Developer"
+            }
+        ],
+        "description": "Quickly build an admin interface for your Eloquent models, using Laravel 5. Build a CMS in a matter of minutes.",
+        "homepage": "https://github.com/laravel-backpack/CRUD",
+        "keywords": [
+            "Admin Interface",
+            "Content management system",
+            "admin panel",
+            "cms",
+            "content management framework",
+            "create",
+            "crud",
+            "delete",
+            "read",
+            "update"
+        ]
+    },
+    {
+        "name": "phpspec/prophecy",
+        "version": "1.7.5",
+        "version_normalized": "1.7.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/phpspec/prophecy.git",
+            "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/dfd6be44111a7c41c2e884a336cc4f461b3b2401",
+            "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/instantiator": "^1.0.2",
+            "php": "^5.3|^7.0",
+            "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0",
+            "sebastian/comparator": "^1.1|^2.0",
+            "sebastian/recursion-context": "^1.0|^2.0|^3.0"
+        },
+        "require-dev": {
+            "phpspec/phpspec": "^2.5|^3.2",
+            "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"
+        },
+        "time": "2018-02-19T10:16:54+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.7.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Prophecy\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Konstantin Kudryashov",
+                "email": "ever.zet@gmail.com",
+                "homepage": "http://everzet.com"
+            },
+            {
+                "name": "Marcello Duarte",
+                "email": "marcello.duarte@gmail.com"
+            }
+        ],
+        "description": "Highly opinionated mocking framework for PHP 5.3+",
+        "homepage": "https://github.com/phpspec/prophecy",
+        "keywords": [
+            "Double",
+            "Dummy",
+            "fake",
+            "mock",
+            "spy",
+            "stub"
         ]
     }
 ]

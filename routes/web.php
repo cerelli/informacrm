@@ -32,6 +32,9 @@ Route::group([
     });
     Route::get('actions', 'ActionCrudController@test');
     CRUD::resource('action','ActionCrudController');
+    CRUD::resource('action_status', 'Action_statusCrudController');
+    CRUD::resource('action_result', 'Action_resultCrudController');
+    CRUD::resource('action_type', 'Action_typeCrudController');
 
     Route::get('search',array('as'=>'search','uses'=>'SearchController@search'));
     Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
@@ -42,7 +45,13 @@ Route::group([
 
     Route::get('dashboard', 'DashboardController@index');
 
-    Route::get('events_calendar', 'EventCrudController@calendar');
+    Route::get('calendar', 'ActionCalendarCrudController@calendarAction');
+    Route::get('getactioneventsjson','ActionCalendarCrudController@getActionEventsJson');
+
+    Route::group(['prefix' => 'calendar'], function()
+    {
+        CRUD::resource('action', 'ActionCalendarCrudController');
+    });
     CRUD::resource('title', 'TitleCrudController');
     // your CRUD resources and other admin routes here
     //***************account*******************
@@ -50,7 +59,7 @@ Route::group([
     Route::get('account_tab_actions/{account_id}/{action_status_id?}', 'ActionCrudController@account_tab_actions');
     Route::group(['prefix' => 'account/{account_id}'], function()
     {
-        CRUD::resource('action', 'AccountActionCrudController');
+        CRUD::resource('action', 'ActionAccountCrudController');
     });
 
     CRUD::resource('event', 'EventCrudController');

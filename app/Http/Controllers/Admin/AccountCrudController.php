@@ -26,7 +26,11 @@ class AccountCrudController extends CrudController
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/account');
         $this->crud->setEntityNameStrings(trans('informacrm.account'), trans('informacrm.accounts'));
         $this->crud->setShowView('inf.accounts.show');
-        $this->crud->setEditView('inf/accounts/edit_account');
+        // $this->crud->setRoute("admin/account/".$account_id."/action");
+        $account_id = \Route::current()->parameter('account');
+        // $this->crud->setRoute("admin/account/".$account_id);
+        $this->crud->cancelRoute = ("admin/account/".$account_id);
+        // $this->crud->setEditView('inf/accounts/edit_account');
         // $this->crud->setCreateView('inf/accounts/tabs/create_contact_from_account');
 
         /*
@@ -199,6 +203,9 @@ class AccountCrudController extends CrudController
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
         //$this->crud->removeAllButtons();
+
+
+        // dump($this->crud->hasAccess('create-account'));
         $this->crud->removeButton( 'preview' );
         $this->crud->removeButton( 'update' );
         $this->crud->removeButton( 'revisions' );
@@ -208,6 +215,16 @@ class AccountCrudController extends CrudController
 
         // ------ CRUD ACCESS
         $this->crud->allowAccess('show','create');
+        if (Auth::user()->can('create-account')){
+
+        }else{
+            $this->crud->removeButton( 'create' );
+        }
+        // if (Auth::user()->can('delete-account')){
+        //
+        // }else{
+        //     $this->crud->removeButton( 'delete' );
+        // }
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
         // $this->crud->denyAccess(['list', 'create', 'update', 'reorder', 'delete']);
 

@@ -151,7 +151,7 @@
 
 
                                               <!-- ====================== EVENTS ================= -->
-                                              <ul class="sidebar-menu">
+                                              {{-- <ul class="sidebar-menu">
                                                   <li class="treeview">
                                                       <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.event') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
                                                       <ul class="treeview-menu">
@@ -160,8 +160,19 @@
                                                           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/event_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.event_type') }}</span></a></li>
                                                       </ul>
                                                   </li>
-                                              </ul>
+                                              </ul> --}}
 
+                                              <!-- ====================== ACTIONS ================= -->
+                                              <ul class="sidebar-menu">
+                                                  <li class="treeview">
+                                                      <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.action') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
+                                                      <ul class="treeview-menu">
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/action_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.action_status') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/action_result') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.action_result') }}</span></a></li>
+                                                          <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/action_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.action_type') }}</span></a></li>
+                                                      </ul>
+                                                  </li>
+                                              </ul>
 
                                               <!-- ====================== OPPORTUNITIES ================= -->
                                               <ul class="sidebar-menu">

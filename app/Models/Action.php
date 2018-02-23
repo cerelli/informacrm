@@ -54,6 +54,21 @@ class Action extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
+    public function scopeStatusActive($query)
+    {
+        return $query->whereHas('action_status', function ($query) {
+            $query->where('status', '=', 0);
+        });
+    }
+
+    public function scopeExpired($query)
+    {
+        return $query->whereHas('action_status', function ($query) {
+            $query->where('status', '=', 0);
+        })
+        ->where('end_date', '<', date("Y-m-d"));
+    }
+    
     // /**
     //  * Scope a query to only include active users.
     //  *

@@ -35,7 +35,7 @@
 @endsection --}}
 
 @section('content')
-    <div class="row">
+    <div class="row col-md-12">
         {{-- <div class="col-md-3"> --}}
             {{-- <div class="box box-solid"> --}}
                 {{-- @include('inf.calendar.event_box_draggable') --}}
@@ -80,12 +80,35 @@
                         </div>
                       </div> --}}
         {{-- </div> --}}
+        <div class="col-md-2">
+            <div class="box box-solid">
+            <div class="box-header with-border">
+              <h4 class="box-title">{{ trans('general.expired') }}</h4>
+            </div>
+            <div class="box-body">
+              <!-- the events -->
+              <div id="expired-actions">
+                @foreach ($data as $key => $action)
+                    {{-- <div href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" type="button" class="btn-xs btn-block" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> {{ $action->title }}</div> --}}
+                    <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" class="btn-xs btn-block" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> {{ $action->title }}</a>
+                    {{-- <a type="button" class="btn-xs btn-block" href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> --}}
+                        {{-- <span class="badge bg-teal" style="background-color: {{ $countActionStatus->background_color }} !important; color: {{ $countActionStatus->color }} !important;">{{ $countActionStatus->actions_count }}</span>
+                        <i class="fa {{ $countActionStatus->icon }}"></i> {{ $countActionStatus->description }} --}}
+                    </a>
+                @endforeach
+                {{-- <div class="external-event bg-green ui-draggable ui-draggable-handle" style="position: relative;">Lunch</div> --}}
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
 
-      <div class="col-md-12">
+        </div>
+      <div class="col-md-10">
           <div class="box box-primary">
               <div class="box-body no-padding">
                   <!-- THE CALENDAR -->
                   {!! $calendar->calendar() !!}
+
               </div>
           </div>
       </div>
@@ -105,4 +128,45 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/locale/it.js"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js"></script> --}}
 {!! $calendar->script() !!}
+<script>
+// $(document).ready(function() {
+    $('#calendar-my-calendar').fullCalendar({
+        events: 'getactioneventsjson',
+        defaultView: 'agendaWeek',
+        header: {
+            left: 'prev,next today addAction',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listYear'
+        },
+        businessHours: {
+            // days of week. an array of zero-based day of week integers (0=Sunday)
+            dow: [ 1, 2, 3, 4, 5 ], // Monday - Thursday
+            start: '08:00', // a start time (10am in this example)
+            end: '18:00', // an end time (6pm in this example)
+        },
+        dayClick: function(date, jsEvent, view) {
+            alert('Clicked on: ' + date.format());
+            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+            alert('Current view: ' + view.name);
+            // change the day's background color just for fun
+            $(this).css('background-color', 'red');
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+            alert('Event: ' + calEvent.title);
+            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+            alert('View: ' + view.name);
+            // change the border color just for fun
+            $(this).css('border-color', 'red');
+        },
+       //  customButtons: {
+       //     addAction: {
+       //         text: 'custom!',
+       //         click: function() {
+       //             alert('clicked the custom button!');
+       //         }
+       //     }
+       // }
+   });
+// });
+</script>
 @endsection
