@@ -17,5 +17,5 @@ return [
     'end' => 'Fine',
     'active' => 'Attivo',
     'expired' => 'Scaduti',
-
+    'expired-active' => 'Scadute Attive',
 ];

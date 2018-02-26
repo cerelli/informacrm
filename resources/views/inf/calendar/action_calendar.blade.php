@@ -83,17 +83,13 @@
         <div class="col-md-2">
             <div class="box box-solid">
             <div class="box-header with-border">
-              <h4 class="box-title">{{ trans('general.expired') }}</h4>
+              <h4 class="box-title">{{ trans('general.expired-active') }}</h4>
             </div>
             <div class="box-body">
               <!-- the events -->
-              <div id="expired-actions">
-                @foreach ($data as $key => $action)
-                    {{-- <div href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" type="button" class="btn-xs btn-block" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> {{ $action->title }}</div> --}}
-                    <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" class="btn-xs btn-block" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> [{{ $action->id }}] {{ $action->title }}</a>
-                    {{-- <a type="button" class="btn-xs btn-block" href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$action->id.'/edit') }}" style="position: relative; background-color: {{ $action->action_status->background_color }};color:{{ $action->action_status->color }};"> --}}
-                        {{-- <span class="badge bg-teal" style="background-color: {{ $countActionStatus->background_color }} !important; color: {{ $countActionStatus->color }} !important;">{{ $countActionStatus->actions_count }}</span>
-                        <i class="fa {{ $countActionStatus->icon }}"></i> {{ $countActionStatus->description }} --}}
+              <div id="expired-active">
+                @foreach ($actionsExpiredActive as $key => $actionExpiredActive)
+                    <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$actionExpiredActive->id.'/edit') }}" class="btn-xs btn-block" style="position: relative; background-color: {{ $actionExpiredActive->action_status->background_color }};color:{{ $actionExpiredActive->action_status->color }};"> [{{ $actionExpiredActive->id }}] {{ $actionExpiredActive->title }}</a>
                     </a>
                 @endforeach
                 {{-- <div class="external-event bg-green ui-draggable ui-draggable-handle" style="position: relative;">Lunch</div> --}}
@@ -101,6 +97,22 @@
             </div>
             <!-- /.box-body -->
           </div>
+          <div class="box box-solid">
+          <div class="box-header with-border">
+            <h4 class="box-title">{{ trans('general.not-scheduled') }}</h4>
+          </div>
+          <div class="box-body">
+            <!-- the events -->
+            <div id="not-scheduled">
+              @foreach ($actionsExpiredActive as $key => $actionsExpiredActive)
+                  <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$actionsExpiredActive->id.'/edit') }}" class="btn-xs btn-block" style="position: relative; background-color: {{ $actionsExpiredActive->action_status->background_color }};color:{{ $actionsExpiredActive->action_status->color }};"> [{{ $actionsExpiredActive->id }}] {{ $actionsExpiredActive->title }}</a>
+                  </a>
+              @endforeach
+              {{-- <div class="external-event bg-green ui-draggable ui-draggable-handle" style="position: relative;">Lunch</div> --}}
+            </div>
+          </div>
+          <!-- /.box-body -->
+        </div>
 
         </div>
       <div class="col-md-10">

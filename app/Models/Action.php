@@ -68,7 +68,15 @@ class Action extends Model
         })
         ->where('end_date', '<', date("Y-m-d"));
     }
-    
+
+    public function scopeNotScheduled($query)
+    {
+        return $query->whereHas('action_status', function ($query) {
+            $query->where('status', '=', 0);
+        })
+        ->where('end_date', '<', date("Y-m-d"));
+    }
+
     // /**
     //  * Scope a query to only include active users.
     //  *

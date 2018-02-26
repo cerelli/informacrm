@@ -52,16 +52,40 @@ class ActionCrudController extends CrudController
         //     $this->crud->addClause('where', 'status', $value);
         // });
         // ------ CRUD FIELDS
+        $this->crud->setBoxOptions('basic', [
+            'side' => false,         // Place this box on the right side?
+            'class' => "box-default",  // CSS class to add to the div. Eg, <div class="box box-info">
+            'collapsible' => false,
+            'viewNameBox' => false,
+            'collapsed' => false,    // Collapse this box by default?
+        ]);
+
+        $this->crud->setBoxOptions('schedule', [
+            'side' => true,         // Place this box on the right side?
+            'class' => "box-info",  // CSS class to add to the div. Eg, <div class="box box-info">
+            'collapsible' => false,
+            'collapsed' => false,    // Collapse this box by default?
+        ]);
+
+        $this->crud->setBoxOptions('result', [
+            'side' => true,         // Place this box on the right side?
+            'class' => "box-info",  // CSS class to add to the div. Eg, <div class="box box-info">
+            'collapsible' => false,
+            'collapsed' => true,    // Collapse this box by default?
+        ]);
+
         $this->crud->addField([
             'name' => 'account_id',
             'label' => trans('informacrm.account_id'),
-            'type' => 'hidden'
+            'type' => 'hidden',
+            'box' => 'basic'
         ]);
 
         $this->crud->addField([
             'name' => 'title',
             'label' => trans('informacrm.action_title').' *',
-            'type' => 'text'
+            'type' => 'text',
+            'box' => 'basic'
         ]);
 
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
@@ -74,7 +98,8 @@ class ActionCrudController extends CrudController
                 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-9'
-                ]
+                ],
+                'box' => 'basic'
             ]);
 
             $this->crud->addField([
@@ -86,24 +111,26 @@ class ActionCrudController extends CrudController
                 'model' => "App\Models\Action_status", // foreign key model
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-3'
-                ]
+                ],
+                'box' => 'basic'
             ]);
 
             $this->crud->addField([   // WYSIWYG Editor
                 'name' => 'notes',
                 'label' => trans('informacrm.action_notes'),
-                'type' => 'ckeditor'
+                'type' => 'ckeditor',
+                'box' => 'basic'
             ]);
 
-            $this->crud->addField([   // CustomHTML
-                'name' => 'separator',
-                'type' => 'custom_html',
-                'value' => '',
-                'wrapperAttributes' => [
-                    'class' => 'row',
-                    'style' => 'margin-top: 20px'
-                ]
-            ]);
+            // $this->crud->addField([   // CustomHTML
+            //     'name' => 'separator',
+            //     'type' => 'custom_html',
+            //     'value' => '',
+            //     'wrapperAttributes' => [
+            //         'class' => 'row',
+            //         'style' => 'margin-top: 20px'
+            //     ]
+            // ]);
 
 
             // $this->crud->addField(
@@ -125,6 +152,7 @@ class ActionCrudController extends CrudController
             //         ]
             // ]);
 
+
             $this->crud->addField(
                 [
                     'label' => trans('informacrm.action_all_day'),
@@ -141,7 +169,8 @@ class ActionCrudController extends CrudController
                     'default' => 0,
                     'wrapperAttributes' => [
                         'class' => 'form-group col-md-12'
-                    ]
+                    ],
+                    'box' => 'schedule'
             ]);
 
             // $this->crud->addField([   // Checkbox
@@ -175,7 +204,8 @@ class ActionCrudController extends CrudController
                 ],
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-6'
-                ]
+                ],
+                'box' => 'schedule'
             ]);
 
             $this->crud->addField([   // DateTime
@@ -189,7 +219,8 @@ class ActionCrudController extends CrudController
                 ],
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-6'
-                ]
+                ],
+                'box' => 'schedule'
             ]);
 
             $this->crud->addField([
@@ -201,14 +232,16 @@ class ActionCrudController extends CrudController
                 'model' => "App\Models\Action_result", // foreign key model
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-12'
-                ]
+                ],
+                'box' => 'result'
             ]);
 
 
             $this->crud->addField([   // WYSIWYG Editor
                 'name' => 'result_description',
                 'label' => trans('informacrm.action_result_description'),
-                'type' => 'ckeditor'
+                'type' => 'ckeditor',
+                'box' => 'result'
             ]);
 
             // $this->crud->addField([
@@ -366,7 +399,7 @@ class ActionCrudController extends CrudController
 
     public function update(UpdateRequest $request)
     {
-        
+
         // your additional operations before save here
         if ( $request['created_by'] == "") {
             $request['created_by'] = Auth::user()->name;

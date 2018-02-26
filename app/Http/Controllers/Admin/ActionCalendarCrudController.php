@@ -37,10 +37,11 @@ class ActionCalendarCrudController extends ActionCrudController {
     public function calendarAction()
     {
         $actions = [];
-        $data = [];
+        $actionsExpiredActive = [];
+        $actionsNotScheduled = [];
         // $actions[] = Calendar::event();
-        $data = Action::Expired()->get();
-
+        $actionsExpiredActive = Action::Expired()->get();
+        $actionsNotScheduled = Action::NotScheduled()->get();
         // dd($data);
         // if($data->count()) {
             // foreach ($data as $key => $value) {
@@ -75,7 +76,7 @@ class ActionCalendarCrudController extends ActionCrudController {
         // ]);
         $calendar = Calendar::setId('my-calendar');
 
-        return view('inf.calendar.action_calendar', compact('calendar', 'data'));
+        return view('inf.calendar.action_calendar', compact('calendar', 'actionsExpiredActive'));
     }
 
     public function getActionEventsJson(Request $request) {

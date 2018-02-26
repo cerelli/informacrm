@@ -18,6 +18,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         '6d394c3a532652dafb4dd296ba6a3f0b' => __DIR__ . '/../..' . '/app/Http/helpers.php',
     );
@@ -75,6 +76,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         ),
         'N' => 
         array (
+            'Novius\\Backpack\\CRUD\\' => 21,
             'Nicolaslopezj\\Searchable\\' => 25,
         ),
         'M' => 
@@ -125,6 +127,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
             'Cviebrock\\EloquentSluggable\\' => 28,
             'Cron\\' => 5,
             'Creativeorange\\Gravatar\\' => 24,
+            'Collective\\Html\\' => 16,
             'Cocur\\Slugify\\' => 14,
             'Carbon\\' => 7,
         ),
@@ -266,6 +269,10 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'Novius\\Backpack\\CRUD\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src',
+        ),
         'Nicolaslopezj\\Searchable\\' => 
         array (
             0 => __DIR__ . '/..' . '/nicolaslopezj/searchable/src',
@@ -357,6 +364,10 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'Creativeorange\\Gravatar\\' => 
         array (
             0 => __DIR__ . '/..' . '/creativeorange/gravatar/src',
+        ),
+        'Collective\\Html\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravelcollective/html/src',
         ),
         'Cocur\\Slugify\\' => 
         array (
@@ -709,6 +720,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'Barryvdh\\Debugbar\\DataCollector\\SessionCollector' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/DataCollector/SessionCollector.php',
         'Barryvdh\\Debugbar\\DataCollector\\ViewCollector' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/DataCollector/ViewCollector.php',
         'Barryvdh\\Debugbar\\DataFormatter\\QueryFormatter' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/DataFormatter/QueryFormatter.php',
+        'Barryvdh\\Debugbar\\DataFormatter\\SimpleFormatter' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/DataFormatter/SimpleFormatter.php',
         'Barryvdh\\Debugbar\\Facade' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Facade.php',
         'Barryvdh\\Debugbar\\JavascriptRenderer' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/JavascriptRenderer.php',
         'Barryvdh\\Debugbar\\LaravelDebugbar' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/LaravelDebugbar.php',
@@ -759,6 +771,13 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'Cocur\\Slugify\\RuleProvider\\RuleProviderInterface' => __DIR__ . '/..' . '/cocur/slugify/src/RuleProvider/RuleProviderInterface.php',
         'Cocur\\Slugify\\Slugify' => __DIR__ . '/..' . '/cocur/slugify/src/Slugify.php',
         'Cocur\\Slugify\\SlugifyInterface' => __DIR__ . '/..' . '/cocur/slugify/src/SlugifyInterface.php',
+        'Collective\\Html\\Componentable' => __DIR__ . '/..' . '/laravelcollective/html/src/Componentable.php',
+        'Collective\\Html\\Eloquent\\FormAccessible' => __DIR__ . '/..' . '/laravelcollective/html/src/Eloquent/FormAccessible.php',
+        'Collective\\Html\\FormBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/FormBuilder.php',
+        'Collective\\Html\\FormFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/FormFacade.php',
+        'Collective\\Html\\HtmlBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlBuilder.php',
+        'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
+        'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
         'CommunicationTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CommunicationTypesTableSeeder.php',
         'ContactDetailTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ContactDetailTypesTableSeeder.php',
         'ContactTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ContactTypesTableSeeder.php',
@@ -2943,6 +2962,23 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
         'Nicolaslopezj\\Searchable\\SearchableTrait' => __DIR__ . '/..' . '/nicolaslopezj/searchable/src/SearchableTrait.php',
+        'Novius\\Backpack\\CRUD\\Console\\PermissionsCommand' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/Console/PermissionsCommand.php',
+        'Novius\\Backpack\\CRUD\\Contracts\\Field' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/Contracts/Field.php',
+        'Novius\\Backpack\\CRUD\\CrudPanel' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/CrudPanel.php',
+        'Novius\\Backpack\\CRUD\\CrudServiceProvider' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/CrudServiceProvider.php',
+        'Novius\\Backpack\\CRUD\\Http\\Controllers\\CrudController' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/Http/Controllers/CrudController.php',
+        'Novius\\Backpack\\CRUD\\ModelTraits\\SpatieTranslatable\\SluggableScopeHelpers' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/ModelTraits/SpatieTranslatable/SluggableScopeHelpers.php',
+        'Novius\\Backpack\\CRUD\\ModelTraits\\UploadableFile' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/ModelTraits/UploadableFile.php',
+        'Novius\\Backpack\\CRUD\\ModelTraits\\UploadableImage' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/ModelTraits/UploadableImage.php',
+        'Novius\\Backpack\\CRUD\\Observers\\UploadFileObserver' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/Observers/UploadFileObserver.php',
+        'Novius\\Backpack\\CRUD\\Observers\\UploadImageObserver' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/Observers/UploadImageObserver.php',
+        'Novius\\Backpack\\CRUD\\PanelTraits\\BoxTabs' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/PanelTraits/BoxTabs.php',
+        'Novius\\Backpack\\CRUD\\PanelTraits\\Boxes' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/PanelTraits/Boxes.php',
+        'Novius\\Backpack\\CRUD\\PanelTraits\\Permissions' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/PanelTraits/Permissions.php',
+        'Novius\\Backpack\\CRUD\\PanelTraits\\Routes' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/PanelTraits/Routes.php',
+        'Novius\\Backpack\\CRUD\\Services\\AbstractUploadService' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/Services/AbstractUploadService.php',
+        'Novius\\Backpack\\CRUD\\Services\\UploadFileService' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/Services/UploadFileService.php',
+        'Novius\\Backpack\\CRUD\\Services\\UploadImageService' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/Services/UploadImageService.php',
         'OfficesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/OfficesTableSeeder.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
