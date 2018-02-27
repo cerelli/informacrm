@@ -68,10 +68,10 @@ class ActionCrudController extends CrudController
         ]);
 
         $this->crud->setBoxOptions('result', [
-            'side' => true,         // Place this box on the right side?
+            'side' => false,         // Place this box on the right side?
             'class' => "box-info",  // CSS class to add to the div. Eg, <div class="box box-info">
-            'collapsible' => false,
-            'collapsed' => true,    // Collapse this box by default?
+            'collapsible' => true,
+            'collapsed' => false,    // Collapse this box by default?
         ]);
 
         $this->crud->addField([
@@ -155,18 +155,20 @@ class ActionCrudController extends CrudController
 
             $this->crud->addField(
                 [
-                    'label' => trans('informacrm.action_all_day'),
+                    'label' => trans('informacrm.schedule'),
                     'name' => 'all_day',
                     'type' => 'toggle',
                     'inline' => true,
                     'options' => [
-                        0 => 'No',
-                        1 => 'Si'
+                        -1 => 'No',
+                        0 => 'Si',
+                        1 => 'Tutto il giorno'
                     ],
                     'hide_when' => [
+                        -1 => ['start_date', 'end_date'],
                         1 => ['end_date'],
                     ],
-                    'default' => 0,
+                    'default' => -1,
                     'wrapperAttributes' => [
                         'class' => 'form-group col-md-12'
                     ],
@@ -352,14 +354,25 @@ class ActionCrudController extends CrudController
         // your additional operations before save here
         // dd($request);
 
-        list($dateStart, $timeStart) = explode(' ', $request['start_date']);
+        switch ( $request['all_day'] ) {
+            case -1:
+                $request['start_date'] = null;
+                $request['end_date'] = null;
+                break;
 
-        if ( $request['all_day'] == 0 ) {
+            case 0:
+                break;
 
-        } else {
-            $request['start_date'] = $dateStart;
-            $request['end_date'] = $dateStart." 23:59:59";
+            case 1:
+                list($dateStart, $timeStart) = explode(' ', $request['start_date']);
+                $request['start_date'] = $dateStart;
+                $request['end_date'] = $dateStart." 23:59:59";
+                break;
+
+            default:
+                break;
         }
+
 
         $request['created_by'] = Auth::user()->name;
 
@@ -405,14 +418,32 @@ class ActionCrudController extends CrudController
             $request['created_by'] = Auth::user()->name;
         }
         $request['updated_by'] = Auth::user()->name;
-        list($dateStart, $timeStart) = explode(' ', $request['start_date']);
 
-        if ( $request['all_day'] == 0 ) {
 
-        } else {
-            $request['start_date'] = $dateStart;
-            $request['end_date'] = $dateStart." 23:59:59";
+        switch ( $request['all_day'] ) {
+            case -1:
+                $request['start_date'] = null;
+                $request['end_date'] = null;
+                break;
+
+            case 0:
+                break;
+
+            case 1:
+                list($dateStart, $timeStart) = explode(' ', $request['start_date']);
+                $request['start_date'] = $dateStart;
+                $request['end_date'] = $dateStart." 23:59:59";
+                break;
+
+            default:
+                break;
         }
+        // if ( $request['all_day'] == 0 ) {
+        //
+        // } else {
+        //     $request['start_date'] = $dateStart;
+        //     $request['end_date'] = $dateStart." 23:59:59";
+        // }
 
         // $redirect_location = parent::updateCrud($request);
         return parent::updateCrud($request);

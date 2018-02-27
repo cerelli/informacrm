@@ -15,14 +15,15 @@ class Action_type extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'action_types';
-    //protected $primaryKey = 'id';
+    protected $table = 'action_types';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
 
+    protected $fillable = ['description', 'color', 'background_color', 'icon', 'created_by', 'updated_by'];
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS

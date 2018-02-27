@@ -28,6 +28,7 @@ class ActionCalendarCrudController extends ActionCrudController {
         // $this->crud->setRoute("admin/account/".$account_id."#actions");
         $this->crud->setRoute("admin/calendar/action");
         $this->crud->cancelRoute = ("admin/calendar");
+
         // dd($this->crud);
         // show only that user's posts
         // $this->crud->addClause('where', 'id', '==', $id);
@@ -76,7 +77,7 @@ class ActionCalendarCrudController extends ActionCrudController {
         // ]);
         $calendar = Calendar::setId('my-calendar');
 
-        return view('inf.calendar.action_calendar', compact('calendar', 'actionsExpiredActive'));
+        return view('inf.calendar.action_calendar', compact('calendar', 'actionsExpiredActive', 'actionsNotScheduled'));
     }
 
     public function getActionEventsJson(Request $request) {
@@ -165,6 +166,7 @@ class ActionCalendarCrudController extends ActionCrudController {
     public function update(UpdateRequest $request)
     {
         parent::update($request);
+        
         // $account_id = \Route::current()->parameter('account_id');
         $action_id = \Route::current()->parameter('action');
         // set a different route for the admin panel buttons

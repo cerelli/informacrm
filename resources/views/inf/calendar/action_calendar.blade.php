@@ -104,8 +104,8 @@
           <div class="box-body">
             <!-- the events -->
             <div id="not-scheduled">
-              @foreach ($actionsExpiredActive as $key => $actionsExpiredActive)
-                  <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$actionsExpiredActive->id.'/edit') }}" class="btn-xs btn-block" style="position: relative; background-color: {{ $actionsExpiredActive->action_status->background_color }};color:{{ $actionsExpiredActive->action_status->color }};"> [{{ $actionsExpiredActive->id }}] {{ $actionsExpiredActive->title }}</a>
+              @foreach ($actionsNotScheduled as $key => $actionNotScheduled)
+                  <a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/calendar/action/'.$actionNotScheduled->id.'/edit') }}" class="btn-xs btn-block" style="position: relative; background-color: {{ $actionNotScheduled->action_status->background_color }};color:{{ $actionNotScheduled->action_status->color }};"> [{{ $actionNotScheduled->id }}] {{ $actionNotScheduled->title }}</a>
                   </a>
               @endforeach
               {{-- <div class="external-event bg-green ui-draggable ui-draggable-handle" style="position: relative;">Lunch</div> --}}

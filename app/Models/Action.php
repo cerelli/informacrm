@@ -74,7 +74,7 @@ class Action extends Model
         return $query->whereHas('action_status', function ($query) {
             $query->where('status', '=', 0);
         })
-        ->where('end_date', '<', date("Y-m-d"));
+        ->where('all_day', '=', -1);
     }
 
     // /**

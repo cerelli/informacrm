@@ -22,6 +22,10 @@
             </ul>
         @endif
     </div>
+    @if ( isset($crud->cancelRoute) )
+        <a href="{{ url($crud->cancelRoute) }}" class="btn btn-default"><span class="fa fa-ban"></span> &nbsp;{{ trans('backpack::crud.cancel') }}</a>
+    @else
+        <a href="{{ url($crud->indexRoute()) }}" class="btn btn-default"><span class="fa fa-ban"></span> &nbsp;{{ trans('backpack::crud.cancel') }}</a>
+    @endif
 
-    <a href="{{ url($crud->indexRoute()) }}" class="btn btn-default"><span class="fa fa-ban"></span> &nbsp;{{ trans('backpack::crud.cancel') }}</a>
 </div>

@@ -30,8 +30,8 @@ Route::group([
     Route::get('test', function () {
         return view('test');
     });
-    Route::get('actions', 'ActionCrudController@test');
-    CRUD::resource('action','ActionCrudController');
+    // Route::get('actions', 'ActionCrudController@test');
+    // CRUD::resource('action','ActionCrudController');
     CRUD::resource('action_status', 'Action_statusCrudController');
     CRUD::resource('action_result', 'Action_resultCrudController');
     CRUD::resource('action_type', 'Action_typeCrudController');
@@ -45,11 +45,12 @@ Route::group([
 
     Route::get('dashboard', 'DashboardController@index');
 
-    Route::get('calendar', 'ActionCalendarCrudController@calendarAction');
+    // Route::get('calendar', 'ActionCalendarCrudController@calendarAction');
     Route::get('getactioneventsjson','ActionCalendarCrudController@getActionEventsJson');
 
     Route::group(['prefix' => 'calendar'], function()
     {
+        Route::get('/', 'ActionCalendarCrudController@calendarAction');
         CRUD::resource('action', 'ActionCalendarCrudController');
     });
     CRUD::resource('title', 'TitleCrudController');

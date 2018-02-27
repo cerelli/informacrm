@@ -25,6 +25,7 @@ class ActionAccountCrudController extends ActionCrudController {
         $this->crud->setRoute("admin/account/".$account_id."/action");
         $this->crud->cancelRoute = ("admin/account/".$account_id."#actions");
         // dd($this->crud);
+        // dd($this->crud);
         // show only that user's posts
         // $this->crud->addClause('where', 'id', '==', $id);
         // dd($this->crud);

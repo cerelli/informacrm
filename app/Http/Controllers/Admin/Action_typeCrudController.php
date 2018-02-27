@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Auth;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\Action_typeRequest as StoreRequest;
