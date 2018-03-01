@@ -1,26 +1,4 @@
-<nav class="navbar navbar-static-top">
-
-
-<div class="navbar-custom-menu pull-left">
-    <ul class="nav navbar-nav">
-        <!-- =================================================== -->
-        <!-- ========== Top menu items (ordered left) ========== -->
-        <!-- =================================================== -->
-
-        {{-- <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Home</span></a></li> --}}
-        <?php
-            // $menuItems = App\Models\MenuItem::getTree();
-        ?>
-        {{-- @foreach ($menuItems as $menuItem) --}}
-            {{-- <li>{{ dump($menuItem) }}</li> --}}
-            {{-- <li><a href="{{ url('/'.$menuItem->link) }}">{{ $menuItem->name }}</a></li> --}}
-        {{-- @endforeach --}}
-        {{-- {{ dump($menuItems) }} --}}
-        <div class="navbar-custom-menu">
-        <!-- ========== End of top menu left items ========== -->
-    </ul>
-</div>
-
+{{-- <nav class="navbar navbar-static-top"> --}}
 
 <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">
@@ -60,4 +38,4 @@
     </ul>
 </div>
 
-</nav>
+{{-- </nav> --}}

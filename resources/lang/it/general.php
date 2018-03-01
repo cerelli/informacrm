@@ -18,4 +18,6 @@ return [
     'active' => 'Attivo',
     'expired' => 'Scaduti',
     'expired-active' => 'Scadute Attive',
+    'not-scheduled' => 'Non schedulate',
+    'account' => 'Nominativo',
 ];

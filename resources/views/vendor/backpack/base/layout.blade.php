@@ -52,7 +52,6 @@
 	</script>
     <!-- Site wrapper -->
     <div class="wrapper">
-
       <header class="main-header">
         <!-- Logo -->
         <a href="{{ url('') }}" class="logo">
@@ -72,70 +71,26 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          {{-- <ul class="add-new nav navbar-nav pull-left">
-                      <!-- Notifications: style can be found in dropdown.less -->
-                      <li class="dropdown add-new-menu">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              <i class="fa fa-plus"></i>
-                          </a>
-                          <div class="dropdown-menu">
-                              <ul class="list-inline"> --}}
-                                  {{-- <li>
-                                      <ul class="list-unstyled">
-                                          <li class="header"><i class="fa fa-money"></i> &nbsp;<span style="font-weight: 600;">{{ trans_choice('general.incomes', 1) }}</span></li>
-                                          <li>
-                                              <ul class="menu">
-                                                  @permission('create-incomes-invoices')
-                                                  <li><a href="{{ url('incomes/invoices/create') }}">{{ trans_choice('general.invoices', 1) }}</a></li>
-                                                  @endpermission
-                                                  @permission('create-incomes-revenues')
-                                                  <li><a href="{{ url('incomes/revenues/create') }}">{{ trans_choice('general.revenues', 1) }}</a></li>
-                                                  @endpermission
-                                                  @permission('create-incomes-customers')
-                                                  <li><a href="{{ url('incomes/customers/create') }}">{{ trans_choice('general.customers', 1) }}</a></li>
-                                                  @endpermission
-                                              </ul>
-                                          </li>
-                                      </ul>
-                                  </li>
-                                  <li>
-                                      <ul class="list-unstyled">
-                                          <li class="header"><i class="fa fa-shopping-cart"></i> &nbsp;<span style="font-weight: 600;">{{ trans_choice('general.expenses', 1) }}</span></li>
-                                          <li>
-                                              <ul class="menu">
-                                                  @permission('create-expenses-bills')
-                                                  <li><a href="{{ url('expenses/bills/create') }}">{{ trans_choice('general.bills', 1) }}</a></li>
-                                                  @endpermission
-                                                  @permission('create-expenses-payments')
-                                                  <li><a href="{{ url('expenses/payments/create') }}">{{ trans_choice('general.payments', 1) }}</a></li>
-                                                  @endpermission
-                                                  @permission('create-expenses-vendors')
-                                                  <li><a href="{{ url('expenses/vendors/create') }}">{{ trans_choice('general.vendors', 1) }}</a></li>
-                                                  @endpermission
-                                              </ul>
-                                          </li>
-                                      </ul>
-                                  </li>
-                                  <li>
-                                      <ul class="list-unstyled">
-                                          <li class="header"><i class="fa fa-university"></i> &nbsp;<span style="font-weight: 600;">{{ trans('general.banking') }}</span></li>
-                                          <li>
-                                              <ul class="menu">
-                                                  @permission('create-banking-accounts')
-                                                  <li><a href="{{ url('banking/accounts/create') }}">{{ trans_choice('general.accounts', 1) }}</a></li>
-                                                  @endpermission
-                                                  @permission('create-banking-transfers')
-                                                  <li><a href="{{ url('banking/transfers/create') }}">{{ trans_choice('general.transfers', 1) }}</a></li>
-                                                  @endpermission
-                                              </ul>
-                                          </li>
-                                      </ul>
-                                  </li> --}}
-                              {{-- </ul>
-                          </div>
-                      </li>
-                  </ul> --}}
-
+          <ul class="add-new nav navbar-nav pull-left">
+              <li class="dropdown add-new-menu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-plus"></i>
+                  </a>
+                <div class="dropdown-menu">
+                    <ul class = "list-inline" style="margin-left: 5px;">
+                        <ul class="list-unstyled">
+                            <li class="header"><i class="fa fa-address-book-o"></i> &nbsp;<span style="font-weight: 600;">{{ trans('general.account') }}</span></li>
+                            <li>
+                                <ul class="menu">
+                                    @can('create-account')
+                                        <li><a href="{{ '/admin/account/create' }}">{{ trans('general.account') }}</a></li>
+                                    @endcan
+                                </ul>
+                        </ul>
+                    </ul>
+                </div>
+              </li>
+          </ul>
           @include('backpack::inc.menu')
         </nav>
       </header>
