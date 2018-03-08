@@ -25,8 +25,11 @@ class Web_siteCrudController extends CrudController
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/web_site');
         // $this->crud->setEntityNameStrings(trans('informacrm.web_site'), trans('informacrm.web_sites'));
         $this->crud->setEntityNameStrings(trans('informacrm.web_site'), trans('informacrm.web_sites'));
-        $this->crud->setEditView('inf/accounts/tabs/edit_web_site_from_account');
-        $this->crud->setCreateView('inf/accounts/tabs/create_web_site_from_account');
+        // $this->crud->setEditView('inf/accounts/tabs/edit_web_site_from_account');
+        // $this->crud->setCreateView('inf/accounts/tabs/create_web_site_from_account');
+        $account_id = \Route::current()->parameter('account_id');
+        $this->crud->setRoute("admin/account/".$account_id."/web_site");
+        $this->crud->cancelRoute = ("admin/account/".$account_id."#web_sites");
 
         /*
         |--------------------------------------------------------------------------
@@ -149,6 +152,9 @@ class Web_siteCrudController extends CrudController
     {
         // your additional operations before save here
         // $active_account_id = $request['account_id'];
+        $account_id = \Route::current()->parameter('account_id');
+        $request['account_id'] = $account_id;
+
         $request['created_by'] = Auth::user()->name;
         $redirect_location = parent::storeCrud($request);
         $saveAction = $this->getSaveAction()['active']['value'];
@@ -156,11 +162,11 @@ class Web_siteCrudController extends CrudController
             case 'save_and_edit':
                 break;
             case 'save_and_new':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/web_site/create?active_account_id='.$this->crud->entry['account_id']);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'/web_site/create');
                 break;
             case 'save_and_back':
             default:
-                $redirect_location = redirect('admin/account/'.$this->crud->entry['account_id'].'#web_sites');
+                $redirect_location = redirect('admin/account/'.$account_id.'#web_sites');
                 break;
         }
         // your additional operations after save here
@@ -176,6 +182,7 @@ class Web_siteCrudController extends CrudController
         }
         $request['updated_by'] = Auth::user()->name;
         $redirect_location = parent::updateCrud($request);
+        $account_id = \Route::current()->parameter('account_id');
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         $saveAction = $this->getSaveAction()['active']['value'];
@@ -183,14 +190,26 @@ class Web_siteCrudController extends CrudController
             case 'save_and_edit':
                 break;
             case 'save_and_new':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/web_site/create?active_account_id='.$this->crud->entry['account_id']);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'/web_site/create');
                 break;
             case 'save_and_back':
             default:
-                $redirect_location = redirect('admin/account/'.$this->crud->entry['account_id'].'#web_sites');
+                $redirect_location = redirect('admin/account/'.$account_id.'#web_sites');
                 break;
         }
 
         return $redirect_location;
+    }
+
+    public function edit($parent_id, $id = null)
+    {
+        $web_site_id = \Route::current()->parameter('web_site');
+        return parent::edit($web_site_id);
+    }
+
+    public function destroy($parent_id, $id = null)
+    {
+        $web_site_id = \Route::current()->parameter('web_site');
+        return parent::destroy($web_site_id);
     }
 }

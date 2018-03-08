@@ -1,7 +1,7 @@
 <div class="row col-md-12" style="margin-left: 10px; padding-left: 0px">
     <!-- Create button -->
     @includeif('vendor.backpack.crud.buttons.create', [
-        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/contact_detail/create?active_account_id='.$entry->id.'&active_contact_id='.$contact->id),
+        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->id.'/contact/'.$contact->id.'/contact_detail/create'),
         'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.contact_detail')."' ",
         'custom_button_class' => "  btn-xs  "
     ])
@@ -19,14 +19,14 @@
                 <div class="col-md-3 button-tools" style="padding: 8px;">
                     <!-- Delete button -->
                     @includeif('vendor.backpack.crud.buttons.delete', [
-                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/contact_detail').'/'.$contact_detail->id,
+                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->id.'/contact/'.$contact->id.'/contact_detail').'/'.$contact_detail->id,
                         'custom_button_attributes' => " title='Delete contact_detail' delete-id='$contact_detail->id'",
                         'custom_button_class' => " pull-right del-confirmcontactdetails"
                     ])
 
                     <!-- Edit button -->
                     @includeif('vendor.backpack.crud.buttons.update', [
-                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin').'/contact_detail/'.$contact_detail->id.'/edit?active_account_id='.$entry->id.'&active_contact_id='.$contact->id),
+                        'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->id.'/contact/'.$contact->id.'/contact_detail/'.$contact_detail->id.'/edit'),
                         'custom_button_attributes' => " title='Edit Contact detail' style='margin-right: 3px;' ",
                         'custom_button_class' => " pull-right "
                     ])

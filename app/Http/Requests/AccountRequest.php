@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Illuminate\Support\Facades\Input;
 
 class AccountRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
 {
@@ -24,8 +25,22 @@ class AccountRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
      */
     public function rules()
     {
+        // $rules = [];
+        // if ( Input::get('is_person') == 1) {
+        //     $rules = [
+        //         'name1' => 'required',
+        //         'name2' => 'required'
+        //     ];
+        // } else {
+        //     $rules = [
+        //         'name1' => 'required'
+        //     ];
+        // }
+        //
+        // return $rules;
+        //
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name1' => 'required|min:5|max:255'
         ];
     }
 

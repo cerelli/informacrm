@@ -1,6 +1,6 @@
 <!-- Create button -->
 @includeif('vendor.backpack.crud.buttons.create', [
-    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/address/create?active_account_id='.$entry->id),
+    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin').'/account/'.$entry->id.'/address/create'),
     'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.address')."' ",
     'custom_button_class' => ""
 ])
@@ -23,14 +23,14 @@
                             <div class="col-md-3 button-tools" style="padding: 8px;">
                                 <!-- Delete button -->
                                 @includeif('vendor.backpack.crud.buttons.delete', [
-                                    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/address').'/'.$address->id,
+                                    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$address->account_id.'/address').'/'.$address->id,
                                     'custom_button_attributes' => "  title='Delete address' delete-id='$address->id' ",
                                     'custom_button_class' => " pull-right  del-confirmaddress"
                                 ])
 
                                 <!-- Edit button -->
                                 @includeif('vendor.backpack.crud.buttons.update', [
-                                    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/address').'/'.$address->id.'/edit',
+                                    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$address->account_id.'/address').'/'.$address->id.'/edit',
                                     'custom_button_attributes' => " title='Edit address' style='margin-right: 3px;' ",
                                     'custom_button_class' => " pull-right "
                                 ])

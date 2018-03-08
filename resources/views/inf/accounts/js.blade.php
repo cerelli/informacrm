@@ -81,6 +81,7 @@
     var delete_button = $(this);
     var delete_url = $(this).attr('href');
     var delete_id = $(this).attr('delete-id');
+	var after_url = "{{ url(config('backpack.base.route_prefix', 'admin') . '/account') }}";
     if (confirm("{{ trans('backpack::crud.delete_confirm') }}") == true) {
   	  $.ajax({
   		  url: delete_url,
@@ -93,6 +94,7 @@
   				  type: "success"
   			  });
   			  // return to account list
+			  window.open(after_url,"_self");
   	// 		  $("#addresses-panel-"+delete_id).remove();
   		  },
   		  error: function(result) {

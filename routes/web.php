@@ -60,9 +60,14 @@ Route::group([
     Route::get('account_tab_actions/{account_id}/{action_status_id?}', 'ActionCrudController@account_tab_actions');
     Route::group(['prefix' => 'account/{account_id}'], function()
     {
+        CRUD::resource('contact', 'ContactCrudController');
+        CRUD::resource('contact/{contact_id}/contact_detail', 'Contact_detailCrudController');
+        CRUD::resource('web_site', 'Web_siteCrudController');
+        CRUD::resource('address', 'AddressCrudController');
         CRUD::resource('action', 'ActionAccountCrudController');
     });
 
+    // Route::delete('contact_detail/{id}', 'ContactCrudController@destroy');
     CRUD::resource('event', 'EventCrudController');
     Route::get('selevent', 'EventCrudController@select');
     Route::get('selevent/update/{event_id}/{opportunity_id}/{account_id}/{tab}', 'EventCrudController@selectupdate');
@@ -88,16 +93,16 @@ Route::group([
 
     CRUD::resource('account_type', 'Account_typeCrudController');
 
-    CRUD::resource('contact', 'ContactCrudController');
+
     CRUD::resource('contact_type', 'Contact_typeCrudController');
-    CRUD::resource('contact_detail', 'Contact_detailCrudController');
+
     CRUD::resource('contact_detail_type', 'Contact_detail_typeCrudController');
     CRUD::resource('communication_type', 'Communication_typeCrudController');
 
-    CRUD::resource('web_site', 'Web_siteCrudController');
+
     CRUD::resource('web_site_type', 'Web_site_typeCrudController');
 
-    CRUD::resource('address', 'AddressCrudController');
+
     CRUD::resource('address_type', 'Address_typeCrudController');
 
     CRUD::resource('office', 'OfficeCrudController');

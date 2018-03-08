@@ -21,10 +21,11 @@ class ContactCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Contact');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/contact');
+        // $this->crud->setRoute(config('backpack.base.route_prefix','admin') . 'account/contact');
         $this->crud->setEntityNameStrings(trans('informacrm.contact'), trans('informacrm.contacts'));
-        $this->crud->setEditView('inf/accounts/tabs/edit_contact_from_account');
-        $this->crud->setCreateView('inf/accounts/tabs/create_contact_from_account');
+        $account_id = \Route::current()->parameter('account_id');
+        $this->crud->setRoute("admin/account/".$account_id."/contact");
+        $this->crud->cancelRoute = ("admin/account/".$account_id."#contacts");
 
         /*
         |--------------------------------------------------------------------------
@@ -39,6 +40,29 @@ class ContactCrudController extends CrudController
             'name' => 'account_id',
             'label' => trans('informacrm.account_id'),
             'type' => 'hidden'
+        ]);
+
+        $this->crud->addField([
+            'label' => trans('informacrm.contact_type'),
+            'type' => 'select2',
+            'name' => 'contact_type_id', // the db column for the foreign key
+            'entity' => 'contact_type', // the method that defines the relationship in your Model
+            'attribute' => 'description', // foreign key attribute that is shown to user
+            'model' => "App\Models\Contact_type", // foreign key model
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6 required',
+            ]
+        ]);
+        $this->crud->addField([
+            'label' => trans('informacrm.office'),
+            'type' => 'select2',
+            'name' => 'office_id', // the db column for the foreign key
+            'entity' => 'office', // the method that defines the relationship in your Model
+            'attribute' => 'description', // foreign key attribute that is shown to user
+            'model' => "App\Models\Office", // foreign key model
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6'
+            ]
         ]);
 
         $this->crud->addField([
@@ -77,28 +101,7 @@ class ContactCrudController extends CrudController
                 'class' => 'form-group col-md-6'
             ]
         ]);
-        $this->crud->addField([
-            'label' => trans('informacrm.contact_type'),
-            'type' => 'select2',
-            'name' => 'contact_type_id', // the db column for the foreign key
-            'entity' => 'contact_type', // the method that defines the relationship in your Model
-            'attribute' => 'description', // foreign key attribute that is shown to user
-            'model' => "App\Models\Contact_type", // foreign key model
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ]
-        ]);
-        $this->crud->addField([
-            'label' => trans('informacrm.office'),
-            'type' => 'select2',
-            'name' => 'office_id', // the db column for the foreign key
-            'entity' => 'office', // the method that defines the relationship in your Model
-            'attribute' => 'description', // foreign key attribute that is shown to user
-            'model' => "App\Models\Office", // foreign key model
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-6'
-            ]
-        ]);
+
         $this->crud->addField([   // WYSIWYG Editor
             'name' => 'notes',
             'label' => trans('informacrm.account_notes'),
@@ -207,10 +210,7 @@ class ContactCrudController extends CrudController
      */
     public function show($id)
     {
-
-
         $this->crud->hasAccessOrFail('show');
-
         // Cache::forever('active_contact_id', $id);
         $view = parent::show($id);
         return $view;
@@ -220,65 +220,63 @@ class ContactCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
-        // $contact_detail = new App\Models\Contact_detail(
-        //     ['value' => '029090719']
-        //     )
+        $account_id = \Route::current()->parameter('account_id');
+        $request['account_id'] = $account_id;
+
         $request['created_by'] = Auth::user()->name;
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
+        // $contact_id = \Route::current()->parameter('action');
         $saveAction = $this->getSaveAction()['active']['value'];
         switch ($saveAction) {
             case 'save_and_edit':
                 break;
             case 'save_and_new':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/contact/create?active_account_id='.$this->crud->entry['account_id']);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'/contact/create');
                 break;
             case 'save_and_back':
             default:
                 $redirect_location = redirect('admin/account/'.$this->crud->entry['account_id'].'#contacts');
                 break;
         }
+
         return $redirect_location;
     }
 
     public function update(UpdateRequest $request)
     {
-        // your additional operations before save here
-        // dump($request);
-        if ( $request['created_by'] == "") {
-            $request['created_by'] = Auth::user()->name;
-        }
-        $request['updated_by'] = Auth::user()->name;
         $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
+        $account_id = \Route::current()->parameter('account_id');
+        // $action_id = \Route::current()->parameter('action');
+        // set a different route for the admin panel buttons
+        $this->crud->setRoute("admin/account/".$account_id."#contacts");
         $saveAction = $this->getSaveAction()['active']['value'];
         switch ($saveAction) {
             case 'save_and_edit':
                 break;
             case 'save_and_new':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/contact/create?active_account_id='.$this->crud->entry['account_id']);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'/contact/create');
                 break;
             case 'save_and_back':
             default:
-                $redirect_location = redirect('admin/account/'.$this->crud->entry['account_id'].'#contacts');
+                $redirect_location = redirect('admin/account/'.$account_id.'#contacts');
                 break;
         }
+        // your additional operations after save here
+        // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return string
-     */
-    public function destroy($id)
+    public function edit($parent_id, $id = null)
     {
-        // dd($this->crud);
-        $redirect_location = parent::destroy($id);
-        return $redirect_location;
+        $contact_id = \Route::current()->parameter('contact');
+        return parent::edit($contact_id);
+    }
+
+    public function destroy($parent_id, $id = null)
+    {
+        $contact_id = \Route::current()->parameter('contact');
+        return parent::destroy($contact_id);
     }
 }

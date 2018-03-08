@@ -148,7 +148,7 @@ class Account extends Model
     */
     public function scopeActionsDetail($account_id)
     {
-        dump($this->crud->entry);
+        // dump($this->crud->entry);
         return $this;
         // return static::with('actions')
         //             ->where('account_id',$account_id)

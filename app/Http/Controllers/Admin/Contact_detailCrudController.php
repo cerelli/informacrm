@@ -20,10 +20,14 @@ class Contact_detailCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Contact_detail');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/contact_detail');
+        // $this->crud->setRoute(config('backpack.base.route_prefix') . '/contact_detail');
         $this->crud->setEntityNameStrings(trans('informacrm.contact_detail'), trans('informacrm.contact_details'));
-        $this->crud->setEditView('inf/accounts/partials/edit_contact_detail_from_account');
-        $this->crud->setCreateView('inf/accounts/partials/create_contact_detail_from_account');
+        // $this->crud->setEditView('inf/accounts/partials/edit_contact_detail_from_account');
+        // $this->crud->setCreateView('inf/accounts/partials/create_contact_detail_from_account');
+        $account_id = \Route::current()->parameter('account_id');
+        $contact_id = \Route::current()->parameter('contact_id');
+        $this->crud->setRoute("admin/account/".$account_id."/contact/".$contact_id."/contact_detail");
+        $this->crud->cancelRoute = ("admin/account/".$account_id."#contacts");
 
         /*
         |--------------------------------------------------------------------------
@@ -163,25 +167,30 @@ class Contact_detailCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
-        $active_contact_id = $request['contact_id'];
+        $account_id = \Route::current()->parameter('account_id');
+        $contact_id = \Route::current()->parameter('contact_id');
+        // $active_contact_id = $request['contact_id'];
+
+        $request['contact_id'] = $contact_id;
         $request['created_by'] = Auth::user()->name;
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
-        $active_account_id = \App\Models\Contact::find($active_contact_id)->account->id;
+        // $active_account_id = \App\Models\Contact::find($active_contact_id)->account->id;
         // dd($active_account_id);
+        $this->crud->setRoute("admin/account/".$account_id."/contact/".$contact_id."/contact_detail");
         $saveAction = $this->getSaveAction()['active']['value'];
         // dd($this->crud->entry['id']);
         switch ($saveAction) {
             case 'save_and_edit':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin') . '/contact_detail/'.$this->crud->entry['id'].'/edit?active_account_id='.$active_account_id.'&active_contact_id='.$active_contact_id);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').                '/account/'.$account_id.'/contact/'.$contact_id.'/contact_details/'.$this->crud->entry['id'].'/edit');
                 break;
             case 'save_and_new':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin') . '/contact_detail/create?active_account_id='.$active_account_id.'&active_contact_id='.$active_contact_id);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin') .'/account/'.$account_id.'/contact/'.$contact_id.'/contact_details/create');
                 break;
             case 'save_and_back':
             default:
-                $redirect_location = redirect('admin/account/'.$active_account_id.'#contacts');
+                $redirect_location = redirect('admin/account/'.$account_id.'#contacts');
                 break;
         }
         // $redirect_location = parent::storeCrud($request);
@@ -193,28 +202,43 @@ class Contact_detailCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
-        $active_contact_id = $request['contact_id'];
+        $account_id = \Route::current()->parameter('account_id');
+        $contact_id = \Route::current()->parameter('contact_id');
+
         if ( $request['created_by'] == "") {
             $request['created_by'] = Auth::user()->name;
         }
         $request['updated_by'] = Auth::user()->name;
         $redirect_location = parent::updateCrud($request);
-        $active_account_id = \App\Models\Contact::find($active_contact_id)->account->id;
+
         $saveAction = $this->getSaveAction()['active']['value'];
         switch ($saveAction) {
             case 'save_and_edit':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin') . '/contact_detail/'.$this->crud->entry['id'].'/edit?active_account_id='.$active_account_id.'&active_contact_id='.$active_contact_id);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').                '/account/'.$account_id.'/contact/'.$contact_id.'/contact_details/'.$this->crud->entry['id'].'/edit');
                 break;
             case 'save_and_new':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin') . '/contact_detail/create?active_account_id='.$active_account_id.'&active_contact_id='.$active_contact_id);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin') .'/account/'.$account_id.'/contact/'.$contact_id.'/contact_details/create');
                 break;
             case 'save_and_back':
             default:
-                $redirect_location = redirect('admin/account/'.$active_account_id.'#contacts');
+                $redirect_location = redirect('admin/account/'.$account_id.'#contacts');
                 break;
         }
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }
+
+
+        public function edit($parent_id, $id = null)
+        {
+            $contact_detail_id = \Route::current()->parameter('contact_detail');
+            return parent::edit($contact_detail_id);
+        }
+
+        public function destroy($parent_id, $id = null)
+        {
+            $contact_detail_id = \Route::current()->parameter('contact_detail');
+            return parent::destroy($contact_detail_id);
+        }
 }

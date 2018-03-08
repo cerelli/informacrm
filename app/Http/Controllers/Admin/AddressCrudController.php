@@ -24,8 +24,12 @@ class AddressCrudController extends CrudController
         $this->crud->setModel('App\Models\Address');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/address');
         $this->crud->setEntityNameStrings('address', 'addresses');
-        $this->crud->setEditView('inf/accounts/tabs/edit_address_from_account');
-        $this->crud->setCreateView('inf/accounts/tabs/create_address_from_account');
+
+        $account_id = \Route::current()->parameter('account_id');
+        $this->crud->setRoute("admin/account/".$account_id."/address");
+        $this->crud->cancelRoute = ("admin/account/".$account_id."#addresses");
+        // $this->crud->setEditView('inf/accounts/tabs/edit_address_from_account');
+        // $this->crud->setCreateView('inf/accounts/tabs/create_address_from_account');
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
@@ -101,7 +105,7 @@ class AddressCrudController extends CrudController
                     'name'  => 'country',
                     'label' => trans('informacrm.country'),
                     'type'  => 'short_name',
-                    'class' => 'hidden',
+                    'class' => 'form-group col-md-3',
                 ],
             ],
         ]);
@@ -181,6 +185,8 @@ class AddressCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
+        $account_id = \Route::current()->parameter('account_id');
+        $request['account_id'] = $account_id;
         $request['created_by'] = Auth::user()->name;
         //***************************ORIGINAL*********
         $redirect_location = parent::storeCrud($request);
@@ -192,11 +198,11 @@ class AddressCrudController extends CrudController
             case 'save_and_edit':
                 break;
             case 'save_and_new':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/address/create?active_account_id='.$this->crud->entry['account_id']);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'/address/create');
                 break;
             case 'save_and_back':
             default:
-                $redirect_location = redirect('admin/account/'.$this->crud->entry['account_id'].'#addresses');
+                $redirect_location = redirect('admin/account/'.$account_id.'#addresses');
                 break;
         }
         //***************************ORIGINAL********
@@ -206,6 +212,7 @@ class AddressCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
+        $account_id = \Route::current()->parameter('account_id');
         if ( $request['created_by'] == "") {
             $request['created_by'] = Auth::user()->name;
         }
@@ -217,15 +224,27 @@ class AddressCrudController extends CrudController
             case 'save_and_edit':
                 break;
             case 'save_and_new':
-                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/address/create?active_account_id='.$this->crud->entry['account_id']);
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'/address/create');
                 break;
             case 'save_and_back':
             default:
-                $redirect_location = redirect('admin/account/'.$this->crud->entry['account_id'].'#addresses');
+                $redirect_location = redirect('admin/account/'.$account_id.'#addresses');
                 break;
         }
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }
+
+        public function edit($parent_id, $id = null)
+        {
+            $address_id = \Route::current()->parameter('address');
+            return parent::edit($address_id);
+        }
+
+        public function destroy($parent_id, $id = null)
+        {
+            $address_id = \Route::current()->parameter('address');
+            return parent::destroy($address_id);
+        }
 }

@@ -23,7 +23,7 @@ class AccountCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Models\Account');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/account');
+        $this->crud->setRoute(config('backpack.base.route_prefix','admin') . '/account');
         $this->crud->setEntityNameStrings(trans('informacrm.account'), trans('informacrm.accounts'));
         $this->crud->setShowView('inf.accounts.show');
         // $this->crud->setRoute("admin/account/".$account_id."/action");
@@ -275,6 +275,7 @@ class AccountCrudController extends CrudController
         // $this->crud->limit();
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -291,6 +292,8 @@ class AccountCrudController extends CrudController
         return $view;
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -302,7 +305,6 @@ class AccountCrudController extends CrudController
     {
 
         $this->crud->hasAccessOrFail('update');
-
         $view = parent::edit($id);
         return $view;
     }
@@ -315,6 +317,8 @@ class AccountCrudController extends CrudController
         // echo "<br>ABC Controller.";
 
         $redirect_location = parent::storeCrud($request);
+        $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$this->crud->entry->id);
+        // dump($redirect_location);
         // // your additional operations after save here
         // // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;

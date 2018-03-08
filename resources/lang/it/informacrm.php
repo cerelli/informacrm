@@ -68,9 +68,10 @@ return [
 
     'addresses'           => 'Indirizzi',
 
-    'address_find'           => 'Cera Indirizzo',
+    'address_find'           => 'Cerca Indirizzo',
 
     'address_line1'           => 'Indirizzo',
+    'country'       => 'Sigla Stato',
 
     'street_number'           => 'Numero Civico',
 
@@ -220,5 +221,6 @@ return [
 'created_by' => 'Creato da',
 'updated_by' => 'Aggiornato da',
 'status' => 'Stato',
+'contact_detail__notes' => 'Note',
 
 ];

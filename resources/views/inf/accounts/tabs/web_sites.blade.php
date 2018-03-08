@@ -1,6 +1,6 @@
 <!-- Create button -->
 @includeif('vendor.backpack.crud.buttons.create', [
-    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/web_site/create?active_account_id='.$entry->id),
+    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin').'/account/'.$entry->id.'/web_site/create'),
     'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.web_site')."' ",
     'custom_button_class' => ""
 ])
@@ -17,20 +17,20 @@
                                     {{ $web_site->web_site_type['description'] }}
                                 </p>
                                 <h3 class="profile-username">
-                                    <a href="{{ $web_site->url }}" target="_blank">{{ $web_site->url }}</a>
+                                    <a href="{!! $web_site->url !!}" target="_blank">{{ $web_site->url }}</a>
                                 </h3>
                             </div>
                             <div class="col-md-3 button-tools" style="padding: 8px;">
                                 <!-- Delete button -->
                                 @includeif('vendor.backpack.crud.buttons.delete', [
-                                    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/web_site').'/'.$web_site->id,
+                                    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$web_site->account_id.'/web_site').'/'.$web_site->id,
                                     'custom_button_attributes' => " title='Delete contact_detail' delete-id='$web_site->id' ",
                                     'custom_button_class' => " pull-right  del-confirmweb"
                                 ])
 
                                 <!-- Edit button -->
                                 @includeif('vendor.backpack.crud.buttons.update', [
-                                    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/web_site').'/'.$web_site->id.'/edit',
+                                    'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$web_site->account_id.'/web_site').'/'.$web_site->id.'/edit',
                                     'custom_button_attributes' => " title='Edit Web Site' style='margin-right: 3px;' ",
                                     'custom_button_class' => " pull-right "
                                 ])
