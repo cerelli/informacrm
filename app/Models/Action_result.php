@@ -15,11 +15,11 @@ class Action_result extends Model
     |--------------------------------------------------------------------------
     */
 
-    //protected $table = 'action_results';
-    //protected $primaryKey = 'id';
+    protected $table = 'action_results';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    // protected $fillable = [];
+    protected $fillable = ['description', 'color', 'background_color', 'icon', 'created_by', 'updated_by'];
     // protected $hidden = [];
     // protected $dates = [];
 

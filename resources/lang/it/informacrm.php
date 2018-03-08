@@ -214,13 +214,6 @@ return [
 'action_end' => 'Fine',
 'action_result_id' => 'Risultato',
 'action_result_description' => 'Descrizione risultato',
-'description' => 'Descrizione',
-'colore' => 'Colore',
-'background_color' => 'Background',
-'icon' => 'Icona',
-'created_by' => 'Creato da',
-'updated_by' => 'Aggiornato da',
-'status' => 'Stato',
 'contact_detail__notes' => 'Note',
 
 ];

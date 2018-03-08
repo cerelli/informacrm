@@ -20,4 +20,12 @@ return [
     'expired-active' => 'Scadute Attive',
     'not-scheduled' => 'Non schedulate',
     'account' => 'Nominativo',
+    'description' => 'Descrizione',
+    'colore' => 'Colore',
+    'background_color' => 'Background',
+    'icon' => 'Icona',
+    'created_by' => 'Creato da',
+    'updated_by' => 'Aggiornato da',
+    'status' => 'Stato',
+
 ];
