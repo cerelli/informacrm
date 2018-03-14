@@ -250,17 +250,92 @@ class ActionCrudController extends CrudController
             $this->crud->addFilter([ // select2_multiple filter
                 'name' => 'action_types',
                 'type' => 'select2_multiple',
-                'label'=> trans('informacrm.action_types')
+                'label'=> trans('general.types')
             ], function() { // the options that show up in the select2
                 return Action_type::all()->pluck('description', 'id')->toArray();
             }, function($values) { // if the filter is active
                 foreach (json_decode($values) as $key => $value) {
-                    $this->crud->query = $this->crud->query->whereHas('action_types', function ($query) use ($value) {
-                        $query->where('action_type_id', $value);
-                    });
+                    if ($key == 0) {
+                        $this->crud->query = $this->crud->query->whereHas('action_types', function ($query) use ($value) {
+                            $query->Where('action_type_id', $value);
+                        });
+                    } else {
+                        $this->crud->query = $this->crud->query->whereHas('action_types', function ($query) use ($value) {
+                            $query->orWhere('action_type_id', $value);
+                        });
+                    }
                 }
             });
 
+            $this->crud->addFilter([ // select2_multiple filter
+              'name' => 'status',
+              'type' => 'select2_multiple',
+              'label'=> trans('general.statuses')
+            ], function() {
+                    $statuses = Action_status::all();
+                    $statusList = [];
+                    $statuses->each(function ($s) use (&$statusList) {
+                        $statusList[$s->id] = $s->description;
+                    });
+
+                    return $statusList;
+            }, function($values) { // if the filter is active
+                if (isset($values)) {
+                    foreach (json_decode($values) as $key => $value) {
+                        if ($key == 0) {
+                            $this->crud->addClause('where', 'action_status_id', $value);
+                        } else {
+                            $this->crud->addClause('orWhere', 'action_status_id', $value);
+                        }
+                    }
+                }
+            });
+
+            $this->crud->addColumn([
+                'name' => 'id', // The db column name
+                'label' => trans('general.id'), // Table column heading
+                'type' => "model_function",
+                'function_name' => 'getShowIdLink', // the method in your Model
+            ]);
+
+            $this->crud->addColumn([
+                'name' => "account",
+                'label' => trans('informacrm.account'), // Table column heading
+                'type' => "model_function",
+                'function_name' => 'getShowAccountLink',
+                'searchLogic' => function ($query, $column, $searchTerm) {
+                    $query->orWhereHas('account', function ($q) use ($column, $searchTerm) {
+                        $q->where('name1', 'like', '%'.$searchTerm.'%')
+                        ->orWhere('name2', 'like', '%'.$searchTerm.'%');
+                    });
+                }
+            ]);
+
+            $this->crud->addColumn([
+                // run a function on the CRUD model and show its return value
+                'name' => 'title',
+                'label' => trans('general.title')
+            ]);
+
+            $this->crud->addColumn([
+                // n-n relationship (with pivot table)
+                'label' => trans('general.statuses'), // Table column heading
+                'type' => 'label',
+                'name' => 'action_status', // the method that defines the relationship in your Model
+                'entity' => 'action_status', // the method that defines the relationship in your Model
+                'attribute' => "description" // foreign key attribute that is shown to user
+                // 'model' => "App\Models\Opportunity_status", // foreign key model
+            ]);
+
+            $this->crud->addColumn([
+                // n-n relationship (with pivot table)
+                'label' => trans('general.types'), // Table column heading
+                'type' => 'label_multiple',
+                'name' => 'action_types', // the method that defines the relationship in your Model
+                'entity' => 'action_types', // the method that defines the relationship in your Model
+                'attribute' => "description", // foreign key attribute that is shown to user
+                'model' => "App\Models\Action_type", // foreign key model
+            ]);
             // dump($this->crud);
             // $this->crud->addField([
             //     'label' => trans('informacrm.opportunity'),

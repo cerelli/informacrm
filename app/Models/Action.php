@@ -28,7 +28,24 @@ class Action extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getShowIdLink() {
+        // Replace proofAttach with the name of your field
+        if (isset($this->id)) {
+            return $this->id;
+            // dd($this);
+            // return '<a href="'.url(config('backpack.base.route_prefix', 'admin') . '/opportunity/'.$this->id).'/edit?call_url=opportunity&call=opportunity" >'.$this->id.'</a>';
+            // return '<a href="'.url($this->id).'" target="_blank">Download</a>';
+        }
+    }
 
+    public function getShowAccountLink() {
+        // Replace proofAttach with the name of your field
+        if (isset($this->account->fullname)) {
+            // dd($this);
+            return '<a href="'.url(config('backpack.base.route_prefix', 'admin') . '/account/'.$this->account->id).'#actions" >'.$this->account->fullname.'</a>';
+            // return '<a href="'.url($this->id).'" target="_blank">Download</a>';
+        }
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

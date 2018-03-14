@@ -30,7 +30,7 @@ Route::group([
     Route::get('test', function () {
         return view('test');
     });
-    // Route::get('actions', 'ActionCrudController@test');
+
     // CRUD::resource('action','ActionCrudController');
     CRUD::resource('action_status', 'Action_statusCrudController');
     CRUD::resource('action_result', 'Action_resultCrudController');
@@ -67,6 +67,7 @@ Route::group([
         CRUD::resource('action', 'ActionAccountCrudController');
     });
 
+    CRUD::resource('action', 'ActionCrudController');
     // Route::delete('contact_detail/{id}', 'ContactCrudController@destroy');
     CRUD::resource('event', 'EventCrudController');
     Route::get('selevent', 'EventCrudController@select');

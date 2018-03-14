@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Controllers\Admin\ActionCrudController;
 use Auth;
-// use App\Models\Action;
+use App\Models\Account_type;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ActionRequest as StoreRequest;

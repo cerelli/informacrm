@@ -14,6 +14,7 @@ return [
     */
 
     //base
+    'actions' => 'Azioni',
     'end' => 'Fine',
     'active' => 'Attivo',
     'expired' => 'Scaduti',
@@ -27,5 +28,9 @@ return [
     'created_by' => 'Creato da',
     'updated_by' => 'Aggiornato da',
     'status' => 'Stato',
+    'id' => 'Codice',
+    'title' => 'Titolo',
+    'statuses' => 'Stato',
+    'types' => 'Tipi',
 
 ];
