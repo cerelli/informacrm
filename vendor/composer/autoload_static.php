@@ -4631,6 +4631,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'elFinderAbortException' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinder.class.php',
         'elFinderConnector' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderConnector.class.php',
         'elFinderEditor' => __DIR__ . '/..' . '/studio-42/elfinder/php/editors/editor.php',
+        'elFinderEditorZipArchive' => __DIR__ . '/..' . '/studio-42/elfinder/php/editors/ZipArchive/editor.php',
         'elFinderEditorZohoOffice' => __DIR__ . '/..' . '/studio-42/elfinder/php/editors/ZohoOffice/editor.php',
         'elFinderLibGdBmp' => __DIR__ . '/..' . '/studio-42/elfinder/php/libs/GdBmp.php',
         'elFinderPlugin' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderPlugin.php',

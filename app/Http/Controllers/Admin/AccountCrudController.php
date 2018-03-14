@@ -173,19 +173,7 @@ class AccountCrudController extends CrudController
             'attribute' => "description", // foreign key attribute that is shown to user
             'model' => "App\Models\Account_type", // foreign key model
         ]);
-        $this->crud->addFilter([ // select2_multiple filter
-            'name' => 'account_types',
-            'type' => 'select2_multiple',
-            'label'=> trans('informacrm.account_types')
-        ], function() { // the options that show up in the select2
-            return Account_type::all()->pluck('description', 'id')->toArray();
-        }, function($values) { // if the filter is active
-            foreach (json_decode($values) as $key => $value) {
-                $this->crud->query = $this->crud->query->whereHas('account_types', function ($query) use ($value) {
-                    $query->where('account_type_id', $value);
-                });
-            }
-        });
+
 
         // $this->crud->addColumn(); // add a single column, at the end of the stack
         // $this->crud->addColumns(); // add multiple columns, at the end of the stack

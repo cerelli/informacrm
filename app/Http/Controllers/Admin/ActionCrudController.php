@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\DB;
 use App\Models\Action;
 use App\Models\Action_status;
+use App\Models\Action_type;
 use Auth;
 
 
@@ -246,6 +247,21 @@ class ActionCrudController extends CrudController
                 'box' => 'result'
             ]);
 
+            $this->crud->addFilter([ // select2_multiple filter
+                'name' => 'action_types',
+                'type' => 'select2_multiple',
+                'label'=> trans('informacrm.action_types')
+            ], function() { // the options that show up in the select2
+                return Action_type::all()->pluck('description', 'id')->toArray();
+            }, function($values) { // if the filter is active
+                foreach (json_decode($values) as $key => $value) {
+                    $this->crud->query = $this->crud->query->whereHas('action_types', function ($query) use ($value) {
+                        $query->where('action_type_id', $value);
+                    });
+                }
+            });
+
+            // dump($this->crud);
             // $this->crud->addField([
             //     'label' => trans('informacrm.opportunity'),
             //     'type' => 'select2_nohtml',
@@ -327,9 +343,13 @@ class ActionCrudController extends CrudController
 
     public function account_tab_actions($account_id, $action_status_id = null)
     {
+
         $data['actions'] = Action::where('account_id', '=', $account_id);
         $data['countActionStatuses'] = Action_status::countActions($account_id)->get();
+        $data['countActionTypes'] = Action_type::countActions($account_id)->get();
         $data['active_account_id']['id'] = $account_id;
+        // $filter = new CrudFilter($options, $values, $filter_logic);
+        // $data['filter']['name'] = 'filtro1';
         if (!$action_status_id){
             //active first action_status
             $data['actions']->where('action_status_id', '=', $data['countActionStatuses'][0]->id);

@@ -36,12 +36,21 @@ class Action_type extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function actions()
+    {
+        return $this->belongsToMany('App\Models\Action','action_action_type','action_type_id','action_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
+    public function scopeCountActions($query, $account_id){
+       return $query->withCount(['actions' => function($subquery) use ($account_id){
+         return $subquery->where('account_id', $account_id);
+     }])->orderBy('lft','asc');
+    }
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

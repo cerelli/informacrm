@@ -1,5 +1,5 @@
 {{-- <a href="#tab_actions" data-dati="{{ url(config('backpack.base.route_prefix', 'admin') . '/account_tab_actions/'.$entry->id) }}" data-tab="tab_actions" aria-controls="tab_actions" role="tab" data-toggle="tab">{{ trans('informacrm.actions') }}</a> --}}
-
+{{-- @include('inf.filter.select2_multiple') --}}
 <ul class="timeline" id="tab_actions_details">
     {{-- {{ dump($actions[0]->action_status->background_color) }} --}}
     <!-- timeline time label -->
@@ -14,6 +14,7 @@
 
     </li>
     <!-- /.timeline-label -->
+    
     @foreach ($actions as $action)
         <!-- timeline item -->
         <li class='acton-li-{{ $action->id }}'>

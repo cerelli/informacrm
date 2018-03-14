@@ -9,19 +9,34 @@
         {{-- <a class="navbar-brand" href="#">{{ trans('backpack::crud.filters') }}</a> --}}
         @can ('create')
             <!-- Create button -->
+            {{-- {{ dd($filter) }} --}}
             @includeif('inf.buttons.create', [
                 'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$active_account_id['id'].'/action/create'),
                 'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.action')."' ",
                 'custom_button_class' => ""
             ])
         @endcan
+        {{-- @include('inf.filter.select2_multiple',['filter' => $filter]) --}}
       </div>
+      {{-- @include('crud::inc.filters_navbar') --}}
       <!-- Collect the nav links, forms, and other content for toggling -->
+      {{-- {{dd($request)}}
+      @if ($crud->filtersEnabled()) --}}
+        {{-- @include('inf.filter.select2_multiple') --}}
+      {{-- @endif --}}
+      {{-- @include('inf.filter.select2_multiple', ['filter' => $countActionStatuses]) --}}
       @foreach ($countActionStatuses as $countActionStatus)
           {{-- {{ dd($active_account_id) }} --}}
-                <a class="btn btn-app btn_tab_action_filter" data-action_status_id="{{ $countActionStatus->id }}" data-account_id="{{ $active_account_id['id'] }}" data-dati="{{ url(config('backpack.base.route_prefix', 'admin') . '/account_tab_actions/'.$active_account_id['id'].'/'.$countActionStatus->id) }}" style="margin-bottom: 0px;">
+                <a class="btn btn-app btn_tab_action_filter" data-action_status_id="{{ $countActionStatus->id }}" data-account_id="{{ $active_account_id['id'] }}" data-dati="{{ url(config('backpack.base.route_prefix', 'admin') . '/account_tab_actions/'.$active_account_id['id'].'/'.$countActionStatus->id) }}" style="margin: 10px;">
                     <span class="badge bg-teal" style="background-color: {{ $countActionStatus->background_color }} !important; color: {{ $countActionStatus->color }} !important;">{{ $countActionStatus->actions_count }}</span>
                     <i class="fa {{ $countActionStatus->icon }}"></i> {{ $countActionStatus->description }}
+
+                    {{-- <div class="container-fluid">
+                        @foreach ($countActionTypes as $countActionType)
+                            <small class="label" style="background-color: {{ $countActionType->background_color }} !important; color: {{ $countActionType->color }} !important;">{{ $countActionType->actions_count }}</small>
+                        @endforeach
+                    </div> --}}
+
                 </a>
       @endforeach
     </div><!-- /.container-fluid -->

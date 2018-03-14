@@ -16,6 +16,13 @@ class LangFileManagerServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * Where the route file lives, both inside the package and in the app (if overwritten).
+     *
+     * @var string
+     */
+    public $routeFilePath = '/routes/backpack/langfilemanager.php';
+
+    /**
      * Perform post-registration booting of services.
      *
      * @return void
@@ -37,6 +44,9 @@ class LangFileManagerServiceProvider extends ServiceProvider
         // publish lang files
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
 
+        // publish the migrations and seeds
+        $this->publishes([__DIR__.'/database/migrations/' => database_path('migrations')], 'migrations');
+
         // use the vendor configuration file as fallback
         $this->mergeConfigFrom(__DIR__.'/config/backpack/langfilemanager.php', 'langfilemanager');
     }
@@ -49,9 +59,13 @@ class LangFileManagerServiceProvider extends ServiceProvider
      */
     public function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Backpack\LangFileManager\app\Http\Controllers'], function ($router) {
-            require __DIR__.'/app/Http/routes.php';
-        });
+        // by default, use the routes file provided in vendor
+        $routeFilePathInUse = __DIR__.$this->routeFilePath;
+        // but if there's a file with the same name in routes/backpack, use that one
+        if (file_exists(base_path().$this->routeFilePath)) {
+            $routeFilePathInUse = base_path().$this->routeFilePath;
+        }
+        $this->loadRoutesFrom($routeFilePathInUse);
     }
 
     /**

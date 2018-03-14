@@ -2466,79 +2466,6 @@
         ]
     },
     {
-        "name": "backpack/pagemanager",
-        "version": "1.1.22",
-        "version_normalized": "1.1.22.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/PageManager.git",
-            "reference": "0d94d2c02b0b8da4d917ce99344c7361a369f89a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/PageManager/zipball/0d94d2c02b0b8da4d917ce99344c7361a369f89a",
-            "reference": "0d94d2c02b0b8da4d917ce99344c7361a369f89a",
-            "shasum": ""
-        },
-        "require": {
-            "backpack/crud": "^3.0.6",
-            "cviebrock/eloquent-sluggable": "^4.0",
-            "doctrine/dbal": "^2.5.12",
-            "illuminate/support": "~5.1",
-            "php": "~5.5|~7.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*",
-            "scrutinizer/ocular": "~1.1",
-            "squizlabs/php_codesniffer": "~2.3"
-        },
-        "time": "2017-11-02T08:20:13+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Backpack\\PageManager\\PageManagerServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\PageManager\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Cristian Tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://tabacitu.ro",
-                "role": "Architect & Developer"
-            }
-        ],
-        "description": "Create admin panels for presentation websites on Laravel, using page templates and Backpack\\CRUD.",
-        "homepage": "https://github.com/laravel-backpack/PageManager",
-        "keywords": [
-            "Content management system",
-            "admin panel",
-            "administer pages",
-            "backpack",
-            "cms",
-            "crud",
-            "manage pages",
-            "pagemanager",
-            "presentation pages",
-            "presentation website",
-            "wordpress"
-        ]
-    },
-    {
         "name": "myclabs/deep-copy",
         "version": "1.7.0",
         "version_normalized": "1.7.0.0",
@@ -2592,12 +2519,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/creativeorange/gravatar.git",
-            "reference": "a0e84f0c8e8922ad151168d6ebd8db6a1b2d8cd2"
+            "reference": "9affd46be10f1ebb11d5d9f03440f804c09f2b59"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/creativeorange/gravatar/zipball/a0e84f0c8e8922ad151168d6ebd8db6a1b2d8cd2",
-            "reference": "a0e84f0c8e8922ad151168d6ebd8db6a1b2d8cd2",
+            "url": "https://api.github.com/repos/creativeorange/gravatar/zipball/9affd46be10f1ebb11d5d9f03440f804c09f2b59",
+            "reference": "9affd46be10f1ebb11d5d9f03440f804c09f2b59",
             "shasum": ""
         },
         "require": {
@@ -3061,149 +2988,6 @@
             "annotations",
             "docblock",
             "parser"
-        ]
-    },
-    {
-        "name": "backpack/permissionmanager",
-        "version": "2.1.24",
-        "version_normalized": "2.1.24.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/PermissionManager.git",
-            "reference": "d82f33a6d56b6562a44cf199c78afbacd8093829"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/PermissionManager/zipball/d82f33a6d56b6562a44cf199c78afbacd8093829",
-            "reference": "d82f33a6d56b6562a44cf199c78afbacd8093829",
-            "shasum": ""
-        },
-        "require": {
-            "backpack/crud": "^3.3.0",
-            "spatie/laravel-permission": "^1.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*",
-            "scrutinizer/ocular": "~1.1"
-        },
-        "time": "2017-12-13T05:34:02+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Backpack\\PermissionManager\\PermissionManagerServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\PermissionManager\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "proprietary"
-        ],
-        "authors": [
-            {
-                "name": "Marius Constantin",
-                "email": "marius@updivision.com",
-                "homepage": "http://www.updivision.com",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Cristian Tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://www.tabacitu.ro",
-                "role": "Chief Architect"
-            }
-        ],
-        "description": "Users and permissions management interface for Laravel 5 using Backpack CRUD.",
-        "homepage": "https://github.com/laravel-backpack/permissionmanager",
-        "keywords": [
-            "backpack",
-            "backpack permission",
-            "backpack roles",
-            "backpack user management",
-            "dick",
-            "dick permission",
-            "laravel backpack",
-            "manage permission",
-            "manage roles",
-            "manage users",
-            "tabacitu",
-            "updivision",
-            "users roles admin"
-        ]
-    },
-    {
-        "name": "backpack/settings",
-        "version": "2.0.27",
-        "version_normalized": "2.0.27.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/Settings.git",
-            "reference": "b51d4a92305f03fba6d4221767b9c5b1cbeb2e66"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/Settings/zipball/b51d4a92305f03fba6d4221767b9c5b1cbeb2e66",
-            "reference": "b51d4a92305f03fba6d4221767b9c5b1cbeb2e66",
-            "shasum": ""
-        },
-        "require": {
-            "backpack/crud": "^3.2"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*",
-            "scrutinizer/ocular": "~1.1"
-        },
-        "time": "2017-12-14T23:20:32+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Backpack\\Settings\\SettingsServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\Settings\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "proprietary"
-        ],
-        "authors": [
-            {
-                "name": "Cristian Tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://www.tabacitu.ro",
-                "role": "Chief Architect & Lead Developer"
-            }
-        ],
-        "description": "Application settings interface for Laravel 5 using Backpack CRUD.",
-        "homepage": "https://github.com/laravel-backpack/settings",
-        "keywords": [
-            "backpack",
-            "backpack settings",
-            "dick",
-            "dick settings",
-            "laravel backpack",
-            "manage settings",
-            "settings admin",
-            "tabacitu",
-            "updivision"
         ]
     },
     {
@@ -4092,66 +3876,6 @@
         ]
     },
     {
-        "name": "studio-42/elfinder",
-        "version": "2.1.32",
-        "version_normalized": "2.1.32.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Studio-42/elFinder.git",
-            "reference": "1118be362d76b06cd4179a38caa193644f7ae45d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/1118be362d76b06cd4179a38caa193644f7ae45d",
-            "reference": "1118be362d76b06cd4179a38caa193644f7ae45d",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2"
-        },
-        "suggest": {
-            "barryvdh/elfinder-flysystem-driver": "VolumeDriver for elFinder to use Flysystem as a root.",
-            "google/apiclient": "VolumeDriver GoogleDrive require `google/apiclient:^2.0.",
-            "kunalvarma05/dropbox-php-sdk": "VolumeDriver `Dropbox`2 require `kunalvarma05/dropbox-php-sdk.",
-            "nao-pon/flysystem-google-drive": "require in GoogleDrive network volume mounting with Flysystem."
-        },
-        "time": "2018-02-07T00:04:43+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Dmitry Levashov",
-                "email": "dio@std42.ru",
-                "homepage": "http://std42.ru"
-            },
-            {
-                "name": "Troex Nevelin",
-                "email": "troex@fury.scancode.ru",
-                "homepage": "http://std42.ru"
-            },
-            {
-                "name": "Community contributions",
-                "homepage": "https://github.com/Studio-42/elFinder/contributors"
-            },
-            {
-                "name": "Naoki Sawada",
-                "email": "hypweb+elfinder@gmail.com",
-                "homepage": "http://xoops.hypweb.net"
-            }
-        ],
-        "description": "File manager for web",
-        "homepage": "http://elfinder.org"
-    },
-    {
         "name": "barryvdh/laravel-elfinder",
         "version": "v0.3.12",
         "version_normalized": "0.3.12.0",
@@ -4208,84 +3932,6 @@
             "filebrowser",
             "laravel",
             "tinymce"
-        ]
-    },
-    {
-        "name": "backpack/langfilemanager",
-        "version": "1.0.23",
-        "version_normalized": "1.0.23.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/LangFileManager.git",
-            "reference": "bf593ed79a8b701deeba663c62e0e65905988a88"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/LangFileManager/zipball/bf593ed79a8b701deeba663c62e0e65905988a88",
-            "reference": "bf593ed79a8b701deeba663c62e0e65905988a88",
-            "shasum": ""
-        },
-        "require": {
-            "backpack/crud": "^3.0.6",
-            "illuminate/support": "~5.1",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*",
-            "scrutinizer/ocular": "~1.1"
-        },
-        "time": "2018-02-07T20:53:19+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Backpack\\LangFileManager\\LangFileManagerServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\LangFileManager\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Alin Ghitu",
-                "email": "alin@updivision.com",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Cristian Tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://www.tabacitu.ro",
-                "role": "Contributor"
-            }
-        ],
-        "description": "An interface to edit language files, for Laravel Backpack.",
-        "homepage": "https://github.com/laravel-backpack/langfilemanager",
-        "keywords": [
-            "admin panel",
-            "backpack",
-            "dick",
-            "dick admin",
-            "dick translationmanager",
-            "dickadmin",
-            "lang file manager",
-            "lang files",
-            "language",
-            "laravel",
-            "laravel backpack",
-            "tabacitu",
-            "translationmanager",
-            "updivision"
         ]
     },
     {
@@ -4676,82 +4322,6 @@
         ],
         "description": "HTML and Form Builders for the Laravel Framework",
         "homepage": "https://laravelcollective.com"
-    },
-    {
-        "name": "backpack/crud",
-        "version": "3.3.11",
-        "version_normalized": "3.3.11.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Laravel-Backpack/CRUD.git",
-            "reference": "443482a20af236c746c4d89ee14c4025fe87c5c6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/443482a20af236c746c4d89ee14c4025fe87c5c6",
-            "reference": "443482a20af236c746c4d89ee14c4025fe87c5c6",
-            "shasum": ""
-        },
-        "require": {
-            "backpack/base": "^0.8.0",
-            "barryvdh/laravel-elfinder": "^0.3.10",
-            "doctrine/dbal": "^2.5",
-            "intervention/image": "^2.3",
-            "venturecraft/revisionable": "1.*"
-        },
-        "require-dev": {
-            "orchestra/database": "~3.4",
-            "orchestra/testbench": "~3.0",
-            "phpunit/phpunit": "~6.0",
-            "scrutinizer/ocular": "~1.1"
-        },
-        "time": "2018-02-23T11:04:12+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Backpack\\CRUD\\CrudServiceProvider"
-                ],
-                "aliases": {
-                    "CRUD": "Backpack\\CRUD\\CrudServiceProvider"
-                }
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Backpack\\CRUD\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Cristian Tabacitu",
-                "email": "hello@tabacitu.ro",
-                "homepage": "http://www.tabacitu.ro",
-                "role": "Chief Architect & Lead Developer"
-            }
-        ],
-        "description": "Quickly build an admin interface for your Eloquent models, using Laravel 5. Build a CMS in a matter of minutes.",
-        "homepage": "https://github.com/laravel-backpack/CRUD",
-        "keywords": [
-            "Admin Interface",
-            "Content management system",
-            "admin panel",
-            "cms",
-            "content management framework",
-            "create",
-            "crud",
-            "delete",
-            "read",
-            "update"
-        ]
     },
     {
         "name": "phpunit/phpunit",
@@ -5661,61 +5231,6 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "nesbot/carbon",
-        "version": "1.23.0",
-        "version_normalized": "1.23.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/briannesbitt/Carbon.git",
-            "reference": "4a874a39b2b00d7e0146cd46fab6f47c41ce9e65"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4a874a39b2b00d7e0146cd46fab6f47c41ce9e65",
-            "reference": "4a874a39b2b00d7e0146cd46fab6f47c41ce9e65",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "symfony/translation": "~2.6 || ~3.0 || ~4.0"
-        },
-        "require-dev": {
-            "friendsofphp/php-cs-fixer": "~2",
-            "phpunit/phpunit": "^4.8.35 || ^5.7"
-        },
-        "time": "2018-02-28T09:22:05+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.23-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Carbon\\": "src/Carbon/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Brian Nesbitt",
-                "email": "brian@nesbot.com",
-                "homepage": "http://nesbot.com"
-            }
-        ],
-        "description": "A simple API extension for DateTime.",
-        "homepage": "http://carbon.nesbot.com",
-        "keywords": [
-            "date",
-            "datetime",
-            "time"
-        ]
-    },
-    {
         "name": "league/flysystem",
         "version": "1.0.43",
         "version_normalized": "1.0.43.0",
@@ -5847,207 +5362,6 @@
         "keywords": [
             "markdown",
             "parser"
-        ]
-    },
-    {
-        "name": "laravel/framework",
-        "version": "v5.5.37",
-        "version_normalized": "5.5.37.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/laravel/framework.git",
-            "reference": "cf750b00c77d0d73e889c86f7db6a0e13b8dea8c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/cf750b00c77d0d73e889c86f7db6a0e13b8dea8c",
-            "reference": "cf750b00c77d0d73e889c86f7db6a0e13b8dea8c",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/inflector": "~1.1",
-            "erusev/parsedown": "~1.7",
-            "ext-mbstring": "*",
-            "ext-openssl": "*",
-            "league/flysystem": "~1.0",
-            "monolog/monolog": "~1.12",
-            "mtdowling/cron-expression": "~1.0",
-            "nesbot/carbon": "~1.20",
-            "php": ">=7.0",
-            "psr/container": "~1.0",
-            "psr/simple-cache": "^1.0",
-            "ramsey/uuid": "~3.0",
-            "swiftmailer/swiftmailer": "~6.0",
-            "symfony/console": "~3.3",
-            "symfony/debug": "~3.3",
-            "symfony/finder": "~3.3",
-            "symfony/http-foundation": "~3.3",
-            "symfony/http-kernel": "~3.3",
-            "symfony/process": "~3.3",
-            "symfony/routing": "~3.3",
-            "symfony/var-dumper": "~3.3",
-            "tijsverkoyen/css-to-inline-styles": "~2.2",
-            "vlucas/phpdotenv": "~2.2"
-        },
-        "replace": {
-            "illuminate/auth": "self.version",
-            "illuminate/broadcasting": "self.version",
-            "illuminate/bus": "self.version",
-            "illuminate/cache": "self.version",
-            "illuminate/config": "self.version",
-            "illuminate/console": "self.version",
-            "illuminate/container": "self.version",
-            "illuminate/contracts": "self.version",
-            "illuminate/cookie": "self.version",
-            "illuminate/database": "self.version",
-            "illuminate/encryption": "self.version",
-            "illuminate/events": "self.version",
-            "illuminate/filesystem": "self.version",
-            "illuminate/hashing": "self.version",
-            "illuminate/http": "self.version",
-            "illuminate/log": "self.version",
-            "illuminate/mail": "self.version",
-            "illuminate/notifications": "self.version",
-            "illuminate/pagination": "self.version",
-            "illuminate/pipeline": "self.version",
-            "illuminate/queue": "self.version",
-            "illuminate/redis": "self.version",
-            "illuminate/routing": "self.version",
-            "illuminate/session": "self.version",
-            "illuminate/support": "self.version",
-            "illuminate/translation": "self.version",
-            "illuminate/validation": "self.version",
-            "illuminate/view": "self.version",
-            "tightenco/collect": "<5.5.33"
-        },
-        "require-dev": {
-            "aws/aws-sdk-php": "~3.0",
-            "doctrine/dbal": "~2.5",
-            "filp/whoops": "^2.1.4",
-            "mockery/mockery": "~1.0",
-            "orchestra/testbench-core": "3.5.*",
-            "pda/pheanstalk": "~3.0",
-            "phpunit/phpunit": "~6.0",
-            "predis/predis": "^1.1.1",
-            "symfony/css-selector": "~3.3",
-            "symfony/dom-crawler": "~3.3"
-        },
-        "suggest": {
-            "aws/aws-sdk-php": "Required to use the SQS queue driver and SES mail driver (~3.0).",
-            "doctrine/dbal": "Required to rename columns and drop SQLite columns (~2.5).",
-            "ext-pcntl": "Required to use all features of the queue worker.",
-            "ext-posix": "Required to use all features of the queue worker.",
-            "fzaninotto/faker": "Required to use the eloquent factory builder (~1.4).",
-            "guzzlehttp/guzzle": "Required to use the Mailgun and Mandrill mail drivers and the ping methods on schedules (~6.0).",
-            "laravel/tinker": "Required to use the tinker console command (~1.0).",
-            "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (~1.0).",
-            "league/flysystem-cached-adapter": "Required to use Flysystem caching (~1.0).",
-            "league/flysystem-rackspace": "Required to use the Flysystem Rackspace driver (~1.0).",
-            "nexmo/client": "Required to use the Nexmo transport (~1.0).",
-            "pda/pheanstalk": "Required to use the beanstalk queue driver (~3.0).",
-            "predis/predis": "Required to use the redis cache and queue drivers (~1.0).",
-            "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~3.0).",
-            "symfony/css-selector": "Required to use some of the crawler integration testing tools (~3.3).",
-            "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (~3.3).",
-            "symfony/psr-http-message-bridge": "Required to psr7 bridging features (~1.0)."
-        },
-        "time": "2018-03-07T14:11:09+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.5-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/Illuminate/Foundation/helpers.php",
-                "src/Illuminate/Support/helpers.php"
-            ],
-            "psr-4": {
-                "Illuminate\\": "src/Illuminate/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
-            }
-        ],
-        "description": "The Laravel Framework.",
-        "homepage": "https://laravel.com",
-        "keywords": [
-            "framework",
-            "laravel"
-        ]
-    },
-    {
-        "name": "laravel/tinker",
-        "version": "v1.0.4",
-        "version_normalized": "1.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/laravel/tinker.git",
-            "reference": "eb8d3cfb41b7f74fb0ef4724e459d44f4cbb35b8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/laravel/tinker/zipball/eb8d3cfb41b7f74fb0ef4724e459d44f4cbb35b8",
-            "reference": "eb8d3cfb41b7f74fb0ef4724e459d44f4cbb35b8",
-            "shasum": ""
-        },
-        "require": {
-            "illuminate/console": "~5.1",
-            "illuminate/contracts": "~5.1",
-            "illuminate/support": "~5.1",
-            "php": ">=5.5.9",
-            "psy/psysh": "0.7.*|0.8.*",
-            "symfony/var-dumper": "~3.0|~4.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0|~5.0"
-        },
-        "suggest": {
-            "illuminate/database": "The Illuminate Database package (~5.1)."
-        },
-        "time": "2018-03-06T13:48:07+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Laravel\\Tinker\\TinkerServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Laravel\\Tinker\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Taylor Otwell",
-                "email": "taylor@laravel.com"
-            }
-        ],
-        "description": "Powerful REPL for the Laravel framework.",
-        "keywords": [
-            "REPL",
-            "Tinker",
-            "laravel",
-            "psysh"
         ]
     },
     {
@@ -6185,6 +5499,692 @@
             "laravel",
             "profiler",
             "webprofiler"
+        ]
+    },
+    {
+        "name": "nesbot/carbon",
+        "version": "1.24.2",
+        "version_normalized": "1.24.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/briannesbitt/Carbon.git",
+            "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bba6c6e410c6b4317e37a9474aeaa753808c3875",
+            "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.9",
+            "symfony/translation": "~2.6 || ~3.0 || ~4.0"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "~2",
+            "phpunit/phpunit": "^4.8.35 || ^5.7"
+        },
+        "time": "2018-03-10T10:10:14+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.23-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Carbon\\": "src/Carbon/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Brian Nesbitt",
+                "email": "brian@nesbot.com",
+                "homepage": "http://nesbot.com"
+            }
+        ],
+        "description": "A simple API extension for DateTime.",
+        "homepage": "http://carbon.nesbot.com",
+        "keywords": [
+            "date",
+            "datetime",
+            "time"
+        ]
+    },
+    {
+        "name": "laravel/framework",
+        "version": "v5.5.39",
+        "version_normalized": "5.5.39.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel/framework.git",
+            "reference": "a21ef7e51df831a7c38d24dcf8c4774ee0847526"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/a21ef7e51df831a7c38d24dcf8c4774ee0847526",
+            "reference": "a21ef7e51df831a7c38d24dcf8c4774ee0847526",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/inflector": "~1.1",
+            "erusev/parsedown": "~1.7",
+            "ext-mbstring": "*",
+            "ext-openssl": "*",
+            "league/flysystem": "~1.0",
+            "monolog/monolog": "~1.12",
+            "mtdowling/cron-expression": "~1.0",
+            "nesbot/carbon": "^1.24.1",
+            "php": ">=7.0",
+            "psr/container": "~1.0",
+            "psr/simple-cache": "^1.0",
+            "ramsey/uuid": "~3.0",
+            "swiftmailer/swiftmailer": "~6.0",
+            "symfony/console": "~3.3",
+            "symfony/debug": "~3.3",
+            "symfony/finder": "~3.3",
+            "symfony/http-foundation": "~3.3",
+            "symfony/http-kernel": "~3.3",
+            "symfony/process": "~3.3",
+            "symfony/routing": "~3.3",
+            "symfony/var-dumper": "~3.3",
+            "tijsverkoyen/css-to-inline-styles": "~2.2",
+            "vlucas/phpdotenv": "~2.2"
+        },
+        "replace": {
+            "illuminate/auth": "self.version",
+            "illuminate/broadcasting": "self.version",
+            "illuminate/bus": "self.version",
+            "illuminate/cache": "self.version",
+            "illuminate/config": "self.version",
+            "illuminate/console": "self.version",
+            "illuminate/container": "self.version",
+            "illuminate/contracts": "self.version",
+            "illuminate/cookie": "self.version",
+            "illuminate/database": "self.version",
+            "illuminate/encryption": "self.version",
+            "illuminate/events": "self.version",
+            "illuminate/filesystem": "self.version",
+            "illuminate/hashing": "self.version",
+            "illuminate/http": "self.version",
+            "illuminate/log": "self.version",
+            "illuminate/mail": "self.version",
+            "illuminate/notifications": "self.version",
+            "illuminate/pagination": "self.version",
+            "illuminate/pipeline": "self.version",
+            "illuminate/queue": "self.version",
+            "illuminate/redis": "self.version",
+            "illuminate/routing": "self.version",
+            "illuminate/session": "self.version",
+            "illuminate/support": "self.version",
+            "illuminate/translation": "self.version",
+            "illuminate/validation": "self.version",
+            "illuminate/view": "self.version",
+            "tightenco/collect": "<5.5.33"
+        },
+        "require-dev": {
+            "aws/aws-sdk-php": "~3.0",
+            "doctrine/dbal": "~2.5",
+            "filp/whoops": "^2.1.4",
+            "mockery/mockery": "~1.0",
+            "orchestra/testbench-core": "3.5.*",
+            "pda/pheanstalk": "~3.0",
+            "phpunit/phpunit": "~6.0",
+            "predis/predis": "^1.1.1",
+            "symfony/css-selector": "~3.3",
+            "symfony/dom-crawler": "~3.3"
+        },
+        "suggest": {
+            "aws/aws-sdk-php": "Required to use the SQS queue driver and SES mail driver (~3.0).",
+            "doctrine/dbal": "Required to rename columns and drop SQLite columns (~2.5).",
+            "ext-pcntl": "Required to use all features of the queue worker.",
+            "ext-posix": "Required to use all features of the queue worker.",
+            "fzaninotto/faker": "Required to use the eloquent factory builder (~1.4).",
+            "guzzlehttp/guzzle": "Required to use the Mailgun and Mandrill mail drivers and the ping methods on schedules (~6.0).",
+            "laravel/tinker": "Required to use the tinker console command (~1.0).",
+            "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (~1.0).",
+            "league/flysystem-cached-adapter": "Required to use Flysystem caching (~1.0).",
+            "league/flysystem-rackspace": "Required to use the Flysystem Rackspace driver (~1.0).",
+            "nexmo/client": "Required to use the Nexmo transport (~1.0).",
+            "pda/pheanstalk": "Required to use the beanstalk queue driver (~3.0).",
+            "predis/predis": "Required to use the redis cache and queue drivers (~1.0).",
+            "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~3.0).",
+            "symfony/css-selector": "Required to use some of the crawler integration testing tools (~3.3).",
+            "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (~3.3).",
+            "symfony/psr-http-message-bridge": "Required to psr7 bridging features (~1.0)."
+        },
+        "time": "2018-03-09T17:24:53+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.5-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/Illuminate/Foundation/helpers.php",
+                "src/Illuminate/Support/helpers.php"
+            ],
+            "psr-4": {
+                "Illuminate\\": "src/Illuminate/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylor@laravel.com"
+            }
+        ],
+        "description": "The Laravel Framework.",
+        "homepage": "https://laravel.com",
+        "keywords": [
+            "framework",
+            "laravel"
+        ]
+    },
+    {
+        "name": "backpack/crud",
+        "version": "3.3.12",
+        "version_normalized": "3.3.12.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/CRUD.git",
+            "reference": "d84a84237a605a1464cd21d73041d3995c3bc2b3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/d84a84237a605a1464cd21d73041d3995c3bc2b3",
+            "reference": "d84a84237a605a1464cd21d73041d3995c3bc2b3",
+            "shasum": ""
+        },
+        "require": {
+            "backpack/base": "^0.8.0",
+            "barryvdh/laravel-elfinder": "^0.3.10",
+            "doctrine/dbal": "^2.5",
+            "intervention/image": "^2.3",
+            "venturecraft/revisionable": "1.*"
+        },
+        "require-dev": {
+            "orchestra/database": "~3.4",
+            "orchestra/testbench": "~3.0",
+            "phpunit/phpunit": "~6.0",
+            "scrutinizer/ocular": "~1.1"
+        },
+        "time": "2018-03-09T11:18:59+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\CRUD\\CrudServiceProvider"
+                ],
+                "aliases": {
+                    "CRUD": "Backpack\\CRUD\\CrudServiceProvider"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\CRUD\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Cristian Tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://www.tabacitu.ro",
+                "role": "Chief Architect & Lead Developer"
+            }
+        ],
+        "description": "Quickly build an admin interface for your Eloquent models, using Laravel 5. Build a CMS in a matter of minutes.",
+        "homepage": "https://github.com/laravel-backpack/CRUD",
+        "keywords": [
+            "Admin Interface",
+            "Content management system",
+            "admin panel",
+            "cms",
+            "content management framework",
+            "create",
+            "crud",
+            "delete",
+            "read",
+            "update"
+        ]
+    },
+    {
+        "name": "laravel/tinker",
+        "version": "v1.0.5",
+        "version_normalized": "1.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel/tinker.git",
+            "reference": "94f6daf2131508cebd11cd6f8632ba586d7ecc41"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel/tinker/zipball/94f6daf2131508cebd11cd6f8632ba586d7ecc41",
+            "reference": "94f6daf2131508cebd11cd6f8632ba586d7ecc41",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/console": "~5.1",
+            "illuminate/contracts": "~5.1",
+            "illuminate/support": "~5.1",
+            "php": ">=5.5.9",
+            "psy/psysh": "0.7.*|0.8.*",
+            "symfony/var-dumper": "~3.0|~4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0|~5.0"
+        },
+        "suggest": {
+            "illuminate/database": "The Illuminate Database package (~5.1)."
+        },
+        "time": "2018-03-06T17:34:36+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Laravel\\Tinker\\TinkerServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Laravel\\Tinker\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylor@laravel.com"
+            }
+        ],
+        "description": "Powerful REPL for the Laravel framework.",
+        "keywords": [
+            "REPL",
+            "Tinker",
+            "laravel",
+            "psysh"
+        ]
+    },
+    {
+        "name": "studio-42/elfinder",
+        "version": "2.1.33",
+        "version_normalized": "2.1.33.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Studio-42/elFinder.git",
+            "reference": "2d3a31f70e3c817417913ab54035717f26e3efce"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/2d3a31f70e3c817417913ab54035717f26e3efce",
+            "reference": "2d3a31f70e3c817417913ab54035717f26e3efce",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "suggest": {
+            "barryvdh/elfinder-flysystem-driver": "VolumeDriver for elFinder to use Flysystem as a root.",
+            "google/apiclient": "VolumeDriver GoogleDrive require `google/apiclient:^2.0.",
+            "kunalvarma05/dropbox-php-sdk": "VolumeDriver `Dropbox`2 require `kunalvarma05/dropbox-php-sdk.",
+            "nao-pon/flysystem-google-drive": "require in GoogleDrive network volume mounting with Flysystem."
+        },
+        "time": "2018-03-14T08:59:23+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Dmitry Levashov",
+                "email": "dio@std42.ru",
+                "homepage": "http://std42.ru"
+            },
+            {
+                "name": "Troex Nevelin",
+                "email": "troex@fury.scancode.ru",
+                "homepage": "http://std42.ru"
+            },
+            {
+                "name": "Community contributions",
+                "homepage": "https://github.com/Studio-42/elFinder/contributors"
+            },
+            {
+                "name": "Naoki Sawada",
+                "email": "hypweb+elfinder@gmail.com",
+                "homepage": "http://xoops.hypweb.net"
+            }
+        ],
+        "description": "File manager for web",
+        "homepage": "http://elfinder.org"
+    },
+    {
+        "name": "backpack/langfilemanager",
+        "version": "1.0.25",
+        "version_normalized": "1.0.25.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/LangFileManager.git",
+            "reference": "9923207c184ac4c2ba9c4b49290eb1e87c9e981e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/LangFileManager/zipball/9923207c184ac4c2ba9c4b49290eb1e87c9e981e",
+            "reference": "9923207c184ac4c2ba9c4b49290eb1e87c9e981e",
+            "shasum": ""
+        },
+        "require": {
+            "backpack/crud": "^3.0.6",
+            "illuminate/support": "~5.1",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "scrutinizer/ocular": "~1.1"
+        },
+        "time": "2018-03-05T12:30:19+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\LangFileManager\\LangFileManagerServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\LangFileManager\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Alin Ghitu",
+                "email": "alin@updivision.com",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Cristian Tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://www.tabacitu.ro",
+                "role": "Contributor"
+            }
+        ],
+        "description": "An interface to edit language files, for Laravel Backpack.",
+        "homepage": "https://github.com/laravel-backpack/langfilemanager",
+        "keywords": [
+            "admin panel",
+            "backpack",
+            "dick",
+            "dick admin",
+            "dick translationmanager",
+            "dickadmin",
+            "lang file manager",
+            "lang files",
+            "language",
+            "laravel",
+            "laravel backpack",
+            "tabacitu",
+            "translationmanager",
+            "updivision"
+        ]
+    },
+    {
+        "name": "backpack/pagemanager",
+        "version": "1.1.23",
+        "version_normalized": "1.1.23.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/PageManager.git",
+            "reference": "b2f45c478904c1495383179822cc35669b9154b4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/PageManager/zipball/b2f45c478904c1495383179822cc35669b9154b4",
+            "reference": "b2f45c478904c1495383179822cc35669b9154b4",
+            "shasum": ""
+        },
+        "require": {
+            "backpack/crud": "^3.0.6",
+            "cviebrock/eloquent-sluggable": "^4.0",
+            "doctrine/dbal": "^2.5.12",
+            "illuminate/support": "~5.1",
+            "php": "~5.5|~7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "scrutinizer/ocular": "~1.1",
+            "squizlabs/php_codesniffer": "~2.3"
+        },
+        "time": "2018-03-05T15:36:08+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\PageManager\\PageManagerServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\PageManager\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "Cristian Tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://tabacitu.ro",
+                "role": "Architect & Developer"
+            }
+        ],
+        "description": "Create admin panels for presentation websites on Laravel, using page templates and Backpack\\CRUD.",
+        "homepage": "https://github.com/laravel-backpack/PageManager",
+        "keywords": [
+            "Content management system",
+            "admin panel",
+            "administer pages",
+            "backpack",
+            "cms",
+            "crud",
+            "manage pages",
+            "pagemanager",
+            "presentation pages",
+            "presentation website",
+            "wordpress"
+        ]
+    },
+    {
+        "name": "backpack/permissionmanager",
+        "version": "2.1.26",
+        "version_normalized": "2.1.26.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/PermissionManager.git",
+            "reference": "74a95bc8319cf2ab2fa94827f49679daea62659a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/PermissionManager/zipball/74a95bc8319cf2ab2fa94827f49679daea62659a",
+            "reference": "74a95bc8319cf2ab2fa94827f49679daea62659a",
+            "shasum": ""
+        },
+        "require": {
+            "backpack/crud": "^3.3.0",
+            "spatie/laravel-permission": "^1.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "scrutinizer/ocular": "~1.1"
+        },
+        "time": "2018-03-05T17:16:26+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\PermissionManager\\PermissionManagerServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\PermissionManager\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "Marius Constantin",
+                "email": "marius@updivision.com",
+                "homepage": "http://www.updivision.com",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Cristian Tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://www.tabacitu.ro",
+                "role": "Chief Architect"
+            }
+        ],
+        "description": "Users and permissions management interface for Laravel 5 using Backpack CRUD.",
+        "homepage": "https://github.com/laravel-backpack/permissionmanager",
+        "keywords": [
+            "backpack",
+            "backpack permission",
+            "backpack roles",
+            "backpack user management",
+            "dick",
+            "dick permission",
+            "laravel backpack",
+            "manage permission",
+            "manage roles",
+            "manage users",
+            "tabacitu",
+            "updivision",
+            "users roles admin"
+        ]
+    },
+    {
+        "name": "backpack/settings",
+        "version": "2.0.29",
+        "version_normalized": "2.0.29.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Backpack/Settings.git",
+            "reference": "0697311005c6efcf7e46bc789c22729bb1f13b9c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Backpack/Settings/zipball/0697311005c6efcf7e46bc789c22729bb1f13b9c",
+            "reference": "0697311005c6efcf7e46bc789c22729bb1f13b9c",
+            "shasum": ""
+        },
+        "require": {
+            "backpack/crud": "^3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "scrutinizer/ocular": "~1.1"
+        },
+        "time": "2018-03-05T15:02:55+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Backpack\\Settings\\SettingsServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Backpack\\Settings\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "Cristian Tabacitu",
+                "email": "hello@tabacitu.ro",
+                "homepage": "http://www.tabacitu.ro",
+                "role": "Chief Architect & Lead Developer"
+            }
+        ],
+        "description": "Application settings interface for Laravel 5 using Backpack CRUD.",
+        "homepage": "https://github.com/laravel-backpack/settings",
+        "keywords": [
+            "backpack",
+            "backpack settings",
+            "dick",
+            "dick settings",
+            "laravel backpack",
+            "manage settings",
+            "settings admin",
+            "tabacitu",
+            "updivision"
         ]
     }
 ]
