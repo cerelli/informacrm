@@ -63,10 +63,13 @@ class Address extends Model
         if ( !empty(trim($this->address_line_2)) ) {
             $address_formatted .= '<br>'.trim($this->address_line_2);
         }
-        $address_formatted .= '<br>'.trim($this->postal_code).' - '.trim($this->country);
+        $address_formatted .= '<br>'.trim($this->postal_code).' - '.trim($this->city);
         if ( !empty(trim($this->province)) ) {
-            $address_formatted .= ' ('.trim($this->province).')';
+            $address_formatted .= ' ('.trim($this->province).') '.trim($this->country);
+        }else{
+            $address_formatted .= ' - '.trim($this->country);
         }
+
         return $address_formatted;
     }
     /*

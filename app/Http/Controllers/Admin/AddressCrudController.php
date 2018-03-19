@@ -8,6 +8,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\AddressRequest as StoreRequest;
 use App\Http\Requests\AddressRequest as UpdateRequest;
 
+use App\Models\Account;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class AddressCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Address');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/address');
-        $this->crud->setEntityNameStrings('address', 'addresses');
+        $this->crud->setEntityNameStrings(trans('general.address'), trans('general.addresses'));
 
         $account_id = \Route::current()->parameter('account_id');
         $this->crud->setRoute("admin/account/".$account_id."/address");
@@ -38,11 +39,19 @@ class AddressCrudController extends CrudController
 
         // $this->crud->setFromDb();
 
+        $this->crud->setBoxOptions('basic', [
+            'side' => false,         // Place this box on the right side?
+            'class' => "box-default",  // CSS class to add to the div. Eg, <div class="box box-info">
+            'collapsible' => false,
+            'viewNameBox' => false,
+            'collapsed' => false,    // Collapse this box by default?
+        ]);
         // ------ CRUD FIELDS
         $this->crud->addField([
             'name' => 'account_id',
             'label' => trans('informacrm.account_id'),
-            'type' => 'hidden'
+            'type' => 'hidden',
+            'box' => 'basic'
         ]);
 
         $this->crud->addField([
@@ -182,6 +191,19 @@ class AddressCrudController extends CrudController
         // $this->crud->limit();
     }
 
+    public function create()
+    {
+        $account_id = \Route::current()->parameter('account_id');
+        if ( $account_id > 0 ) {
+            $account = Account::findOrFail($account_id);
+            $this->crud->entity_name = $this->crud->entity_name.' '.trans('general.to').' '.$account->getFullNameAttribute();
+        } else {
+
+        }
+
+        return parent::create();
+    }
+
     public function store(StoreRequest $request)
     {
         // your additional operations before save here
@@ -238,8 +260,10 @@ class AddressCrudController extends CrudController
 
         public function edit($parent_id, $id = null)
         {
+
             $address_id = \Route::current()->parameter('address');
-            return parent::edit($address_id);
+            parent::edit($address_id);
+            return $this->crud['nominativo'] = 'pippo';
         }
 
         public function destroy($parent_id, $id = null)
