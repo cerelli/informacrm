@@ -32,5 +32,8 @@ return [
     'title' => 'Titolo',
     'statuses' => 'Stato',
     'types' => 'Tipi',
+    'to' => 'a',
+    'address' => 'indirizzo',
+    'addresses' => 'indirizzi',
 
 ];
