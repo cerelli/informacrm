@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Controllers\Admin\ActionCrudController;
 use Auth;
 use App\Models\Account_type;
+use App\Models\Account;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ActionRequest as StoreRequest;
@@ -43,6 +44,18 @@ class ActionAccountCrudController extends ActionCrudController {
         // show only that user's posts
         // $this->crud->addClause('where', 'id', '==', $id);
         // dd($this->crud);
+    }
+
+    public function create()
+    {
+        $account_id = \Route::current()->parameter('account_id');
+        if ( $account_id > 0 ) {
+            $account = Account::findOrFail($account_id);
+            $this->crud->entity_name = $this->crud->entity_name.' '.trans('general.to').' '.$account->getFullNameAttribute();
+        } else {
+
+        }
+        return parent::create();
     }
 
     public function edit($parent_id, $id = null)
