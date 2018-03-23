@@ -469,7 +469,7 @@ class ActionCrudController extends CrudController
         }
 
 
-        $request['created_by'] = Auth::user()->name;
+        $request['created_by'] = Auth::user()->id;
 
         $redirect_location = parent::storeCrud($request);
         // // your additional operations after save here
@@ -509,10 +509,10 @@ class ActionCrudController extends CrudController
     {
 
         // your additional operations before save here
-        if ( $request['created_by'] == "") {
-            $request['created_by'] = Auth::user()->name;
+        if ( $request['created_by'] == 0) {
+            $request['created_by'] = Auth::user()->id;
         }
-        $request['updated_by'] = Auth::user()->name;
+        $request['updated_by'] = Auth::user()->id;
 
 
         switch ( $request['all_day'] ) {

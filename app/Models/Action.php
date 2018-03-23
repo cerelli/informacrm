@@ -51,6 +51,11 @@ class Action extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function user()
+    {
+        return $this->hasOne('App\User','id', 'user_id');
+    }
+
     public function account()
     {
         return $this->hasOne('App\Models\Account','id', 'account_id');
