@@ -20,8 +20,11 @@ class ModifyActionsCreateUpdatedBy extends Migration
             $table->renameColumn('updated_by', 'updated_by_old');
         });
         Schema::table('actions', function($table) {
-            $table->integer('created_by')->unsigned()->default(0)->after('updated_by_old');
-            $table->integer('updated_by')->unsigned()->default(0)->after('created_by');
+            $table->integer('created_by')->unsigned()->nullable()->after('updated_by_old');
+            $table->integer('updated_by')->unsigned()->nullable()->after('created_by');
+
+            $table->foreign('created_by', 'actions_user_id_createfor')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('RESTRICT');
+            $table->foreign('updated_by', 'actions_user_id_updatefor')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('RESTRICT');
         });
         $actions = Action::all();
         foreach ($actions as $action) {
