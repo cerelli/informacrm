@@ -18,12 +18,12 @@
             {{-- <li><a href="{{ url('admin/menu-item') }}"><i class="fa fa-list"></i> <span>Menu</span></a></li> --}}
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <div class="twitter-typeahead" style="position: relative; display: inline-block;">
+                    {{-- <li> --}}
+                        {{-- <div class="twitter-typeahead" style="position: relative; display: inline-block;">
                             @include('backpack::inc.search')
-                        </div>
+                        </div> --}}
 
-                    </li>
+                    {{-- </li> --}}
                     <li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>

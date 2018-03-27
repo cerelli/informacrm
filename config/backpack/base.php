@@ -22,10 +22,10 @@ return [
     //'logo_mini' => '<font face=”Verdana”><b>i</b></font>',
 
     // Developer or company name. Shown in footer.
-    'developer_name' => 'Marco Mapelli',
+    'developer_name' => 'Slam Service',
 
     // Developer website. Link in footer.
-    'developer_link' => 'http://informacrm.it',
+    'developer_link' => 'http://www.slamservice.it',
 
     // Show powered by Laravel Backpack in the footer?
     'show_powered_by' => true,

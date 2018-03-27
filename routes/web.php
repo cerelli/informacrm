@@ -68,6 +68,7 @@ Route::group([
     });
 
     CRUD::resource('action', 'ActionCrudController');
+    Route::get('action_list', 'ActionCrudController@list');
     // Route::delete('contact_detail/{id}', 'ContactCrudController@destroy');
     CRUD::resource('event', 'EventCrudController');
     Route::get('selevent', 'EventCrudController@select');

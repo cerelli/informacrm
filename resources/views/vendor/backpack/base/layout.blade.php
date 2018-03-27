@@ -90,6 +90,11 @@
                     </ul>
                 </div>
               </li>
+              <li>
+                  <div class="twitter-typeahead" style="position: relative; display: inline-block;">
+                      @include('backpack::inc.search')
+                  </div>
+              </li>
           </ul>
           @include('backpack::inc.menu')
         </nav>
