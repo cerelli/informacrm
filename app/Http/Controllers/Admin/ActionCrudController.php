@@ -309,23 +309,25 @@ class ActionCrudController extends CrudController
                 }
             });
 
-            // $statuses = Action_status::all();
-            //
-            // foreach ($statuses as $key => $status) {
-            //     $this->crud->addFilter([ // simple filter
-            //       'type' => 'simple',
-            //       'name' => 'status'.$status['id'],
-            //       'label'=> $status['description']
-            //     ],
-            //     false,
-            //     function($value) { // if the filter is active
-            //         echo $value;
-            //         $this->crud->addClause('where', 'action_status_id', '=', 1);
-            //     } );
-            //     }
-
-
-
+            $this->crud->addFilter([ // dropdown filter
+              'name' => 'actions',
+              'type' => 'dropdown',
+              'label'=> 'Azioni...'
+            ], [
+              1 => 'Create da me',
+              2 => 'Assegnate a me',
+            ], function($value) { // if the filter is active
+                switch ( $value ) {
+                    case 1:
+                        $this->crud->addClause('where', 'created_by', Auth::user()->id);
+                        break;
+                    case 2:
+                        $this->crud->addClause('where', 'assigned_to', Auth::user()->id);
+                        break;
+                    default:
+                        break;
+                }
+            });
 
             $this->crud->addColumn([
                 'name' => 'id', // The db column name
@@ -468,7 +470,7 @@ class ActionCrudController extends CrudController
     {
         $actionStatusClosed = Action_status::actionStatusClosed();
         // dump(implode(",",$actionStatusClosed));
-        return redirect('admin/action_list?status='.implode(",",$actionStatusClosed));
+        return redirect('admin/action_list?status='.implode(",",$actionStatusClosed).'&actions=2');
         // dump($this->crud);
         // return parent::index();
     }
