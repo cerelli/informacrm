@@ -104,16 +104,7 @@ class Action extends Model
         ->where('all_day', '=', -1);
     }
 
-    public function scopeActionStatusClosed($query)
-    {
-        return $query->whereHas('action_status', function ($query) {
-            $query->where('status', '=', 0);
-        });
 
-
-        // return array_pluck($actionStatusClosed, 'id');
-        // return $actionStatusClosed;
-    }
     // /**
     //  * Scope a query to only include active users.
     //  *

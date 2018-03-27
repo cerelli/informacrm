@@ -309,25 +309,25 @@ class ActionCrudController extends CrudController
                 }
             });
 
-            $this->crud->addFilter([ // dropdown filter
-              'name' => 'actions',
-              'type' => 'dropdown',
-              'label'=> 'Azioni...'
-            ], [
-              1 => 'Create da me',
-              2 => 'Assegnate a me',
-            ], function($value) { // if the filter is active
-                switch ( $value ) {
-                    case 1:
-                        $this->crud->addClause('where', 'created_by', Auth::user()->id);
-                        break;
-                    case 2:
-                        $this->crud->addClause('where', 'assigned_to', Auth::user()->id);
-                        break;
-                    default:
-                        break;
-                }
-            });
+            // $this->crud->addFilter([ // dropdown filter
+            //   'name' => 'actions',
+            //   'type' => 'dropdown',
+            //   'label'=> 'Azioni...'
+            // ], [
+            //   1 => 'Create da me',
+            //   2 => 'Assegnate a me',
+            // ], function($value) { // if the filter is active
+            //     switch ( $value ) {
+            //         case 1:
+            //             $this->crud->addClause('where', 'created_by', Auth::user()->id);
+            //             break;
+            //         case 2:
+            //             $this->crud->addClause('where', 'assigned_to', Auth::user()->id);
+            //             break;
+            //         default:
+            //             break;
+            //     }
+            // });
 
             $this->crud->addColumn([
                 'name' => 'id', // The db column name
@@ -375,15 +375,15 @@ class ActionCrudController extends CrudController
                 'model' => "App\Models\Action_type", // foreign key model
             ]);
 
-            $this->crud->addColumn([
-                // 1-n relationship
-                'label' => trans('general.assigned_to'), // Table column heading
-                'type' => "select",
-                'name' => 'assigned_to', // the column that contains the ID of that connected entity;
-                'entity' => 'user_assigned_to', // the method that defines the relationship in your Model
-                'attribute' => "name", // foreign key attribute that is shown to user
-                'model' => "App\User", // foreign key model
-            ]);
+            // $this->crud->addColumn([
+            //     // 1-n relationship
+            //     'label' => trans('general.assigned_to'), // Table column heading
+            //     'type' => "select",
+            //     'name' => 'assigned_to', // the column that contains the ID of that connected entity;
+            //     'entity' => 'user_assigned_to', // the method that defines the relationship in your Model
+            //     'attribute' => "name", // foreign key attribute that is shown to user
+            //     'model' => "App\User", // foreign key model
+            // ]);
 
             // dump($this->crud);
             // $this->crud->addField([
@@ -464,13 +464,20 @@ class ActionCrudController extends CrudController
         // $this->crud->groupBy();
         // $this->crud->limit();
         // $this->crud->addClause('actionStatusClosed');
+        $this->crud->addClause('where', 'assigned_to', Auth::user()->id);
+    }
+
+    public function search()
+    {
+        // dump('pippo');
+        return parent::search();
     }
 
     public function index()
     {
-        $actionStatusClosed = Action_status::actionStatusClosed();
+        $actionStatusOpened = Action_status::actionStatusOpened();
         // dump(implode(",",$actionStatusClosed));
-        return redirect('admin/action_list?status='.implode(",",$actionStatusClosed).'&actions=2');
+        return redirect('admin/action_list?status='.implode(",",$actionStatusOpened));
         // dump($this->crud);
         // return parent::index();
     }
@@ -540,6 +547,9 @@ class ActionCrudController extends CrudController
 
 
         $request['created_by'] = Auth::user()->id;
+        if ( $request['assigned_to'] <= 0) {
+            $request['assigned_to'] = Auth::user()->id;
+        }
 
         $redirect_location = parent::storeCrud($request);
         // // your additional operations after save here
@@ -579,10 +589,13 @@ class ActionCrudController extends CrudController
     {
 
         // your additional operations before save here
-        if ( $request['created_by'] == 0) {
+        if ( $request['created_by'] <= 0) {
             $request['created_by'] = Auth::user()->id;
         }
         $request['updated_by'] = Auth::user()->id;
+        if ( $request['assigned_to'] <= 0) {
+            $request['assigned_to'] = Auth::user()->id;
+        }
 
 
         switch ( $request['all_day'] ) {
