@@ -30,13 +30,13 @@ class ModifyActionsCreateUpdatedBy extends Migration
         foreach ($actions as $action) {
             $user = User::where('name', $action->created_by_old)->first();
             if ( $user['id'] <= 0 ) {
-                $action->created_by = 0;
+                $action->created_by = null;
             } else {
                 $action->created_by = $user['id'];
             }
             $user = User::where('name', $action->updated_by_old)->first();
             if ( $user['id'] <= 0 ) {
-                $action->updated_by = 0;
+                $action->updated_by = null;
             } else {
                 $action->updated_by = $user['id'];
             }
