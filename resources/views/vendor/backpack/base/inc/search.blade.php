@@ -55,7 +55,7 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    left: auto !important;
+    /* left: auto !important; */
     right: 0 !important;
 }
 

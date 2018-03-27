@@ -25,7 +25,7 @@ class ContactRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            'contact_type_id' => 'required'
+            // 'contact_type_id' => 'required'
         ];
     }
 

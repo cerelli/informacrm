@@ -50,7 +50,7 @@ class ContactCrudController extends CrudController
             'attribute' => 'description', // foreign key attribute that is shown to user
             'model' => "App\Models\Contact_type", // foreign key model
             'wrapperAttributes' => [
-                'class' => 'form-group col-md-6 required',
+                'class' => 'form-group col-md-6',
             ]
         ]);
         $this->crud->addField([
