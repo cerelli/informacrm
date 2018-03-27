@@ -56,6 +56,11 @@ class Action extends Model
         return $this->hasOne('App\User','id', 'user_id');
     }
 
+    public function user_assigned_to()
+    {
+        return $this->hasOne('App\User','id', 'assigned_to');
+    }
+
     public function account()
     {
         return $this->hasOne('App\Models\Account','id', 'account_id');
@@ -99,6 +104,16 @@ class Action extends Model
         ->where('all_day', '=', -1);
     }
 
+    public function scopeActionStatusClosed($query)
+    {
+        return $query->whereHas('action_status', function ($query) {
+            $query->where('status', '=', 0);
+        });
+
+
+        // return array_pluck($actionStatusClosed, 'id');
+        // return $actionStatusClosed;
+    }
     // /**
     //  * Scope a query to only include active users.
     //  *

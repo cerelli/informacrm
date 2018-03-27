@@ -35,5 +35,6 @@ return [
     'to' => 'a',
     'address' => 'indirizzo',
     'addresses' => 'indirizzi',
+    'assigned_to' => 'Assegnato a',
 
 ];

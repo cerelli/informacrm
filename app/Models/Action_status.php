@@ -59,6 +59,15 @@ class Action_status extends Model
      }])->orderBy('lft','asc');
     }
 
+    public function scopeActionStatusClosed($query)
+    {
+        $actionStatusClosed[] = DB::table('action_statuses')
+                                ->where('status', 0)
+                                ->pluck("id");
+        // return array_pluck($actionStatusClosed, 'id');
+        return $actionStatusClosed;
+    }
+
     // function scopeCountActionStatuses($account_id)
     // {
     //     $countActionStatusesAccount[] = DB::table('action_statuses')
