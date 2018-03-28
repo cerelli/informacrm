@@ -266,26 +266,6 @@ class ActionCrudController extends CrudController
             ]);
 
             $this->crud->addFilter([ // select2_multiple filter
-                'name' => 'action_types',
-                'type' => 'select2_multiple',
-                'label'=> trans('general.types')
-            ], function() { // the options that show up in the select2
-                return Action_type::all()->pluck('description', 'id')->toArray();
-            }, function($values) { // if the filter is active
-                foreach (json_decode($values) as $key => $value) {
-                    if ($key == 0) {
-                        $this->crud->query = $this->crud->query->whereHas('action_types', function ($query) use ($value) {
-                            $query->Where('action_type_id', $value);
-                        });
-                    } else {
-                        $this->crud->query = $this->crud->query->whereHas('action_types', function ($query) use ($value) {
-                            $query->orWhere('action_type_id', $value);
-                        });
-                    }
-                }
-            });
-
-            $this->crud->addFilter([ // select2_multiple filter
               'name' => 'status',
               'type' => 'select2_multiple',
               'label'=> trans('general.statuses')
@@ -297,17 +277,46 @@ class ActionCrudController extends CrudController
                     });
                     return $statusList;
             }, function($values) { // if the filter is active
-                // dump($values);
                 if (isset($values)) {
                     foreach (json_decode($values) as $key => $value) {
-                        if ($key == 0) {
-                            $this->crud->addClause('where', 'action_status_id', $value);
-                        } else {
-                            $this->crud->addClause('orWhere', 'action_status_id', $value);
-                        }
+                        $this->crud->addClause('orwhere', 'action_status_id', $value);
+                        // if ($key == 0) {
+                        //     $this->crud->addClause('where', 'action_status_id', $value);
+                        // } else {
+                        //     $this->crud->addClause('orWhere', 'action_status_id', $value);
+                        // }
                     }
                 }
             });
+
+            $this->crud->addFilter([ // select2_multiple filter
+                'name' => 'action_types',
+                'type' => 'select2_multiple',
+                'label'=> trans('general.types')
+            ], function() { // the options that show up in the select2
+                return Action_type::all()->pluck('description', 'id')->toArray();
+            }, function($values) { // if the filter is active
+                foreach (json_decode($values) as $key => $value) {
+                    // if ( $value <> '') {
+                        $this->crud->query = $this->crud->query->whereHas('action_types', function ($query) use ($value) {
+                            $query->Where('action_type_id', $value);
+                        });
+                        // if ($key == 1) {
+                        //     $this->crud->query = $this->crud->query->whereHas('action_types', function ($query) use ($value) {
+                        //         $query->Where('action_type_id', $value);
+                        //     });
+                        // } else {
+                        //     $this->crud->query = $this->crud->query->whereHas('action_types', function ($query) use ($value) {
+                        //         $query->orWhere('action_type_iad', $value);
+                        //     });
+                        // }
+                    // }
+
+
+                }
+            });
+
+            // dump($this->crud);
 
             // $this->crud->addFilter([ // dropdown filter
             //   'name' => 'actions',
@@ -375,15 +384,15 @@ class ActionCrudController extends CrudController
                 'model' => "App\Models\Action_type", // foreign key model
             ]);
 
-            // $this->crud->addColumn([
-            //     // 1-n relationship
-            //     'label' => trans('general.assigned_to'), // Table column heading
-            //     'type' => "select",
-            //     'name' => 'assigned_to', // the column that contains the ID of that connected entity;
-            //     'entity' => 'user_assigned_to', // the method that defines the relationship in your Model
-            //     'attribute' => "name", // foreign key attribute that is shown to user
-            //     'model' => "App\User", // foreign key model
-            // ]);
+            $this->crud->addColumn([
+                // 1-n relationship
+                'label' => trans('general.assigned_to'), // Table column heading
+                'type' => "select",
+                'name' => 'assigned_to', // the column that contains the ID of that connected entity;
+                'entity' => 'user_assigned_to', // the method that defines the relationship in your Model
+                'attribute' => "name", // foreign key attribute that is shown to user
+                'model' => "App\User", // foreign key model
+            ]);
 
             // dump($this->crud);
             // $this->crud->addField([
@@ -464,12 +473,12 @@ class ActionCrudController extends CrudController
         // $this->crud->groupBy();
         // $this->crud->limit();
         // $this->crud->addClause('actionStatusClosed');
-        $this->crud->addClause('where', 'assigned_to', Auth::user()->id);
+
     }
 
     public function search()
     {
-        // dump('pippo');
+        // $this->crud->addClause('where', 'assigned_to', '=', 2);
         return parent::search();
     }
 

@@ -112,16 +112,16 @@
         },
         {
             "name": "backpack/crud",
-            "version": "3.3.12",
+            "version": "3.3.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/CRUD.git",
-                "reference": "d84a84237a605a1464cd21d73041d3995c3bc2b3"
+                "reference": "dade164f74d34943ac935f0af98c5da546a7a8c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/d84a84237a605a1464cd21d73041d3995c3bc2b3",
-                "reference": "d84a84237a605a1464cd21d73041d3995c3bc2b3",
+                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/dade164f74d34943ac935f0af98c5da546a7a8c4",
+                "reference": "dade164f74d34943ac935f0af98c5da546a7a8c4",
                 "shasum": ""
             },
             "require": {
@@ -182,7 +182,7 @@
                 "read",
                 "update"
             ],
-            "time": "2018-03-09T11:18:59+00:00"
+            "time": "2018-03-21T17:06:28+00:00"
         },
         {
             "name": "backpack/langfilemanager",
@@ -408,16 +408,16 @@
         },
         {
             "name": "backpack/settings",
-            "version": "2.0.29",
+            "version": "2.0.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/Settings.git",
-                "reference": "0697311005c6efcf7e46bc789c22729bb1f13b9c"
+                "reference": "cf92180045d76f48b59efe46f5023f1f7768d063"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/Settings/zipball/0697311005c6efcf7e46bc789c22729bb1f13b9c",
-                "reference": "0697311005c6efcf7e46bc789c22729bb1f13b9c",
+                "url": "https://api.github.com/repos/Laravel-Backpack/Settings/zipball/cf92180045d76f48b59efe46f5023f1f7768d063",
+                "reference": "cf92180045d76f48b59efe46f5023f1f7768d063",
                 "shasum": ""
             },
             "require": {
@@ -468,7 +468,7 @@
                 "tabacitu",
                 "updivision"
             ],
-            "time": "2018-03-05T15:02:55+00:00"
+            "time": "2018-03-06T17:01:02+00:00"
         },
         {
             "name": "barryvdh/elfinder-flysystem-driver",
@@ -1978,16 +1978,16 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.5.3",
+            "version": "v5.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "b79edc7acf574144c9811277286b4cafee8a07cc"
+                "reference": "04c596a69975b901f2223eb6eb4adf55354121c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/b79edc7acf574144c9811277286b4cafee8a07cc",
-                "reference": "b79edc7acf574144c9811277286b4cafee8a07cc",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/04c596a69975b901f2223eb6eb4adf55354121c2",
+                "reference": "04c596a69975b901f2223eb6eb4adf55354121c2",
                 "shasum": ""
             },
             "require": {
@@ -2005,7 +2005,9 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": [],
+                "branch-alias": {
+                    "dev-master": "5.5-dev"
+                },
                 "laravel": {
                     "providers": [
                         "Collective\\Html\\HtmlServiceProvider"
@@ -2040,7 +2042,7 @@
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "https://laravelcollective.com",
-            "time": "2018-02-12T14:19:55+00:00"
+            "time": "2018-03-24T00:39:21+00:00"
         },
         {
             "name": "league/flysystem",
@@ -2406,16 +2408,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.24.2",
+            "version": "1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875"
+                "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bba6c6e410c6b4317e37a9474aeaa753808c3875",
-                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/cbcf13da0b531767e39eb86e9687f5deba9857b4",
+                "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4",
                 "shasum": ""
             },
             "require": {
@@ -2455,7 +2457,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-03-10T10:10:14+00:00"
+            "time": "2018-03-19T15:50:49+00:00"
         },
         {
             "name": "nicolaslopezj/searchable",
@@ -2556,16 +2558,16 @@
         },
         {
             "name": "novius/laravel-backpack-crud-extended",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/novius/laravel-backpack-crud-extended.git",
-                "reference": "d7eab6fa26ac258a0a35910b2e24a8b7fa6d1176"
+                "reference": "22188f5fbd77fbf3a240e281c8993a2ec7a31a74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/novius/laravel-backpack-crud-extended/zipball/d7eab6fa26ac258a0a35910b2e24a8b7fa6d1176",
-                "reference": "d7eab6fa26ac258a0a35910b2e24a8b7fa6d1176",
+                "url": "https://api.github.com/repos/novius/laravel-backpack-crud-extended/zipball/22188f5fbd77fbf3a240e281c8993a2ec7a31a74",
+                "reference": "22188f5fbd77fbf3a240e281c8993a2ec7a31a74",
                 "shasum": ""
             },
             "require": {
@@ -2615,7 +2617,7 @@
                 "crud",
                 "laravel"
             ],
-            "time": "2017-12-12T16:44:52+00:00"
+            "time": "2018-02-14T17:45:13+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3178,16 +3180,16 @@
         },
         {
             "name": "studio-42/elfinder",
-            "version": "2.1.33",
+            "version": "2.1.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "2d3a31f70e3c817417913ab54035717f26e3efce"
+                "reference": "6ae2d6a826b2bd42035df63857a0ba80c7033baa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/2d3a31f70e3c817417913ab54035717f26e3efce",
-                "reference": "2d3a31f70e3c817417913ab54035717f26e3efce",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/6ae2d6a826b2bd42035df63857a0ba80c7033baa",
+                "reference": "6ae2d6a826b2bd42035df63857a0ba80c7033baa",
                 "shasum": ""
             },
             "require": {
@@ -3232,7 +3234,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2018-03-14T08:59:23+00:00"
+            "time": "2018-03-21T14:17:40+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
