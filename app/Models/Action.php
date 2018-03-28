@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Backpack\CRUD\CrudTrait;
+use App\User;
+use Auth;
 
 class Action extends Model
 {
@@ -23,6 +26,27 @@ class Action extends Model
     // protected $hidden = [];
     // protected $dates = [];
 
+    protected static function boot()
+        {
+            parent::boot();
+
+            // never let a company user see the users of other companies
+            if (Auth::check() && Auth::user()->id) {
+                $userId = Auth::user()->id;
+
+                static::addGlobalScope('assigned_to', function (Builder $builder) use ($userId) {
+                    $builder->where('assigned_to', $userId);
+                });
+            }
+            // // never let a company user see the users of other companies
+            // if (Auth::check() && Auth::user()->company_id) {
+            //     $companyId = Auth::user()->company->id;
+            //
+            //     static::addGlobalScope('company_id', function (Builder $builder) use ($companyId) {
+            //         $builder->where('company_id', $companyId);
+            //     });
+            // }
+        }
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -104,7 +128,13 @@ class Action extends Model
         ->where('all_day', '=', -1);
     }
 
+    public function scopeAssignedToMe($query)
+    {
+        $test = $query->where('assigned_to', '==', 2);
 
+        return $test;
+
+    }
     // /**
     //  * Scope a query to only include active users.
     //  *

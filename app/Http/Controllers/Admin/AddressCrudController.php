@@ -262,8 +262,8 @@ class AddressCrudController extends CrudController
         {
 
             $address_id = \Route::current()->parameter('address');
-            parent::edit($address_id);
-            return $this->crud['nominativo'] = 'pippo';
+            return parent::edit($address_id);
+            // return $this->crud['nominativo'] = 'pippo';
         }
 
         public function destroy($parent_id, $id = null)

@@ -98,9 +98,9 @@ trait Boxes
         $boxOptions = [
             'side' => false,
             'class' => '',
-            'collapsible' => true,
-            'viewNameBox' => true,
             'collapsed' => false,
+            'viewNameBox' => true,
+            'collapsible' => true,
         ];
 
         if (isset($this->boxesOptions[$label])) {

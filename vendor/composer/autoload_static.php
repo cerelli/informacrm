@@ -18,8 +18,8 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
-        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '6d394c3a532652dafb4dd296ba6a3f0b' => __DIR__ . '/../..' . '/app/Http/helpers.php',
     );
 
@@ -750,6 +750,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
+        'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
         'Cocur\\Slugify\\Bridge\\Laravel\\SlugifyFacade' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Laravel/SlugifyFacade.php',
         'Cocur\\Slugify\\Bridge\\Laravel\\SlugifyServiceProvider' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Laravel/SlugifyServiceProvider.php',
         'Cocur\\Slugify\\Bridge\\Latte\\SlugifyHelper' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Latte/SlugifyHelper.php',
@@ -2967,6 +2968,7 @@ class ComposerStaticInit8017445522eeea455acffc4ccbcae02b
         'Novius\\Backpack\\CRUD\\CrudPanel' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/CrudPanel.php',
         'Novius\\Backpack\\CRUD\\CrudServiceProvider' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/CrudServiceProvider.php',
         'Novius\\Backpack\\CRUD\\Http\\Controllers\\CrudController' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/Http/Controllers/CrudController.php',
+        'Novius\\Backpack\\CRUD\\ModelTraits\\SpatieMediaLibrary\\UploadableImage' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/ModelTraits/SpatieMediaLibrary/UploadableImage.php',
         'Novius\\Backpack\\CRUD\\ModelTraits\\SpatieTranslatable\\SluggableScopeHelpers' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/ModelTraits/SpatieTranslatable/SluggableScopeHelpers.php',
         'Novius\\Backpack\\CRUD\\ModelTraits\\UploadableFile' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/ModelTraits/UploadableFile.php',
         'Novius\\Backpack\\CRUD\\ModelTraits\\UploadableImage' => __DIR__ . '/..' . '/novius/laravel-backpack-crud-extended/src/ModelTraits/UploadableImage.php',
