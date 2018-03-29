@@ -83,8 +83,9 @@
 
       @include('backpack::inc.sidebar')
       {{-- SLAM start--}}
-      @include('backpack::inc.config_menu')
+      @include('inf.menu.sidebar_right')
       {{-- SLAM end--}}
+
       <!-- =============================================== -->
 
       <!-- Content Wrapper. Contains page content -->
