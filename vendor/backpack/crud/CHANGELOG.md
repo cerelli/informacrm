@@ -20,6 +20,46 @@ All Notable changes to `Backpack CRUD` will be documented in this file
 - Nothing
 -----------
 
+## [3.4.4] - 2018-03-29
+
+## Fixed
+- ckeditor button now showing after js update; merges #1310; fixes #1309;
+
+
+## [3.4.3] - 2018-03-28
+
+## Fixed
+- model_function column HTML was escaped;
+
+
+## [3.4.2] - 2018-03-23
+
+## Fixed
+- CrudPanelCreateTest failing 1 test;
+
+
+## [3.4.1] - 2018-03-22
+
+## Fixed
+- HUGE ERROR whereby entities could not be created if they had zero relationships;
+
+
+## [3.4.0] - 2018-03-22
+
+## Added
+- one-line installation command ```php artisan backpack:crud:install```;
+- 1-1 relatiosnhips; merges #865;
+
+## Fixed
+- ```checkbox``` field was using the default value over the DB value on edit; merges #1239;
+- no longer registering Base, Elfinder and Image service providers and aliases, since they all now use auto-load; merges #1279;
+- datatables responsive working with colvis and export buttons;
+
+### Removed
+- elFinder is no longer a dependency; users should require it themselves, if they need it;
+
+-----------
+
 ## [3.3.17] - 2018-03-21
 
 ## Fixed

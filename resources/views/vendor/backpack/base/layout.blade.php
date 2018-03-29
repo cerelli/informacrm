@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,12 +11,13 @@
     <title>
       {{ isset($title) ? $title.' :: '.config('backpack.base.project_name').' Admin' : config('backpack.base.project_name').' Admin' }}
     </title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('') }}/favicon.ico" />
+
     @yield('before_styles')
+    @stack('before_styles')
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/bootstrap/css/bootstrap.min.css">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
@@ -27,11 +28,14 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/pace/pace.min.css">
     <link rel="stylesheet" href="{{ asset('vendor/backpack/pnotify/pnotify.custom.min.css') }}">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
     <!-- BackPack Base CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/backpack/backpack.base.css') }}?v=2">
     <link rel="stylesheet" href="{{ asset('vendor/backpack/overlays/backpack.bold.css') }}">
 
     @yield('after_styles')
+    @stack('after_styles')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,60 +56,35 @@
 	</script>
     <!-- Site wrapper -->
     <div class="wrapper">
+
       <header class="main-header">
         <!-- Logo -->
         <a href="{{ url('') }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">{!! config('backpack.base.logo_mini') !!}</span>
-          {{-- <span class="logo-mini">{!! Config::get('settings.logo-mini') !!}</span> --}}
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg">{!! config('backpack.base.logo_lg') !!}</span>
-          {{-- <span class="logo-mini">{!! Config::get('settings.logo_lg') !!}</span> --}}
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">{{ trans('backpack::base.toggle_navigation') }}</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <ul class="add-new nav navbar-nav pull-left">
-              <li class="dropdown add-new-menu">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-plus"></i>
-                  </a>
-                <div class="dropdown-menu">
-                    <ul class = "list-inline" style="margin-left: 5px;">
-                        <ul class="list-unstyled">
-                            <li class="header"><i class="fa fa-address-book-o"></i> &nbsp;<span style="font-weight: 600;">{{ trans('general.account') }}</span></li>
-                            <li>
-                                <ul class="menu">
-                                    @can('create-account')
-                                        <li><a href="{{ '/admin/account/create' }}">{{ trans('general.account') }}</a></li>
-                                    @endcan
-                                </ul>
-                        </ul>
-                    </ul>
-                </div>
-              </li>
-              <li>
-                  <div class="twitter-typeahead" style="position: relative; display: inline-block;">
-                      @include('backpack::inc.search')
-                  </div>
-              </li>
-          </ul>
+
           @include('backpack::inc.menu')
         </nav>
       </header>
 
       <!-- =============================================== -->
 
-
       @include('backpack::inc.sidebar')
+      {{-- SLAM start--}}
       @include('backpack::inc.config_menu')
-
+      {{-- SLAM end--}}
       <!-- =============================================== -->
 
       <!-- Content Wrapper. Contains page content -->
@@ -136,16 +115,18 @@
 
 
     @yield('before_scripts')
+    @stack('before_scripts')
 
-    <!-- jQuery 2.2.0 -->
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jQuery-2.2.3.min.js"><\/script>')</script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="{{ asset('vendor/adminlte') }}/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jQuery 2.2.3 -->
+    <script src="{{ asset('vendor/adminlte') }}/bower_components/jquery/dist/jquery.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jQuery-2.2.3.min.js"><\/script>')</script> --}}
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{{ asset('vendor/adminlte') }}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/pace/pace.min.js"></script>
-    <script src="{{ asset('vendor/adminlte') }}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <script src="{{ asset('vendor/adminlte') }}/plugins/fastclick/fastclick.js"></script>
-    <script src="{{ asset('vendor/adminlte') }}/dist/js/app.min.js"></script>
+    <script src="{{ asset('vendor/adminlte') }}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    {{-- <script src="{{ asset('vendor/adminlte') }}/bower_components/fastclick/lib/fastclick.js"></script> --}}
+    <script src="{{ asset('vendor/adminlte') }}/dist/js/adminlte.min.js"></script>
 
     <!-- page script -->
     <script type="text/javascript">
@@ -195,8 +176,9 @@
     @include('backpack::inc.alerts')
 
     @yield('after_scripts')
+    @stack('after_scripts')
 
     <!-- JavaScripts -->
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
 </body>
 </html>

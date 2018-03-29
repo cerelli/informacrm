@@ -45,7 +45,7 @@ class OpportunityCrudController extends CrudController
 
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => trans('informacrm.opportunity_types').' *',
-                'type' => 'select2_multiple_color',
+                'type' => 'select2_multiple',
                 'name' => 'opportunity_types', // the method that defines the relationship in your Model
                 'entity' => 'opportunity_types', // the method that defines the relationship in your Model
                 'attribute' => 'description', // foreign key attribute that is shown to user

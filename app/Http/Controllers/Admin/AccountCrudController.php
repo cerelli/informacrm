@@ -78,14 +78,14 @@ class AccountCrudController extends CrudController
 
         $this->crud->addField([
             'label' => trans('informacrm.title'),
-            'type' => 'select',
+            'type' => 'select2',
             'name' => 'title_id', // the db column for the foreign key
             'entity' => 'title', // the method that defines the relationship in your Model
             'attribute' => 'description', // foreign key attribute that is shown to user
             'model' => "App\Models\Title", // foreign key model
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-3'
-            ]
+            ],
         ]);
         $this->crud->addField([
             'name' => 'is_person',
@@ -115,7 +115,7 @@ class AccountCrudController extends CrudController
         ]);
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => trans('informacrm.account_types'),
-                'type' => 'select2_multiple_color',
+                'type' => 'select2_multiple',
                 'name' => 'account_types', // the method that defines the relationship in your Model
                 'entity' => 'account_types', // the method that defines the relationship in your Model
                 'attribute' => 'description', // foreign key attribute that is shown to user
@@ -156,6 +156,12 @@ class AccountCrudController extends CrudController
         //     'type' => 'text',
         // ]);
 
+        $this->crud->addColumn([
+            // run a function on the CRUD model and show its return value
+            'name' => "id",
+            'label' => trans('informacrm.id'), // Table column heading
+            'type' => "text",
+        ]);
 
         $this->crud->addColumn([
             // run a function on the CRUD model and show its return value
@@ -163,7 +169,9 @@ class AccountCrudController extends CrudController
             'label' => trans('informacrm.fullname'), // Table column heading
             'type' => "model_function",
             'function_name' => 'getShowAccountLink', // the method in your Model
+            'limit' => 120,
         ]);
+
         $this->crud->addColumn([
             // n-n relationship (with pivot table)
             'label' => trans('informacrm.account_types'), // Table column heading

@@ -99,8 +99,8 @@ trait Boxes
             'side' => false,
             'class' => '',
             'collapsed' => false,
-            'viewNameBox' => true,
-            'collapsible' => true,
+            'collapsible' => false,
+            'viewNameBox' => false,
         ];
 
         if (isset($this->boxesOptions[$label])) {
