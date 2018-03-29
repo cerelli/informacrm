@@ -167,13 +167,13 @@ return [
         /*
          * Package Service Providers...
          */
-         Backpack\PermissionManager\PermissionManagerServiceProvider::class,
-         Backpack\LangFileManager\LangFileManagerServiceProvider::class,
+         // Backpack\PermissionManager\PermissionManagerServiceProvider::class,
+         // Backpack\LangFileManager\LangFileManagerServiceProvider::class,
         /*
          * Application Service Providers...
          */
-        Backpack\Base\BaseServiceProvider::class,
-        Backpack\CRUD\CrudServiceProvider::class,
+        // Backpack\Base\BaseServiceProvider::class,
+        // Backpack\CRUD\CrudServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -228,7 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'CRUD' => Backpack\CRUD\CrudServiceProvider::class,
+        // 'CRUD' => Backpack\CRUD\CrudServiceProvider::class,
     ],
 
 ];

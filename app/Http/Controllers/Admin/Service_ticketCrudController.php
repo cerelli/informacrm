@@ -44,7 +44,7 @@ class Service_ticketCrudController extends CrudController
 
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => trans('informacrm.service_ticket_types').' *',
-                'type' => 'select2_multiple_color',
+                'type' => 'select2_multiple',
                 'name' => 'service_ticket_types', // the method that defines the relationship in your Model
                 'entity' => 'service_ticket_types', // the method that defines the relationship in your Model
                 'attribute' => 'description', // foreign key attribute that is shown to user

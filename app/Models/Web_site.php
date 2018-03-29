@@ -36,7 +36,7 @@ class Web_site extends Model
     */
     public function web_site_type()
     {
-        return $this->hasOne('App\Models\Web_site_type','id','web_site_type_id');
+        return $this->belongsTo('App\Models\Web_site_type');
     }
 
     /*

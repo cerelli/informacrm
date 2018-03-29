@@ -71,7 +71,7 @@ class Account extends Model
     */
     public function title()
     {
-        return $this->hasOne('App\Models\Title','id', 'title_id');
+        return $this->belongsTo('App\Models\Title');
     }
 
     public function account_types()

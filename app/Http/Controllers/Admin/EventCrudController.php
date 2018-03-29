@@ -72,7 +72,7 @@ class EventCrudController extends CrudController
 
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => trans('informacrm.event_types').' *',
-                'type' => 'select2_multiple_color',
+                'type' => 'select2_multiple',
                 'name' => 'event_types', // the method that defines the relationship in your Model
                 'entity' => 'event_types', // the method that defines the relationship in your Model
                 'attribute' => 'description', // foreign key attribute that is shown to user
