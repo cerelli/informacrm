@@ -156,12 +156,26 @@ class AccountCrudController extends CrudController
         //     'type' => 'text',
         // ]);
 
-        $this->crud->addColumn([
-            // run a function on the CRUD model and show its return value
-            'name' => "id",
-            'label' => trans('informacrm.id'), // Table column heading
-            'type' => "text",
-        ]);
+        // $this->crud->addColumn([
+        //     // run a function on the CRUD model and show its return value
+        //     'name' => "id",
+        //     'label' => trans('informacrm.id'), // Table column heading
+        //     'type' => "text",
+        // ]);
+
+        $this->crud->addFilter([ // select2_multiple filter
+            'name' => 'account_types',
+            'type' => 'select2_multiple',
+            'label'=> trans('general.types')
+        ], function() { // the options that show up in the select2
+            return Account_type::all()->pluck('description', 'id')->toArray();
+        }, function($values) { // if the filter is active
+            foreach (json_decode($values) as $key => $value) {
+                $this->crud->query = $this->crud->query->whereHas('account_types', function ($query) use ($value) {
+                    $query->Where('account_type_id', $value);
+                });
+            }
+        });
 
         $this->crud->addColumn([
             // run a function on the CRUD model and show its return value
@@ -170,6 +184,11 @@ class AccountCrudController extends CrudController
             'type' => "model_function",
             'function_name' => 'getShowAccountLink', // the method in your Model
             'limit' => 120,
+            'searchLogic' => function ($query, $column, $searchTerm) {
+                $query->where('name1', 'like', '%'.$searchTerm.'%')
+                    ->orWhere('name2', 'like', '%'.$searchTerm.'%');
+            },
+            // 'orderable' => true
         ]);
 
         $this->crud->addColumn([
@@ -179,7 +198,8 @@ class AccountCrudController extends CrudController
             'name' => 'account_types', // the method that defines the relationship in your Model
             'entity' => 'account_types', // the method that defines the relationship in your Model
             'attribute' => "description", // foreign key attribute that is shown to user
-            'model' => "App\Models\Account_type", // foreign key model
+            'model' => "App\Models\Account_type", // foreign key model,
+            // 'orderable' => true
         ]);
 
 

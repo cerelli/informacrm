@@ -9,7 +9,9 @@
           @if (backpack_auth()->guest())
 
           @else
-              @include('inf.menu.menu_top_content_left')
+              @can ('show admin menu')
+                  @include('inf.menu.menu_top_content_left')
+              @endcan
           @endif
          @endif
         <!-- ========== End of top menu left items ========== -->
