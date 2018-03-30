@@ -300,7 +300,8 @@ class ActionCrudController extends CrudController
                 ], function() { // the options that show up in the select2
                     return User::all()->pluck('name', 'id')->toArray();
                 }, function($value) { // if the filter is active
-                    $this->crud->addClause('where', 'assigned_to', $value);
+                    // $this->crud->addClause('where', 'assigned_to', $value);
+                    $this->crud->addClause('assignedToUser', $value);
                 });
             }
 
