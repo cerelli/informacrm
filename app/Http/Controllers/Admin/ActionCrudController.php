@@ -245,6 +245,10 @@ class ActionCrudController extends CrudController
                 'box' => 'assignments'
             ]);
 
+            // dump($this->crud['name']);
+            // if ( $this->crud->['assigned_to'] <= 0) {
+            //     $this->crud['assigned_to'] = Auth::user()->id;
+            // }
             $this->crud->addField([
                 'label' => trans('informacrm.action_result_id'),
                 'type' => 'select',
@@ -292,7 +296,7 @@ class ActionCrudController extends CrudController
 
 
             if ( Auth::user()->hasPermissionTo('show actions of all users') ) {
-                $this->crud->addClause('withoutGlobalScopes');
+                // $this->crud->addClause('withoutGlobalScopes');
                 $this->crud->addFilter([ // select2_multiple filter
                     'name' => 'users',
                     'type' => 'select2',
@@ -615,6 +619,12 @@ class ActionCrudController extends CrudController
     //     $redirect_location = parent::updateCrud($request);
     //
     // }
+
+    public function create()
+    {
+        $this->crud->create_fields['assigned_to']['value'] = Auth::user()->id;
+        return parent::create();
+    }
 
     public function update(UpdateRequest $request)
     {

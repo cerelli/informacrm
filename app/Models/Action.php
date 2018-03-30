@@ -32,11 +32,16 @@ class Action extends Model
 
             // never let a company user see the users of other companies
             if (Auth::check() && Auth::user()->id) {
-                $userId = Auth::user()->id;
-                static::addGlobalScope('assigned_to', function (Builder $builder) use ($userId) {
-                    $builder->where('assigned_to', $userId);
-                });
+                if ( Auth::user()->hasPermissionTo('show actions of all users') ) {
+                    // $this->crud->addClause('withoutGlobalScopes');
+                }else{
+                    $userId = Auth::user()->id;
+                    static::addGlobalScope('assigned_to', function (Builder $builder) use ($userId) {
+                        $builder->where('assigned_to', $userId);
+                    });
+                }
             }
+
             // // never let a company user see the users of other companies
             // if (Auth::check() && Auth::user()->company_id) {
             //     $companyId = Auth::user()->company->id;
