@@ -40,7 +40,7 @@ class Address extends Model
     */
     public function address_types()
     {
-        return $this->hasOne('App\Models\Address_type','id', 'address_type_id');
+        return $this->belongsTo('App\Models\Address_type');
     }
 
     /*

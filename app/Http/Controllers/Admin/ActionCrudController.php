@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Action;
 use App\Models\Action_status;
 use App\Models\Action_type;
+use App\User;
 use Auth;
 
 
@@ -99,7 +100,7 @@ class ActionCrudController extends CrudController
 
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => trans('informacrm.action_types').' *',
-                'type' => 'select2_multiple_color',
+                'type' => 'select2_multiple',
                 'name' => 'action_types', // the method that defines the relationship in your Model
                 'entity' => 'action_types', // the method that defines the relationship in your Model
                 'attribute' => 'description', // foreign key attribute that is shown to user
@@ -115,7 +116,7 @@ class ActionCrudController extends CrudController
                 'label' => trans('informacrm.action_status').' *',
                 'type' => 'select',
                 'name' => 'action_status_id', // the db column for the foreign key
-                'entity' => 'action_statuses', // the method that defines the relationship in your Model
+                'entity' => 'action_status', // the method that defines the relationship in your Model
                 'attribute' => 'description', // foreign key attribute that is shown to user
                 'model' => "App\Models\Action_status", // foreign key model
                 'wrapperAttributes' => [
@@ -238,7 +239,7 @@ class ActionCrudController extends CrudController
                 'label' => trans('informacrm.assignments'),
                 'type' => 'select',
                 'name' => 'assigned_to', // the db column for the foreign key
-                'entity' => 'assigned_to', // the method that defines the relationship in your Model
+                'entity' => 'user_assigned_to', // the method that defines the relationship in your Model
                 'attribute' => 'name', // foreign key attribute that is shown to user
                 'model' => "App\User", // foreign key model
                 'box' => 'assignments'
@@ -248,7 +249,7 @@ class ActionCrudController extends CrudController
                 'label' => trans('informacrm.action_result_id'),
                 'type' => 'select',
                 'name' => 'action_result_id', // the db column for the foreign key
-                'entity' => 'action_results', // the method that defines the relationship in your Model
+                'entity' => 'action_result', // the method that defines the relationship in your Model
                 'attribute' => 'description', // foreign key attribute that is shown to user
                 'model' => "App\Models\Action_result", // foreign key model
                 'wrapperAttributes' => [
@@ -288,6 +289,20 @@ class ActionCrudController extends CrudController
                     }
                 }
             });
+
+
+            if ( Auth::user()->hasPermissionTo('show actions of all users') ) {
+                $this->crud->addClause('withoutGlobalScopes');
+                $this->crud->addFilter([ // select2_multiple filter
+                    'name' => 'users',
+                    'type' => 'select2',
+                    'label'=> trans('general.users')
+                ], function() { // the options that show up in the select2
+                    return User::all()->pluck('name', 'id')->toArray();
+                }, function($value) { // if the filter is active
+                    $this->crud->addClause('where', 'assigned_to', $value);
+                });
+            }
 
             $this->crud->addFilter([ // select2_multiple filter
                 'name' => 'action_types',
@@ -350,6 +365,7 @@ class ActionCrudController extends CrudController
                 'label' => trans('informacrm.account'), // Table column heading
                 'type' => "model_function",
                 'function_name' => 'getShowAccountLink',
+                'limit' => 120,
                 'searchLogic' => function ($query, $column, $searchTerm) {
                     $query->orWhereHas('account', function ($q) use ($column, $searchTerm) {
                         $q->where('name1', 'like', '%'.$searchTerm.'%')
@@ -485,8 +501,13 @@ class ActionCrudController extends CrudController
     public function index()
     {
         $actionStatusOpened = Action_status::actionStatusOpened();
+        if ( Auth::user()->hasPermissionTo('show actions of all users') ) {
+            return redirect('admin/action_list?status='.implode(",",$actionStatusOpened).'&users='.Auth::user()->id);
+        }else{
+            return redirect('admin/action_list?status='.implode(",",$actionStatusOpened));
+        }
         // dump(implode(",",$actionStatusClosed));
-        return redirect('admin/action_list?status='.implode(",",$actionStatusOpened));
+
         // dump($this->crud);
         // return parent::index();
     }

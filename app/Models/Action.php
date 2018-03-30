@@ -33,7 +33,6 @@ class Action extends Model
             // never let a company user see the users of other companies
             if (Auth::check() && Auth::user()->id) {
                 $userId = Auth::user()->id;
-
                 static::addGlobalScope('assigned_to', function (Builder $builder) use ($userId) {
                     $builder->where('assigned_to', $userId);
                 });
@@ -75,24 +74,29 @@ class Action extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function user()
-    {
-        return $this->hasOne('App\User','id', 'user_id');
-    }
+    // public function user()
+    // {
+    //     return $this->hasOne('App\User','id', 'user_id');
+    // }
 
     public function user_assigned_to()
     {
-        return $this->hasOne('App\User','id', 'assigned_to');
+        return $this->belongsTo('App\User', 'assigned_to', 'id');
     }
 
     public function account()
     {
-        return $this->hasOne('App\Models\Account','id', 'account_id');
+        return $this->belongsTo('App\Models\Account');
     }
 
     public function action_status()
     {
-        return $this->hasOne('App\Models\Action_status','id','action_status_id');
+        return $this->belongsTo('App\Models\Action_status');
+    }
+
+    public function action_result()
+    {
+        return $this->belongsTo('App\Models\Action_result');
     }
 
     public function action_types()
@@ -158,4 +162,7 @@ class Action extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function setDatetimeAttribute($value) {
+        $this->attributes['start_date'] = \Date::parse($value);
+    }
 }

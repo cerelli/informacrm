@@ -55,22 +55,22 @@ class Contact extends Model
     */
     public function title()
     {
-        return $this->hasOne('App\Models\Title','id','title_id');
+        return $this->belongsTo('App\Models\Title');
     }
 
     public function account()
     {
-        return $this->hasOne('App\Models\Account','id','account_id');
+        return $this->belongsTo('App\Models\Account');
     }
 
     public function contact_type()
     {
-        return $this->hasOne('App\Models\Contact_type','id','contact_type_id');
+        return $this->belongsTo('App\Models\Contact_type');
     }
 
     public function office()
     {
-        return $this->hasOne('App\Models\Office','id','office_id');
+        return $this->belongsTo('App\Models\Office');
     }
 
     public function contact_details()

@@ -3,6 +3,15 @@
 		$url = '';
 		$attributes = '';
 		$class = '';
+		$idDeleteButton = '';
+		if ( !isset($custom_button_class_name) ) {
+			// $url = url($crud->route.'/'.$entry->getKey());
+		} else {
+			if ( isset($custom_button_class_name) ) {
+				$idDeleteButton = '.'.$custom_button_class_name;
+			}
+
+		}
 		if ( !isset($custom_button_url) ) {
 			// $url = url($crud->route.'/'.$entry->getKey());
 		} else {
@@ -44,3 +53,42 @@
 		</a>
 	@endif --}}
 {{-- @endif --}}
+
+<script>
+$('{{$idDeleteButton}}').click(function(e){
+  e.preventDefault();
+  var delete_button = $(this);
+  var delete_url = $(this).attr('href');
+  var delete_id = $(this).attr('delete-id');
+  if (confirm("{{ trans('backpack::crud.delete_confirm') }}") == true) {
+	  $.ajax({
+		  url: delete_url,
+		  type: 'DELETE',
+		  success: function(result) {
+			  // Show an alert with the result
+			  new PNotify({
+				  title: "{{ trans('backpack::crud.delete_confirmation_title') }}",
+				  text: "{{ trans('backpack::crud.delete_confirmation_message') }}",
+				  type: "success"
+			  });
+			  // delete panel of contact deleted
+			  $("#web-site-panel-"+delete_id).remove();
+		  },
+		  error: function(result) {
+			  // Show an alert with the result
+			  new PNotify({
+				  title: "{{ trans('backpack::crud.delete_confirmation_not_title') }}",
+				  text: "{{ trans('backpack::crud.delete_confirmation_not_message') }}",
+				  type: "warning"
+			  });
+		  }
+	  });
+  } else {
+	  new PNotify({
+		  title: "{{ trans('backpack::crud.delete_confirmation_not_deleted_title') }}",
+		  text: "{{ trans('backpack::crud.delete_confirmation_not_deleted_message') }}",
+		  type: "info"
+	  });
+  }
+});
+</script>

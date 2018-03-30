@@ -36,5 +36,6 @@ return [
     'address' => 'indirizzo',
     'addresses' => 'indirizzi',
     'assigned_to' => 'Assegnato a',
+    'users' => 'Utenti',
 
 ];

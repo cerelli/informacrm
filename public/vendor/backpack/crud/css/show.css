@@ -3,12 +3,3 @@
 * Backpack Crud / Show
 *
 */
-.btn-hidden{
-    display: none;
-}
-
-
-.button-tools:hover .btn-hidden{
-    display: inline;
-    margin-left: 3px;
-}
