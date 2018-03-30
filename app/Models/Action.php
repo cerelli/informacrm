@@ -132,12 +132,10 @@ class Action extends Model
         ->where('all_day', '=', -1);
     }
 
-    public function scopeAssignedToMe($query)
+    public function scopeAssignedToUser($query, $userId)
     {
-        $test = $query->where('assigned_to', '==', 2);
-
+        $test = $query->where('assigned_to', $userId);
         return $test;
-
     }
     // /**
     //  * Scope a query to only include active users.
