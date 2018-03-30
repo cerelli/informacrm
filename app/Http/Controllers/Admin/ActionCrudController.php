@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Action;
 use App\Models\Action_status;
 use App\Models\Action_type;
+use App\User;
 use Auth;
 
 
@@ -289,6 +290,20 @@ class ActionCrudController extends CrudController
                 }
             });
 
+
+            if ( Auth::user()->hasPermissionTo('show actions of all users') ) {
+                $this->crud->addClause('withoutGlobalScopes');
+                $this->crud->addFilter([ // select2_multiple filter
+                    'name' => 'users',
+                    'type' => 'select2',
+                    'label'=> trans('general.users')
+                ], function() { // the options that show up in the select2
+                    return User::all()->pluck('name', 'id')->toArray();
+                }, function($value) { // if the filter is active
+                    $this->crud->addClause('where', 'assigned_to', $value);
+                });
+            }
+
             $this->crud->addFilter([ // select2_multiple filter
                 'name' => 'action_types',
                 'type' => 'select2_multiple',
@@ -486,8 +501,13 @@ class ActionCrudController extends CrudController
     public function index()
     {
         $actionStatusOpened = Action_status::actionStatusOpened();
+        if ( Auth::user()->hasPermissionTo('show actions of all users') ) {
+            return redirect('admin/action_list?status='.implode(",",$actionStatusOpened).'&users='.Auth::user()->id);
+        }else{
+            return redirect('admin/action_list?status='.implode(",",$actionStatusOpened));
+        }
         // dump(implode(",",$actionStatusClosed));
-        return redirect('admin/action_list?status='.implode(",",$actionStatusOpened));
+
         // dump($this->crud);
         // return parent::index();
     }

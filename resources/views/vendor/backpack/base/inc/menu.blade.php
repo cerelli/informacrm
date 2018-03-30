@@ -9,7 +9,7 @@
           @if (backpack_auth()->guest())
 
           @else
-              @include('inf.menu.menu_top_content')
+              @include('inf.menu.menu_top_content_left')
           @endif
          @endif
         <!-- ========== End of top menu left items ========== -->
