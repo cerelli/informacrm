@@ -159,7 +159,10 @@ class Action extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
-
+    public function getFullNameAccountAttribute()
+    {
+        return trim(trim($this->name1).' '.trim($this->name2));
+    }
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

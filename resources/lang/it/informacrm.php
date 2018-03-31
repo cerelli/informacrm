@@ -14,6 +14,7 @@ return [
     */
 
     //base
+    'account_id' => 'Codice Nominativo',
     'select' => 'Seleziona',
     'new' => 'Nuovo',
     'other'         => 'Altro',

@@ -37,5 +37,7 @@ return [
     'addresses' => 'indirizzi',
     'assigned_to' => 'Assegnato a',
     'users' => 'Utenti',
+    'assignment' => 'Assegnazione',
+    'schedule' => 'Programmazione',
 
 ];

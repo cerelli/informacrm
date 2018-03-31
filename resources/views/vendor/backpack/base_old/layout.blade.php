@@ -82,7 +82,7 @@
                             <li class="header"><i class="fa fa-address-book-o"></i> &nbsp;<span style="font-weight: 600;">{{ trans('general.account') }}</span></li>
                             <li>
                                 <ul class="menu">
-                                    @can('create-account')
+                                    @can('create account')
                                         <li><a href="{{ '/admin/account/create' }}">{{ trans('general.account') }}</a></li>
                                     @endcan
                                 </ul>

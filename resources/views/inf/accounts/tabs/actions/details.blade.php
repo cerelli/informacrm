@@ -14,7 +14,7 @@
 
     </li>
     <!-- /.timeline-label -->
-    
+
     @foreach ($actions as $action)
         <!-- timeline item -->
         <li class='acton-li-{{ $action->id }}'>
