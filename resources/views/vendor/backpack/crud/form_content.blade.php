@@ -70,9 +70,15 @@
             @foreach ($crud->getBoxes('side') as $k => $box)
                 <div class="box {{ $crud->getBoxOptions($box)['class'] }}">
                     <div class="box-header">
-                        <h3 class="box-title">{{ $box }}</h3>
+                        @if ($crud->getBoxOptions($box)['viewNameBox'])
+                            <h3 class="box-title">
+                                {{ $box }}
+                            </h3>
+                        @endif
                         <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-{{ $crud->getBoxOptions($box)['collapsed'] ? 'plus' : 'minus' }}"></i></button>
+                            @if ($crud->getBoxOptions($box)['collapsible'])
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-{{ $crud->getBoxOptions($box)['collapsed'] ? 'plus' : 'minus' }}"></i></button>
+                            @endif
                         </div>
                     </div>
                     <div class="box-body">

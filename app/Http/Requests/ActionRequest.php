@@ -26,6 +26,7 @@ class ActionRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     {
         return [
             'title' => 'required|min:3|max:255',
+            'account_id' => 'required',
             'action_types' => 'required',
             'action_status_id' => 'required',
         ];

@@ -223,18 +223,28 @@ class AccountCrudController extends CrudController
 
         // dump($this->crud->hasAccess('create-account'));
         $this->crud->removeButton( 'preview' );
-        $this->crud->removeButton( 'update' );
+        // $this->crud->removeButton( 'update' );
         $this->crud->removeButton( 'revisions' );
-        $this->crud->removeButton( 'delete' );
+        // $this->crud->removeButton( 'delete' );
         // $this->crud->removeAllButtonsFromStack('line');
         // $this->crud->addButtonFromModelFunction('line', 'open_google', 'openGoogle', 'beginning'); // add a button whose HTML is returned by a method in the CRUD model
 
         // ------ CRUD ACCESS
         $this->crud->allowAccess('show','create');
-        if (Auth::user()->can('create-account')){
+        if (Auth::user()->can('create account')){
 
         }else{
             $this->crud->removeButton( 'create' );
+        }
+        if (Auth::user()->can('update account')){
+
+        }else{
+            $this->crud->removeButton( 'update' );
+        }
+        if (Auth::user()->can('delete account')){
+
+        }else{
+            $this->crud->removeButton( 'delete' );
         }
         // if (Auth::user()->can('delete-account')){
         //

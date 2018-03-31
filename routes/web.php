@@ -21,7 +21,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'], 'namespace' 
     // Backpack\MenuCRUD
     CRUD::resource('menu-item', 'MenuItemCrudController');
 });
-
+Route::get('/api/accounts', 'Api\AccountController@index');
 Route::group([
     'prefix' => config('backpack.base.route_prefix', 'admin'),
     'middleware' => ['admin'],
@@ -30,6 +30,7 @@ Route::group([
     Route::get('test', function () {
         return view('test');
     });
+
 
     // CRUD::resource('action','ActionCrudController');
     CRUD::resource('action_status', 'Action_statusCrudController');

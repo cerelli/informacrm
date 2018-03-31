@@ -15,7 +15,19 @@ use App\Http\Requests\ActionRequest as UpdateRequest;
 class ActionAccountCrudController extends ActionCrudController {
 
     public function setup() {
+
         parent::setup();
+
+        $this->crud->removeField('account_id', 'both');
+        $this->crud->addField([
+            'name' => 'account_id',
+            'label' => trans('informacrm.account_id'),
+            'type' => 'text',
+            'box' => 'basic',
+            'wrapperAttributes' => [
+                'class' => 'required'
+            ]
+        ]);
 
         $this->crud->addFilter([ // select2_multiple filter
             'name' => 'account_types',
