@@ -58,7 +58,7 @@ class AddressCrudController extends CrudController
             'label' => trans('informacrm.address_type'),
             'type' => 'select2',
             'name' => 'address_type_id', // the db column for the foreign key
-            'entity' => 'address_types', // the method that defines the relationship in your Model
+            'entity' => 'address_type', // the method that defines the relationship in your Model
             'attribute' => 'description', // foreign key attribute that is shown to user
             'model' => "App\Models\Address_type", // foreign key model
             'wrapperAttributes' => [

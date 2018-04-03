@@ -18,16 +18,26 @@ class ActionAccountCrudController extends ActionCrudController {
 
         parent::setup();
 
-        $this->crud->removeField('account_id', 'both');
-        $this->crud->addField([
-            'name' => 'account_id',
-            'label' => trans('informacrm.account_id'),
-            'type' => 'text',
-            'box' => 'basic',
-            'wrapperAttributes' => [
-                'class' => 'required'
-            ]
-        ]);
+        // $this->crud->removeField('account_id', 'both');
+        //
+        // // $this->crud->addField([   // CustomHTML
+        // //     'name' => 'separator',
+        // //     'type' => 'custom_html',
+        // //     'value' => '<label>{!! $field['label'] !!}</label>'
+        // // ]);
+        //
+        // $this->crud->addField([
+        //     'name' => 'account_id',
+        //     'label' => trans('informacrm.account_id'),
+        //     'type' => 'text',
+        //     'box' => 'basic',
+        //     'attributes' => ['disabled' => 'disapled'],
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-12 required'
+        //     ]
+        // ])->beforeField('title');
+        // $this->crud->addField()->afterField('name'); // will show this after the given field
+
 
         $this->crud->addFilter([ // select2_multiple filter
             'name' => 'account_types',

@@ -27,9 +27,9 @@ Route::group([
     'middleware' => ['admin'],
     'namespace' => 'Admin'
 ], function() {
-    Route::get('test', function () {
-        return view('test');
-    });
+    // Route::get('test', function () {
+    //     return view('test');
+    // });
 
 
     // CRUD::resource('action','ActionCrudController');

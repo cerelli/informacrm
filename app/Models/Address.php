@@ -38,7 +38,7 @@ class Address extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function address_types()
+    public function address_type()
     {
         return $this->belongsTo('App\Models\Address_type');
     }

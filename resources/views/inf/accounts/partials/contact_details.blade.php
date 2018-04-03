@@ -18,7 +18,7 @@
               </div>
                 <div class="col-md-3 button-tools" style="padding: 8px;">
                     <!-- Delete button -->
-                    @includeif('vendor.backpack.crud.buttons.delete', [
+                    @includeif('inf.buttons.delete', [
                         'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$entry->id.'/contact/'.$contact->id.'/contact_detail').'/'.$contact_detail->id,
                         'custom_button_attributes' => " title='Delete contact_detail' delete-id='$contact_detail->id'",
                         'custom_button_class' => " pull-right del-confirmcontactdetails"

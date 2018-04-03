@@ -100,7 +100,22 @@ class ActionCrudController extends CrudController
         //         'class' => 'form-group col-md-12 required'
         //     ]
         // ]);
+        $action_id = \Route::current()->parameter('action');
+        // dump($action_id);
+        if ( $action_id > 0 ) {
+            if ( Auth::user()->hasPermissionTo('change the action account') ) {
+                // dump('pippo');
+                $disabled = '';
+            }else{
+                // dump('pluto');/
+                $disabled = 'disabled';
+            };
+        } else {
+            $disabled = '';
+        }
 
+
+        // dump($disabled);
         $this->crud->addField([
             'name' => 'account_id',
             'label' => trans('general.account'),
@@ -112,6 +127,7 @@ class ActionCrudController extends CrudController
             'placeholder' => trans('general.account'),
             'minimum_input_length' => 2,
             'box' => 'basic',
+            'attributes' => [$disabled => $disabled],
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-12 required'
             ]
@@ -139,6 +155,8 @@ class ActionCrudController extends CrudController
             ]
         ]);
 
+
+        // dump( $attrubutes );
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
             'label' => trans('informacrm.action_types'),
                 'type' => 'select2_multiple',
@@ -664,6 +682,13 @@ class ActionCrudController extends CrudController
     public function create()
     {
         $this->crud->create_fields['assigned_to']['value'] = Auth::user()->id;
+        $account_id = \Route::current()->parameter('account_id');
+        if ( !$account_id ) {
+
+        } else {
+            $this->crud->create_fields['account_id']['value'] = $account_id;
+        }
+
         return parent::create();
     }
 
