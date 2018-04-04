@@ -32,11 +32,16 @@ class Action extends Model
 
             // never let a company user see the users of other companies
             if (Auth::check() && Auth::user()->id) {
-                $userId = Auth::user()->id;
-                static::addGlobalScope('assigned_to', function (Builder $builder) use ($userId) {
-                    $builder->where('assigned_to', $userId);
-                });
+                if ( Auth::user()->hasPermissionTo('show actions of all users') ) {
+                    // $this->crud->addClause('withoutGlobalScopes');
+                }else{
+                    $userId = Auth::user()->id;
+                    static::addGlobalScope('assigned_to', function (Builder $builder) use ($userId) {
+                        $builder->where('assigned_to', $userId);
+                    });
+                }
             }
+
             // // never let a company user see the users of other companies
             // if (Auth::check() && Auth::user()->company_id) {
             //     $companyId = Auth::user()->company->id;
@@ -132,12 +137,10 @@ class Action extends Model
         ->where('all_day', '=', -1);
     }
 
-    public function scopeAssignedToMe($query)
+    public function scopeAssignedToUser($query, $userId)
     {
-        $test = $query->where('assigned_to', '==', 2);
-
+        $test = $query->where('assigned_to', $userId);
         return $test;
-
     }
     // /**
     //  * Scope a query to only include active users.
@@ -156,7 +159,10 @@ class Action extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
-
+    public function getFullNameAccountAttribute()
+    {
+        return trim(trim($this->name1).' '.trim($this->name2));
+    }
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

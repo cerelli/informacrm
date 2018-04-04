@@ -12,7 +12,7 @@
             {{-- {{ dd($filter) }} --}}
             @includeif('inf.buttons.create', [
                 'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/account/'.$active_account_id['id'].'/action/create'),
-                'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.action')."' ",
+                'custom_button_attributes' => " title='".trans('backpack::crud.add')." ".trans('informacrm.action')."' style='margin-top: 20px;'",
                 'custom_button_class' => ""
             ])
         @endcan

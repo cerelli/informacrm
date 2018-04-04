@@ -156,12 +156,26 @@ class AccountCrudController extends CrudController
         //     'type' => 'text',
         // ]);
 
-        $this->crud->addColumn([
-            // run a function on the CRUD model and show its return value
-            'name' => "id",
-            'label' => trans('informacrm.id'), // Table column heading
-            'type' => "text",
-        ]);
+        // $this->crud->addColumn([
+        //     // run a function on the CRUD model and show its return value
+        //     'name' => "id",
+        //     'label' => trans('informacrm.id'), // Table column heading
+        //     'type' => "text",
+        // ]);
+
+        $this->crud->addFilter([ // select2_multiple filter
+            'name' => 'account_types',
+            'type' => 'select2_multiple',
+            'label'=> trans('general.types')
+        ], function() { // the options that show up in the select2
+            return Account_type::all()->pluck('description', 'id')->toArray();
+        }, function($values) { // if the filter is active
+            foreach (json_decode($values) as $key => $value) {
+                $this->crud->query = $this->crud->query->whereHas('account_types', function ($query) use ($value) {
+                    $query->Where('account_type_id', $value);
+                });
+            }
+        });
 
         $this->crud->addColumn([
             // run a function on the CRUD model and show its return value
@@ -170,6 +184,11 @@ class AccountCrudController extends CrudController
             'type' => "model_function",
             'function_name' => 'getShowAccountLink', // the method in your Model
             'limit' => 120,
+            'searchLogic' => function ($query, $column, $searchTerm) {
+                $query->where('name1', 'like', '%'.$searchTerm.'%')
+                    ->orWhere('name2', 'like', '%'.$searchTerm.'%');
+            },
+            // 'orderable' => true
         ]);
 
         $this->crud->addColumn([
@@ -179,7 +198,8 @@ class AccountCrudController extends CrudController
             'name' => 'account_types', // the method that defines the relationship in your Model
             'entity' => 'account_types', // the method that defines the relationship in your Model
             'attribute' => "description", // foreign key attribute that is shown to user
-            'model' => "App\Models\Account_type", // foreign key model
+            'model' => "App\Models\Account_type", // foreign key model,
+            // 'orderable' => true
         ]);
 
 
@@ -203,18 +223,28 @@ class AccountCrudController extends CrudController
 
         // dump($this->crud->hasAccess('create-account'));
         $this->crud->removeButton( 'preview' );
-        $this->crud->removeButton( 'update' );
+        // $this->crud->removeButton( 'update' );
         $this->crud->removeButton( 'revisions' );
-        $this->crud->removeButton( 'delete' );
+        // $this->crud->removeButton( 'delete' );
         // $this->crud->removeAllButtonsFromStack('line');
         // $this->crud->addButtonFromModelFunction('line', 'open_google', 'openGoogle', 'beginning'); // add a button whose HTML is returned by a method in the CRUD model
 
         // ------ CRUD ACCESS
         $this->crud->allowAccess('show','create');
-        if (Auth::user()->can('create-account')){
+        if (Auth::user()->can('create account')){
 
         }else{
             $this->crud->removeButton( 'create' );
+        }
+        if (Auth::user()->can('update account')){
+
+        }else{
+            $this->crud->removeButton( 'update' );
+        }
+        if (Auth::user()->can('delete account')){
+
+        }else{
+            $this->crud->removeButton( 'delete' );
         }
         // if (Auth::user()->can('delete-account')){
         //

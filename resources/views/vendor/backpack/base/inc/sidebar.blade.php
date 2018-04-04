@@ -17,7 +17,6 @@
 
           <!-- ======================================= -->
           {{-- <li class="header">Other menus</li> --}}
-          @include('inf.menu.sidebar_content_user')
         </ul>
       </section>
       <!-- /.sidebar -->

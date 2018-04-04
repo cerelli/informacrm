@@ -66,13 +66,15 @@ class ActionCrudController extends CrudController
             'side' => true,         // Place this box on the right side?
             'class' => "box-info",  // CSS class to add to the div. Eg, <div class="box box-info">
             'collapsible' => false,
+            'viewNameBox' => false,
             'collapsed' => false,    // Collapse this box by default?
         ]);
 
         $this->crud->setBoxOptions('result', [
             'side' => false,         // Place this box on the right side?
             'class' => "box-info",  // CSS class to add to the div. Eg, <div class="box box-info">
-            'collapsible' => true,
+            'collapsible' => false,
+            'viewNameBox' => false,
             'collapsed' => false,    // Collapse this box by default?
         ]);
 
@@ -80,26 +82,83 @@ class ActionCrudController extends CrudController
         $this->crud->setBoxOptions('assignments', [
             'side' => true,         // Place this box on the right side?
             'class' => "box-info",  // CSS class to add to the div. Eg, <div class="box box-info">
-            'collapsible' => true,
+            'collapsible' => false,
+            'viewNameBox' => false,
             'collapsed' => false,    // Collapse this box by default?
         ]);
 
+
+        // $this->crud->addField([
+        //     'name' => 'account_id',
+        //     'label' => trans('general.account'),
+        //     'type' => 'select2',
+        //     'entity' => 'account', // the method that defines the relationship in your Model
+        //     'attribute' => 'name1'.'name2', // foreign key attribute that is shown to user
+        //     'model' => "App\Models\Account", // foreign key model
+        //     'box' => 'basic',
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-12 required'
+        //     ]
+        // ]);
+        $action_id = \Route::current()->parameter('action');
+        // dump($action_id);
+        if ( $action_id > 0 ) {
+            if ( Auth::user()->hasPermissionTo('change the action account') ) {
+                // dump('pippo');
+                $disabled = '';
+            }else{
+                // dump('pluto');/
+                $disabled = 'disabled';
+            };
+        } else {
+            $disabled = '';
+        }
+
+
+        // dump($disabled);
         $this->crud->addField([
             'name' => 'account_id',
-            'label' => trans('informacrm.account_id'),
-            'type' => 'hidden',
-            'box' => 'basic'
+            'label' => trans('general.account'),
+            'type' => 'select2_from_ajax',
+            'entity' => 'account', // the method that defines the relationship in your Model
+            'attribute' => 'full_name', // foreign key attribute that is shown to user
+            'model' => "App\Models\Account", // foreign key model
+            'data_source' => url("api/accounts"),
+            'placeholder' => trans('general.account'),
+            'minimum_input_length' => 2,
+            'box' => 'basic',
+            'attributes' => [$disabled => $disabled],
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-12 required'
+            ]
         ]);
+        // [
+        //             // 1-n relationship
+        //             // 'label' => "End", // Table column heading
+        //             // 'type' => "select2_from_ajax",
+        //             // 'name' => 'category_id', // the column that contains the ID of that connected entity
+        //             // 'entity' => 'city', // the method that defines the relationship in your Model
+        //             'attribute' => "name", // foreign key attribute that is shown to user
+        //             // 'model' => "App\Models\Category", // foreign key model
+        //             // 'data_source' => url("api/category"), // url to controller search function (with /{id} should return model)
+        //             // 'placeholder' => "Select a category", // placeholder for the select
+        //             'minimum_input_length' => 2, // minimum characters to type before querying results
+        //  ]
 
         $this->crud->addField([
             'name' => 'title',
-            'label' => trans('informacrm.action_title').' *',
+            'label' => trans('informacrm.action_title'),
             'type' => 'text',
-            'box' => 'basic'
+            'box' => 'basic',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-12 required'
+            ]
         ]);
 
+
+        // dump( $attrubutes );
         $this->crud->addField([       // Select2Multiple = n-n relationship (with pivot table)
-            'label' => trans('informacrm.action_types').' *',
+            'label' => trans('informacrm.action_types'),
                 'type' => 'select2_multiple',
                 'name' => 'action_types', // the method that defines the relationship in your Model
                 'entity' => 'action_types', // the method that defines the relationship in your Model
@@ -107,20 +166,20 @@ class ActionCrudController extends CrudController
                 'model' => "App\Models\Action_type", // foreign key model
                 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
                 'wrapperAttributes' => [
-                    'class' => 'form-group col-md-9'
+                    'class' => 'form-group col-md-9 required'
                 ],
                 'box' => 'basic'
             ]);
 
             $this->crud->addField([
-                'label' => trans('informacrm.action_status').' *',
+                'label' => trans('informacrm.action_status'),
                 'type' => 'select',
                 'name' => 'action_status_id', // the db column for the foreign key
                 'entity' => 'action_status', // the method that defines the relationship in your Model
                 'attribute' => 'description', // foreign key attribute that is shown to user
                 'model' => "App\Models\Action_status", // foreign key model
                 'wrapperAttributes' => [
-                    'class' => 'form-group col-md-3'
+                    'class' => 'form-group col-md-3 required'
                 ],
                 'box' => 'basic'
             ]);
@@ -165,7 +224,7 @@ class ActionCrudController extends CrudController
 
             $this->crud->addField(
                 [
-                    'label' => trans('informacrm.schedule'),
+                    'label' => trans('general.schedule'),
                     'name' => 'all_day',
                     'type' => 'toggle',
                     'inline' => true,
@@ -236,7 +295,7 @@ class ActionCrudController extends CrudController
             ]);
 
             $this->crud->addField([
-                'label' => trans('informacrm.assignments'),
+                'label' => trans('general.assignment'),
                 'type' => 'select',
                 'name' => 'assigned_to', // the db column for the foreign key
                 'entity' => 'user_assigned_to', // the method that defines the relationship in your Model
@@ -245,6 +304,10 @@ class ActionCrudController extends CrudController
                 'box' => 'assignments'
             ]);
 
+            // dump($this->crud['name']);
+            // if ( $this->crud->['assigned_to'] <= 0) {
+            //     $this->crud['assigned_to'] = Auth::user()->id;
+            // }
             $this->crud->addField([
                 'label' => trans('informacrm.action_result_id'),
                 'type' => 'select',
@@ -292,7 +355,7 @@ class ActionCrudController extends CrudController
 
 
             if ( Auth::user()->hasPermissionTo('show actions of all users') ) {
-                $this->crud->addClause('withoutGlobalScopes');
+                // $this->crud->addClause('withoutGlobalScopes');
                 $this->crud->addFilter([ // select2_multiple filter
                     'name' => 'users',
                     'type' => 'select2',
@@ -300,7 +363,8 @@ class ActionCrudController extends CrudController
                 ], function() { // the options that show up in the select2
                     return User::all()->pluck('name', 'id')->toArray();
                 }, function($value) { // if the filter is active
-                    $this->crud->addClause('where', 'assigned_to', $value);
+                    // $this->crud->addClause('where', 'assigned_to', $value);
+                    $this->crud->addClause('assignedToUser', $value);
                 });
             }
 
@@ -614,6 +678,19 @@ class ActionCrudController extends CrudController
     //     $redirect_location = parent::updateCrud($request);
     //
     // }
+
+    public function create()
+    {
+        $this->crud->create_fields['assigned_to']['value'] = Auth::user()->id;
+        $account_id = \Route::current()->parameter('account_id');
+        if ( !$account_id ) {
+
+        } else {
+            $this->crud->create_fields['account_id']['value'] = $account_id;
+        }
+
+        return parent::create();
+    }
 
     public function update(UpdateRequest $request)
     {
