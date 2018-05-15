@@ -164,6 +164,15 @@ class Account extends Model
         return trim(trim($this->name1).' '.trim($this->name2));
     }
 
+    public function getCreatedAtAttribute($date)
+    {
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
+    }
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
+    }
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

@@ -144,6 +144,8 @@ class AccountCrudController extends CrudController
                 'class' => 'form-group col-md-6'
             ]
         ]);
+
+
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');
@@ -299,6 +301,7 @@ class AccountCrudController extends CrudController
         // $this->crud->orderBy();
         // $this->crud->groupBy();
         // $this->crud->limit();
+
     }
 
 
@@ -315,6 +318,7 @@ class AccountCrudController extends CrudController
         $this->crud->hasAccessOrFail('show');
         // Cache::forever('active_account_id', $id);
         $view = parent::show($id);
+        $this->addAcud();
         return $view;
     }
 
@@ -378,6 +382,20 @@ class AccountCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
+    }
+
+    public function addAcud()
+    {
+        // $this->crud->acud['assigned_to'] = '';
+        // $this->crud->acud['assigned_by'] = '';
+        // $this->crud->acud['assigned_at'] = '';
+
+        $this->crud->acud['created_by'] = $this->crud->entry['created_by'];
+        $this->crud->acud['created_at'] = $this->crud->entry['created_at'];
+
+        $this->crud->acud['updated_by'] = $this->crud->entry['updated_by'];
+        $this->crud->acud['updated_at'] = $this->crud->entry['updated_at'];
+
     }
 
 }

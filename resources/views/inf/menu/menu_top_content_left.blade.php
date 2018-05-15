@@ -20,7 +20,7 @@
     </li>
     <li>
         <div class="twitter-typeahead" style="position: relative; display: inline-block;">
-            @include('backpack::inc.search')
+            @include('inf.search.top')
         </div>
     </li>
 </ul>

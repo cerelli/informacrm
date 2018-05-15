@@ -9,13 +9,14 @@ use Backpack\Settings\app\Http\Requests\SettingRequest as UpdateRequest;
 
 class SettingCrudController extends CrudController
 {
-    public function __construct()
+    public function setup()
     {
-        parent::__construct();
+        parent::setup();
 
         $this->crud->setModel("Backpack\Settings\app\Models\Setting");
         $this->crud->setEntityNameStrings(trans('backpack::settings.setting_singular'), trans('backpack::settings.setting_plural'));
-        $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/setting');
+        $this->crud->setRoute(backpack_url('setting'));
+        $this->crud->addClause('where', 'active', 1);
         $this->crud->denyAccess(['create', 'delete']);
         $this->crud->setColumns([
             [
@@ -50,8 +51,6 @@ class SettingCrudController extends CrudController
      */
     public function index()
     {
-        $this->crud->addClause('where', 'active', 1);
-
         return parent::index();
     }
 

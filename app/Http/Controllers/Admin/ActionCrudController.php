@@ -9,7 +9,8 @@ use App\Models\Action_status;
 use App\Models\Action_type;
 use App\User;
 use Auth;
-
+use Illuminate\Support\Facades\Input;
+// use Illuminate\Http\Request;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ActionRequest as StoreRequest;
@@ -28,7 +29,8 @@ class ActionCrudController extends CrudController
         $this->crud->setModel('App\Models\Action');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/action');
         $this->crud->setEntityNameStrings(trans('informacrm.action'), trans('informacrm.actions'));
-        // $this->crud->setListView('inf.action');
+
+        $this->crud->setShowView('inf.actions.action');
         // $this->crud->setEditView('inf.edit');
         // dump($this->crud);
         /*
@@ -510,7 +512,7 @@ class ActionCrudController extends CrudController
         // $this->crud->removeAllButtonsFromStack('line');
 
         // ------ CRUD ACCESS
-        $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);
+        $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete', 'show']);
         // $this->crud->denyAccess(['list', 'create', 'update', 'reorder', 'delete']);
 
         // ------ CRUD REORDER
@@ -525,7 +527,7 @@ class ActionCrudController extends CrudController
         // ------ REVISIONS
         // You also need to use \Venturecraft\Revisionable\RevisionableTrait;
         // Please check out: https://laravel-backpack.readme.io/docs/crud#revisions
-        // $this->crud->allowAccess('revisions');
+        $this->crud->allowAccess('revisions');
 
         // ------ AJAX TABLE VIEW
         // Please note the drawbacks of this though:
@@ -555,6 +557,21 @@ class ActionCrudController extends CrudController
         // $this->crud->addClause('actionStatusClosed');
 
     }
+    // public function show($id)
+    // {
+    //
+    //     $this->crud->hasAccessOrFail('show');
+    //     // Cache::forever('active_account_id', $id);
+    //     $view = parent::show($id);
+    //     $this->addAcud();
+    //     return $view;
+    // }
+
+    // public function show()
+    // {
+    //     return 'pippo';
+    //     return parent::show();
+    // }
 
     public function search()
     {
@@ -575,6 +592,11 @@ class ActionCrudController extends CrudController
         // dump($this->crud);
         // return parent::index();
     }
+
+    // public function listRevisions($id)
+    // {
+    //     parent::listRevisions($id);
+    // }
 
     public function list()
     {
@@ -607,6 +629,37 @@ class ActionCrudController extends CrudController
         $data['actions'] = $data['actions']->get();
         return view($viewReturn, $data);
     }
+
+
+    // public function addAcud()
+    // {
+    //     $data['actions']['acud']['assigned_to'] = $this->crud->entry['assigned_to'];
+    //     $data['actions']['acud']['assigned_by'] = $this->crud->entry['assigned_by'];
+    //     $data['actions']['acud']['assigned_at'] = $this->crud->entry['assigned_at'];
+    //
+    //     $data['actions']['acud']['created_by'] = $this->crud->entry['created_by'];
+    //     $data['actions']['acud']['created_at'] = $this->crud->entry['created_at'];
+    //
+    //     $data['actions']['acud']['updated_by'] = $this->crud->entry['updated_by'];
+    //     $data['actions']['acud']['updated_at'] = $this->crud->entry['updated_at'];
+    //
+    // }
+
+    // public function acud($action_id)
+    //     {
+    //         $action = Action::where('id', '=', $action_id)->first();
+    //         $acud['assigned_to'] = $action->user_assigned_to->name;
+    //         $acud['assigned_by'] = $action->user_assigned_by->name;
+    //         $acud['assigned_at'] = $action->assigned_at;
+    //
+    //         $acud['created_by'] = $action->user_created_by->name;
+    //         $acud['created_at'] = $action->created_at;
+    //
+    //         $acud['updated_by'] = $action->user_updated_by->name;
+    //         $acud['updated_at'] = $action->updated_at;
+    //         dd($acud);
+    //         return view('inf.acud',['acud' => $acud]);
+    //     }
 
     public function test()
     {
@@ -644,7 +697,7 @@ class ActionCrudController extends CrudController
         if ( $request['assigned_to'] <= 0) {
             $request['assigned_to'] = Auth::user()->id;
         }
-
+        $request['assigned_by'] = Auth::user()->id;
         $redirect_location = parent::storeCrud($request);
         // // your additional operations after save here
         // // use $this->data['entry'] or $this->crud->entry
@@ -703,7 +756,7 @@ class ActionCrudController extends CrudController
         if ( $request['assigned_to'] <= 0) {
             $request['assigned_to'] = Auth::user()->id;
         }
-
+        $request['assigned_by'] = Auth::user()->id;
 
         switch ( $request['all_day'] ) {
             case -1:
@@ -752,4 +805,18 @@ class ActionCrudController extends CrudController
         // // use $this->data['entry'] or $this->crud->entry
         // return $redirect_location;
     }
+
+    public function assign($id)
+    {
+        $action = Action::where('id', '=', $id)->first();
+        $action->assigned_to = Input::get('assigned_to');
+        $action->assigned_by = Auth::user()->id;
+        $action->assigned_at = \Carbon\Carbon::now();
+        // dd(Input::all());
+        $action->save();
+        $acud = $action->getAcudAttribute();
+        return view('inf.acud',['acud' => $acud]);
+    }
+
+
 }

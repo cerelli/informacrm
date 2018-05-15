@@ -7,7 +7,8 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\Contact;
-use App\Models\Event;
+use App\Models\Action;
+
 
 class SearchController extends CrudController
 {
@@ -33,25 +34,30 @@ class SearchController extends CrudController
         return account::search($request->get('q'))->distinct()->get();
     }
 
+    public function findActionsInGrouping(Request $request)
+    {
+        return action::search($request->get('q'))->distinct()->get();
+    }
+
     public function findContacts(Request $request)
     {
         return contact::search($request->get('q'))->distinct()->get();
     }
 
-    public function findSelEventOpportunity(Request $request)
-    {
-        $result = event::whereNull('opportunity_id')
-                    ->search($request->get('q'))
-                    ->distinct()
-                    ->get();
-        // dd($result);
-        return $result;
-        // $data = Event::select("id","title as title")
-        //                     ->where("title","LIKE","%{$request->input('query')}%")->get();
-        //
-        // return response()->json($data);
-        // return 'pippo'; //event::search($request->get('q'))->distinct()->get();
-    }
+    // public function findSelEventOpportunity(Request $request)
+    // {
+    //     $result = event::whereNull('opportunity_id')
+    //                 ->search($request->get('q'))
+    //                 ->distinct()
+    //                 ->get();
+    //     // dd($result);
+    //     return $result;
+    //     // $data = Event::select("id","title as title")
+    //     //                     ->where("title","LIKE","%{$request->input('query')}%")->get();
+    //     //
+    //     // return response()->json($data);
+    //     // return 'pippo'; //event::search($request->get('q'))->distinct()->get();
+    // }
     /**
      * Display a listing of the resource.
      *

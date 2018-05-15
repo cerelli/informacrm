@@ -14,6 +14,8 @@ return [
     */
 
     //base
+    'groupings' => 'Raggruppamenti',
+
     'account_id' => 'Codice Nominativo',
     'select' => 'Seleziona',
     'new' => 'Nuovo',

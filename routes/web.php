@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'], 'namespace' 
     CRUD::resource('menu-item', 'MenuItemCrudController');
 });
 Route::get('/api/accounts', 'Api\AccountController@index');
+Route::get('/api/actions', 'Api\ActionController@index');
 Route::group([
     'prefix' => config('backpack.base.route_prefix', 'admin'),
     'middleware' => ['admin'],
@@ -30,17 +31,36 @@ Route::group([
     // Route::get('test', function () {
     //     return view('test');
     // });
+    // CRUD::resource('grouping', 'GroupingCrudController');
+    // CRUD::resource('grouping_link', 'Grouping_linkCrudController');
+    // Route::get('grouping/list/{grouping_id}', 'GroupingCrudController@list');
+    CRUD::resource('grouping_type', 'Grouping_typeCrudController');
+    CRUD::resource('grouping_status', 'Grouping_statusCrudController');
 
+    //***************grouping*******************
+    CRUD::resource('grouping', 'GroupingCrudController');
+    Route::get('grouping/{grouping_id}/edit_group', 'GroupingCrudController@edit_group');
+    // Route::get('grouping/type/{id}', 'GroupingCrudController@groupingType');
+    Route::get('grouping-actions-timeline/{grouping_id}', 'GroupingCrudController@actionsTimeline');
+    CRUD::resource('grouping_thread', 'Grouping_threadCrudController');
+    Route::get('grouping_internal_note', 'Grouping_threadCrudController@groupingInternalNote');
+    Route::patch('/grouping/saveinternalnote/{id}', 'GroupingCrudController@saveInternalNote'); 
+    Route::get('/grouping/internalnote/{id}', 'GroupingCrudController@internalNote');
+    /*
 
     // CRUD::resource('action','ActionCrudController');
     CRUD::resource('action_status', 'Action_statusCrudController');
     CRUD::resource('action_result', 'Action_resultCrudController');
     CRUD::resource('action_type', 'Action_typeCrudController');
+    Route::PATCH('/action/assign/{id}', 'ActionCrudController@assign'); /*  Patch Action assigned to whom */
+    Route::get('action_acud/{action_id}', 'ActionCrudController@acud');
 
-    Route::get('search',array('as'=>'search','uses'=>'SearchController@search'));
-    Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
+    // Route::get('search',array('as'=>'search','uses'=>'SearchController@search'));
+    // Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
     Route::get('findAccounts','SearchController@findAccounts');
     Route::get('findContacts','SearchController@findContacts');
+    Route::get('findActionsInGrouping','SearchController@findActionsInGrouping');
+
     Route::get('findSelEventOpportunity','SearchController@findSelEventOpportunity');
 
 
@@ -59,6 +79,8 @@ Route::group([
     //***************account*******************
     CRUD::resource('account', 'AccountCrudController');
     Route::get('account_tab_actions/{account_id}/{action_status_id?}', 'ActionCrudController@account_tab_actions');
+    Route::get('grouping_tab_actions/{grouping_id}/{action_status_id?}', 'GroupingCrudController@grouping_tab_actions');
+
     Route::group(['prefix' => 'account/{account_id}'], function()
     {
         CRUD::resource('contact', 'ContactCrudController');
@@ -68,8 +90,20 @@ Route::group([
         CRUD::resource('action', 'ActionAccountCrudController');
     });
 
+
+    Route::group(['prefix' => 'grouping/{grouping_id}'], function()
+    {
+        // CRUD::resource('contact', 'ContactCrudController');
+        // CRUD::resource('contact/{contact_id}/contact_detail', 'Contact_detailCrudController');
+        // CRUD::resource('web_site', 'Web_siteCrudController');
+        // CRUD::resource('address', 'AddressCrudController');
+        CRUD::resource('action', 'ActionGroupingCrudController');
+        Route::get('action/attach', 'ActionGroupingCrudController@attach');
+    });
+
     CRUD::resource('action', 'ActionCrudController');
     Route::get('action_list', 'ActionCrudController@list');
+
     // Route::delete('contact_detail/{id}', 'ContactCrudController@destroy');
     CRUD::resource('event', 'EventCrudController');
     Route::get('selevent', 'EventCrudController@select');
