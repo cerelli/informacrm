@@ -59,6 +59,7 @@ class Action_status extends Model
      }])->orderBy('lft','asc');
     }
 
+    
     public function scopeActionStatusOpened($query)
     {
         $actionStatusOpened[] = DB::table('action_statuses')

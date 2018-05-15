@@ -43,7 +43,19 @@
         </li>
     </ul>
 
-    <!-- ====================== OPPORTUNITIES ================= -->
+    <!-- ====================== GROUPINGS ================= -->
+    <ul class="sidebar-menu" data-widget="tree">
+        <li class="treeview">
+            <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.groupings') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/grouping') }}"><i class="fa fa-cog"></i> <span>{{ trans('general.groupings') }}</span></a></li>
+                <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/grouping_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('general.types') }}</span></a></li>
+                <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/grouping_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('general.statuses') }}</span></a></li>
+            </ul>
+        </li>
+    </ul>
+
+    {{-- <!-- ====================== OPPORTUNITIES ================= -->
     <ul class="sidebar-menu" data-widget="tree">
         <li class="treeview">
             <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.opportunity') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
@@ -53,9 +65,9 @@
                 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/opportunity_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.opportunity_type') }}</span></a></li>
             </ul>
         </li>
-    </ul>
+    </ul> --}}
 
-    <!-- ====================== SERVICE TICKETS ================= -->
+    {{-- <!-- ====================== SERVICE TICKETS ================= -->
     <ul class="sidebar-menu" data-widget="tree">
         <li class="treeview">
             <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.service_ticket') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
@@ -65,9 +77,12 @@
                 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/service_ticket_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.service_ticket_type') }}</span></a></li>
             </ul>
         </li>
-    </ul>
+    </ul> --}}
+
+    {{-- <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/grouping') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.grouping') }}</span></a></li> --}}
 
     <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/setting') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.settings') }}</span></a></li>
+
 
     {{-- <div class="form-group">
       <label class="control-sidebar-subheading">

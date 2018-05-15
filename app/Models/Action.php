@@ -5,18 +5,35 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Backpack\CRUD\CrudTrait;
+use Nicolaslopezj\Searchable\SearchableTrait;
 use App\User;
 use Auth;
 
 class Action extends Model
 {
     use CrudTrait;
+    use SearchableTrait;
+    use \Venturecraft\Revisionable\RevisionableTrait;
+
+    protected $searchable = [
+        'columns' => [
+            'actions.id' => 10,
+            'actions.title' => 10,
+            'actions.notes' => 10,
+        ],
+        // 'joins' =>  [
+        //     'contacts' => ['accounts.id','contacts.account_id'],
+        // ],
+    ];
 
      /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
+    // protected $casts = [
+    //     'created_at' => 'datetime:d/m/Y H:m',
+    // ];
 
     protected $table = 'actions';
     protected $primaryKey = 'id';
@@ -25,11 +42,14 @@ class Action extends Model
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
+    protected $revisionCleanup = true;
+    protected $revisionCreationsEnabled = true;
+    protected $historyLimit = 200;
+
 
     protected static function boot()
         {
             parent::boot();
-
             // never let a company user see the users of other companies
             if (Auth::check() && Auth::user()->id) {
                 if ( Auth::user()->hasPermissionTo('show actions of all users') ) {
@@ -74,6 +94,9 @@ class Action extends Model
             // return '<a href="'.url($this->id).'" target="_blank">Download</a>';
         }
     }
+
+
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -84,9 +107,38 @@ class Action extends Model
     //     return $this->hasOne('App\User','id', 'user_id');
     // }
 
+    // public function lastAssignedTo()
+    // {
+    //     return $this->hasMany('\Venturecraft\Revisionable\Revision', 'revisionable_id', 'id')->select(['id', 'new_value as test'])
+    //         ->where('revisionable_type','=', 'actions')
+    //         ->where('key','=', 'assigned_to')
+    //         ->latest()
+    //         ;
+    // }
+
+    public function user_updated_by()
+    {
+        return $this->belongsTo('App\User', 'updated_by', 'id');
+    }
+
+    public function user_created_by()
+    {
+        return $this->belongsTo('App\User', 'created_by', 'id');
+    }
+
+    public function user_deleted_by()
+    {
+        return $this->belongsTo('App\User', 'deleted_by', 'id');
+    }
+
     public function user_assigned_to()
     {
         return $this->belongsTo('App\User', 'assigned_to', 'id');
+    }
+
+    public function user_assigned_by()
+    {
+        return $this->belongsTo('App\User', 'assigned_by', 'id');
     }
 
     public function account()
@@ -107,6 +159,11 @@ class Action extends Model
     public function action_types()
     {
         return $this->belongsToMany('App\Models\Action_type','action_action_type','action_id','action_type_id');
+    }
+
+    public function grouping()
+    {
+        return $this->morphToMany('App\Models\Groupings\Grouping', 'groupinggable');
     }
 
     /*
@@ -162,6 +219,52 @@ class Action extends Model
     public function getFullNameAccountAttribute()
     {
         return trim(trim($this->name1).' '.trim($this->name2));
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->id.' - '.$this->title;
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['created_at'])->format('d/m/Y H:i');
+    }
+
+    public function getUpdatedAtAttribute()
+    {
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['updated_at'])->format('d/m/Y H:i');
+    }
+
+    public function getAssignedAtAttribute()
+    {
+        if ( isset($this->attributes['assigned_at'])) {
+            return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['assigned_at'])->format('d/m/Y H:i');
+        }
+        return null;
+    }
+
+    // public function getGroupedAtAttribute()
+    // {
+    //     if ( isset($this->pivot->created_at)) {
+    //         return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->pivot->created_at)->format('d/m/Y H:i');
+    //     }
+    //     return 'pippo';
+    // }
+
+    public function getAcudAttribute()
+    {
+        $acud['assigned_to'] = $this->user_assigned_to['name'];
+        $acud['assigned_by'] = $this->user_assigned_by['name'];
+        $acud['assigned_at'] = $this->assigned_at;
+
+        $acud['created_by'] = $this->user_created_by['name'];
+        $acud['created_at'] = $this->created_at;
+
+        $acud['updated_by'] = $this->user_updated_by['name'];
+        $acud['updated_at'] = $this->updated_at;
+        // dd($acud);
+        return $acud;
     }
     /*
     |--------------------------------------------------------------------------

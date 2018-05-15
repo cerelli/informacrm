@@ -553,8 +553,6 @@ if (! function_exists('dd')) {
      */
     function dd(...$args)
     {
-        http_response_code(500);
-
         foreach ($args as $x) {
             (new Dumper)->dump($x);
         }
@@ -626,7 +624,7 @@ if (! function_exists('env')) {
                 return;
         }
 
-        if (strlen($value) > 1 && Str::startsWith($value, '"') && Str::endsWith($value, '"')) {
+        if (($valueLength = strlen($value)) > 1 && $value[0] === '"' && $value[$valueLength - 1] === '"') {
             return substr($value, 1, -1);
         }
 

@@ -3,6 +3,7 @@
 		$url = '';
 		$attributes = '';
 		$class = '';
+		// $redirect = url($crud->route);
 		if ( !isset($custom_button_url) ) {
 			$url = url($crud->route.'/'.$entry->getKey());
 		} else {
@@ -32,6 +33,7 @@
 @endif
 
 <script>
+	var redirect = "{{url($crud->route)}}";
 	if (typeof deleteEntry != 'function') {
 	  $("[data-button-type=delete]").unbind('click');
 
@@ -41,7 +43,8 @@
 	      var button = $(button);
 	      var route = button.attr('data-route');
 	      var row = $("#crudTable a[data-route='"+route+"']").parentsUntil('tr').parent();
-
+		  // var path = route) }};
+		  console.log(redirect);
 	      if (confirm("{{ trans('backpack::crud.delete_confirm') }}") == true) {
 	          $.ajax({
 	              url: route,
@@ -56,9 +59,10 @@
 
 	                  // Hide the modal, if any
 	                  $('.modal').modal('hide');
-
 	                  // Remove the row from the datatable
 	                  row.remove();
+					  window.location.href = redirect;
+
 	              },
 	              error: function(result) {
 	                  // Show an alert with the result

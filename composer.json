@@ -7,7 +7,7 @@
     "require": {
         "php": ">=7.1.3",
         "backpack/base": "^0.9.0",
-        "backpack/crud": "^3.4.0",
+        "backpack/crud": "dev-master as 3.4.0",
         "backpack/langfilemanager": "^1.0",
         "backpack/pagemanager": "^1.1",
         "backpack/permissionmanager": "^2.1",
@@ -21,7 +21,8 @@
         "laravelcollective/html": "^5.5",
         "maddhatter/laravel-fullcalendar": "^1.3",
         "nicolaslopezj/searchable": "1.*",
-        "novius/laravel-backpack-crud-extended": "dev-master"
+        "novius/laravel-backpack-crud-extended": "dev-master",
+        "venturecraft/revisionable": "dev-fix-map-morph as 1.28.0"
     },
     "require-dev": {
         "backpack/generators": "^1.1",
@@ -74,6 +75,14 @@
         {
             "type": "vcs",
             "url": "https://github.com/cerelli/laravel-backpack-crud-extended"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cerelli/revisionable"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cerelli/CRUD"
         }
     ]
 }

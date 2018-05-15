@@ -81,6 +81,16 @@ class ActionAccountCrudController extends ActionCrudController {
         return parent::create();
     }
 
+    public function show($parent_id, $id = null)
+    {
+        // dd($id,$parent_id);
+        $this->crud->hasAccessOrFail('show');
+        $this->crud->setRoute("admin/account/".$parent_id."#action");
+        // $this->crud->cancelRoute = ("admin/account/".$account_id."#actions");
+        $view = parent::show($id);
+        return $view;
+    }
+
     public function edit($parent_id, $id = null)
     {
         return parent::edit($id);

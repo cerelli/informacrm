@@ -45,7 +45,7 @@ if (!function_exists('backpack_users_have_email')) {
     }
 }
 
-if (!function_exists('backpack_avatar')) {
+if (!function_exists('backpack_avatar_url')) {
     /**
      * Returns the avatar URL of a user.
      *
@@ -71,7 +71,7 @@ if (!function_exists('backpack_avatar')) {
                 break;
 
             default:
-                return $user->{config('backpack.base.avatar_type')};
+                return method_exists($user, config('backpack.base.avatar_type')) ? $user->{config('backpack.base.avatar_type')}() : $user->{config('backpack.base.avatar_type')};
                 break;
         }
     }
