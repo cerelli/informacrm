@@ -74,13 +74,13 @@ class GroupingCrudController extends CrudController
         //     $disabled = '';
         // }
 
-        $this->crud->addField([
-            'name' => 'thread',
-            'label' => 'thread',
-            'type' => 'ckeditor',
-            'tab'      => 'General',
-            'class' => 'hidden'
-        ]);
+        // $this->crud->addField([
+        //     'name' => 'thread',
+        //     'label' => 'thread',
+        //     'type' => 'ckeditor',
+        //     'tab'      => 'General',
+        //     'class' => 'hidden'
+        // ]);
 
         $this->crud->addField([
             'name' => 'account_id',
