@@ -94,6 +94,17 @@ class Grouping_statusCrudController extends CrudController
                 'class' => 'form-group col-md-6'
             ]
         ]);
+
+        $this->crud->addField([
+            'label'     => trans('general.grouping_types'),
+            'type'      => 'checklist',
+            'name'      => 'grouping_types',
+            'entity'    => 'grouping_types',
+            'attribute' => 'description',
+            'model'     => "App\Models\Groupings\Grouping_type",
+            'pivot'     => true,
+        ]);
+
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
         // $this->crud->removeField('name', 'update/create/both');

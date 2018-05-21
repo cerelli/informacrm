@@ -34,7 +34,7 @@ class Grouping_type extends Model
         $menus = '';
         foreach ($grouping_type_menus as $key => $menuItem){
             $menus .= '<li><a href="'.url(config("backpack.base.route_prefix", "admin") . "/grouping?grouping_type_id=".$menuItem->id).'"><i class="fa '. $menuItem->icon .'"></i> <span>'. $menuItem->description .'</span></a></li>';
-            
+
         }
 
         return $menus;
@@ -51,10 +51,17 @@ class Grouping_type extends Model
     {
         return $this->belongsTo('App\User', 'created_by', 'id');
     }
+    
     public function user_updated_by()
     {
         return $this->belongsTo('App\User', 'updated_by', 'id');
     }
+
+    public function grouping_statuses()
+    {
+        return $this->belongsToMany('App\Models\Groupings\Grouping_status');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

@@ -103,7 +103,7 @@ class GroupingCrudController extends CrudController
 
 
         $this->crud->addField([
-            'label' => trans('general.type'),
+            'label' => trans('general.grouping_type'),
             'type' => 'select2',
             'name' => 'grouping_type_id', // the db column for the foreign key
             'entity' => 'grouping_type', // the method that defines the relationship in your Model
@@ -118,11 +118,13 @@ class GroupingCrudController extends CrudController
 
         $this->crud->addField([
             'label' => trans('general.status'),
-            'type' => 'select',
+            'type' => 'select2_cascade',
             'name' => 'grouping_status_id', // the db column for the foreign key
+            'concatenated' => 'grouping_type_id',
             'entity' => 'grouping_status', // the method that defines the relationship in your Model
             'attribute' => 'description', // foreign key attribute that is shown to user
             'model' => "App\Models\Groupings\Grouping_status", // foreign key model
+            'data_source' => url("/api/groupingtypestatuses/"),
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-6 required'
             ],
@@ -130,6 +132,48 @@ class GroupingCrudController extends CrudController
             'tab'      => 'General',
         ]);
 
+ //        $this->crud->addField([
+ //            // 1-n relationship
+ //            'label' => "test", // Table column heading
+ //            'type' => "select2_from_ajax",
+ //            'name' => 'grouping_status_id', // the column that contains the ID of that connected entity
+ //            'entity' => 'grouping_status', // the method that defines the relationship in your Model
+ //            'attribute' => "description", // foreign key attribute that is shown to user
+ //            'model' => "App\Models\Groupings\Grouping_status", // foreign key model
+ //            'data_source' => url("/api/groupingtypestatuses"), // url to controller search function (with /{id} should return model)
+ //            'placeholder' => "Select a category", // placeholder for the select
+ //            'minimum_input_length' => 2, // minimum characters to type before querying results
+ // ]);
+        //
+        // $this->crud->addField(
+        //     [ // select_from_array
+        //         'name' => 'template',
+        //         'label' => "Template",
+        //         'type' => 'select2_from_array',
+        //         'options' => url("api/grouping_type_statuses"),
+        //         'allows_null' => false,
+        //         'default' => 'one'
+        //         // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
+        //     ]);
+
+
+            // ,
+            //
+            // [
+            //         // n-n relationship
+            //         'label' => "Statuses", // Table column heading
+            //         'type' => "select2_from_ajax_multiple",
+            //         'name' => 'grouping_status_id', // the column that contains the ID of that connected entity
+            //         'entity' => 'grouping_status', // the method that defines the relationship in your Model
+            //         'attribute' => "description", // foreign key attribute that is shown to user
+            //         'model' => "App\Models\Groupings\Grouping_status", // foreign key model
+            //         'data_source' => url("api/grouping_type_statuses"), // url to controller search function (with /{id} should return model)
+            //         'placeholder' => "Select an status", // placeholder for the select
+            //         'minimum_input_length' => 2, // minimum characters to type before querying results
+            //         'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+            //         'box' => 'basic',
+            //         'tab'      => 'General',
+            // ]
         $this->crud->addField([
             'name' => 'title',
             'label' => trans('general.title'),
@@ -290,6 +334,20 @@ class GroupingCrudController extends CrudController
                 // 'limit' => 120, // character limit; default is 50;
             ]);
 
+            $this->crud->addColumn([
+                'name' => "account",
+                'label' => trans('informacrm.account'), // Table column heading
+                'type' => "model_function",
+                'function_name' => 'getShowAccountLink',
+                'limit' => 120,
+                'searchLogic' => function ($query, $column, $searchTerm) {
+                    $query->orWhereHas('account', function ($q) use ($column, $searchTerm) {
+                        $q->where('name1', 'like', '%'.$searchTerm.'%')
+                        ->orWhere('name2', 'like', '%'.$searchTerm.'%');
+                    });
+                }
+            ]);
+
         $this->crud->addColumn([
             // run a function on the CRUD model and show its return value
             'name' => "titlelink",
@@ -303,7 +361,25 @@ class GroupingCrudController extends CrudController
             // 'orderable' => true
         ]);
 
+        $this->crud->addColumn([
+            // n-n relationship (with pivot table)
+            'label' => trans('general.statuses'), // Table column heading
+            'type' => 'label',
+            'name' => 'grouping_status', // the method that defines the relationship in your Model
+            'entity' => 'grouping_status', // the method that defines the relationship in your Model
+            'attribute' => "description" // foreign key attribute that is shown to user
+            // 'model' => "App\Models\Opportunity_status", // foreign key model
+        ]);
 
+        $this->crud->addColumn([
+            // 1-n relationship
+            'label' => trans('general.assigned_to'), // Table column heading
+            'type' => "select",
+            'name' => 'assigned_to', // the column that contains the ID of that connected entity;
+            'entity' => 'user_assigned_to', // the method that defines the relationship in your Model
+            'attribute' => "name", // foreign key attribute that is shown to user
+            'model' => "App\User", // foreign key model
+        ]);
 
         // $grouping_type_id = \Route::current()->parameter('id');
         // $this->crud->addClause('where','grouping_type_id', '=', $grouping_type_id);
@@ -404,6 +480,8 @@ class GroupingCrudController extends CrudController
     {
         $result = parent::edit($id);
         $this->crud->cancelRoute = (config('backpack.base.route_prefix') . '/grouping?grouping_type_id='.$parent_id);
+        $this->crud->selectStatus = \App\Models\Groupings\Grouping_type::find($this->crud->entry->grouping_type_id)->grouping_statuses;
+        // dump($this->crud->selectStatus);
         return $result;
     }
 
@@ -411,6 +489,7 @@ class GroupingCrudController extends CrudController
     {
 
         $result = parent::edit($id);
+        $this->crud->selectStatus = \App\Models\Groupings\Grouping_type::find($this->crud->entry->grouping_type_id)->grouping_statuses;
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/grouping');
         $this->crud->cancelRoute = (config('backpack.base.route_prefix') . '/grouping/'.$parent_id);
         return $result;
@@ -420,6 +499,7 @@ class GroupingCrudController extends CrudController
     public function create()
     {
         $this->crud->create_fields['assigned_to']['value'] = Auth::user()->id;
+
         // $account_id = \Route::current()->parameter('account_id');
         // if ( !$account_id ) {
         //
@@ -576,6 +656,18 @@ class GroupingCrudController extends CrudController
         }
         // $data['actions'] = $data['actions']->get();
         return view($viewReturn, $data);
+    }
+
+    public function showDetailsRow($id)
+    {
+        $this->crud->hasAccessOrFail('details_row');
+
+        $this->data['entry'] = $this->crud->getEntry($id);
+        $this->data['crud'] = $this->crud;
+        $this->data['acud'] = Grouping::find($id)->acud;
+        // dd($this->data['entry'],$this->crud->getDetailsRowView());
+        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
+        return view($this->crud->getDetailsRowView(),['data' => $this->data]);
     }
 
     public function show($id)

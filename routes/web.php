@@ -23,6 +23,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'], 'namespace' 
 });
 Route::get('/api/accounts', 'Api\AccountController@index');
 Route::get('/api/actions', 'Api\ActionController@index');
+Route::get('/api/groupingtypestatuses/{grouping_id}', 'Api\GroupingController@groupingStatuses');
+
+
 Route::group([
     'prefix' => config('backpack.base.route_prefix', 'admin'),
     'middleware' => ['admin'],
@@ -44,7 +47,7 @@ Route::group([
     Route::get('grouping-actions-timeline/{grouping_id}', 'GroupingCrudController@actionsTimeline');
     CRUD::resource('grouping_thread', 'Grouping_threadCrudController');
     Route::get('grouping_internal_note', 'Grouping_threadCrudController@groupingInternalNote');
-    Route::patch('/grouping/saveinternalnote/{id}', 'GroupingCrudController@saveInternalNote'); 
+    Route::patch('/grouping/saveinternalnote/{id}', 'GroupingCrudController@saveInternalNote');
     Route::get('/grouping/internalnote/{id}', 'GroupingCrudController@internalNote');
     /*
 

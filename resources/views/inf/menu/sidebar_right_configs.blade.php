@@ -48,7 +48,7 @@
         <li class="treeview">
             <a href="#"><i class="fa fa-gears"></i> <span>{{ trans('informacrm.groupings') }}</span> <i class="fa fa-angle-left     pull-right"></i></a>
             <ul class="treeview-menu">
-                <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/grouping') }}"><i class="fa fa-cog"></i> <span>{{ trans('general.groupings') }}</span></a></li>
+                {{-- <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/grouping') }}"><i class="fa fa-cog"></i> <span>{{ trans('general.groupings') }}</span></a></li> --}}
                 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/grouping_type') }}"><i class="fa fa-cog"></i> <span>{{ trans('general.types') }}</span></a></li>
                 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/grouping_status') }}"><i class="fa fa-cog"></i> <span>{{ trans('general.statuses') }}</span></a></li>
             </ul>

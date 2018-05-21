@@ -27,9 +27,8 @@ class AddAcudToGroupings extends Migration
      */
     public function down()
     {
-        Schema::table('actions', function (Blueprint $table) {
-            $table->dropForeign('actions_user_id_assignedby');
-            $table->dropForeign('actions_user_id_deletedby');
+        Schema::table('groupings', function (Blueprint $table) {
+            $table->dropForeign('groupings_user_id_assignedby');
             $table->dropIndex('assigned_by');
             $table->dropColumn('assigned_by');
             $table->dropColumn('assigned_at');

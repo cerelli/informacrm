@@ -35,7 +35,7 @@ return [
     'to' => 'a',
     'address' => 'indirizzo',
     'addresses' => 'indirizzi',
-    'assigned_to' => 'a',
+    'assigned_to' => 'Assegnato a',
     'users' => 'Utenti',
     'assignment' => 'Assegnazione',
     'schedule' => 'Programmazione',
@@ -48,5 +48,6 @@ return [
     'assigned_by' => 'Assegnato da:',
     'all' => 'Tutti',
     'update' => 'Aggiorna',
+    'grouping_type' => 'Tipo',
 
 ];

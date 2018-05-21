@@ -1,7 +1,8 @@
 <div class="m-t-10 m-b-10 p-l-10 p-r-10 p-t-10 p-b-10">
 	<div class="row">
 		<div class="col-md-12">
-			<small>Use the <span class="label label-default">details_row</span> functionality to show more information about the entry, when that information does not fit inside the table column.</small><br><br>
+			{!! $data['entry']->description !!}
+			{{-- <small>Use the <span class="label label-default">details_row</span> functionality to show more information about the entry, when that information does not fit inside the table column.</small><br><br>
 			<strong>Descrizione:</strong> {{ $entry->description }} <br>
 			<strong>Textarea:</strong> {{ $entry->textarea }} <br>
 			<strong>Email:</strong> {{ $entry->email }} <br>
@@ -9,7 +10,12 @@
 			<strong>Float:</strong> {{ $entry->float }} <br>
 			<strong>Week:</strong> {{ $entry->week }} <br>
 			<strong>Month:</strong> {{ $entry->month }} <br>
-			etc.
+			etc. --}}
+		</div>
+		<div class="row col-md-12" style="margin-left: 2px;">
+			<div class="pull-left" >
+				@include('inf.acud',['acud' => $data['acud']])
+			</div>
 		</div>
 	</div>
 </div>

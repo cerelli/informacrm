@@ -29,10 +29,10 @@ class ActionGroupingCrudController extends GroupingCrudController {
         return $result;
     }
 
-    public function edit($parent_id, $id = null)
-    {
-        return parent::edit($id);
-    }
+    // public function edit($parent_id, $id = null)
+    // {
+    //     return parent::edit($id);
+    // }
 
     public function destroy($parent_id, $id = null)
     {

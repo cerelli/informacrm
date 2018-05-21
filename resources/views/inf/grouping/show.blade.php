@@ -136,6 +136,8 @@
   			  </div>
 			  <div class="tab-content col-md-12">
 			  	<div role="tabpanel" class="tab-pane active" id="tab_information">
+
+					<button id="show">+</button>
 					Note interne
 					{{-- @include('inf.grouping.thread', ['informations' => $entry]) --}}
 					@php
@@ -143,11 +145,15 @@
 
 						// $testModel = Grouping_threadCrudController::groupingInternalNote();
 						// dd($crud->create_fields['thread']);
-						$internaNote['grouping_id'] = $entry->id;
+						$internalNote['grouping_id'] = $entry->id;
 						// dd($passFields);
 					@endphp
+					<div class="row hidden" id="insertInternalNote">
+						@include('inf.grouping.thread', ['internalNote' => $internalNote])
+					</div>
+					<div class="row" id="refreshDetailsThread">
 
-			  		@include('inf.grouping.thread', ['internalNote' => $internaNote])
+					</div>
 			  	</div>
 				<div role="tabpanel" class="tab-pane" id="tab_actions">
 					{{-- @include('inf.accounts.tabs.actions', ['actions' => $entry->actions]) --}}
@@ -167,18 +173,101 @@
 
 <script src="{{ asset('vendor/adminlte') }}/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
-$(document).ready(function($) {
+function readyFn( jQuery ) {
 	var accountReturnURL = document.baseURI;
 	var tabhash = accountReturnURL.split('#')[1];
+	// console.log(tabhash);
+	switch (tabhash) {
+    case 'actions':
+		// console.log('1');
+        $('[data-tab="tab_actions"]').trigger("click");
+        break;
+    case 'information':
+		// console.log('2');
+		// $('#show').trigger("click");
+		$('#internal_note_01').trigger('click');
+		break;
+	default:
+		// console.log('3');
+		$('#internal_note_01').trigger('click');
+		// $('#show').trigger("click");
+	}
+}
+$( window ).on( "load", readyFn );
 
-	if (tabhash == 'actions'){
-		// console.log(tabhash);
-		$('[data-tab="tab_actions"]').trigger("click");
-	}else{
-		// console.log('pippo');
-	};
+$(document).ready(function(e) {
 
 
+
+	// if (tabhash == 'actions'){
+	// 	// console.log(tabhash);
+	// 	$('[data-tab="tab_actions"]').trigger("click");
+	// }else{
+	// 	// console.log('pippo');
+	// };
+	//
+	// if (tabhash == 'information' or tabhash == ''){
+	// 	// console.log(tabhash);
+	// 	$('#show').trigger("click");
+	// }else{
+	// 	// console.log('pippo');
+	// };
+
+	$("#show").click(function(e){
+		e.preventDefault();
+		$("#insertInternalNote").toggleClass("hidden");
+	});
+
+	$(".btn_add_internal_note").click(function(e){
+		e.preventDefault();
+		var grouping_id = $(this).attr('data-grouping_id');
+		// sendAjaxRequest($(this),'/pages/test/');
+		var content = CKEDITOR.instances.summaryckeditor.getData();
+		var notifing = 0;
+		if ( content == '') {
+			// console.log('vuoto');
+			var url = $(this).attr('data-dati_blank')
+			var type = "GET";
+		} else {
+			// console.log(content);
+			var url = $(this).attr('data-dati')
+			var type = "PATCH";
+			notifing = 1;
+		}
+		// console.log(url);
+		$.ajax({
+			type: type,
+			url: url,
+			dataType: 'html',
+			data: {
+				grouping_id: grouping_id,
+				content: content,
+				access_token: $("#access_token").val()
+			},
+			success: function(result) {
+				if ( notifing ) {
+					new PNotify({
+						title: "{{ trans('general.grouping_thread_confirmation_title') }}",
+						text: "{{ trans('general.grouping_thread__confirmation_message') }}",
+						type: "success"
+					});
+				}
+				$('#refreshDetailsThread').html(result);
+				// $('#show').trigger("click");
+				CKEDITOR.instances.summaryckeditor.setData('');
+
+			},
+			error: function(result) {
+				if ( notifing ) {
+					new PNotify({
+						title: "{{ trans('general.grouping_thread_confirmation_not_title') }}",
+						text: "{{ trans('general.grouping_thread_confirmation_not_message') }}",
+						type: "warning"
+					});
+				}
+			}
+		});
+	});
 });
 
 $('[data-tab="tab_actions"]').click(function(e) {

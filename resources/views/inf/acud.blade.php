@@ -4,7 +4,7 @@
         @if ( isset($acud['assigned_by']) )
             <strong>{{ trans('general.assigned_by') }}&nbsp</strong> {{ $acud['assigned_by'] }}&nbsp;
             @if ( isset($acud['assigned_to']) )
-                {{ trans('general.assigned_to') }}&nbsp {{ $acud['assigned_to'] }}&nbsp;
+                {{ trans('general.to') }}&nbsp {{ $acud['assigned_to'] }}&nbsp;
                 @if ( isset($acud['assigned_at']) )
                     {{-- <strong>{{ trans('general.aca_at') }}&nbsp</strong> {{ $crud->acud['assigned_at'] }}&nbsp; --}}
                     {{ trans('general.aca_at') }}&nbsp {{ $acud['assigned_at'] }}&nbsp;

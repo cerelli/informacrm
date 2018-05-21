@@ -128,7 +128,10 @@ class Grouping extends Model
         return $this->hasMany('App\Models\Groupings\Grouping_thread', 'grouping_id');
     }
 
-
+    public function statuses()
+    {
+        return $this->hasManyThrough("App\Models\Groupings\Grouping_status", "App\Models\Groupings\Grouping_type", 'grouping_type_id', 'student_id');
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +153,10 @@ class Grouping extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getCountryName()
+    {
+        return $this->city()->country()->name ?? '';
+    }
 
     public function getCreatedAtAttribute()
     {

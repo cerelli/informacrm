@@ -42,6 +42,12 @@ class Grouping_status extends Model
     {
         return $this->belongsTo('App\User', 'updated_by', 'id');
     }
+
+    public function grouping_types()
+    {
+        return $this->belongsToMany('App\Models\Groupings\Grouping_type');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
