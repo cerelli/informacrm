@@ -335,6 +335,19 @@ class GroupingCrudController extends CrudController
             ]);
 
             $this->crud->addColumn([
+                // run a function on the CRUD model and show its return value
+                'name' => "titlelink",
+                'label' => trans('informacrm.title'), // Table column heading
+                'type' => "model_function",
+                'function_name' => 'getShowTitleLink', // the method in your Model
+                'limit' => 120,
+                'searchLogic' => function ($query, $column, $searchTerm) {
+                    $query->orWhere('title', 'like', '%'.$searchTerm.'%');
+                },
+                // 'orderable' => true
+            ]);
+            
+            $this->crud->addColumn([
                 'name' => "account",
                 'label' => trans('informacrm.account'), // Table column heading
                 'type' => "model_function",
@@ -348,18 +361,7 @@ class GroupingCrudController extends CrudController
                 }
             ]);
 
-        $this->crud->addColumn([
-            // run a function on the CRUD model and show its return value
-            'name' => "titlelink",
-            'label' => trans('informacrm.title'), // Table column heading
-            'type' => "model_function",
-            'function_name' => 'getShowTitleLink', // the method in your Model
-            'limit' => 120,
-            'searchLogic' => function ($query, $column, $searchTerm) {
-                $query->orWhere('title', 'like', '%'.$searchTerm.'%');
-            },
-            // 'orderable' => true
-        ]);
+
 
         $this->crud->addColumn([
             // n-n relationship (with pivot table)

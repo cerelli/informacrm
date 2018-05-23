@@ -21,6 +21,11 @@
             <!-- timeline icon -->
             <i class="fa {{ $action->action_status->icon }} bg" style="background-color: {{ $action->action_status->background_color }} !important; color: {{ $action->action_status->color }} !important;"></i>
             <div class="timeline-item">
+                <div class="row col-md-12" style="margin-left: 2px;">
+                    <div class="pull-right" id="refresh_acud{{ $action->id }}">
+                        @include('inf.acud',['acud' => $action->acud])
+                    </div>
+                </div>
                 <div class="row col-md-12" style="padding-bottom: 10px; padding-top: 5px;">
                     <div class="event-types col-md-10">
                         <!-- event types -->
@@ -81,11 +86,7 @@
                 </div>
 
                 <div class="timeline-footer row">
-                    <div class="row col-md-12" style="margin-left: 2px;">
-                        <div class="pull-left" id="refresh_acud{{ $action->id }}">
-                            @include('inf.acud',['acud' => $action->acud])
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </li>

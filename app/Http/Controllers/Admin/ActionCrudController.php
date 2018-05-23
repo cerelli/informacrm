@@ -425,6 +425,24 @@ class ActionCrudController extends CrudController
                 'type' => "model_function",
                 'function_name' => 'getShowIdLink', // the method in your Model
             ]);
+            // 
+            // $this->crud->addColumn([
+            //     // run a function on the CRUD model and show its return value
+            //     'name' => 'title',
+            //     'label' => trans('general.title')
+            // ]);
+            $this->crud->addColumn([
+                // run a function on the CRUD model and show its return value
+                'name' => "titlelink",
+                'label' => trans('general.title'), // Table column heading
+                'type' => "model_function",
+                'function_name' => 'getShowTitleLink', // the method in your Model
+                'limit' => 120,
+                'searchLogic' => function ($query, $column, $searchTerm) {
+                    $query->orWhere('title', 'like', '%'.$searchTerm.'%');
+                },
+                // 'orderable' => true
+            ]);
 
             $this->crud->addColumn([
                 'name' => "account",
@@ -438,12 +456,6 @@ class ActionCrudController extends CrudController
                         ->orWhere('name2', 'like', '%'.$searchTerm.'%');
                     });
                 }
-            ]);
-
-            $this->crud->addColumn([
-                // run a function on the CRUD model and show its return value
-                'name' => 'title',
-                'label' => trans('general.title')
             ]);
 
             $this->crud->addColumn([

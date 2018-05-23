@@ -9,8 +9,14 @@
 	  <h1>
 		<i class="fa {{ $entry->grouping_type->icon }}"></i>
         <span class="text-capitalize">{{ $entry->grouping_type->description.' ['.$entry->id.']' }}</span>
+		{{-- <div class="row col-md-12" style="margin-left: 2px;"> --}}
+
+		{{-- </div> --}}
         {{-- <small>{{ trans('backpack::crud.edit').' '.$entry->grouping_type->description }}.</small> --}}
 	  </h1>
+	  <div class="pull-right" >
+		  @include('inf.acud',['acud' => $acud])
+	  </div>
 	  <ol class="breadcrumb">
 	    <li><a href="{{ url(config('backpack.base.route_prefix'),'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
 	    <li><a href="{{ url($crud->route) }}?grouping_type_id={{ $entry->grouping_type->id }}" class="text-capitalize">{{ $crud->entity_name_plural }}</a></li>
@@ -37,6 +43,7 @@
 		  		>
 		  {!! csrf_field() !!}
 		  {!! method_field('PUT') !!}
+
 		  <div class="box box-primary" style="border-top-color: {{ $entry->grouping_type->background_color }} !important; border-top-width: 3px;">
 		    <div class="box-header with-border">
 				{{-- @if ( $entry->account_id > 0 ) --}}
@@ -78,37 +85,43 @@
 				</div>
 		    </div>
 		    <div class="box-body display-flex-wrap " style="display: flex;flex-wrap: wrap;">
-				<div class="row">
+				<div class="row col-md-12">
 					{{-- ****************TITLE*************** --}}
-					<div class="col-md-12">
-						@if ($crud->model->translationEnabled())
-							<!-- Single button -->
-							<div class="btn-group pull-right">
-							  <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								{{trans('backpack::crud.language')}}: {{ $crud->model->getAvailableLocales()[$crud->request->input('locale')?$crud->request->input('locale'):App::getLocale()] }} <span class="caret"></span>
-							  </button>
-							  <ul class="dropdown-menu">
-								@foreach ($crud->model->getAvailableLocales() as $key => $locale)
-									<li><a href="{{ url($crud->route.'/'.$entry->getKey().'/edit') }}?locale={{ $key }}">{{ $locale }}</a></li>
-								@endforeach
-							  </ul>
-							</div>
-							{{-- <h3 class="box-title" style="line-height: 30px;">{{ trans('backpack::crud.edit') }}</h3> --}}
-							<h3 class="box-title" style="line-height: 30px;">{{ $entry->title }}</h3>
-						@else
-							{{-- <h3 class="box-title">{{ trans('backpack::crud.edit') }}</h3> --}}
-							<h3 class="box-title">{{ $entry->title }}</h3>
-						@endif
-					</div>
-					<div class="col-md-8">
-						<p>{!! $entry->description !!}</p>
-					</div>
+					{{-- <div class="col-md-12"> --}}
+						{{-- <div class="col-md-2">
+							<h3>{{ trans('general.title') }}: </h3>
+						</div> --}}
+						<div class="col-md-12">
+							@if ($crud->model->translationEnabled())
+								<!-- Single button -->
+								<div class="btn-group pull-right">
+								  <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{trans('backpack::crud.language')}}: {{ $crud->model->getAvailableLocales()[$crud->request->input('locale')?$crud->request->input('locale'):App::getLocale()] }} <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+									@foreach ($crud->model->getAvailableLocales() as $key => $locale)
+										<li><a href="{{ url($crud->route.'/'.$entry->getKey().'/edit') }}?locale={{ $key }}">{{ $locale }}</a></li>
+									@endforeach
+								  </ul>
+								</div>
+								{{-- <h3 class="box-title" style="line-height: 30px;">{{ trans('backpack::crud.edit') }}</h3> --}}
+								<h3 class="box-title" style="line-height: 30px;">{{ $entry->title }}</h3>
+							@else
+								{{-- <h3 class="box-title">{{ trans('backpack::crud.edit') }}</h3> --}}
+								<h3 class="box-title">{{ $entry->title }}</h3>
+							@endif
+						</div>
+					{{-- </div> --}}
+					{{-- <div class="col-md-12"> --}}
+						{{-- <div class="col-md-2">
+							<h4>{{ trans('general.description') }}: </h4>
+						</div> --}}
+						<div class="well col-md-12" style="padding: 2px;">
+							<p>{!! $entry->description !!}</p>
+						</div>
+					{{-- </div> --}}
 				</div>
-				<div class="row col-md-12" style="margin-left: 2px;">
-					<div class="pull-left" >
-						@include('inf.acud',['acud' => $acud])
-					</div>
-				</div>
+
 
 		      <!-- load the view from the application if it exists, otherwise load the one in the package -->
 		      {{-- @if(view()->exists('vendor.backpack.crud.form_content'))
