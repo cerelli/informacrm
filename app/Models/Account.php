@@ -69,6 +69,21 @@ class Account extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function user_updated_by()
+    {
+        return $this->belongsTo('App\User', 'updated_by', 'id');
+    }
+
+    public function user_created_by()
+    {
+        return $this->belongsTo('App\User', 'created_by', 'id');
+    }
+
+    public function user_deleted_by()
+    {
+        return $this->belongsTo('App\User', 'deleted_by', 'id');
+    }
+    
     public function title()
     {
         return $this->belongsTo('App\Models\Title');

@@ -20,6 +20,11 @@
 		<a href="{{ url($crud->route) }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
 	@endif
 	<div class="row content col-md-12">
+		<div class="row account-types col-md-12">
+			<div class="pull-right">
+				@include('inf.acud', ['acud' => $crud->acud])
+			</div>
+	  </div>
 		<!-- THE ACTUAL CONTENT -->
 		<div class="box col-md-12">
 			<div class="box-header with-border col-md-12">
@@ -74,10 +79,10 @@
 								<a href="#tab_events" aria-controls="tab_events" role="tab" data-toggle="tab">{{ trans('informacrm.events') }}</a>
 						</li> --}}
 						<li role="presentation" class="">
-								<a href="#tab_opportunities" aria-controls="tab_opportunities" role="tab" data-toggle="tab">{{ trans('informacrm.opportunities') }}</a>
+								<a href="#tab_documents" aria-controls="tab_documents" role="tab" data-toggle="tab">{{ trans('informacrm.documents') }}</a>
 						</li>
 						<li role="presentation" class="">
-								<a href="#tab_documents" aria-controls="tab_documents" role="tab" data-toggle="tab">{{ trans('informacrm.documents') }}</a>
+								<a href="#tab_opportunities" aria-controls="tab_opportunities" role="tab" data-toggle="tab">{{ trans('informacrm.opportunities') }}</a>
 						</li>
 						<li role="presentation" class="">
 								<a href="#tab_service_tickets" aria-controls="tab_service_tickets" role="tab" data-toggle="tab">{{ trans('informacrm.service_tickets') }}</a>
@@ -119,11 +124,11 @@
 				<div role="tabpanel" class="tab-pane" id="tab_events">
 					@include('inf.accounts.tabs.events', ['events' => $entry->events])
 				</div>
-				<div role="tabpanel" class="tab-pane" id="tab_opportunities">
-					@include('inf.accounts.tabs.opportunities', ['opportunities' => $entry->opportunities])
-				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_documents">
 					@include('inf.accounts.tabs.documents', ['opportunities' => $entry->events])
+				</div>
+				<div role="tabpanel" class="tab-pane" id="tab_opportunities">
+					@include('inf.accounts.tabs.opportunities', ['opportunities' => $entry->opportunities])
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_service_tickets">
 					@include('inf.accounts.tabs.service_tickets', ['service_tickets' => $entry->service_tickets])
@@ -139,11 +144,7 @@
 		  </div><!-- /.box-body -->
 
 		  @include('crud::inc.button_stack', ['stack' => 'bottom'])
-		  <div class="row account-types col-md-12">
-			  <div class="pull-left">
-			  	  @include('inf.acud', ['acud' => $crud->acud])
-			  </div>
-  		</div>
+
 		</div><!-- /.box -->
 	</div>
 @endsection

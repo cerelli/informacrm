@@ -61,15 +61,6 @@ class Action extends Model
                     });
                 }
             }
-
-            // // never let a company user see the users of other companies
-            // if (Auth::check() && Auth::user()->company_id) {
-            //     $companyId = Auth::user()->company->id;
-            //
-            //     static::addGlobalScope('company_id', function (Builder $builder) use ($companyId) {
-            //         $builder->where('company_id', $companyId);
-            //     });
-            // }
         }
     /*
     |--------------------------------------------------------------------------
@@ -80,9 +71,6 @@ class Action extends Model
         // Replace proofAttach with the name of your field
         if (isset($this->id)) {
             return $this->id;
-            // dd($this);
-            // return '<a href="'.url(config('backpack.base.route_prefix', 'admin') . '/opportunity/'.$this->id).'/edit?call_url=opportunity&call=opportunity" >'.$this->id.'</a>';
-            // return '<a href="'.url($this->id).'" target="_blank">Download</a>';
         }
     }
 

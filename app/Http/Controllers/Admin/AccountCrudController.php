@@ -389,13 +389,26 @@ class AccountCrudController extends CrudController
         // $this->crud->acud['assigned_to'] = '';
         // $this->crud->acud['assigned_by'] = '';
         // $this->crud->acud['assigned_at'] = '';
-
-        $this->crud->acud['created_by'] = $this->crud->entry['created_by'];
-        $this->crud->acud['created_at'] = $this->crud->entry['created_at'];
-
-        $this->crud->acud['updated_by'] = $this->crud->entry['updated_by'];
-        $this->crud->acud['updated_at'] = $this->crud->entry['updated_at'];
-
+        if ( isset($this->crud->entry['user_created_by']->name) ) {
+            $this->crud->acud['created_by'] = $this->crud->entry['user_created_by']->name;
+        } else {
+            $this->crud->acud['created_by'] = '';
+        }
+        if ( isset($this->crud->entry['created_at']) ) {
+            $this->crud->acud['created_at'] = $this->crud->entry['created_at'];
+        } else {
+            $this->crud->acud['created_at'] = '';
+        }
+        if ( isset($this->crud->entry['user_updated_by']->name) ) {
+            $this->crud->acud['updated_by'] = $this->crud->entry['user_updated_by']->name;
+        } else {
+            $this->crud->acud['updated_by'] = '';
+        }
+        if ( isset($this->crud->entry['updated_at']) ) {
+            $this->crud->acud['updated_at'] = $this->crud->entry['updated_at'];
+        } else {
+            $this->crud->acud['updated_at'] = '';
+        }
     }
 
 }
