@@ -14,23 +14,38 @@ class ModifyDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('documents', function($table) {
-            $table->dropColumn('path');
-            $table->dropColumn('preview');
-            $table->dropColumn('name');
-            $table->dropColumn('type');
-            $table->dropColumn('disk');
-            $table->dropColumn('hash');
-            $table->dropColumn('size');
-            $table->dropColumn('width');
-            $table->dropColumn('height');
+        $columns = [];
+        //check whether documents table has path column
+        if (Schema::hasColumn('documents', 'path')); { array_push($columns, 'path'); }
+        if (Schema::hasColumn('documents', 'preview')); { array_push($columns, 'preview'); }
+        if (Schema::hasColumn('documents', 'type')); { array_push($columns, 'type'); }
+        if (Schema::hasColumn('documents', 'disk')); { array_push($columns, 'disk'); }
+        if (Schema::hasColumn('documents', 'hash')); { array_push($columns, 'hash'); }
+        if (Schema::hasColumn('documents', 'size')); { array_push($columns, 'size'); }
+        if (Schema::hasColumn('documents', 'width')); { array_push($columns, 'width'); }
+        if (Schema::hasColumn('documents', 'height')); { array_push($columns, 'height'); }
+        if (Schema::hasColumn('documents', 'created_by')); { array_push($columns, 'created_by'); }
+        if (Schema::hasColumn('documents', 'updated_by')); { array_push($columns, 'updated_by'); }
 
-            $table->dropColumn('created_by');
-            $table->dropColumn('updated_by');
+        if (count($columns)) {
+            Schema::table('documents', function (Blueprint $table) use ($columns) {
+                $table->dropColumn($columns);
+            });
+        }
 
-            $table->renameColumn('inf_account_id', 'account_id');
-            $table->renameColumn('inf_document_status_id', 'document_status_id');
-        });
+        if (Schema::hasColumn('documents', 'inf_account_id'));
+        {
+            Schema::table('documents', function($table) {
+                $table->renameColumn('inf_account_id', 'account_id');
+            });
+        }
+        if (Schema::hasColumn('documents', 'inf_document_status_id'));
+        {
+            Schema::table('documents', function($table) {
+                $table->renameColumn('inf_document_status_id', 'document_status_id');
+            });
+        }
+
         Schema::table('documents', function($table) {
             $table->unsignedInteger('document_type_id')->nullable();
 
