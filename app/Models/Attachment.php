@@ -34,6 +34,15 @@ class Attachment extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getShowTitleLink() {
+        // Replace proofAttach with the name of your field
+        if (isset($this->title)) {
+            // dd($this);
+            // downloads/{attachment_id}/{fisical_name}/{original_name}
+            return '<a href="'.url(config('backpack.base.route_prefix', 'admin') . '/downloads/'.$this->id).'" >'.$this->title.'</a>';
+            // return '<a href="'.url($this->id).'" target="_blank">Download</a>';
+        }
+    }
     // public function uploadableFiles(): array
     //     {
     //         return [

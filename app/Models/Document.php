@@ -44,6 +44,7 @@ class Document extends Model
         }
     }
 
+    
     public function getShowAccountLink() {
         // Replace proofAttach with the name of your field
         if (isset($this->account->fullname)) {

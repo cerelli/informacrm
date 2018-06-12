@@ -37,6 +37,30 @@ Route::group([
     // CRUD::resource('grouping', 'GroupingCrudController');
     // CRUD::resource('grouping_link', 'Grouping_linkCrudController');
     // Route::get('grouping/list/{grouping_id}', 'GroupingCrudController@list');
+    Route::get('downloads/{attachment_id}',function($attachment_id)
+    {
+        $attachment = App\Models\Attachment::find($attachment_id);
+
+        if (!$attachment) {
+
+        } else {
+            $headers = [
+
+            ];
+            // dd($attachment);
+            return response()->download(storage_path().'/app/'.$attachment->path.'/'.$attachment->fisical_name, $attachment->original_name, $headers);
+        }
+    });
+
+    Route::get('downloads/{attachment_id}/{fisical_name}/{original_name}',function($attachment_id, $fisical_name, $original_name)
+    {
+        $headers = [
+
+        ];
+        // dd(storage_path());
+        return response()->download(storage_path().'/app/local/'.$attachment_id.'/'.$fisical_name, $original_name, $headers);
+    });
+
     CRUD::resource('grouping_type', 'Grouping_typeCrudController');
     CRUD::resource('grouping_status', 'Grouping_statusCrudController');
 

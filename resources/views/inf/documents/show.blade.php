@@ -92,7 +92,7 @@
 				@foreach ($entry->attachments as $key => $value)
 					<div class="attachment-block clearfix" id='attachment-block-{{ $value->id }}'>
 						<div class="col-md-10">
-							{{ $value->title }} - {{ trans('general.version') }} {{ $value->version }}
+							{!! $value->getShowTitleLink() !!} - {{ trans('general.version') }} {{ $value->version }}
 						</div>
 						<div class="col_md_2">
 							<!-- Delete button -->
