@@ -40,6 +40,19 @@ Route::group([
     CRUD::resource('grouping_type', 'Grouping_typeCrudController');
     CRUD::resource('grouping_status', 'Grouping_statusCrudController');
 
+    CRUD::resource('document_type', 'Document_typeCrudController');
+    CRUD::resource('document_status', 'Document_statusCrudController');
+    CRUD::resource('document', 'DocumentCrudController');
+    Route::group(['prefix' => 'document/{document_id}'], function()
+    {
+        CRUD::resource('attachment', 'AttachmentCrudController');
+    });
+
+    // Route::get('attachment', 'AttachmentCrudController@create');
+    // Route::post('/attachment-save', 'AttachmentCrudController@store');
+    // Route::post('/attachment-delete', 'AttachmentCrudController@destroy');
+    // Route::get('/attachment-show', 'AttachmentCrudController@index');
+
     //***************grouping*******************
     CRUD::resource('grouping', 'GroupingCrudController');
     Route::get('grouping/{grouping_id}/edit_group', 'GroupingCrudController@edit_group');

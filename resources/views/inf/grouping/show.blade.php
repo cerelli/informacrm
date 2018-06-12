@@ -80,7 +80,9 @@
 				<div class="row">
 					<div class="col-md-12">
 						{{-- ****************STATUS*************** --}}
-						<span class="label label-default" style="background-color:{{ $entry->grouping_status->background_color }}; color:{{ $entry->grouping_status->color }}">{{ $entry->grouping_status->description }}</span>
+						@if ( isset($entry->grouping_status) )
+							<span class="label label-default" style="background-color:{{ $entry->grouping_status->background_color }}; color:{{ $entry->grouping_status->color }}">{{ $entry->grouping_status->description }}</span>
+						@endif
 					</div>
 				</div>
 		    </div>
@@ -180,6 +182,8 @@
 
 			</div>
 		  </div><!-- /.box -->
+
+
 		  </form>
 	</div>
 </div>
@@ -209,22 +213,6 @@ function readyFn( jQuery ) {
 $( window ).on( "load", readyFn );
 
 $(document).ready(function(e) {
-
-
-
-	// if (tabhash == 'actions'){
-	// 	// console.log(tabhash);
-	// 	$('[data-tab="tab_actions"]').trigger("click");
-	// }else{
-	// 	// console.log('pippo');
-	// };
-	//
-	// if (tabhash == 'information' or tabhash == ''){
-	// 	// console.log(tabhash);
-	// 	$('#show').trigger("click");
-	// }else{
-	// 	// console.log('pippo');
-	// };
 
 	$("#show").click(function(e){
 		e.preventDefault();

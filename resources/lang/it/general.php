@@ -49,5 +49,6 @@ return [
     'all' => 'Tutti',
     'update' => 'Aggiorna',
     'grouping_type' => 'Tipo',
+    'version' => 'Vers.',
 
 ];
