@@ -50,7 +50,7 @@
 						])
 					</div>
 				</div>
-				<div class="row col-md-12">
+				<div class="row">
 					<!-- account types -->
 					{{-- {{ dd($crud->create_fields['account_types']) }} --}}
 					@include('vendor.backpack.crud.fields.label_multiple',['field' => $crud->create_fields['account_types']])

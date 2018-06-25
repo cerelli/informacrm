@@ -344,7 +344,7 @@ class AccountCrudController extends CrudController
     {
         // your additional operations before save here
         // dd($request);
-        $request['created_by'] = Auth::user()->name;
+        $request['created_by'] = Auth::user()->id;
         // echo "<br>ABC Controller.";
 
         $redirect_location = parent::storeCrud($request);
@@ -359,10 +359,10 @@ class AccountCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
-        if ( $request['created_by'] == "") {
-            $request['created_by'] = Auth::user()->name;
+        if ( $request['created_by'] > 0) {
+            $request['created_by'] = Auth::user()->id;
         }
-        $request['updated_by'] = Auth::user()->name;
+        $request['updated_by'] = Auth::user()->id;
         $parsed = parse_url(url()->previous());
         parse_str($parsed['query'], $query_params);
         $active_tab = $query_params['call_url'];
