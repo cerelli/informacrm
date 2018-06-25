@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Models\Attachment;
+use App\Models\Extraction;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -52,6 +53,24 @@ class AttachmentCrudController extends CrudController
             'name' => "document_id",
             'type' => 'text'
         ]);
+
+
+$this->crud->addField([ // pdf
+    'label' => "document_id",
+    'name' => "extraction_id",
+    'type' => 'text'
+]);
+        // $this->crud->addField([
+        //     'label' => trans('informacrm.extraction'),
+        //     'type' => 'select2',
+        //     'name' => 'extraction_id', // the db column for the foreign key
+        //     'entity' => 'extraction', // the method that defines the relationship in your Model
+        //     'attribute' => 'attachment_id', // foreign key attribute that is shown to user
+        //     'model' => "App\Models\Extraction", // foreign key model
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-3'
+        //     ],
+        // ]);
         // $this->crud->addField([
         //     'label' => 'Document 2',
         //     'name' => 'fisical_name',
@@ -258,6 +277,14 @@ class AttachmentCrudController extends CrudController
 
     }
 
+    // public function buttons($document_id, $attachment_id){
+    //     $attachment = Attachment::find($attachment_id);
+    //     $extraction_id = $attachment->getExtractionIdAttribute();
+    //     // dd($extraction_id,$attachment);
+    //     $attachment->document_id = $document_id;
+    //     return view('inf.attachments.buttons',['attachment' => $attachment]);
+    // }
+
     public function update(UpdateRequest $request)
     {
         // your additional operations before save here
@@ -265,5 +292,64 @@ class AttachmentCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
+    }
+
+    public function unlock($document_id, $attachment_id)
+    {
+        $attachment = Attachment::find($attachment_id);
+        if (!$attachment) {
+            return 0;
+        } else {
+            // dd($attachment);
+            if ( !$attachment->getOriginal('extraction_id') ) {
+                //file not locked: lock
+                return 0;
+            } else {
+                //file locked, unlock
+                $extraction_id = $attachment->extraction_id;
+                $extraction = Extraction::find($extraction_id);
+                // $extraction->attachment_id = $attachment_id;
+                $extraction->archived_by = Auth::user()->id;
+                $extraction->archived_at = \Carbon\Carbon::now();
+                // dump($extraction);
+                $extraction->update();
+                // dump($extraction);
+                // dd($attachment);
+                $attachment->extraction_id = null;
+                $attachment->update();
+                return 1;
+                // return 'file già lock da '.$attachment->extraction->extracted_by()->first()->name;
+            }
+        }
+
+    }
+
+    public function lock($document_id, $attachment_id)
+    {
+        $attachment = Attachment::find($attachment_id);
+        if (!$attachment) {
+            return 0;
+        } else {
+            // dd($attachment);
+            if ( !$attachment->getOriginal('extraction_id') ) {
+                //file not locked: lock
+                $extraction = new Extraction();
+                $extraction->attachment_id = $attachment_id;
+                $extraction->extracted_by = Auth::user()->id;
+                $extraction->extracted_at = \Carbon\Carbon::now();
+                // dump(\Carbon\Carbon::now()->timestamp);
+                // dump(\Carbon\Carbon::now());
+                $extraction->save();
+                // dd($attachment);
+                $attachment->extraction_id = $extraction->id;
+                $attachment->update();
+                return $attachment->getExtractionInfo();
+            } else {
+                // $fileStatus = "<strong><span style='color: red;'> Bloccato da ".$attachment->extraction->extracted_by()->first()->name." il  ".$attachment->extraction->extracted_at."</span></strong>";
+                return 0;
+                // return 'file già lock da '.$attachment->extraction->extracted_by()->first()->name;
+            }
+        }
+
     }
 }

@@ -158,12 +158,7 @@ class AccountCrudController extends CrudController
         //     'type' => 'text',
         // ]);
 
-        // $this->crud->addColumn([
-        //     // run a function on the CRUD model and show its return value
-        //     'name' => "id",
-        //     'label' => trans('informacrm.id'), // Table column heading
-        //     'type' => "text",
-        // ]);
+
 
         $this->crud->addFilter([ // select2_multiple filter
             'name' => 'account_types',
@@ -178,6 +173,12 @@ class AccountCrudController extends CrudController
                 });
             }
         });
+
+        $this->crud->addColumn([
+            'name' => "id",
+            'label' => trans('general.id'), // Table column heading
+            'type' => "text",
+        ]);
 
         $this->crud->addColumn([
             // run a function on the CRUD model and show its return value

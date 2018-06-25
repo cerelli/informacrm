@@ -17,10 +17,10 @@ class CreateExtractionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('attachment_id');
             $table->unsignedInteger('extracted_by');
-            $table->timestamp('extracted_at');
+            $table->datetime('extracted_at');
 
             $table->unsignedInteger('archived_by')->nullable();
-            $table->timestamp('archived_at')->nullable();
+            $table->datetime('archived_at')->nullable();
 
             $table->foreign('extracted_by', 'extraction_user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('RESTRICT');
             $table->foreign('archived_by', 'archive_user_id')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('RESTRICT');

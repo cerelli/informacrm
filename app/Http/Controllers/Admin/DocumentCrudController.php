@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Models\Document;
+use Illuminate\Support\Facades\DB;
+use App\Models\Document_status;
+use App\Models\Document_type;
+use App\User;
+use Auth;
+use Illuminate\Support\Facades\Input;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\DocumentRequest as StoreRequest;
@@ -331,6 +337,8 @@ class DocumentCrudController extends CrudController
         // $this->data['entry'] = $this->crud->getEntry($id);
 
         $this->data['entry'] = $this->crud->getEntry($id);
+
+        // dd($this->data['entry']->attachments);
         $this->data['crud'] = $this->crud;
         $this->data['title'] = trans('backpack::crud.preview').' '.$this->crud->entity_name;
         $this->data['acud'] = Document::find($id)->acud;
@@ -340,5 +348,26 @@ class DocumentCrudController extends CrudController
         $this->crud->removeButton('delete');
         // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
         return view($this->crud->getShowView(), $this->data);
+    }
+
+    public function account_tab_documents($account_id, $document_status_id = null)
+    {
+        // dump($account_id, $document_status_id );
+        $data['documents'] = Document::where('account_id', '=', $account_id);
+        $data['countDocumentStatuses'] = Document_status::countDocuments($account_id)->get();
+        $data['countDocumentTypes'] = Document_type::countDocuments($account_id)->get();
+        $data['active_account_id']['id'] = $account_id;
+        // $filter = new CrudFilter($options, $values, $filter_logic);
+        // $data['filter']['name'] = 'filtro1';
+        if (!$document_status_id){
+            //active first action_status
+            $data['documents']->where('document_status_id', '=', $data['countDocumentStatuses'][0]->id);
+            $viewReturn = 'inf.accounts.tabs.documents.documents';
+        }else{
+            $data['documents']->where('document_status_id', '=', $document_status_id);
+            $viewReturn = 'inf.accounts.tabs.documents.details';
+        }
+        $data['documents'] = $data['documents']->get();
+        return view($viewReturn, $data);
     }
 }

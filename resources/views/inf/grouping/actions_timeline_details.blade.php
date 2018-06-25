@@ -169,7 +169,7 @@ function assignAction(button) {
     var route = button.attr('actionUrl');
     var actionId = button.attr('actionid');
     var selected = $("#asssign").val();
-    // console.log(selected);
+    // console.log(route);
 
     $.ajax({
         url: route,
@@ -188,6 +188,7 @@ function assignAction(button) {
             // $("#tab_actions_details > li.acton-li-"+delete_id).remove();
              $('#assign_toModal').modal( 'hide' );
              $('#refresh_acud'+actionId).html(result);
+             // console.log(result);
 
         },
         error: function(result) {

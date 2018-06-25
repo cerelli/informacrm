@@ -89,26 +89,9 @@
 				 ])
 			 </div>
 			 <div class="box-body">
-				@foreach ($entry->attachments as $key => $value)
-					<div class="attachment-block clearfix" id='attachment-block-{{ $value->id }}'>
-						<div class="col-md-10">
-							{!! $value->getShowTitleLink() !!} - {{ trans('general.version') }} {{ $value->version }}
-						</div>
-						<div class="col_md_2">
-							<!-- Delete button -->
-							@includeif('inf.buttons.delete', [
-                                'custom_button_url' => url(config('backpack.base.route_prefix', 'admin').'/document').'/'.$entry->id.'/attachment/'.$value->id,
-                                'custom_button_attributes' => "  title='Delete attachment' delete-id='$value->id' ",
-                                'custom_button_class' => " pull-right  del-confirmattachment"
-                            ])
-
-							{{-- <!-- Edit button -->
-							@includeif('vendor.backpack.crud.buttons.update', [
-								'custom_button_url' => url(config('backpack.base.route_prefix', 'admin') . '/document').'/'.$entry->id.'/a',
-								'custom_button_attributes' => " id='btn_edit_document' title='".trans('backpack::crud.edit')." ".trans('informacrm.document')."'  style='margin-right: 3px;' ",
-								'custom_button_class' => " pull-right "
-							]) --}}
-						</div>
+				@foreach ($entry->attachments as $key => $attachment)
+					<div class="attachment-block clearfix" id='attachment-block-{{ $attachment->id }}'>
+						@include('inf.attachments.attachment',['attachment' => $attachment])
 					</div>
 				@endforeach
 			 </div>
@@ -129,44 +112,4 @@
     @section('after_scripts')
     <script src="{{ asset('vendor/backpack/crud/js/crud.js') }}"></script>
     <script src="{{ asset('vendor/backpack/crud/js/show.js') }}"></script>
-	<script>
-	$(document).ready(function () {
-		$('.del-confirmattachment').click(function(e){
-			e.preventDefault();
-			var delete_button = $(this);
-			var delete_url = $(this).attr('href');
-			var delete_id = $(this).attr('delete-id');
-			if (confirm("{{ trans('backpack::crud.delete_confirm') }}") == true) {
-				$.ajax({
-					url: delete_url,
-					type: 'DELETE',
-					success: function(result) {
-						// Show an alert with the result
-						new PNotify({
-							title: "{{ trans('backpack::crud.delete_confirmation_title') }}",
-							text: "{{ trans('backpack::crud.delete_confirmation_message') }}",
-							type: "success"
-						});
-						// return to account list
-						$("#attachment-block-"+delete_id).remove();
-					},
-					error: function(result) {
-						// Show an alert with the result
-						new PNotify({
-							title: "{{ trans('backpack::crud.delete_confirmation_not_title') }}",
-							text: "{{ trans('backpack::crud.delete_confirmation_not_message') }}",
-							type: "warning"
-						});
-					}
-				});
-			} else {
-				new PNotify({
-					title: "{{ trans('backpack::crud.delete_confirmation_not_deleted_title') }}",
-					text: "{{ trans('backpack::crud.delete_confirmation_not_deleted_message') }}",
-					type: "info"
-				});
-			}
-		});
-	});
-	</script>
     @endsection

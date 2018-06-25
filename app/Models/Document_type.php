@@ -34,13 +34,22 @@ class Document_type extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function documents()
+    {
+        return $this->hasMany('App\Models\Document');
+    }
 
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
+    public function scopeCountDocuments($query, $account_id){
+       return $query->withCount(['documents' => function($subquery) use ($account_id){
+         return $subquery->where('account_id', $account_id);
+     }])->orderBy('lft','asc');
+    }
+    
     /*
     |--------------------------------------------------------------------------
     | ACCESORS

@@ -34,6 +34,36 @@ class Attachment extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getExtractionInfo()
+    {
+        // dd($this->extraction->extracted_by);
+        $this->attributes['deleteButton'] = '';
+        $this->attributes['unlockButton'] = '';
+        $this->attributes['lockButton'] = '';
+
+        // dd($this->extractioned);
+        if ( isset($this->attributes['extraction_id'])) {
+            //attachment extracted
+            $this->attributes['lockButton'] = 'hidden';
+            // dd( $this->extractioned->extracted_by );
+            if ( $this->extractioned->extracted_by == Auth::user()->id ) {
+                // same user
+                $this->attributes['unlockButton'] = '';
+                $this->attributes['deleteButton'] = '';
+                return "<strong><span style='color: orange;'> Bloccato il ".$this->extractioned->extracted_at."</span></strong>";
+            } else {
+                // different user
+                $this->attributes['unlockButton'] = 'hidden';
+                $this->attributes['deleteButton'] = 'hidden';
+                return "<strong><span style='color: red;'> Bloccato da ".$this->extractioned->extracted_by()->first()->name." il ".$this->extractioned->extracted_at."</span></strong>";
+            }
+        }else{
+            //attachment not extracted
+            $this->attributes['unlockButton'] = 'hidden';
+            return '';
+        }
+    }
+
     public function getShowTitleLink() {
         // Replace proofAttach with the name of your field
         if (isset($this->title)) {
@@ -60,6 +90,10 @@ class Attachment extends Model
         return $this->belongsToMany('App\Models\Document','attachment_document','attachment_id','document_id');
     }
 
+    public function extractioned()
+    {
+        return $this->belongsTo('App\Models\Extraction', 'extraction_id', 'id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -71,6 +105,35 @@ class Attachment extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
+    // public function getExtractionIdAttribute()
+    // {
+    //     // dd($this->extraction->extracted_by);
+    //     $this->attributes['deleteButton'] = '';
+    //     $this->attributes['unlockButton'] = '';
+    //     $this->attributes['lockButton'] = '';
+    //
+    //     // dd($this->extractioned);
+    //     if ( isset($this->attributes['extraction_id'])) {
+    //         //attachment extracted
+    //         $this->attributes['lockButton'] = 'hidden';
+    //         dd( $this->extractioned->extracted_by );
+    //         if ( $this->extractioned->extracted_by == Auth::user()->id ) {
+    //             // same user
+    //             $this->attributes['unlockButton'] = '';
+    //             $this->attributes['deleteButton'] = '';
+    //             return "<strong><span style='color: orange;'> Bloccato il ".$this->extractioned->extracted_at."</span></strong>";
+    //         } else {
+    //             // different user
+    //             $this->attributes['unlockButton'] = 'hidden';
+    //             $this->attributes['deleteButton'] = 'hidden';
+    //             return "<strong><span style='color: red;'> Bloccato da ".$this->extractioned->extracted_by()->first()->name." il ".$this->extractioned->extracted_at."</span></strong>";
+    //         }
+    //     }else{
+    //         //attachment not extracted
+    //         $this->attributes['unlockButton'] = 'hidden';
+    //         return '';
+    //     }
+    // }
 
     /*
     |--------------------------------------------------------------------------

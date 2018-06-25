@@ -40,26 +40,15 @@ Route::group([
     Route::get('downloads/{attachment_id}',function($attachment_id)
     {
         $attachment = App\Models\Attachment::find($attachment_id);
-
         if (!$attachment) {
-
         } else {
             $headers = [
-
             ];
             // dd($attachment);
             return response()->download(storage_path().'/app/'.$attachment->path.'/'.$attachment->fisical_name, $attachment->original_name, $headers);
         }
     });
 
-    Route::get('downloads/{attachment_id}/{fisical_name}/{original_name}',function($attachment_id, $fisical_name, $original_name)
-    {
-        $headers = [
-
-        ];
-        // dd(storage_path());
-        return response()->download(storage_path().'/app/local/'.$attachment_id.'/'.$fisical_name, $original_name, $headers);
-    });
 
     CRUD::resource('grouping_type', 'Grouping_typeCrudController');
     CRUD::resource('grouping_status', 'Grouping_statusCrudController');
@@ -70,6 +59,10 @@ Route::group([
     Route::group(['prefix' => 'document/{document_id}'], function()
     {
         CRUD::resource('attachment', 'AttachmentCrudController');
+        Route::patch('attachment_lock/{attachment_id}','AttachmentCrudController@lock');
+        Route::patch('attachment_unlock/{attachment_id}','AttachmentCrudController@unlock');
+        // Route::patch('attachment_lock/{attachment_id}/buttons','AttachmentCrudController@buttons');
+        // Route::patch('attachment_unlock/{attachment_id}/buttons','AttachmentCrudController@buttons');
     });
 
     // Route::get('attachment', 'AttachmentCrudController@create');
@@ -93,6 +86,7 @@ Route::group([
     CRUD::resource('action_result', 'Action_resultCrudController');
     CRUD::resource('action_type', 'Action_typeCrudController');
     Route::PATCH('/action/assign/{id}', 'ActionCrudController@assign'); /*  Patch Action assigned to whom */
+    Route::PATCH('/action/assign/{id}', 'ActionCrudController@assign');
     Route::get('action_acud/{action_id}', 'ActionCrudController@acud');
 
     // Route::get('search',array('as'=>'search','uses'=>'SearchController@search'));
@@ -119,6 +113,7 @@ Route::group([
     //***************account*******************
     CRUD::resource('account', 'AccountCrudController');
     Route::get('account_tab_actions/{account_id}/{action_status_id?}', 'ActionCrudController@account_tab_actions');
+    Route::get('account_tab_documents/{account_id}/{document_status_id?}', 'DocumentCrudController@account_tab_documents');
     Route::get('grouping_tab_actions/{grouping_id}/{action_status_id?}', 'GroupingCrudController@grouping_tab_actions');
 
     Route::group(['prefix' => 'account/{account_id}'], function()
@@ -128,6 +123,7 @@ Route::group([
         CRUD::resource('web_site', 'Web_siteCrudController');
         CRUD::resource('address', 'AddressCrudController');
         CRUD::resource('action', 'ActionAccountCrudController');
+        CRUD::resource('document', 'DocumentAccountCrudController');
     });
 
 

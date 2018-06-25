@@ -14,5 +14,8 @@ return [
     // Actions icon.
     'actions_icon' => 'fa-list-ul',
     'actions_color' => '#ff007a',
+    // Documents icon.
+    'documents_icon' => 'fa-files-o',
+    'documents_color' => '#ffff7a',
 
 ];

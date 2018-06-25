@@ -60,10 +60,29 @@
 		});
 	});
 
+	$('[data-tab="tab_documents"]').click(function(e) {
+		var account_id = $(this).attr('data-account_id');
+		// console.log(account_id);
+		$.ajax({
+			type: "GET",
+			url: $(this).attr('data-dati'),
+			dataType: 'html',
+			data: {
+				// account_id: account_id, // < note use of 'this' here
+				access_token: $("#access_token").val()
+			},
+			success: function(result) {
+				$('#tab_documents').html(result);
+			},
+			error: function(result) {
+				alert('error');
+			}
+		});
+	});
+
 	$('a.btn.btn-app.btn_action_1').click(function(e) {
 		e.preventDefault();
 		console.log('pippo');
-
 	});
 
 	$('#btn_edit_account').click(function(e) {
@@ -75,8 +94,6 @@
 		// console.log(pp);
 		window.open(pp,"_self");
 	});
-
-
 
 	$('.del-confirmcontact').click(function(e){
 	  e.preventDefault();
@@ -120,8 +137,8 @@
 		  });
 	  }
 	});
-	$(document).ready(function($) {
 
+	$(document).ready(function($) {
 	  $('.del-confirmcontactdetails').click(function(e){
 		e.preventDefault();
 		var delete_button = $(this);
