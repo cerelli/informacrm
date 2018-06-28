@@ -114,6 +114,7 @@ Route::group([
     CRUD::resource('account', 'AccountCrudController');
     Route::get('account_tab_actions/{account_id}/{action_status_id?}', 'ActionCrudController@account_tab_actions');
     Route::get('account_tab_documents/{account_id}/{document_status_id?}', 'DocumentCrudController@account_tab_documents');
+    Route::get('account_tab_groupings/{account_id}/{grouping_type_id}/{grouping_status_id?}', 'GroupingCrudController@account_tab_groupings');
     Route::get('grouping_tab_actions/{grouping_id}/{action_status_id?}', 'GroupingCrudController@grouping_tab_actions');
 
     Route::group(['prefix' => 'account/{account_id}'], function()
@@ -124,6 +125,7 @@ Route::group([
         CRUD::resource('address', 'AddressCrudController');
         CRUD::resource('action', 'ActionAccountCrudController');
         CRUD::resource('document', 'DocumentAccountCrudController');
+        CRUD::resource('grouping/{grouping_type_id}/grouping', 'GroupingAccountCrudController');
     });
 
 

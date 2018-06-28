@@ -425,7 +425,7 @@ class ActionCrudController extends CrudController
                 'type' => "model_function",
                 'function_name' => 'getShowIdLink', // the method in your Model
             ]);
-            // 
+            //
             // $this->crud->addColumn([
             //     // run a function on the CRUD model and show its return value
             //     'name' => 'title',
@@ -623,7 +623,6 @@ class ActionCrudController extends CrudController
 
     public function account_tab_actions($account_id, $action_status_id = null)
     {
-
         $data['actions'] = Action::where('account_id', '=', $account_id);
         $data['countActionStatuses'] = Action_status::countActions($account_id)->get();
         $data['countActionTypes'] = Action_type::countActions($account_id)->get();

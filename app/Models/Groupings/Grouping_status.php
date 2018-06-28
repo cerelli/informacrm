@@ -43,9 +43,15 @@ class Grouping_status extends Model
         return $this->belongsTo('App\User', 'updated_by', 'id');
     }
 
-    public function grouping_types()
+    public function groupings()
     {
-        return $this->belongsToMany('App\Models\Groupings\Grouping_type');
+        return $this->belongsTo('App\Models\Groupings\Grouping','id','grouping_status_id');
+    }
+
+    public function types()
+    {
+        return $this->belongsToMany('App\Models\Groupings\Grouping_type',
+           'grouping_status_grouping_type', 'grouping_status_id', 'grouping_type_id');
     }
 
     /*
@@ -53,6 +59,11 @@ class Grouping_status extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
+    public function scopeCountGroupings($query, $account_id){
+       return $query->withCount(['groupings' => function($subquery) use ($account_id){
+         return $subquery->where('account_id', $account_id);
+     }])->orderBy('lft','asc');
+    }
 
     /*
     |--------------------------------------------------------------------------

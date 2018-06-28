@@ -25,10 +25,22 @@ class GroupingRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required|min:3|max:255'
-        ];
+        $grouping_type_id = \Route::current()->parameter('grouping_type_id');
+        // dump($account_id);
+        if ( $grouping_type_id > 0 ) {
+            return [
+                'title' => 'required|min:3|max:255',
+                'grouping_status_id' => 'required',
+            ];
+        }else{
+            return [
+                'title' => 'required|min:3|max:255',
+                'grouping_status_id' => 'required',
+                'grouping_type_id' => 'required',
+            ];
+        }
     }
+
 
     /**
      * Get the validation attributes that apply to the request.

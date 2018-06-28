@@ -7,6 +7,7 @@ use Auth;
 use Request;
 use App\Models\Account;
 use App\Models\Account_type;
+use App\Models\Groupings\Grouping_type;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\AccountRequest as StoreRequest;
@@ -319,6 +320,8 @@ class AccountCrudController extends CrudController
         $this->crud->hasAccessOrFail('show');
         // Cache::forever('active_account_id', $id);
         $view = parent::show($id);
+        $this->crud->entry['countGroupingTypes'] = Grouping_type::countGroupings($id)->get();
+        // dd($data);
         $this->addAcud();
         return $view;
     }

@@ -39,7 +39,30 @@
  //  		document.getElementById("active_tab").value = accountReturnURL;
 	// });
 	//
-	//
+	//data-groupingType_id
+	$('[data-tab="tab_groupings"]').click(function(e) {
+		var account_id = $(this).attr('data-account_id');
+		var url = $(this).attr('data-dati');
+		var tab_id = $(this).attr('data-groupingType_id');
+		console.log(url);
+		$.ajax({
+			type: "GET",
+			url: $(this).attr('data-dati'),
+			dataType: 'html',
+			data: {
+				// account_id: account_id, // < note use of 'this' here
+				access_token: $("#access_token").val()
+			},
+			success: function(result) {
+				// console.log('#tab_grouping_'+tab_id);
+				$('#tab_grouping_'+tab_id).html(result);
+			},
+			error: function(result) {
+				alert('error');
+			}
+		});
+	});
+
 	$('[data-tab="tab_actions"]').click(function(e) {
 		var account_id = $(this).attr('data-account_id');
 		// console.log(account_id);

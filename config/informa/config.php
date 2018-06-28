@@ -17,5 +17,8 @@ return [
     // Documents icon.
     'documents_icon' => 'fa-files-o',
     'documents_color' => '#ffff7a',
+    // Grouping icon.
+    'groupings_icon' => 'fa-files-o',
+    'groupings_color' => '#ffff7a',
 
 ];

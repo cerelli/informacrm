@@ -83,7 +83,7 @@ class Account extends Model
     {
         return $this->belongsTo('App\User', 'deleted_by', 'id');
     }
-    
+
     public function title()
     {
         return $this->belongsTo('App\Models\Title');
@@ -120,39 +120,44 @@ class Account extends Model
     {
         return $this->hasMany('App\Models\Web_site','account_id', 'id');
     }
-
-    public function events()
-    {
-        return $this->hasMany('App\Models\Event','account_id', 'id');
-    }
-
-    public function event_types()
-    {
-        return $this->hasManyThrough(
-            'App\Models\Event_type',
-            'App\Models\Event',
-            'account_id', // Foreign key on contacts table...
-            'event_id', // Foreign key on contact_details table...
-            'id', // Local key on accounts table...
-            'id' // Local key on contacts table...
-        );
-    }
+    //
+    // public function events()
+    // {
+    //     return $this->hasMany('App\Models\Event','account_id', 'id');
+    // }
+    //
+    // public function event_types()
+    // {
+    //     return $this->hasManyThrough(
+    //         'App\Models\Event_type',
+    //         'App\Models\Event',
+    //         'account_id', // Foreign key on contacts table...
+    //         'event_id', // Foreign key on contact_details table...
+    //         'id', // Local key on accounts table...
+    //         'id' // Local key on contacts table...
+    //     );
+    // }
 
     public function actions()
     {
         return $this->hasMany('App\Models\Action','account_id', 'id');
     }
 
-    public function opportunities()
+    public function groupings()
     {
-        return $this->hasMany('App\Models\Opportunity','account_id', 'id');
+        return $this->hasMany('App\Models\Groupings\Grouping','account_id', 'id');
     }
 
-
-    public function service_tickets()
-    {
-        return $this->hasMany('App\Models\Service_ticket','account_id', 'id');
-    }
+    // public function opportunities()
+    // {
+    //     return $this->hasMany('App\Models\Opportunity','account_id', 'id');
+    // }
+    //
+    //
+    // public function service_tickets()
+    // {
+    //     return $this->hasMany('App\Models\Service_ticket','account_id', 'id');
+    // }
 
 
 

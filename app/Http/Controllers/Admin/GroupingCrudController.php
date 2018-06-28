@@ -10,6 +10,8 @@ use App\Http\Requests\GroupingRequest as UpdateRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Models\Groupings\Grouping_thread;
+use App\Models\Groupings\Grouping_type;
+use App\Models\Groupings\Grouping_status;
 use Auth;
 
 class GroupingCrudController extends CrudController
@@ -70,17 +72,6 @@ class GroupingCrudController extends CrudController
                 // dump('pluto');/
                 $disabled = 'disabled';
             };
-        // } else {
-        //     $disabled = '';
-        // }
-
-        // $this->crud->addField([
-        //     'name' => 'thread',
-        //     'label' => 'thread',
-        //     'type' => 'ckeditor',
-        //     'tab'      => 'General',
-        //     'class' => 'hidden'
-        // ]);
 
         $this->crud->addField([
             'name' => 'account_id',
@@ -101,7 +92,6 @@ class GroupingCrudController extends CrudController
         ]);
 
 
-
         $this->crud->addField([
             'label' => trans('general.grouping_type'),
             'type' => 'select2',
@@ -109,12 +99,14 @@ class GroupingCrudController extends CrudController
             'entity' => 'grouping_type', // the method that defines the relationship in your Model
             'attribute' => 'description', // foreign key attribute that is shown to user
             'model' => "App\Models\Groupings\Grouping_type",
+            'allows_null' => false,
             'box' => 'basic',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-6 required'
             ],
             'tab'      => 'General',
         ]);
+
 
         $this->crud->addField([
             'label' => trans('general.status'),
@@ -125,12 +117,27 @@ class GroupingCrudController extends CrudController
             'attribute' => 'description', // foreign key attribute that is shown to user
             'model' => "App\Models\Groupings\Grouping_status", // foreign key model
             'data_source' => url("/api/groupingtypestatuses/"),
+            'allows_null' => false,
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-6 required'
             ],
             'box' => 'basic',
             'tab'      => 'General',
         ]);
+
+        // $this->crud->addField([
+        //     'label' => trans('general.grouping_type'),
+        //     'type' => 'select2',
+        //     'name' => 'grouping_status_id', // the db column for the foreign key
+        //     'entity' => 'statuses', // the method that defines the relationship in your Model
+        //     'attribute' => 'description', // foreign key attribute that is shown to user
+        //     'model' => "App\Models\Groupings\Grouping_status",
+        //     'box' => 'basic',
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-6 required'
+        //     ],
+        //     'tab'      => 'General',
+        // ]);
 
  //        $this->crud->addField([
  //            // 1-n relationship
@@ -346,7 +353,7 @@ class GroupingCrudController extends CrudController
                 },
                 // 'orderable' => true
             ]);
-            
+
             $this->crud->addColumn([
                 'name' => "account",
                 'label' => trans('informacrm.account'), // Table column heading
@@ -501,14 +508,6 @@ class GroupingCrudController extends CrudController
     public function create()
     {
         $this->crud->create_fields['assigned_to']['value'] = Auth::user()->id;
-
-        // $account_id = \Route::current()->parameter('account_id');
-        // if ( !$account_id ) {
-        //
-        // } else {
-        //     $this->crud->create_fields['account_id']['value'] = $account_id;
-        // }
-
         return parent::create();
     }
 
@@ -527,7 +526,9 @@ class GroupingCrudController extends CrudController
         }
 
         // dd($this->crud);
+        // dump($request);
         $redirect_location = parent::storeCrud($request);
+        // dd($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         // dump($request['account_id']);
@@ -580,7 +581,7 @@ class GroupingCrudController extends CrudController
         return $redirect_location;
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        // return $redirect_location;
     }
 
     public function actionsTimeline($grouping_id)
@@ -708,6 +709,44 @@ class GroupingCrudController extends CrudController
         $threads = Grouping_thread::where('grouping_id', '=', $id)->orderby('created_at','DESC')->get();
         // dd($threads);
         return view('inf.grouping.thread_timeline',['threads' => $threads]);
+    }
+
+    public function account_tab_groupings($account_id, $grouping_type_id, $grouping_status_id = null)
+    {
+        $data['groupings_pass'] = Grouping::where('account_id', '=', $account_id)
+                                        ->where('grouping_type_id', '=', $grouping_type_id)->get();
+
+        $data['groupings'] = Grouping::where('account_id', '=', $account_id)
+                                            ->where('grouping_type_id', '=', $grouping_type_id);
+
+        $data['countGroupingStatuses'] = Grouping_type::countGroupings($account_id)->get();
+
+        $data['groupingStatuses'] = Grouping_type::find($grouping_type_id)->grouping_statuses;
+
+        // dd($data['groupingStatuses']);
+        foreach ($data['groupingStatuses'] as $key => $value) {
+            $groupingForStatus = $data['groupings_pass']->where('grouping_status_id', '=', $value->id)->count();
+            $data['groupingStatuses'][$key]['totalGroupings'] = $data['groupings_pass']->where('grouping_status_id', '=', $value->id)->count();
+            // dump($key,$value->id, $groupingForStatus);
+        }
+        // dump($data['groupingStatuses']);
+        // dd($countGroupingStatuses->grouping_statuses);
+        // $data['countGroupingTypes'] = Grouping_type::countGroupings($account_id)->get();
+        $data['active_account_id']['id'] = $account_id;
+        $data['active_grouping_type_id']['id'] = $grouping_type_id;
+        if (!$grouping_status_id){
+            //active first grouping_status
+            // dump('uno');
+            $data['groupings']->where('grouping_status_id', '=', $data['groupingStatuses'][0]->id);
+            $viewReturn = 'inf.accounts.tabs.groupings.groupings';
+        }else{
+            // dump('due');
+            $data['groupings']->where('grouping_status_id', '=', $grouping_status_id);
+            $viewReturn = 'inf.accounts.tabs.groupings.details';
+        }
+        // dd($data['groupings']);
+        $data['groupings'] = $data['groupings']->get();
+        return view($viewReturn, $data);
     }
 
     public function SaveInternalNote($id)

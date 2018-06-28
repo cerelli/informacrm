@@ -152,6 +152,10 @@ class Grouping extends Model
     | ACCESORS
     |--------------------------------------------------------------------------
     */
+    public function getGroupingCountAttribute()
+    {
+        return $this->groupings()->count();
+    }
 
     public function getCountryName()
     {

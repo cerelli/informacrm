@@ -81,12 +81,20 @@
 						<li role="presentation" class="tab_documents_click">
 								<a href="#tab_documents" data-dati="{{ url(config('backpack.base.route_prefix', 'admin') . '/account_tab_documents/'.$entry->id) }}" data-account_id="{{ $entry->id }}" data-tab="tab_documents" aria-controls="tab_documents" role="tab" data-toggle="tab">{{ trans('informacrm.documents') }}</a>
 						</li>
-						<li role="presentation" class="">
+						{{-- {{ dump(App\Models\Groupings\Grouping_type::countGroupingTypes($entry->id)->get()) }} --}}
+						@foreach ($entry->countGroupingTypes as $groupingType)
+							{{-- {{ dump($groupingType) }} --}}
+							<li role="presentation" class="tab_groupings_click">
+									<a href="#tab_grouping_{{ $groupingType->id }}" data-dati="{{ url(config('backpack.base.route_prefix', 'admin') . '/account_tab_groupings/'.$entry->id.'/'.$groupingType->id) }}" data-groupingType_id="{{ $groupingType->id }}" data-account_id="{{ $entry->id }}" data-tab="tab_groupings" aria-controls="tab_groupings" role="tab" data-toggle="tab">{{ $groupingType->description }}</a>
+							</li>
+						@endforeach
+						{{-- <li role="presentation" class="">
 								<a href="#tab_opportunities" aria-controls="tab_opportunities" role="tab" data-toggle="tab">{{ trans('informacrm.opportunities') }}</a>
 						</li>
 						<li role="presentation" class="">
 								<a href="#tab_service_tickets" aria-controls="tab_service_tickets" role="tab" data-toggle="tab">{{ trans('informacrm.service_tickets') }}</a>
-						</li>
+						</li> --}}
+
 						<li class="dropdown">
 	  						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 		  						{{ trans('informacrm.other') }} <span class="caret"></span>
@@ -121,18 +129,23 @@
 				<div role="tabpanel" class="tab-pane" id="tab_actions">
 					{{-- @include('inf.accounts.tabs.actions', ['actions' => $entry->actions]) --}}
 				</div>
-				<div role="tabpanel" class="tab-pane" id="tab_events">
+				{{-- <div role="tabpanel" class="tab-pane" id="tab_events">
 					@include('inf.accounts.tabs.events', ['events' => $entry->events])
-				</div>
+				</div> --}}
 				<div role="tabpanel" class="tab-pane" id="tab_documents">
 					{{-- @include('inf.accounts.tabs.documents', ['opportunities' => $entry->events]) --}}
 				</div>
-				<div role="tabpanel" class="tab-pane" id="tab_opportunities">
+				@foreach ($entry->countGroupingTypes as $groupingType)
+					<div role="tabpanel" class="tab-pane" id="tab_grouping_{{ $groupingType->id }}">
+						{{-- @include('inf.accounts.tabs.documents', ['opportunities' => $entry->events]) --}}
+					</div>
+				@endforeach
+				{{-- <div role="tabpanel" class="tab-pane" id="tab_opportunities">
 					@include('inf.accounts.tabs.opportunities', ['opportunities' => $entry->opportunities])
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_service_tickets">
 					@include('inf.accounts.tabs.service_tickets', ['service_tickets' => $entry->service_tickets])
-				</div>
+				</div> --}}
 				<div role="tabpanel" class="tab-pane" id="tab_time_line">
 					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
 				</div>

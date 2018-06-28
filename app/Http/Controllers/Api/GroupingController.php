@@ -21,7 +21,7 @@ class GroupingController extends Controller
         $page = $request->input('page');
         $test = [];
         $test = ["one" => "One", "two" => "Two"];
-        dump($test);
+        // dump($test);
         return $test;
 
         if ($search_term)

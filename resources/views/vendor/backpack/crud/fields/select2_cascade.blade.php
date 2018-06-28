@@ -18,7 +18,9 @@
         @if (isset($field['model']))
             {{-- {{ dd($field['data_source']) }} --}}
             {{-- @foreach ($field['model']::all() as $connected_entity_entry) --}}
+            {{-- {{ dump($crud->selectStatus) }} --}}
             @if (isset($crud->selectStatus))
+                
             @foreach ($crud->selectStatus as $connected_entity_entry)
                 {{-- {{ dump($connected_entity_entry) }} --}}
                 @if(old($field['name']) == $connected_entity_entry->getKey() || (is_null(old($field['name'])) && isset($field['value']) && $field['value'] == $connected_entity_entry->getKey()))
@@ -64,7 +66,9 @@
         <script>
 
             jQuery(document).ready(function($) {
-                // console.log("{{ $field['concatenated'] }}");
+                if ( $('select[name="{{ $field['concatenated'] }}"]') ) {
+                    console.log('pippo');
+                }
                 // trigger select2 for each untriggered select2 box
                 $('.select2_field').each(function (i, obj) {
                     if (!$(obj).hasClass("select2-hidden-accessible"))
