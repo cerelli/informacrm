@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Groupings;
+namespace App\Models\Actions;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-class Grouping_thread extends Model
+class Action_thread extends Model
 {
     use CrudTrait;
 
@@ -15,7 +15,7 @@ class Grouping_thread extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'grouping_threads';
+    protected $table = 'action_threads';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];

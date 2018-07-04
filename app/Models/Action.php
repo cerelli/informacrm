@@ -67,6 +67,7 @@ class Action extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
     public function getShowIdLink() {
         // Replace proofAttach with the name of your field
         if (isset($this->id)) {
@@ -159,6 +160,11 @@ class Action extends Model
     public function grouping()
     {
         return $this->morphToMany('App\Models\Groupings\Grouping', 'groupinggable');
+    }
+
+    public function thread()
+    {
+        return $this->hasMany('App\Models\Actions\Action_thread', 'action_id');
     }
 
     /*
@@ -260,6 +266,12 @@ class Action extends Model
         $acud['updated_at'] = $this->updated_at;
         // dd($acud);
         return $acud;
+    }
+
+    public function getBreadcrumbAttribute() {
+        // if (isset($this->account->fullname)) {
+            return '<li><a href="{{ url($crud->route) }}?action_type_id={{ $entry->action_types->id }}" class="text-capitalize">{{ $crud->entity_name_plural }}</a></li>';
+        // }
     }
     /*
     |--------------------------------------------------------------------------

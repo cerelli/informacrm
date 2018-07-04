@@ -20,10 +20,29 @@ All Notable changes to `Backpack CRUD` will be documented in this file
 - Nothing
 -----------
 
-## [3.4.15] - 2018-06-xx
+## [3.4.17] - 2018-06-28
+
+### Added
+- merges #1479 - added print button on show view;
+- merges #1424 - added --elfinder option to install command;
+
+### Fixed
+- merges #1480 - hide back buttons and unnecessary features from print previews;
+- merges #1416 - enables responsive mode on the table;
+
+
+## [3.4.16] - 2018-06-28
+
+### Fixed
+- automatically remove ```row_number```` columns from the Preview screen, since it doesn't make sense there and it would break the functionality;
+- return to current_tab functionality broke when used with autoSet();
+
+## [3.4.15] - 2018-06-26
 
 ### Added
 - ```php artisan backpack:crud:publish [folder.file]``` command, thank to [Owen Melbourne's PR in Generators](https://github.com/Laravel-Backpack/Generators/pull/15);
+- merged #1471 - ```row_number``` column type;
+- merged #1471 - ```makeFirstColumn()``` method for columns;
 
 ### Fixed
 - #1446 merged, fixes #1430 - return to current tab on save and edit;

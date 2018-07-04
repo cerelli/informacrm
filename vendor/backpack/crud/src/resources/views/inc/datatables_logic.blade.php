@@ -27,6 +27,11 @@
         fn.apply(window, args);
       },
       dataTableConfiguration: {
+        initComplete: function () {
+            crud.responsiveToggle(
+                jQuery('#crudTable').DataTable()
+            );
+        },
         responsive: {
             details: {
                 display: $.fn.dataTable.Responsive.display.modal( {
@@ -92,9 +97,9 @@
               "type": "POST"
           },
           dom:
-            "<'row'<'col-sm-6 hidden-xs'l><'col-sm-6'f>>" +
+            "<'row'<'col-sm-6 hidden-xs'l><'col-sm-6 hidden-print'f>>" +
             "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-5'i><'col-sm-2'B><'col-sm-5'p>>",
+            "<'row'<'col-sm-5'i><'col-sm-2'B><'col-sm-5 hidden-print'p>>",
       }
   }
   </script>

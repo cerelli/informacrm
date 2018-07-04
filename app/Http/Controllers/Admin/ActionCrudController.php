@@ -10,6 +10,7 @@ use App\Models\Action_type;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\Input;
+use App\Models\Actions\Action_thread;
 // use Illuminate\Http\Request;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -30,7 +31,7 @@ class ActionCrudController extends CrudController
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/action');
         $this->crud->setEntityNameStrings(trans('informacrm.action'), trans('informacrm.actions'));
 
-        $this->crud->setShowView('inf.actions.action');
+        $this->crud->setShowView('inf.actions.show');
         // $this->crud->setEditView('inf.edit');
         // dump($this->crud);
         /*
@@ -715,16 +716,19 @@ class ActionCrudController extends CrudController
         return $redirect_location;
     }
 
-    // public function edit($id)
-    // {
-    //     $parsed = \Route::current();
-    //     // $parsed = \Route::current()->parameter('user_id');
-    //     dd($parsed);
-    //     parse_str($parsed['path'], $query_params);
-    //     $active_tab = $query_params['call_url'];
-    //     $this->crud->setRoute(config('backpack.base.route_prefix') . $active_tab);
-    //     return parent::edit($id);
-    // }
+    public function edit($id)
+    {
+        $account_id = \Route::current()->parameter('account_id');
+        if ( !$account_id ) {
+            $this->crud->setRoute("admin/action");
+            $this->crud->cancelRoute = ("admin/action/".$id);
+        } else {
+            $this->crud->setRoute("admin/account/".$account_id."/action");
+            $this->crud->cancelRoute = ("admin/account/".$account_id."#actions");
+        }
+        return parent::edit($id);
+    }
+
 
     // public function update(UpdateRequest $request)
     // {
@@ -795,26 +799,24 @@ class ActionCrudController extends CrudController
         // }
 
         // $redirect_location = parent::updateCrud($request);
-        return parent::updateCrud($request);
-        // $account_id = \Route::current()->parameter('account_id');
-        // $action_id = \Route::current()->parameter('action');
-        // // set a different route for the admin panel buttons
-        // $this->crud->setRoute("admin/account/".$account_id."/action");
-        // $saveAction = $this->getSaveAction()['active']['value'];
-        // switch ($saveAction) {
-        //     case 'save_and_edit':
-        //         break;
-        //     case 'save_and_new':
-        //         $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/account/'.$account_id.'/'.$action_id.'/create');
-        //         break;
-        //     case 'save_and_back':
-        //     default:
-        //         $redirect_location = redirect('admin/account/'.$account_id.'#actions');
-        //         break;
-        // }
-        // // your additional operations after save here
-        // // use $this->data['entry'] or $this->crud->entry
-        // return $redirect_location;
+        parent::updateCrud($request);
+        $this->crud->setRoute("admin/action");
+        $saveAction = $this->getSaveAction()['active']['value'];
+        switch ($saveAction) {
+            case 'save_and_edit':
+                break;
+            case 'save_and_new':
+                $redirect_location = redirect(config('backpack.base.route_prefix', 'admin').'/action/create');
+                break;
+            case 'save_and_back':
+            default:
+                $redirect_location = redirect('admin/action/'.$this->crud->entry->id);
+                break;
+        }
+        // dd($this->crud->entry->id);
+        // your additional operations after save here
+        // use $this->data['entry'] or $this->crud->entry
+        return $redirect_location;
     }
 
     public function assign($id)
@@ -829,5 +831,75 @@ class ActionCrudController extends CrudController
         return view('inf.acud',['acud' => $acud]);
     }
 
+    public function show($id)
+    {
+        $this->crud->hasAccessOrFail('show');
 
+        // get entry ID from Request (makes sure its the last ID for nested resources)
+        $id = $this->crud->getCurrentEntryId() ?? $id;
+
+        // set columns from db
+        $this->crud->setFromDb();
+        // cycle through columns
+        foreach ($this->crud->columns as $key => $column) {
+            // remove any autoset relationship columns
+            if (array_key_exists('model', $column) && array_key_exists('autoset', $column) && $column['autoset']) {
+                $this->crud->removeColumn($column['name']);
+            }
+        }
+        // get the info for that entry
+        // $this->data['entry'] = $this->crud->getEntry($id);
+
+        $this->data['entry'] = $this->crud->getEntry($id);
+        $this->data['crud'] = $this->crud;
+        $this->data['title'] = trans('backpack::crud.preview').' '.$this->crud->entity_name;
+        $account_id = \Route::current()->parameter('account_id');
+        if ( isset($account_id) ) {
+            $this->crud->setRoute(config('backpack.base.route_prefix') . '/account');
+            $this->crud->cancelRoute = ("admin/account/".$account_id."#actions");
+            $this->data['entry']->editUrl = '/account/'.$account_id.'/action';
+        } else {
+
+            $this->crud->cancelRoute = ("admin/action/".$id);
+            $this->data['entry']->editUrl = '/action';
+        }
+
+        // $this->data['acud'] = $this->crud->entry->acud;
+        // $this->data['breadcrumb'] = $this->crud->entry->Breadcrumb;
+        // $this->data['acud'] = Action::find($id)->acud;
+
+        // remove preview button from stack:line
+        $this->crud->removeButton('preview');
+        $this->crud->removeButton('delete');
+        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
+        return view($this->crud->getShowView(), $this->data);
+    }
+
+    public function InternalNote($id)
+    {
+
+        $threads = Action_thread::where('action_id', '=', $id)->orderby('created_at','DESC')->get();
+        // dd($threads);
+        return view('inf.actions.thread_timeline',['threads' => $threads]);
+    }
+
+    public function SaveInternalNote($id)
+    {
+
+        $InternalContent = Input::get('content');
+        $NewThread = new Action_thread();
+        $NewThread->action_id = $id;
+        $NewThread->description = $InternalContent;
+        $NewThread->thread_type = 'internal_note';
+        $NewThread->is_internal = 1;
+        $NewThread->created_by = Auth::user()->id;
+        $NewThread->save();
+        $data = [
+            'action_id' => $id,
+            'u_id'      => Auth::user()->first_name.' '.Auth::user()->last_name,
+            'body'      => $InternalContent,
+        ];
+        $result = $this->internalNote($id);
+        return $result;
+    }
 }

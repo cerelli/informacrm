@@ -79,6 +79,10 @@ Route::group([
     Route::get('grouping_internal_note', 'Grouping_threadCrudController@groupingInternalNote');
     Route::patch('/grouping/saveinternalnote/{id}', 'GroupingCrudController@saveInternalNote');
     Route::get('/grouping/internalnote/{id}', 'GroupingCrudController@internalNote');
+
+    Route::patch('/action/saveinternalnote/{id}', 'ActionCrudController@saveInternalNote');
+    Route::get('/action/internalnote/{id}', 'ActionCrudController@internalNote');
+
     /*
 
     // CRUD::resource('action','ActionCrudController');
