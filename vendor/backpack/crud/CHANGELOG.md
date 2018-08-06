@@ -20,6 +20,55 @@ All Notable changes to `Backpack CRUD` will be documented in this file
 - Nothing
 -----------
 
+
+## [3.4.23] - 2018-07-11
+
+### Added
+- composer.lock to gitignore;
+
+### Fixed
+- #1533 - fixed casts with fakes;
+
+
+## [3.4.22] - 2018-07-10
+
+### Fixed
+- #1523 - required asterisks didn't show up when ```wrapperAttributes``` was used;
+
+
+## [3.4.21] - 2018-07-09
+
+### Added
+- #1524 - columns ```searchLogic``` attribute can now receive a string; this will make that column search like it was that column type; so if you pass ```'searchLogic'=> 'text'``` it will search like a text column;
+- #1380 - ```$this->crud->disableResponsiveTable()```, ```$this->crud->enableResponsiveTable()``` and a config option to set the default behaviour;
+- #1353 - ```$this->crud->modifyColumn($name, $modifs_array)```;
+- #1353 - ```$this->crud->modifyField($name, $modifs_array, $form)```;
+- #1353 - ```$this->crud->modifyFilter($name, $modifs_array)```;
+- #1353 - ```$this->crud->modifyButton($name, $modifs_array)```;
+
+## [3.4.20] - 2018-07-08
+
+### Fixed
+- default UpdateRequest and CreateRequest were missing from both CrudController and Operations/Create and Operations/Update, because StyleCI removed them;
+
+## [3.4.19] - 2018-07-07
+
+### Added
+- #1501 - priority attribute to addColumn statement and ```$this->crud->setActionsColumnPriority(10000);``` method; first and last column now take priority by default;
+- #1507 - actions; the ability to determine what controller method is currently being called by the route using ```$this->crud->getActionMethod()``` and the ```$this->crud->actionIs('create')``` conditional;
+- #1495 - asterisk for required fields are added automatically for create&update operations, if ```$this->crud->setRequiredFields(StoreRequest::class, 'create');``` and ```$this->crud->setRequiredFields(UpdateRequest::class, 'edit');``` are defined in the setup() method;
+
+### Fixed
+- #1489, #1416 merged #1499 - datatables colvis and responsive incompatibility;
+- #1502 - range filter type can now work only with one value - min/max;
+- #1510 - renamed CrudFeatures into Operations (simple refactoring);
+
+## [3.4.18] - 2018-07-04
+
+### Removed
+- what PR #1416 did;
+
+
 ## [3.4.17] - 2018-06-28
 
 ### Added

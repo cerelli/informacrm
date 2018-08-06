@@ -8,6 +8,8 @@ use Request;
 use App\Models\Account;
 use App\Models\Account_type;
 use App\Models\Groupings\Grouping_type;
+use App\Models\Action;
+use DataTables;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\AccountRequest as StoreRequest;
@@ -414,5 +416,57 @@ class AccountCrudController extends CrudController
             $this->crud->acud['updated_at'] = '';
         }
     }
+
+    /**
+	 * Datatable Ajax fetch
+	 *
+	 * @return
+	 */
+	public function dtajax(Request $request)
+	{
+        $actions = Action::where('account_id','=',2);
+
+        $out = DataTables::of($actions)->make();
+        return $out;
+		// $module = Module::get('Users');
+		// $listing_cols = Module::getListingColumns('Users');
+        //
+		// $values = DB::table('users')->select($listing_cols)->whereNull('deleted_at');
+		// $out = DataTables::of($values)->make();
+		// $data = $out->getData();
+        //
+		// $fields_popup = ModuleFields::getModuleFields('Users');
+        //
+		// for($i=0; $i < count($data->data); $i++) {
+		// 	for ($j=0; $j < count($listing_cols); $j++) {
+		// 		$col = $listing_cols[$j];
+		// 		if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
+		// 			$data->data[$i]->$col = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i]->$col);
+		// 		}
+		// 		if($col == $module->view_col) {
+		// 			$data->data[$i]->$col = '<a href="'.url(config('informa.base.adminRoute') . '/users/'.$data->data[$i]->id).'">'.$data->data[$i]->$col.'</a>';
+		// 		}
+		// 		// else if($col == "author") {
+		// 		//    $data->data[$i][$j];
+		// 		// }
+		// 	}
+        //
+		// 	if($this->show_action) {
+		// 		$output = '';
+		// 		if(Module::hasAccess("Users", "edit")) {
+		// 			$output .= '<a href="'.url(config('informa.base.adminRoute') . '/users/'.$data->data[$i]->id.'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+		// 		}
+        //
+		// 		if(Module::hasAccess("Users", "delete")) {
+		// 			$output .= Form::open(['route' => [config('informa.base.adminRoute') . '.users.destroy', $data->data[$i]->id], 'method' => 'delete', 'style'=>'display:inline']);
+		// 			$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
+		// 			$output .= Form::close();
+		// 		}
+		// 		$data->data[$i]->action = (string)$output;
+		// 	}
+		// }
+		// $out->setData($data);
+		// return $out;
+	}
 
 }

@@ -19,10 +19,7 @@
         }
     ],
     "require": {
-        "backpack/base": "^0.9.0",
-        "illuminate/support": ">=5.1",
-        "illuminate/console": ">=5.1",
-        "php" : ">=5.5.0"
+        "backpack/base": "^0.9.0"
     },
     "require-dev": {
         "phpunit/phpunit" : "4.*",

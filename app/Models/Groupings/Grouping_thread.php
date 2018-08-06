@@ -5,7 +5,7 @@ namespace App\Models\Actions;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-class Action_thread extends Model
+class Action_Grouping_thread extends Model
 {
     use CrudTrait;
 

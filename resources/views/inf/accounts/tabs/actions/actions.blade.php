@@ -43,7 +43,8 @@
             {{-- @include('inf.accounts.tabs.actions.details', ['opportunities' => $entry->events]) --}}
             <div class="row" style="background-color: #ecf0f5;">
                 <div class="col-md-12">
-                    @include('inf.accounts.tabs.actions.details', ['actions' => $actions])
+                    {{-- @include('inf.accounts.tabs.actions.details', ['actions' => $actions]) --}}
+                    {{-- @include('inf.accounts.tabs.actions.list', ['crud' => $actions]) --}}
                 </div>
             </div>
         </div>

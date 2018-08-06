@@ -100,7 +100,7 @@
                     new_url = addOrUpdateUriParameter(new_url, parameter + '_text', val_text);
 				}
 				new_url = normalizeAmpersand(new_url.toString());
-
+				
 
 				// replace the datatables ajax url with new_url and reload it
 				ajax_table.ajax.url(new_url).load();
@@ -129,4 +129,3 @@
 @endpush
 {{-- End of Extra CSS and JS --}}
 {{-- ########################################## --}}
-

@@ -1,0 +1,19 @@
+{
+    "name": "slam/informa",
+    "description": "Informa",
+    "authors": [
+        {
+            "name": "Slam Service",
+            "email": "slam@slamservice.it"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Slam\\Informa\\InformaServiceProvider"
+            ]
+        }
+    }
+}

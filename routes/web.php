@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+// Route::get('datatable', ['uses'=>'PostController@datatable']);
+Route::get('datatable/getposts', ['as'=>'datatable.getposts','uses'=>'Admin\ActionCrudController@getPosts']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'], 'namespace' => 'Admin'], function () {
     // Backpack\MenuCRUD
@@ -24,6 +25,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth'], 'namespace' 
 Route::get('/api/accounts', 'Api\AccountController@index');
 Route::get('/api/actions', 'Api\ActionController@index');
 Route::get('/api/groupingtypestatuses/{grouping_id}', 'Api\GroupingController@groupingStatuses');
+
+// Route::get('datatables', 'DatatablesController@getIndex');
+// Route::patch('datatables/data/{account_id}/{action_type}', 'DatatablesController@anyData');
+// Route::get('datatables/listdetails/{account_id}/{action_type}', 'DatatablesController@getListDetails');
+
+Route::get('datatables', 'Admin\ActionCrudController@getIndex');
+Route::patch('datatables/data/{account_id}/{action_type}', 'Admin\ActionCrudController@anyData');
+Route::get('datatables/listdetails/{account_id}/{action_type}', 'Admin\ActionCrudController@getListDetails');
+
+Route::get('datatables/data/{account_id}/{action_type}', 'Admin\ActionCrudController@anyData');
+
 
 
 Route::group([
@@ -49,6 +61,7 @@ Route::group([
         }
     });
 
+    Route::get('action/internal_search', 'ActionCrudController@internal_search');
 
     CRUD::resource('grouping_type', 'Grouping_typeCrudController');
     CRUD::resource('grouping_status', 'Grouping_statusCrudController');
@@ -116,7 +129,12 @@ Route::group([
     // your CRUD resources and other admin routes here
     //***************account*******************
     CRUD::resource('account', 'AccountCrudController');
+
+    Route::post('account_actions_dt_ajax', 'AccountCrudController@dtajax');
+
     Route::get('account_tab_actions/{account_id}/{action_status_id?}', 'ActionCrudController@account_tab_actions');
+    // Route::get('account_tab_actions/{account_id}', 'ActionCrudController@test');
+
     Route::get('account_tab_documents/{account_id}/{document_status_id?}', 'DocumentCrudController@account_tab_documents');
     Route::get('account_tab_groupings/{account_id}/{grouping_type_id}/{grouping_status_id?}', 'GroupingCrudController@account_tab_groupings');
     Route::get('grouping_tab_actions/{grouping_id}/{action_status_id?}', 'GroupingCrudController@grouping_tab_actions');

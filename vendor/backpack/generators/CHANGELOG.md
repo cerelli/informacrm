@@ -19,6 +19,21 @@ All Notable changes to `Backpack Generators` will be documented in this file
 ### Security
 - Nothing
 
+## 1.2.3 - 2018-07-07
+
+### Added
+- ```setRequiredFields()``` to controller stub;
+
+### Fixed
+- fields before columns in the controller stub;
+
+
+## 1.2.2 - 2018-06-22
+
+### Fixed
+- composer requirements;
+
+
 ## 1.2.1 - 2018-06-22
 
 ### Fixed

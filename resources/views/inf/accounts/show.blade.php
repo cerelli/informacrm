@@ -53,7 +53,7 @@
 				<div class="row">
 					<!-- account types -->
 					{{-- {{ dd($crud->create_fields['account_types']) }} --}}
-					@include('vendor.backpack.crud.fields.label_multiple',['field' => $crud->create_fields['account_types']])
+					@include('vendor.backpack.crud.fields.label_multiple',['field' => $crud->create_fields['account_types'],'action' => 'show'])
 				</div>
 			</div>
 		  <div class="box-body">
@@ -128,6 +128,7 @@
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_actions">
 					{{-- @include('inf.accounts.tabs.actions', ['actions' => $entry->actions]) --}}
+					{{-- @include('inf.accounts.tabs.actions.list_internal') --}}
 				</div>
 				{{-- <div role="tabpanel" class="tab-pane" id="tab_events">
 					@include('inf.accounts.tabs.events', ['events' => $entry->events])
@@ -148,12 +149,12 @@
 				</div> --}}
 				<div role="tabpanel" class="tab-pane" id="tab_time_line">
 					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
+
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_permissions">
 					{{-- @include('inf.accounts.tabs.informations', ['informations' => $entry]) --}}
 				</div>
 			  </div>
-
 		  </div><!-- /.box-body -->
 
 		  @include('crud::inc.button_stack', ['stack' => 'bottom'])
@@ -166,10 +167,63 @@
 @section('after_styles')
 	<link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/crud.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/show.css') }}">
+
+	<link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css">
+
+	<link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/crud.css') }}">
+	<link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/form.css') }}">
+	<link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/list.css') }}">
 @endsection
 
 @section('after_scripts')
+	<!-- DATA TABLES SCRIPT -->
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>
+
 	<script src="{{ asset('vendor/backpack/crud/js/crud.js') }}"></script>
 	<script src="{{ asset('vendor/backpack/crud/js/show.js') }}"></script>
 	@include('inf.accounts.js')
+
+	<script>
+		$(document).ready(function() {
+			$('[data-tab="tab_actions"]').click(function(e) {
+				var account_id = $(this).attr('data-account_id');
+				// console.log($(this).attr('data-dati'));
+				$.ajax({
+					type: "GET",
+					url: $(this).attr('data-dati'),
+					dataType: 'html',
+					data: {
+						// account_id: account_id, // < note use of 'this' here
+						access_token: $("#access_token").val()
+					},
+					success: function(result) {
+						$('#tab_actions').html(result);
+					},
+					error: function(result) {
+						alert('error');
+					}
+				});
+			});
+		});
+	</script>
 @endsection
+
+
+{{-- <script>
+$(function() {
+               $('#example1').DataTable({
+               processing: true,
+               serverSide: true,
+               ajax: '{{ url('/admin/user_dt_ajax') }}',
+               columns: [
+				   { data: 'id', name: 'id' },
+  				 { data: 'title', name: 'title' },
+  				 { data: 'notes', name: 'notes' }
+                     ]
+            });
+         });
+</script> --}}

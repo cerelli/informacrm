@@ -11,6 +11,9 @@ use App\User;
 use Auth;
 use Illuminate\Support\Facades\Input;
 use App\Models\Actions\Action_thread;
+use Yajra\Datatables\Datatables;
+
+
 // use Illuminate\Http\Request;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -21,17 +24,19 @@ class ActionCrudController extends CrudController
 {
     public function setup()
     {
-
+        // dd('qui');
         /*
         |--------------------------------------------------------------------------
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
+
         $this->crud->setModel('App\Models\Action');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/action');
         $this->crud->setEntityNameStrings(trans('informacrm.action'), trans('informacrm.actions'));
 
         $this->crud->setShowView('inf.actions.show');
+
         // $this->crud->setEditView('inf.edit');
         // dump($this->crud);
         /*
@@ -589,6 +594,8 @@ class ActionCrudController extends CrudController
     public function search()
     {
         // $this->crud->addClause('where', 'assigned_to', '=', 2);
+        // dd($this->crud);
+        // return 'pippo';
         return parent::search();
     }
 
@@ -613,17 +620,190 @@ class ActionCrudController extends CrudController
 
     public function list()
     {
-        return parent::index();
-        // // $this->crud->parameters['status'] = '["3"]';
-        // // dump($this->crud);
-        // $actionStatusClosed = Action_status::actionStatusClosed();
-        // // dump(implode(",",$actionStatusClosed));
-        // return redirect('admin/action?status='.implode(",",$actionStatusClosed));
-        // // return parent::index();
+        $this->crud->hasAccessOrFail('list');
+
+        $this->data['crud'] = $this->crud;
+        $this->data['title'] = ucfirst($this->crud->entity_name_plural);
+
+        // dd($this->crud->getListView());
+        return view($this->crud->getListView(), $this->data);
     }
+
+    public function test()
+    {
+        $this->crud->hasAccessOrFail('list');
+
+        $this->data['crud'] = $this->crud;
+        $this->data['title'] = ucfirst($this->crud->entity_name_plural);
+
+        // dd($this->data);
+        // return $this->data;
+        return view('inf.accounts.tabs.actions.list_internal', $this->data);
+    }
+
+    public function internal_search()
+    {
+        $this->crud->hasAccessOrFail('list');
+
+        $totalRows = $filteredRows = $this->crud->count();
+        $startIndex = $this->request->input('start') ?: 0;
+        // if a search term was present
+        if ($this->request->input('search') && $this->request->input('search')['value']) {
+            // filter the results accordingly
+            $this->crud->applySearchTerm($this->request->input('search')['value']);
+            // recalculate the number of filtered rows
+            $filteredRows = $this->crud->count();
+        }
+        // start the results according to the datatables pagination
+        if ($this->request->input('start')) {
+            $this->crud->skip($this->request->input('start'));
+        }
+        // limit the number of results according to the datatables pagination
+        if ($this->request->input('length')) {
+            $this->crud->take($this->request->input('length'));
+        }
+        // overwrite any order set in the setup() method with the datatables order
+        if ($this->request->input('order')) {
+            $column_number = $this->request->input('order')[0]['column'];
+            $column_direction = $this->request->input('order')[0]['dir'];
+            $column = $this->crud->findColumnById($column_number);
+            if ($column['tableColumn']) {
+                // clear any past orderBy rules
+                $this->crud->query->getQuery()->orders = null;
+                // apply the current orderBy rules
+                $this->crud->orderBy($column['name'], $column_direction);
+            }
+        }
+        $entries = $this->crud->getEntries();
+
+        return $this->crud->getEntriesAsJsonForDatatables($entries, $totalRows, $filteredRows, $startIndex);
+    }
+    // public function getPosts()
+    // {
+    //     // $this->crud->hasAccessOrFail('list');
+    //     $id = 26;
+    //     $this->data['entry'] = $this->crud->getEntry($id);
+    //     $this->data['crud'] = $this->crud;
+    //     // dd($this->data['crud']);
+    //     $this->data['title'] = ucfirst($this->crud->entity_name_plural);
+    //
+    //     // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
+    //     return view('inf.list', $this->data);
+    // }
+
+
+    /**
+    * Displays datatables front end view
+    *
+    * @return \Illuminate\View\View
+    */
+    public function getIndex()
+    {
+        return view('inf.accounts.tabs.actions.list');
+    }
+
+    public function getColumns()
+    {
+        // $columns = '';
+        // foreach ($this->crud->columns as $key => $column) {
+        //     $columns .= '<th>'.trans('general.'.$key).'</th>';
+        // }
+        // $columns = '<thead>'.$columns.'</thead><tfoot>'.$columns.'</tfoot>';
+        // dd($columns);
+
+        // <th>'.trans('general.statuses').'</th>
+        // <th>'.trans('general.types').'</th>
+        // <th>'.trans('general.assigned_to').'</th>
+        $columns = '<thead>
+                      <th>'.trans('general.id').'</th>
+                      <th>'.trans('general.title').'</th>
+                      <th>'.trans('general.status').'</th>
+                  </thead>
+                  <tfoot>
+                  <th>'.trans('general.id').'</th>
+                  <th>'.trans('general.title').'</th>
+                  <th>'.trans('general.status').'</th>
+                  </tfoot>';
+        return $columns;
+    }
+
+    // public function getListDetails($account_id, $action_type = 0)
+    // {
+    //     dd('qui');
+    //     return view('inf.accounts.tabs.actions.list_details', ['active_account_id' => $account_id,'action_type' => $action_type]);
+    // }
+
+    /**
+    * Process datatables ajax request.
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function anyData($account_id, $action_type = 0)
+    {
+
+        if ( $action_type == 0 ) {
+            $data = Action::with('action_status')->select('id', 'title', 'action_status_id')
+                            ->where('account_id', '=', $account_id)->orderBy('created_at', 'desc');
+        } else {
+            $data = Action::with('action_status')->select('id', 'title', 'action_status_id')
+                        ->where('account_id', '=', $account_id)
+                        ->where('action_status_id', '=', $action_type)
+                        ->orderBy('created_at', 'desc');
+        }
+
+        // dump($data);
+
+        $out = Datatables::of($data)
+                // ->rawColumns(['account'])
+                ->make();
+
+        // dd($out);
+        return $out;
+        // return Datatable::of(Action::all())->make(true);
+    }
+
 
     public function account_tab_actions($account_id, $action_status_id = null)
     {
+
+        $data['active_account_id']['id'] = $account_id;
+        $data['countActionStatuses'] = Action_status::countActions($account_id)->get();
+        $data['countActionTypes'] = Action_type::countActions($account_id)->get();
+        $data['columns'] = $this->getColumns();
+        // dd($data);
+        // $test = $data['countActionStatuses'];
+        // return dump($data['countActionStatuses']->sum('actions_count'));
+        return view('inf.accounts.tabs.actions.list',$data);
+        $this->crud->hasAccessOrFail('list');
+
+        $this->data['crud'] = $this->crud;
+        $this->data['title'] = ucfirst($this->crud->entity_name_plural);
+
+        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
+        // dd($this->crud->getListView());
+        return view('inf.accounts.tabs.actions.list', $this->data);
+        $test = parent::index();
+        // $this->crud->addClause('where', 'account_id', '=', $account_id);
+        // dd($test->crud,'qui',$this->crud);
+        $data['crud'] = $test->crud;
+        $data['countActionStatuses'] = Action_status::countActions($account_id)->get();
+        $data['countActionTypes'] = Action_type::countActions($account_id)->get();
+        $data['active_account_id']['id'] = $account_id;
+        // dump($data['actions']);
+        // if (!$action_status_id){
+        //     //active first action_status
+        //     $data['actions']->where('action_status_id', '=', $data['countActionStatuses'][0]->id);
+        //     $viewReturn = 'inf.accounts.tabs.actions.actions';
+        // }else{
+        //     $data['actions']->where('action_status_id', '=', $action_status_id);
+        //     $viewReturn = 'inf.accounts.tabs.actions.details';
+        // }
+        $viewReturn = 'inf.accounts.tabs.actions.list';
+        dd($data);
+        return view($viewReturn, $data);
+
+
+        //***************
         $data['actions'] = Action::where('account_id', '=', $account_id);
         $data['countActionStatuses'] = Action_status::countActions($account_id)->get();
         $data['countActionTypes'] = Action_type::countActions($account_id)->get();
@@ -673,12 +853,7 @@ class ActionCrudController extends CrudController
     //         return view('inf.acud',['acud' => $acud]);
     //     }
 
-    public function test()
-    {
-        $data['listaAzioni'] = Action::All();
-        return response()->json(['view' => view('inf.actions', compact('data'))->render()]);
-        // return view('inf.actions', $data);
-    }
+
 
     public function store(StoreRequest $request)
     {
@@ -726,7 +901,10 @@ class ActionCrudController extends CrudController
             $this->crud->setRoute("admin/account/".$account_id."/action");
             $this->crud->cancelRoute = ("admin/account/".$account_id."#actions");
         }
-        return parent::edit($id);
+
+        $result = parent::edit($id);
+        // dump($result);
+        return $result;
     }
 
 

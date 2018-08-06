@@ -1,16 +1,20 @@
 
 
 	<script>
-	$(document).ready(function($) {
-		var accountReturnURL = document.baseURI;
-		var tabhash = accountReturnURL.split('#')[1];
-		if (tabhash == 'actions'){
-			// console.log(tabhash);
-			$('[data-tab="tab_actions"]').trigger("click");
-		}else{
-			// console.log('pippo');
-		}
-	});
+	// $(document).ready(function($) {
+	// 	var accountReturnURL = document.baseURI;
+	// 	var tabhash = accountReturnURL.split('#')[1];
+	// 	if (tabhash == 'actions'){
+	// 		// console.log(tabhash);
+	// 		$('[data-tab="tab_actions"]').trigger("click");
+	// 	}else{
+	// 		// console.log('pippo');
+	// 	}
+	// });
+
+
+
+
 	// parser.href = window.location.href;
 
 
@@ -44,7 +48,7 @@
 		var account_id = $(this).attr('data-account_id');
 		var url = $(this).attr('data-dati');
 		var tab_id = $(this).attr('data-groupingType_id');
-		console.log(url);
+		// console.log(url);
 		$.ajax({
 			type: "GET",
 			url: $(this).attr('data-dati'),
@@ -63,25 +67,7 @@
 		});
 	});
 
-	$('[data-tab="tab_actions"]').click(function(e) {
-		var account_id = $(this).attr('data-account_id');
-		// console.log(account_id);
-		$.ajax({
-			type: "GET",
-			url: $(this).attr('data-dati'),
-			dataType: 'html',
-			data: {
-				// account_id: account_id, // < note use of 'this' here
-				access_token: $("#access_token").val()
-			},
-			success: function(result) {
-				$('#tab_actions').html(result);
-			},
-			error: function(result) {
-				alert('error');
-			}
-		});
-	});
+
 
 	$('[data-tab="tab_documents"]').click(function(e) {
 		var account_id = $(this).attr('data-account_id');
@@ -105,7 +91,7 @@
 
 	$('a.btn.btn-app.btn_action_1').click(function(e) {
 		e.preventDefault();
-		console.log('pippo');
+		// console.log('pippo');
 	});
 
 	$('#btn_edit_account').click(function(e) {

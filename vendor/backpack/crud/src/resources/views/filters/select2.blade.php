@@ -88,7 +88,7 @@
 				// replace the datatables ajax url with new_url and reload it
 				new_url = normalizeAmpersand(new_url.toString());
 				ajax_table.ajax.url(new_url).load();
-
+				// console.log(new_url);
 				// mark this filter as active in the navbar-filters
 				if (URI(new_url).hasQuery('{{ $filter->name }}', true)) {
 					$("li[filter-name={{ $filter->name }}]").removeClass('active').addClass('active');
