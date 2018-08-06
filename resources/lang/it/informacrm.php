@@ -106,7 +106,7 @@ return [
 
     'contact_details'           => 'Recapiti',
 
-    'contact_type'           => 'Tipo Recapito',
+    'contact_type'           => 'Tipo Contatto',
 
     'communication_type'           => 'Tipo Comunicazione',
 

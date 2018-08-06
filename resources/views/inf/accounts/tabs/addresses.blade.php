@@ -14,7 +14,7 @@
                         <div class="row col-md-12" style="margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;">
                             <div class="panel-title col-md-9">
                                 <p class="text-muted">
-                                    {{ $address->address_types['description'] }}
+                                    {{ $address->address_type['description'] }}
                                 </p>
                                 <h3 class="profile-username">
                                     {!! $address->FormattedAddress !!}

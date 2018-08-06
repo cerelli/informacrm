@@ -101,10 +101,11 @@ Route::group([
     // CRUD::resource('action','ActionCrudController');
     CRUD::resource('action_status', 'Action_statusCrudController');
     CRUD::resource('action_result', 'Action_resultCrudController');
-    CRUD::resource('action_type', 'Action_typeCrudController');
+
     Route::PATCH('/action/assign/{id}', 'ActionCrudController@assign'); /*  Patch Action assigned to whom */
     Route::PATCH('/action/assign/{id}', 'ActionCrudController@assign');
     Route::get('action_acud/{action_id}', 'ActionCrudController@acud');
+    CRUD::resource('action_type', 'Action_typeCrudController');
 
     // Route::get('search',array('as'=>'search','uses'=>'SearchController@search'));
     // Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));

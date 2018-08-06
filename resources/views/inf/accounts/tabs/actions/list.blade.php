@@ -26,7 +26,7 @@
               <i class="fa {{ $countActionStatus->icon }}"></i> {{ $countActionStatus->description }}
           </a>
 @endforeach
-<div class="panel panel-primary panel-heading col-md-12" >
+<div class="panel panel-heading col-md-12" >
       <table class="table table-striped table-bordered table-hover display responsive nowrap dataTable dtr-inline" id="informaTable">
           {!! $columns !!}
       </table>

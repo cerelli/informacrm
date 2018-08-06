@@ -755,6 +755,12 @@ class ActionCrudController extends CrudController
 
         $out = Datatables::of($data)
                 // ->rawColumns(['account'])
+                // '<a href="'.url(config('backpack.base.route_prefix', 'admin') . '/action/'.$this->id).'" >'.$this->title.'</a>'
+                // ->editColumn('title', '<a href="#"> {{$title}}</a>')
+                // ->editColumn('title', '<a href="#">Html Column</a>')
+                // ->editColumn('nom', '<a href=" #">{{$title}}</a>')
+                ->editColumn('title', '<a href="{{url(config("backpack.base.route_prefix", "admin")."/action/".$id)}}">{{$title}}</a>')
+                ->rawColumns(['title'])
                 ->make();
 
         // dd($out);
