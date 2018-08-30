@@ -21,4 +21,7 @@ return [
     'groupings_icon' => 'fa-files-o',
     'groupings_color' => '#ffff7a',
 
+    //set audit tag
+    'audit_elaboration' => '',
+
 ];

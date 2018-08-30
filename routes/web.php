@@ -36,13 +36,17 @@ Route::get('datatables/listdetails/{account_id}/{action_type}', 'Admin\ActionCru
 
 Route::get('datatables/data/{account_id}/{action_type}', 'Admin\ActionCrudController@anyData');
 
-
+Route::get('account/create_complete','AccountComplete@create');
+Route::post('account/store_complete','AccountComplete@store')->name('accountcomplete.store');
 
 Route::group([
     'prefix' => config('backpack.base.route_prefix', 'admin'),
     'middleware' => ['admin'],
     'namespace' => 'Admin'
 ], function() {
+
+    Route::get('import', 'Import\ImportController@getImport')->name('import');
+    Route::post('import_process', 'Import\ImportController@processImport')->name('import_process');
     // Route::get('test', function () {
     //     return view('test');
     // });

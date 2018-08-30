@@ -369,8 +369,12 @@ class AccountCrudController extends CrudController
         }
         $request['updated_by'] = Auth::user()->id;
         $parsed = parse_url(url()->previous());
-        parse_str($parsed['query'], $query_params);
-        $active_tab = $query_params['call_url'];
+        $active_tab = '';
+        if ( array_key_exists('query',$parsed) ) {
+            parse_str($parsed['query'], $query_params);
+            $active_tab = $query_params['call_url'];
+        }
+
         $redirect_location = parent::updateCrud($request);
 
         $saveAction = $this->getSaveAction()['active']['value'];

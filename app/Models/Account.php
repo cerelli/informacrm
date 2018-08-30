@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Account extends Model
+class Account extends Model implements Auditable
 {
     use CrudTrait;
     use SearchableTrait;
+    use \OwenIt\Auditing\Auditable;
 
     protected $searchable = [
         'columns' => [
@@ -29,6 +31,13 @@ class Account extends Model
             'contacts' => ['accounts.id','contacts.account_id'],
         ],
     ];
+
+    /*
+   |--------------------------------------------------------------------------
+   | AUDIT VARIABLES
+   |--------------------------------------------------------------------------
+   */
+
 
      /*
     |--------------------------------------------------------------------------

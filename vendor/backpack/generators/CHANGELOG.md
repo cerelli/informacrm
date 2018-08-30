@@ -19,6 +19,11 @@ All Notable changes to `Backpack Generators` will be documented in this file
 ### Security
 - Nothing
 
+## 1.2.4 - 2018-08-27
+
+### Removed
+- commented API from controller stub;
+
 ## 1.2.3 - 2018-07-07
 
 ### Added

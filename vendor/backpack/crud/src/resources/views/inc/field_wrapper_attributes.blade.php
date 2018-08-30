@@ -1,5 +1,4 @@
 <?php
-// dd($field['name']);
 $required = (isset($field['attributes']['required']) || $crud->isRequired($field['name'], $action)) ? ' required' : '';
 ?>
 
@@ -10,7 +9,7 @@ $required = (isset($field['attributes']['required']) || $crud->isRequired($field
         class="{{ $field['wrapperAttributes']['class'] }} {{ $required }}"
     @endif
 
-    @php
+    @php 
         unset($field['wrapperAttributes']['class']);
     @endphp
 

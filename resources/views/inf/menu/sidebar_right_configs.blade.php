@@ -93,7 +93,11 @@
 
     {{-- <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/grouping') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.grouping') }}</span></a></li> --}}
 
+    {{-- <!-- ====================== SETTINGS ================= --> --}}
     <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/setting') }}"><i class="fa fa-cog"></i> <span>{{ trans('informacrm.settings') }}</span></a></li>
+
+    {{-- <!-- ====================== IMPORT ================= --> --}}
+    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/import') }}"><i class="fa  fa-file-excel-o"></i> <span>{{ trans('informacrm.import') }}</span></a></li>
 
 
     {{-- <div class="form-group">
