@@ -103,10 +103,13 @@ Route::group([
     /*
 
     // CRUD::resource('action','ActionCrudController');
-    CRUD::resource('action_status', 'Action_statusCrudController');
-    CRUD::resource('action_result', 'Action_resultCrudController');
+
 
     Route::PATCH('/action/assign/{id}', 'ActionCrudController@assign'); /*  Patch Action assigned to whom */
+
+    CRUD::resource('action_status', 'Action_statusCrudController');
+    CRUD::resource('action_result', 'Action_resultCrudController');
+    
     Route::PATCH('/action/assign/{id}', 'ActionCrudController@assign');
     Route::get('action_acud/{action_id}', 'ActionCrudController@acud');
     CRUD::resource('action_type', 'Action_typeCrudController');
